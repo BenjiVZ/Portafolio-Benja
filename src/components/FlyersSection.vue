@@ -16,11 +16,14 @@
           @click="openLightbox(index)"
         >
           <div class="flyer-image-wrapper">
+            <div class="flyer-skeleton" v-if="!loadedImages[index]"></div>
             <img
               :src="flyer.src"
               :alt="flyer.title"
               class="flyer-image"
+              :class="{ 'loaded': loadedImages[index] }"
               loading="lazy"
+              @load="onImageLoad(index)"
             />
             <div class="flyer-overlay">
               <div class="flyer-zoom-icon">
@@ -93,9 +96,14 @@ const flyers = computed(() =>
 )
 
 const visibleCards = ref([])
+const loadedImages = ref({})
 const lightboxOpen = ref(false)
 const activeIndex = ref(0)
 const slideDirection = ref('slide-right')
+
+function onImageLoad(index) {
+  loadedImages.value[index] = true
+}
 
 // Intersection observer for scroll reveal
 let observer = null
@@ -242,12 +250,38 @@ function nextFlyer() {
   background: var(--color-bg-surface);
 }
 
+/* Skeleton shimmer */
+.flyer-skeleton {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    var(--color-bg-surface) 30%,
+    rgba(255, 255, 255, 0.04) 50%,
+    var(--color-bg-surface) 70%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
 .flyer-image {
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: top center;
-  transition: transform var(--duration-slow) var(--ease-out);
+  transition: transform var(--duration-slow) var(--ease-out),
+              opacity 0.5s ease;
+  opacity: 0;
+}
+
+.flyer-image.loaded {
+  opacity: 1;
 }
 
 .flyer-card:hover .flyer-image {
