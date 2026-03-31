@@ -123,6 +123,11 @@ onUnmounted(() => {
   z-index: 2;
   text-align: center;
   padding-top: var(--navbar-height);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - var(--navbar-height));
+  padding-bottom: var(--space-xl);
 }
 
 .hero-badge {
@@ -195,10 +200,8 @@ onUnmounted(() => {
 }
 
 .hero-scroll {
-  position: absolute;
-  bottom: var(--space-2xl);
-  left: 50%;
-  transform: translateX(-50%);
+  margin-top: auto;
+  padding-top: var(--space-xl);
 }
 
 .scroll-indicator {
