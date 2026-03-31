@@ -163,6 +163,30 @@
         </div>
       </div>
 
+      <!-- FLYERS TAB -->
+      <div v-if="activeTab === 'flyers'" class="admin-panel">
+        <div class="panel-header">
+          <h2>Flyers</h2>
+          <button class="btn btn-primary btn-sm" @click="openFlyerForm()">+ Nuevo Flyer</button>
+        </div>
+        <div class="flyers-admin-grid">
+          <div v-for="f in flyersList" :key="f.id" class="flyer-admin-card">
+            <div class="flyer-admin-img">
+              <img :src="f.image_url" :alt="f.title" @error="$event.target.style.display='none'" />
+            </div>
+            <div class="flyer-admin-info">
+              <h4>{{ f.title }}</h4>
+              <span class="badge badge-neutral">{{ f.tag }}</span>
+              <span class="flyer-admin-order">Orden: {{ f.sort_order }}</span>
+            </div>
+            <div class="flyer-admin-actions">
+              <button class="btn btn-ghost btn-sm" @click="openFlyerForm(f)">Editar</button>
+              <button class="btn btn-ghost btn-sm btn-danger" @click="handleDeleteFlyer(f.id)">Eliminar</button>
+            </div>
+          </div>
+          <p v-if="flyersList.length === 0" class="empty-state">No hay flyers. Crea el primero.</p>
+        </div>
+      </div>
 
       <!-- SITE CONFIG TAB -->
       <div v-if="activeTab === 'config'" class="admin-panel">
@@ -551,6 +575,60 @@
       </div>
     </Transition>
 
+    <!-- Flyer Modal -->
+    <Transition name="modal">
+      <div v-if="showFlyerModal" class="modal-overlay" @click.self="showFlyerModal = false">
+        <div class="modal admin-modal">
+          <div class="modal-header">
+            <h3>{{ editingFlyer ? 'Editar Flyer' : 'Nuevo Flyer' }}</h3>
+            <button class="modal-close" @click="showFlyerModal = false">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+          <form @submit.prevent="handleSaveFlyer" class="admin-form">
+            <div class="input-group">
+              <label class="input-label">Título</label>
+              <input class="input" v-model="flyerForm.title" required />
+            </div>
+            <div class="form-row">
+              <div class="input-group">
+                <label class="input-label">Etiqueta</label>
+                <input class="input" v-model="flyerForm.tag" placeholder="Ej: Software ERP" />
+              </div>
+              <div class="input-group">
+                <label class="input-label">Orden</label>
+                <input class="input" type="number" v-model.number="flyerForm.sort_order" />
+              </div>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Imagen del Flyer</label>
+              <div class="project-image-upload">
+                <div class="project-img-preview flyer-img-preview" v-if="flyerForm.image_url">
+                  <img :src="flyerForm.image_url" alt="Preview" @error="$event.target.style.display='none'" />
+                </div>
+                <div class="project-img-preview project-img-placeholder" v-else>
+                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+                </div>
+                <div class="project-img-controls">
+                  <label class="btn btn-primary btn-sm profile-upload-btn" :class="{ disabled: uploadingFlyerImg }">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    {{ uploadingFlyerImg ? 'Subiendo...' : 'Subir Imagen' }}
+                    <input type="file" accept="image/*" @change="handleFlyerImgUpload" style="display:none" :disabled="uploadingFlyerImg" />
+                  </label>
+                  <div class="profile-url-row">
+                    <input class="input" v-model="flyerForm.image_url" placeholder="o pega una URL..." style="font-size:13px;" />
+                    <button type="button" class="btn btn-ghost btn-sm" v-if="flyerForm.image_url" @click="flyerForm.image_url = ''" title="Quitar imagen">✕</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" :disabled="admin.loading.value">
+              {{ admin.loading.value ? 'Guardando...' : 'Guardar' }}
+            </button>
+          </form>
+        </div>
+      </div>
+    </Transition>
 
   </div>
 </template>
@@ -601,6 +679,7 @@ const activeTab = ref('projects')
 const projectsList = ref([])
 const servicesList = ref([])
 const experiencesList = ref([])
+const flyersList = ref([])
 const messagesList = ref([])
 
 // Config
@@ -666,9 +745,11 @@ async function handleProjectImgUpload(event) {
 const showProjectModal = ref(false)
 const showServiceModal = ref(false)
 const showExperienceModal = ref(false)
+const showFlyerModal = ref(false)
 const editingProject = ref(null)
 const editingService = ref(null)
 const editingExperience = ref(null)
+const editingFlyer = ref(null)
 
 // Forms
 const projectForm = reactive({
@@ -724,6 +805,7 @@ const tabs = [
   { id: 'projects', label: 'Proyectos', icon: () => h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, innerHTML: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>' }) },
   { id: 'services', label: 'Servicios', icon: () => h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, innerHTML: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>' }) },
   { id: 'experiences', label: 'Experiencia', icon: () => h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, innerHTML: '<rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>' }) },
+  { id: 'flyers', label: 'Flyers', icon: () => h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, innerHTML: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>' }) },
   { id: 'config', label: 'Configuración', icon: () => h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, innerHTML: '<line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>' }) },
   { id: 'messages', label: 'Mensajes', icon: () => h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, innerHTML: '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>' }) }
 ]
@@ -734,6 +816,7 @@ async function loadAll() {
     projectsList.value = await admin.getProjects() || []
     servicesList.value = await admin.getServices() || []
     experiencesList.value = await admin.getExperiences() || []
+    try { flyersList.value = await admin.getFlyers() || [] } catch(e) { console.warn('Flyers table may not exist yet:', e.message) }
     messagesList.value = await admin.getMessages() || []
     const config = await admin.getSiteConfig()
     if (config.hero) Object.assign(configForm.hero, config.hero)
@@ -895,6 +978,54 @@ function formatDate(dateStr) {
   return new Date(dateStr).toLocaleDateString('es', {
     day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit'
   })
+}
+
+// Flyers
+const flyerForm = reactive({
+  title: '', tag: '', image_url: '', sort_order: 0
+})
+const uploadingFlyerImg = ref(false)
+
+function openFlyerForm(flyer = null) {
+  editingFlyer.value = flyer
+  if (flyer) {
+    Object.assign(flyerForm, { title: flyer.title, tag: flyer.tag, image_url: flyer.image_url, sort_order: flyer.sort_order || 0 })
+  } else {
+    Object.assign(flyerForm, { title: '', tag: '', image_url: '', sort_order: 0 })
+  }
+  showFlyerModal.value = true
+}
+
+async function handleSaveFlyer() {
+  const data = { ...flyerForm }
+  if (editingFlyer.value) {
+    await admin.updateFlyer(editingFlyer.value.id, data)
+  } else {
+    await admin.createFlyer(data)
+  }
+  showFlyerModal.value = false
+  flyersList.value = await admin.getFlyers()
+}
+
+async function handleDeleteFlyer(id) {
+  if (!confirm('¿Eliminar este flyer?')) return
+  await admin.deleteFlyer(id)
+  flyersList.value = await admin.getFlyers()
+}
+
+async function handleFlyerImgUpload(event) {
+  const file = event.target.files[0]
+  if (!file) return
+  uploadingFlyerImg.value = true
+  try {
+    const url = await admin.uploadImage(file, 'flyers')
+    flyerForm.image_url = url
+  } catch (err) {
+    alert('Error subiendo imagen: ' + err.message)
+  } finally {
+    uploadingFlyerImg.value = false
+    event.target.value = ''
+  }
 }
 
 onMounted(loadAll)
@@ -1566,5 +1697,72 @@ onMounted(loadAll)
   background: rgba(239, 68, 68, 0.1);
   border: 1px solid rgba(239, 68, 68, 0.2);
   border-radius: var(--radius-md);
+}
+
+/* Flyers Admin Grid */
+.flyers-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-lg);
+}
+
+.flyer-admin-card {
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.flyer-admin-card:hover {
+  border-color: var(--color-accent-subtle);
+}
+
+.flyer-admin-img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background: var(--color-bg-surface);
+  overflow: hidden;
+}
+
+.flyer-admin-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.flyer-admin-info {
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.flyer-admin-info h4 {
+  font-size: var(--text-sm);
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.flyer-admin-order {
+  font-size: 12px;
+  color: var(--color-text-faint);
+}
+
+.flyer-admin-actions {
+  padding: 0 var(--space-md) var(--space-md);
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.flyer-img-preview {
+  aspect-ratio: 3 / 4;
+  max-height: 300px;
+}
+
+.flyer-img-preview img {
+  object-fit: cover;
+  object-position: top center;
 }
 </style>

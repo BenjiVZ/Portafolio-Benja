@@ -196,6 +196,54 @@ export function useAdmin() {
     if (err) throw err
   }
 
+  // ── Flyers CRUD ──
+  async function getFlyers() {
+    const { data, error: err } = await supabase
+      .from('flyers')
+      .select('*')
+      .order('sort_order', { ascending: true })
+    if (err) throw err
+    return data
+  }
+
+  async function createFlyer(flyer) {
+    loading.value = true
+    try {
+      const { data, error: err } = await supabase
+        .from('flyers')
+        .insert(flyer)
+        .select()
+        .single()
+      if (err) throw err
+      return data
+    } finally { loading.value = false }
+  }
+
+  async function updateFlyer(id, updates) {
+    loading.value = true
+    try {
+      const { data, error: err } = await supabase
+        .from('flyers')
+        .update(updates)
+        .eq('id', id)
+        .select()
+        .single()
+      if (err) throw err
+      return data
+    } finally { loading.value = false }
+  }
+
+  async function deleteFlyer(id) {
+    loading.value = true
+    try {
+      const { error: err } = await supabase
+        .from('flyers')
+        .delete()
+        .eq('id', id)
+      if (err) throw err
+    } finally { loading.value = false }
+  }
+
   // ── Image Upload ──
   async function uploadImage(file, bucket = 'portfolio') {
     loading.value = true
@@ -225,6 +273,8 @@ export function useAdmin() {
     getServices, createService, updateService, deleteService,
     // Experiences
     getExperiences, createExperience, updateExperience, deleteExperience,
+    // Flyers
+    getFlyers, createFlyer, updateFlyer, deleteFlyer,
     // Config
     getSiteConfig, updateSiteConfig,
     // Messages
