@@ -33,42 +33,13 @@
           </div>
         </div>
 
+        <!-- Formulario oculto temporalmente
         <div class="contact-form-wrapper">
           <form class="contact-form" @submit.prevent="handleSubmit">
-            <div class="form-row">
-              <div class="input-group">
-                <label class="input-label" for="contact-name">Nombre</label>
-                <input id="contact-name" class="input" v-model="form.name" placeholder="Tu nombre" required />
-              </div>
-              <div class="input-group">
-                <label class="input-label" for="contact-email">Email</label>
-                <input id="contact-email" class="input" v-model="form.email" type="email" placeholder="tu@email.com" required />
-              </div>
-            </div>
-            <div class="input-group">
-              <label class="input-label" for="contact-subject">Asunto</label>
-              <input id="contact-subject" class="input" v-model="form.subject" placeholder="¿En qué puedo ayudarte?" />
-            </div>
-            <div class="input-group">
-              <label class="input-label" for="contact-message">Mensaje</label>
-              <textarea id="contact-message" class="input" v-model="form.message" placeholder="Cuéntame sobre tu proyecto..." required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary btn-submit" :disabled="sending">
-              <svg v-if="!sending" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-              <span v-if="sending" class="spinner"></span>
-              {{ sending ? 'Enviando...' : 'Enviar mensaje' }}
-            </button>
-            <Transition name="slide">
-              <p v-if="success" class="form-success">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                ¡Mensaje enviado! Te responderé pronto.
-              </p>
-            </Transition>
-            <Transition name="slide">
-              <p v-if="errorMsg" class="form-error">{{ errorMsg }}</p>
-            </Transition>
+            ...
           </form>
         </div>
+        -->
       </div>
     </div>
   </section>
@@ -120,9 +91,12 @@ async function handleSubmit() {
 <style scoped>
 .contact-grid {
   display: grid;
-  grid-template-columns: 1fr 1.2fr;
+  grid-template-columns: 1fr;
   gap: var(--space-3xl);
   align-items: start;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 .contact-subtitle {

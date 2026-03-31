@@ -3,6 +3,7 @@
     <Navbar />
     <main>
       <HeroSection />
+      <LaptopScroll />
       <AboutSection />
       <ExperienceSection />
       <ServicesSection />
@@ -16,6 +17,7 @@
 <script setup>
 import Navbar from '../components/Navbar.vue'
 import HeroSection from '../components/HeroSection.vue'
+import LaptopScroll from '../components/LaptopScroll.vue'
 import AboutSection from '../components/AboutSection.vue'
 import ExperienceSection from '../components/ExperienceSection.vue'
 import ServicesSection from '../components/ServicesSection.vue'
