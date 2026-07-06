@@ -31,6 +31,7 @@
               class="flyer-image"
               :class="{ 'loaded': loadedImages[index] }"
               loading="lazy"
+              decoding="async"
               @load="onImageLoad(index)"
             />
             <div class="flyer-overlay">
