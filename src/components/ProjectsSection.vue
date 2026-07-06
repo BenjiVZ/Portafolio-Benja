@@ -26,6 +26,7 @@
             v-for="project in filteredProjects"
             :key="project.id"
             class="project-card"
+            v-spotlight
             @click="openProject(project)"
           >
             <div class="project-thumbnail">
@@ -97,7 +98,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useProjects } from '../composables/useProjects'
 
 const { projects } = useProjects()
@@ -110,10 +111,12 @@ const categories = [
   { label: 'Web', value: 'web' },
   { label: 'Apps', value: 'app' },
   { label: 'Backend', value: 'backend' },
+  { label: 'Sistemas', value: 'sistemas' },
   { label: 'Universitario', value: 'university' },
   { label: 'Pasantías', value: 'internship' },
   { label: 'Laboral', value: 'work' },
-  { label: 'Personal', value: 'personal' }
+  { label: 'Personal', value: 'personal' },
+  { label: 'Futuros', value: 'future' }
 ]
 
 const visibleCategories = computed(() => {
@@ -140,6 +143,23 @@ function getCategoryLabel(cat) {
 function openProject(project) {
   selectedProject.value = project
 }
+
+// Bloquea el scroll del fondo mientras el modal está abierto
+watch(selectedProject, (val) => {
+  document.body.style.overflow = val ? 'hidden' : ''
+})
+
+function handleKeydown(e) {
+  if (e.key === 'Escape' && selectedProject.value) {
+    selectedProject.value = null
+  }
+}
+
+onMounted(() => window.addEventListener('keydown', handleKeydown))
+onUnmounted(() => {
+  window.removeEventListener('keydown', handleKeydown)
+  document.body.style.overflow = ''
+})
 </script>
 
 <style scoped>

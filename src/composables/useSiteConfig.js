@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { supabase } from '../lib/supabase'
+import { fetchApiSiteConfig } from '../lib/api'
 
 const fallbackConfig = {
   hero: {
@@ -40,20 +41,22 @@ export function useSiteConfig() {
         .select('key, value')
 
       if (err) throw err
+      if (!data || data.length === 0) throw new Error('Sin datos en Supabase')
 
-      if (data && data.length > 0) {
-        const configMap = {}
-        data.forEach(row => {
-          configMap[row.key] = row.value
-        })
-        config.value = configMap
-      } else {
+      const configMap = {}
+      data.forEach(row => {
+        configMap[row.key] = row.value
+      })
+      config.value = configMap
+    } catch (e) {
+      console.warn('Supabase falló, intentando API Django:', e.message)
+      try {
+        config.value = await fetchApiSiteConfig()
+      } catch (e2) {
+        console.warn('Using fallback config:', e2.message)
+        error.value = e2.message
         config.value = fallbackConfig
       }
-    } catch (e) {
-      console.warn('Using fallback config:', e.message)
-      error.value = e.message
-      config.value = fallbackConfig
     } finally {
       loading.value = false
     }

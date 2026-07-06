@@ -1,0 +1,1857 @@
+[
+  {
+    "id": 28,
+    "categoria": {
+      "id": 2,
+      "nombre": "Proyectos Propios",
+      "descripcion": "Sistemas web y apps desarrolladas para clientes",
+      "icono": "🛠️",
+      "orden": 2
+    },
+    "tecnologias_rel": [
+      {
+        "id": 3,
+        "nombre": "Dart",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 8,
+        "nombre": "Flutter",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "Ivoo Ventas - App de apoyo comercial",
+    "descripcion": "Aplicación móvil para el equipo de ventas de Ivoo. Permite registrar ventas del día, generar reportes por tipo de venta, administrar cartera de clientes, calcular caja y descuentos, y actualizar el tipo de cambio BCV.",
+    "descripcion_corta": "App móvil para control diario de ventas, clientes y caja en Ivoo.",
+    "imagen": "https://masterslogic.com/media/proyectos/Captura_de_pantalla_2025-12-11_230048.png",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Flutter, Dart",
+    "estado": "completado",
+    "fecha_creacion": "2026-02-03",
+    "destacado": true,
+    "orden": 1
+  },
+  {
+    "id": 26,
+    "categoria": {
+      "id": 3,
+      "nombre": "Proyectos Futuros",
+      "descripcion": "Proyectos Futuros",
+      "icono": "🚀",
+      "orden": 5
+    },
+    "tecnologias_rel": [
+      {
+        "id": 63,
+        "nombre": "OpenCV",
+        "categoria": "",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Planificado",
+    "titulo": "App Móvil de Combinación de Outfits con IA",
+    "descripcion": "Aplicación móvil innovadora que utiliza inteligencia artificial y visión computacional para recomendar combinaciones de ropa y colores basándose en el guardarropa personal del usuario, ocasiones específicas y tendencias de moda actuales.\r\n                \r\nFuncionalidades planificadas:\r\n- Escaneo y catalogación automática del guardarropa personal\r\n- Recomendaciones personalizadas usando algoritmos de machine learning\r\n- Análisis de colores y estilos compatibles\r\n- Sugerencias basadas en clima, ocasión y tendencias\r\n- Integración con tiendas online para compras sugeridas\r\n- Comunidad social para compartir outfits y obtener feedback\r\n- Asistente virtual fashion con procesamiento de lenguaje natural\r\n- Realidad aumentada para probador virtual\r\n- Análisis de estilo personal y evolución en el tiempo\r\n- Integración con redes sociales para inspiración\r\n                \r\nEn fase de investigación y diseño, con lanzamiento planificado para Q3 2025.",
+    "descripcion_corta": "App de recomendación de outfits con inteligencia artificial",
+    "imagen": "https://masterslogic.com/media/proyectos/14b0c1c3-d934-4728-9d97-575655caca4b.jpg",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Flutter, Python, TensorFlow, Firebase, Machine Learning, Computer Vision",
+    "estado": "planificado",
+    "fecha_creacion": "2025-03-01",
+    "destacado": false,
+    "orden": 1
+  },
+  {
+    "id": 35,
+    "categoria": {
+      "id": 5,
+      "nombre": "Pasantías",
+      "descripcion": "Proyectos y soporte en entornos reales durante pasantías",
+      "icono": "🧪",
+      "orden": 3
+    },
+    "tecnologias_rel": [
+      {
+        "id": 72,
+        "nombre": "osTicket",
+        "categoria": "Herramientas",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "Implementación de osTicket",
+    "descripcion": "Participación en la implementación de osTicket para gestión de solicitudes TI en A.S 28 La Candelaria (Constructora - Sambil).",
+    "descripcion_corta": "Soporte en implementación de mesa de ayuda TI.",
+    "imagen": "https://masterslogic.com/media/proyectos/osticket-supsys-new-1-e1616621912452.png",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "osTicket",
+    "estado": "completado",
+    "fecha_creacion": "2024-11-30",
+    "destacado": false,
+    "orden": 1
+  },
+  {
+    "id": 14,
+    "categoria": {
+      "id": 1,
+      "nombre": "Proyectos Universitarios",
+      "descripcion": "Proyectos Universitarios",
+      "icono": "🧪",
+      "orden": 4
+    },
+    "tecnologias_rel": [
+      {
+        "id": 29,
+        "nombre": "Bootstrap",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 10,
+        "nombre": "CSS",
+        "categoria": "Web",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 5,
+        "nombre": "Django",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 27,
+        "nombre": "Firebase",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 28,
+        "nombre": "Google IDX",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 9,
+        "nombre": "HTML",
+        "categoria": "Web",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 2,
+        "nombre": "JavaScript",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 30,
+        "nombre": "SQLite",
+        "categoria": "",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "E-commerce con Django en Google IDX/Firebase Studio",
+    "descripcion": "Desarrollo completo de una plataforma e-commerce utilizando Django como framework principal y Google IDX/Firebase Studio para el despliegue y gestión de la base de datos. \r\n                \r\nLa plataforma incluye:\r\n- Sistema completo de gestión de productos con categorías\r\n- Carrito de compras funcional con persistencia de sesión\r\n- Sistema de usuarios con registro y autenticación\r\n- Panel de administración para gestión de inventario\r\n- Integración con sistemas de pago\r\n- Diseño responsive y optimizado para dispositivos móviles\r\n- Base de datos escalable con Firebase\r\n                \r\nEste proyecto me permitió profundizar en el desarrollo full-stack con Django y la integración con servicios cloud de Google.",
+    "descripcion_corta": "Plataforma e-commerce completa con Django y Firebase Studio",
+    "imagen": "https://masterslogic.com/media/proyectos/firebase.PNG",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Django, Python, Firebase, Google IDX, HTML, CSS, JavaScript, Bootstrap, SQLite",
+    "estado": "completado",
+    "fecha_creacion": "2024-05-01",
+    "destacado": true,
+    "orden": 1
+  },
+  {
+    "id": 20,
+    "categoria": {
+      "id": 2,
+      "nombre": "Proyectos Propios",
+      "descripcion": "Sistemas web y apps desarrolladas para clientes",
+      "icono": "🛠️",
+      "orden": 2
+    },
+    "tecnologias_rel": [
+      {
+        "id": 52,
+        "nombre": "Analytics",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 3,
+        "nombre": "Dart",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 5,
+        "nombre": "Django",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 27,
+        "nombre": "Firebase",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 8,
+        "nombre": "Flutter",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 51,
+        "nombre": "JWT",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 11,
+        "nombre": "MySQL",
+        "categoria": "Base de Datos",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 45,
+        "nombre": "REST API",
+        "categoria": "",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "Sistema de Puntos de Fidelización Hotelera",
+    "descripcion": "Sistema integral para la gestión de programas de fidelización en cadenas hoteleras, diseñado para incrementar la lealtad de los huéspedes y optimizar las estrategias de marketing hotelero.\r\n                \r\nMódulos del sistema:\r\n- Dashboard administrativo para hoteles con métricas en tiempo real\r\n- Aplicación móvil para huéspedes con Flutter\r\n- Sistema de acumulación y canje de puntos automático\r\n- Programa de beneficios por niveles (Bronze, Silver, Gold, Platinum)\r\n- Integración con sistemas PMS hoteleros existentes\r\n- Notificaciones push personalizadas\r\n- Geolocalización para ofertas contextuales\r\n- Análisis predictivo de comportamiento de huéspedes\r\n- API REST para integración con terceros\r\n- Panel de reportes y analytics avanzados\r\n                \r\nImplementado actualmente en 3 hoteles piloto con más de 1,000 usuarios activos.",
+    "descripcion_corta": "Sistema completo de fidelización para cadenas hoteleras",
+    "imagen": "https://masterslogic.com/media/proyectos/Lidotel.PNG",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Django, Python, MySQL, Flutter, Dart, Firebase, REST API, JWT, Analytics",
+    "estado": "completado",
+    "fecha_creacion": "2024-03-01",
+    "destacado": true,
+    "orden": 1
+  },
+  {
+    "id": 29,
+    "categoria": {
+      "id": 4,
+      "nombre": "Sistemas",
+      "descripcion": "",
+      "icono": "💼",
+      "orden": 1
+    },
+    "tecnologias_rel": [
+      {
+        "id": 5,
+        "nombre": "Django",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 13,
+        "nombre": "PostgreSQL",
+        "categoria": "Base de Datos",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "Damasco IA - Chat Gemini conectado a la base de datos",
+    "descripcion": "Sistema de chat con Gemini integrado a la base de datos de Damasco. Responde en tiempo real con información de productos, ventas y operaciones, con respuestas contextualizadas para el equipo interno.",
+    "descripcion_corta": "Chat corporativo con Gemini para consultar información de Damasco en tiempo real.",
+    "imagen": "https://masterslogic.com/media/proyectos/Captura_de_pantalla_2026-02-26_204739.png",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Django, Python, PostgreSQL",
+    "estado": "completado",
+    "fecha_creacion": "2026-02-03",
+    "destacado": true,
+    "orden": 2
+  },
+  {
+    "id": 27,
+    "categoria": {
+      "id": 3,
+      "nombre": "Proyectos Futuros",
+      "descripcion": "Proyectos Futuros",
+      "icono": "🚀",
+      "orden": 5
+    },
+    "tecnologias_rel": [
+      {
+        "id": 65,
+        "nombre": "Asterisk",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 14,
+        "nombre": "Docker",
+        "categoria": "Infraestructura",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 70,
+        "nombre": "Docker Compose",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 66,
+        "nombre": "FreePBX",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 67,
+        "nombre": "Linux",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 71,
+        "nombre": "Networking",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 68,
+        "nombre": "SIP",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 69,
+        "nombre": "VoIP",
+        "categoria": "",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Planificado",
+    "titulo": "Servidor Asterisk con FreePBX",
+    "descripcion": "Implementación completa de un servidor de telefonía IP empresarial basado en Asterisk con interfaz gráfica FreePBX, completamente containerizado con Docker para facilitar el despliegue, escalabilidad y mantenimiento en entornos empresariales.\r\n                \r\nCaracterísticas técnicas planificadas:\r\n- Implementación completa de Asterisk en contenedores Docker\r\n- Interfaz web FreePBX para administración simplificada\r\n- Configuración automática de extensiones y troncales SIP\r\n- Sistema de grabación de llamadas con almacenamiento en la nube\r\n- IVR (Interactive Voice Response) personalizable\r\n- Integración con CRM para pop-up de información de clientes\r\n- Dashboard de métricas de llamadas en tiempo real\r\n- Failover automático para alta disponibilidad\r\n- Configuración multi-tenant para múltiples empresas\r\n- API REST para integraciones con sistemas externos\r\n- Sistema de backup automático de configuraciones\r\n- Monitoreo proactivo con alertas automatizadas\r\n                \r\nProyecto dirigido a PYMEs que buscan modernizar su infraestructura de telecomunicaciones.",
+    "descripcion_corta": "Servidor de telefonía IP empresarial containerizado",
+    "imagen": "https://masterslogic.com/media/proyectos/4c5ac254-8a20-4f5e-aa29-6b11aa6d2b4c.jpg",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Asterisk, FreePBX, Docker, Linux, SIP, VoIP, Docker Compose, Networking",
+    "estado": "planificado",
+    "fecha_creacion": "2025-04-01",
+    "destacado": false,
+    "orden": 2
+  },
+  {
+    "id": 36,
+    "categoria": {
+      "id": 5,
+      "nombre": "Pasantías",
+      "descripcion": "Proyectos y soporte en entornos reales durante pasantías",
+      "icono": "🧪",
+      "orden": 3
+    },
+    "tecnologias_rel": [
+      {
+        "id": 73,
+        "nombre": "OCSInventory",
+        "categoria": "Herramientas",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "Implementación de OCSInventory",
+    "descripcion": "Apoyo en la implementación de OCSInventory para inventario y control de activos TI en A.S 28 La Candelaria (Constructora - Sambil).",
+    "descripcion_corta": "Soporte en inventario de activos TI.",
+    "imagen": "https://masterslogic.com/media/proyectos/banniere-ocs-without-ng-01-1-300x136.png",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "OCSInventory",
+    "estado": "completado",
+    "fecha_creacion": "2024-11-30",
+    "destacado": false,
+    "orden": 2
+  },
+  {
+    "id": 21,
+    "categoria": {
+      "id": 2,
+      "nombre": "Proyectos Propios",
+      "descripcion": "Sistemas web y apps desarrolladas para clientes",
+      "icono": "🛠️",
+      "orden": 2
+    },
+    "tecnologias_rel": [
+      {
+        "id": 29,
+        "nombre": "Bootstrap",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 6,
+        "nombre": "Flask",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 53,
+        "nombre": "Geolocation API",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 2,
+        "nombre": "JavaScript",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 48,
+        "nombre": "NLP",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 47,
+        "nombre": "RASA",
+        "categoria": "",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "Asistente Virtual Turístico de Mérida",
+    "descripcion": "Asistente virtual especializado e inteligente para información turística de la ciudad de Mérida, Venezuela, utilizando procesamiento de lenguaje natural para proporcionar recomendaciones personalizadas.\r\n                \r\nCapacidades del asistente:\r\n- Base de conocimiento completa sobre Mérida y sus atractivos\r\n- Recomendaciones personalizadas de lugares turísticos\r\n- Información actualizada sobre restaurantes y gastronomía local\r\n- Sugerencias de hoteles y hospedajes por presupuesto\r\n- Itinerarios personalizados según intereses y tiempo disponible\r\n- Información climática y consejos de vestimenta\r\n- Integración con servicios de transporte local\r\n- Soporte multiidioma (español e inglés)\r\n- Interfaz conversacional natural con RASA\r\n- Geolocalización y mapas interactivos\r\n                \r\nDesarrollado como contribución al turismo local de Mérida, con más de 500 consultas procesadas mensualmente.",
+    "descripcion_corta": "Asistente IA especializado en turismo merideño",
+    "imagen": "https://masterslogic.com/media/proyectos/Chat_turistico.PNG",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "RASA, Python, NLP, Flask, JavaScript, Bootstrap, Geolocation API",
+    "estado": "completado",
+    "fecha_creacion": "2024-06-01",
+    "destacado": false,
+    "orden": 2
+  },
+  {
+    "id": 15,
+    "categoria": {
+      "id": 1,
+      "nombre": "Proyectos Universitarios",
+      "descripcion": "Proyectos Universitarios",
+      "icono": "🧪",
+      "orden": 4
+    },
+    "tecnologias_rel": [
+      {
+        "id": 34,
+        "nombre": "Game Development",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 33,
+        "nombre": "OOP",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 32,
+        "nombre": "PyGame",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 31,
+        "nombre": "PyQT5",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 35,
+        "nombre": "Sound Programming",
+        "categoria": "",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "Videojuego con PYQT5 y PyGame",
+    "descripcion": "Desarrollo de un videojuego interactivo completo utilizando las librerías PYQT5 para la interfaz gráfica de usuario y PyGame para la lógica del juego y renderizado.\r\n                \r\nCaracterísticas del juego:\r\n- Interfaz gráfica intuitiva desarrollada con PYQT5\r\n- Motor de juego implementado con PyGame\r\n- Sistema de puntuación y niveles progresivos\r\n- Efectos de sonido y música de fondo\r\n- Gráficos 2D personalizados\r\n- Sistema de guardado de progreso\r\n- Múltiples personajes y enemigos\r\n- Física básica para movimientos y colisiones\r\n                \r\nEste proyecto me ayudó a comprender los conceptos de programación orientada a objetos y desarrollo de interfaces gráficas en Python.",
+    "descripcion_corta": "Videojuego interactivo desarrollado con Python",
+    "imagen": "https://masterslogic.com/media/proyectos/Game.PNG",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Python, PyQT5, PyGame, OOP, Game Development, Sound Programming",
+    "estado": "completado",
+    "fecha_creacion": "2023-08-01",
+    "destacado": false,
+    "orden": 2
+  },
+  {
+    "id": 30,
+    "categoria": {
+      "id": 4,
+      "nombre": "Sistemas",
+      "descripcion": "",
+      "icono": "💼",
+      "orden": 1
+    },
+    "tecnologias_rel": [
+      {
+        "id": 3,
+        "nombre": "Dart",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 8,
+        "nombre": "Flutter",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "Damasco Ventas Live - Reportes en el momento",
+    "descripcion": "Aplicación para el monitoreo de ventas en el momento en Damasco. Provee reportes instantáneos del día, métricas clave y vistas rápidas para apoyar decisiones comerciales.",
+    "descripcion_corta": "App de reportes de ventas en tiempo real para apoyo comercial.",
+    "imagen": "https://masterslogic.com/media/proyectos/WhatsApp_Image_2026-02-21_at_1.30.10_PM.jpeg",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Flutter, Dart",
+    "estado": "completado",
+    "fecha_creacion": "2026-02-03",
+    "destacado": true,
+    "orden": 3
+  },
+  {
+    "id": 45,
+    "categoria": {
+      "id": 4,
+      "nombre": "Sistemas",
+      "descripcion": "",
+      "icono": "💼",
+      "orden": 1
+    },
+    "tecnologias_rel": [
+      {
+        "id": 5,
+        "nombre": "Django",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 39,
+        "nombre": "PDF Generation",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 13,
+        "nombre": "PostgreSQL",
+        "categoria": "Base de Datos",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 45,
+        "nombre": "REST API",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 22,
+        "nombre": "SAP",
+        "categoria": "ERP",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "Damasco Auditoria - Sistema de Control y Auditoria",
+    "descripcion": "Sistema integral de auditoria desarrollado para Damasco, diseñado para garantizar el control, la transparencia y la trazabilidad de las operaciones empresariales.\r\n\r\nEl sistema se integra directamente con SAP para extraer y validar datos en tiempo real, permitiendo a los auditores internos verificar transacciones, detectar inconsistencias y generar reportes de cumplimiento.\r\n\r\nCaracterísticas principales:\r\n• Integración bidireccional con SAP para consulta de datos de ventas, inventario y finanzas\r\n• Dashboard de auditoria con indicadores clave y alertas automáticas\r\n• Registro de hallazgos y seguimiento de acciones correctivas\r\n• Generación de reportes de auditoria en PDF\r\n• Control de acceso por roles (auditor, supervisor, gerencia)\r\n• Historial completo de auditorias realizadas con trazabilidad\r\n• Módulo de verificación cruzada de datos entre sistemas",
+    "descripcion_corta": "Sistema de auditoria empresarial con integración SAP para control y trazabilidad",
+    "imagen": "https://masterslogic.com/media/proyectos/Captura_de_pantalla_2026-02-26_211710_koUeTLg.png",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Django, Python, SAP, PostgreSQL, REST API, PDF Generation",
+    "estado": "completado",
+    "fecha_creacion": "2025-06-01",
+    "destacado": true,
+    "orden": 3
+  },
+  {
+    "id": 22,
+    "categoria": {
+      "id": 2,
+      "nombre": "Proyectos Propios",
+      "descripcion": "Sistemas web y apps desarrolladas para clientes",
+      "icono": "🛠️",
+      "orden": 2
+    },
+    "tecnologias_rel": [
+      {
+        "id": 56,
+        "nombre": "Barcode Scanner",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 3,
+        "nombre": "Dart",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 27,
+        "nombre": "Firebase",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 8,
+        "nombre": "Flutter",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 55,
+        "nombre": "Material Design",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 54,
+        "nombre": "Provider",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 30,
+        "nombre": "SQLite",
+        "categoria": "",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "App Móvil: Listas de Compras y Gestión de Stock Hotelero",
+    "descripcion": "Aplicación multiplataforma desarrollada con Flutter para la gestión eficiente de listas de compras y control de inventario en establecimientos hoteleros de pequeña y mediana escala.\r\n                \r\nFuncionalidades principales:\r\n- Gestión de listas de compras inteligentes con sugerencias automáticas\r\n- Control de inventario en tiempo real por categorías\r\n- Sistema de alertas por stock mínimo y fechas de vencimiento\r\n- Generación automática de órdenes de compra\r\n- Sincronización multi-dispositivo con Firebase\r\n- Escáner de códigos de barras para registro rápido\r\n- Reportes de consumo y análisis de tendencias\r\n- Gestión de proveedores y precios comparativos\r\n- Sistema de usuarios por roles (administrador, encargado, staff)\r\n- Integración con sistemas contables básicos\r\n- Funcionalidad offline con sincronización posterior\r\n                \r\nImplementada en 5 hoteles boutique con reducción del 30% en desperdicio de alimentos.",
+    "descripcion_corta": "App integral para gestión de inventario hotelero",
+    "imagen": "https://masterslogic.com/media/proyectos/Quigua_App.PNG",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Flutter, Dart, Firebase, SQLite, Provider, Material Design, Barcode Scanner",
+    "estado": "completado",
+    "fecha_creacion": "2025-01-01",
+    "destacado": true,
+    "orden": 3
+  },
+  {
+    "id": 37,
+    "categoria": {
+      "id": 5,
+      "nombre": "Pasantías",
+      "descripcion": "Proyectos y soporte en entornos reales durante pasantías",
+      "icono": "🧪",
+      "orden": 3
+    },
+    "tecnologias_rel": [
+      {
+        "id": 6,
+        "nombre": "Flask",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 25,
+        "nombre": "Pandas",
+        "categoria": "Librerías Python",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "Automatización de reportes internos",
+    "descripcion": "Desarrollo de herramientas internas con Python (Flask, Pandas) para automatización de reportes del centro comercial.",
+    "descripcion_corta": "Herramientas internas para reportes del centro comercial.",
+    "imagen": "https://masterslogic.com/media/proyectos/SEAC.PNG",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Python, Flask, Pandas",
+    "estado": "completado",
+    "fecha_creacion": "2024-11-30",
+    "destacado": false,
+    "orden": 3
+  },
+  {
+    "id": 16,
+    "categoria": {
+      "id": 1,
+      "nombre": "Proyectos Universitarios",
+      "descripcion": "Proyectos Universitarios",
+      "icono": "🧪",
+      "orden": 4
+    },
+    "tecnologias_rel": [
+      {
+        "id": 38,
+        "nombre": "Database Management",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 37,
+        "nombre": "GUI Design",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 39,
+        "nombre": "PDF Generation",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 30,
+        "nombre": "SQLite",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 36,
+        "nombre": "Tkinter",
+        "categoria": "",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "Aplicación GUI con Electron",
+    "descripcion": "Aplicación de escritorio completa con interfaz gráfica desarrollada en Python utilizando la librería Tkinter nativa. La aplicación implementa un sistema de gestión de datos con múltiples funcionalidades.\r\n                \r\nFuncionalidades principales:\r\n- Interfaz gráfica intuitiva y profesional\r\n- Sistema CRUD completo (Create, Read, Update, Delete)\r\n- Validación robusta de formularios\r\n- Conexión y gestión de base de datos SQLite\r\n- Sistema de backup y restauración de datos\r\n- Gestión de Proyectos \r\n                \r\nEste proyecto me permitió dominar el desarrollo de aplicaciones de escritorio y la gestión de bases de datos locales.",
+    "descripcion_corta": "Aplicación de escritorio con interfaz gráfica completa",
+    "imagen": "https://masterslogic.com/media/proyectos/Captura_de_pantalla_2026-02-26_203245.png",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "https://benjivz.github.io/pages/projects.html",
+    "tecnologias": "Python, Tkinter, SQLite, GUI Design, Database Management, PDF Generation",
+    "estado": "completado",
+    "fecha_creacion": "2023-06-01",
+    "destacado": false,
+    "orden": 3
+  },
+  {
+    "id": 31,
+    "categoria": {
+      "id": 2,
+      "nombre": "Proyectos Propios",
+      "descripcion": "Sistemas web y apps desarrolladas para clientes",
+      "icono": "🛠️",
+      "orden": 2
+    },
+    "tecnologias_rel": [
+      {
+        "id": 5,
+        "nombre": "Django",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 13,
+        "nombre": "PostgreSQL",
+        "categoria": "Base de Datos",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "Verozh Spa Yoga - Control de clases",
+    "descripcion": "Sistema web para Verozh Spa que automatiza la asignación de profesoras y fechas de clases, gestiona cupos y facilita la organización del calendario de yoga.",
+    "descripcion_corta": "Sistema para programación y control de clases de yoga.",
+    "imagen": "https://masterslogic.com/media/proyectos/Captura_de_pantalla_2026-02-26_204233_pm0OYeR.png",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Django, Python, PostgreSQL",
+    "estado": "completado",
+    "fecha_creacion": "2026-02-03",
+    "destacado": true,
+    "orden": 4
+  },
+  {
+    "id": 46,
+    "categoria": {
+      "id": 4,
+      "nombre": "Sistemas",
+      "descripcion": "",
+      "icono": "💼",
+      "orden": 1
+    },
+    "tecnologias_rel": [
+      {
+        "id": 5,
+        "nombre": "Django",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 13,
+        "nombre": "PostgreSQL",
+        "categoria": "Base de Datos",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 45,
+        "nombre": "REST API",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 22,
+        "nombre": "SAP",
+        "categoria": "ERP",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "Damasco Fidelización - Gestión de Socios de Negocios",
+    "descripcion": "Plataforma de gestión de socios de negocios y programa de fidelización para Damasco, con integración directa al sistema SAP para la sincronización de datos comerciales.\r\n\r\nEl sistema permite visualizar en tiempo real los créditos de cada socio de negocios, registrar y validar pagos, y mantener un control exhaustivo de las relaciones comerciales.\r\n\r\nFuncionalidades principales:\r\n• Visualización de créditos y saldos de socios de negocios en tiempo real\r\n• Registro y validación de pagos con flujo de aprobación\r\n• Integración con SAP para sincronización de datos de socios y transacciones\r\n• Panel de control con métricas de fidelización y comportamiento de socios\r\n• Sistema de alertas para pagos vencidos y créditos próximos a vencer\r\n• Historial completo de transacciones por socio de negocios\r\n• Reportes de estado de cuenta y conciliación\r\n• Gestión de niveles de fidelización basados en volumen de compras",
+    "descripcion_corta": "Gestión de créditos, pagos y fidelización de socios de negocios con integración SAP",
+    "imagen": "https://masterslogic.com/media/proyectos/WhatsApp_Image_2026-02-26_at_9_9di371E.08.41_PM.jpeg",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Django, Python, SAP, PostgreSQL, REST API",
+    "estado": "completado",
+    "fecha_creacion": "2025-03-01",
+    "destacado": true,
+    "orden": 4
+  },
+  {
+    "id": 23,
+    "categoria": {
+      "id": 2,
+      "nombre": "Proyectos Propios",
+      "descripcion": "Sistemas web y apps desarrolladas para clientes",
+      "icono": "🛠️",
+      "orden": 2
+    },
+    "tecnologias_rel": [
+      {
+        "id": 29,
+        "nombre": "Bootstrap",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 57,
+        "nombre": "Chart.js",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 5,
+        "nombre": "Django",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 39,
+        "nombre": "PDF Generation",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 13,
+        "nombre": "PostgreSQL",
+        "categoria": "Base de Datos",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 58,
+        "nombre": "WhatsApp API",
+        "categoria": "",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "Sistema Web de Gestión Técnica e Inventario SINPEL",
+    "descripcion": "Plataforma web integral desarrollada específicamente para SINPEL, enfocada en la gestión eficiente de casos de garantía, inventario de repuestos y seguimiento de reparaciones técnicas de equipos de línea blanca y marrón.\r\n                \r\nMódulos implementados:\r\n- Dashboard ejecutivo con KPIs en tiempo real\r\n- Gestión completa de casos de garantía con workflow automatizado\r\n- Inventario inteligente de repuestos con alertas automáticas\r\n- Sistema de asignación de técnicos por zona geográfica\r\n- Seguimiento detallado de reparaciones con fotos y diagnósticos\r\n- Generación automática de reportes operativos y gerenciales\r\n- Sistema de facturación y cobranza integrado\r\n- Portal del cliente para seguimiento de casos\r\n- Integración con WhatsApp para notificaciones\r\n- Analytics predictivo para planificación de inventario\r\n- Sistema de evaluación de técnicos y calidad de servicio\r\n                \r\nSistema en producción manejando 200+ casos mensuales con mejora del 40% en tiempos de respuesta.",
+    "descripcion_corta": "Sistema integral para gestión técnica y garantías",
+    "imagen": "https://masterslogic.com/media/proyectos/Captura_de_pantalla_2026-02-26_205023.png",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "https://benjivz.github.io/pages/projects.html",
+    "tecnologias": "Django, Python, PostgreSQL, Chart.js, Bootstrap, PDF Generation, WhatsApp API",
+    "estado": "completado",
+    "fecha_creacion": "2025-01-15",
+    "destacado": true,
+    "orden": 4
+  },
+  {
+    "id": 17,
+    "categoria": {
+      "id": 1,
+      "nombre": "Proyectos Universitarios",
+      "descripcion": "Proyectos Universitarios",
+      "icono": "🧪",
+      "orden": 4
+    },
+    "tecnologias_rel": [
+      {
+        "id": 41,
+        "nombre": "Google Colab",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 44,
+        "nombre": "Gráficos 3D",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 42,
+        "nombre": "Jupyter",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 43,
+        "nombre": "Matemáticas Aplicadas",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 40,
+        "nombre": "Matplotlib",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 26,
+        "nombre": "NumPy",
+        "categoria": "Librerías Python",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "Calculadora de Traslación y Rotación 2D/3D",
+    "descripcion": "Herramienta matemática avanzada desarrollada en Google Colab para el cálculo y visualización de transformaciones geométricas en espacios bidimensionales y tridimensionales.\r\n                \r\nCapacidades de la calculadora:\r\n- Cálculo de traslaciones en 2D y 3D\r\n- Rotaciones con ángulos personalizables\r\n- Escalado y transformaciones compuestas\r\n- Visualización gráfica interactiva de las transformaciones\r\n- Interfaz web intuitiva en Jupyter Notebook\r\n- Exportación de resultados y gráficos\r\n- Soporte para matrices de transformación\r\n- Animaciones de las transformaciones step-by-step\r\n                \r\nDesarrollada como herramienta de apoyo para materias de matemáticas y gráficos computacionales, utilizando bibliotecas científicas de Python.",
+    "descripcion_corta": "Calculadora avanzada para transformaciones geométricas 2D/3D",
+    "imagen": "https://masterslogic.com/media/proyectos/Calculadora_Tkinter.PNG",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Python, NumPy, Matplotlib, Google Colab, Jupyter, Matemáticas Aplicadas, Gráficos 3D",
+    "estado": "completado",
+    "fecha_creacion": "2023-04-01",
+    "destacado": false,
+    "orden": 4
+  },
+  {
+    "id": 32,
+    "categoria": {
+      "id": 2,
+      "nombre": "Proyectos Propios",
+      "descripcion": "Sistemas web y apps desarrolladas para clientes",
+      "icono": "🛠️",
+      "orden": 2
+    },
+    "tecnologias_rel": [
+      {
+        "id": 5,
+        "nombre": "Django",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 13,
+        "nombre": "PostgreSQL",
+        "categoria": "Base de Datos",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "Verozh Spa - Historial clínico y consultas",
+    "descripcion": "Sistema de control clínico para Verozh Spa con registro de historial del paciente, seguimiento de consultas y programación de fechas.",
+    "descripcion_corta": "Gestión de historias clínicas y citas médicas.",
+    "imagen": "https://masterslogic.com/media/proyectos/Captura_de_pantalla_2026-02-26_204906.png",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Django, Python, PostgreSQL",
+    "estado": "completado",
+    "fecha_creacion": "2026-02-03",
+    "destacado": true,
+    "orden": 5
+  },
+  {
+    "id": 24,
+    "categoria": {
+      "id": 2,
+      "nombre": "Proyectos Propios",
+      "descripcion": "Sistemas web y apps desarrolladas para clientes",
+      "icono": "🛠️",
+      "orden": 2
+    },
+    "tecnologias_rel": [
+      {
+        "id": 61,
+        "nombre": "Celery",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 5,
+        "nombre": "Django",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 14,
+        "nombre": "Docker",
+        "categoria": "Infraestructura",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 11,
+        "nombre": "MySQL",
+        "categoria": "Base de Datos",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 45,
+        "nombre": "REST API",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 60,
+        "nombre": "Redis",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 59,
+        "nombre": "Vue.js",
+        "categoria": "",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "Sistema Integral de Gestión Comercial CSEN",
+    "descripcion": "Plataforma completa de gestión empresarial desarrollada para CSEN, diseñada para automatizar y optimizar todos los procesos comerciales, desde la gestión de inventarios hasta el análisis de ventas y CRM.\r\n                \r\nArquitectura del sistema:\r\n- Módulo de inventario con control multi-almacén\r\n- Sistema CRM con seguimiento completo del pipeline de ventas\r\n- Facturación electrónica con integración SENIAT\r\n- Gestión de proveedores y órdenes de compra automatizadas\r\n- Control de cuentas por cobrar y por pagar\r\n- Dashboard gerencial con métricas de negocio en tiempo real\r\n- Sistema de comisiones para vendedores\r\n- Gestión de productos con códigos de barras\r\n- Reportes financieros y operativos automatizados\r\n- API REST para integraciones con sistemas externos\r\n- Sistema de backup automático y recuperación de desastres\r\n- Módulo de nómina básica integrada\r\n                \r\nImplementado para empresa con 50+ empleados, procesando 500+ transacciones diarias.",
+    "descripcion_corta": "ERP completo para gestión comercial empresarial",
+    "imagen": "https://masterslogic.com/media/proyectos/Captura_de_pantalla_2026-02-26_204117.png",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Django, Python, MySQL, Vue.js, REST API, Docker, Redis, Celery",
+    "estado": "completado",
+    "fecha_creacion": "2025-01-20",
+    "destacado": true,
+    "orden": 5
+  },
+  {
+    "id": 18,
+    "categoria": {
+      "id": 1,
+      "nombre": "Proyectos Universitarios",
+      "descripcion": "Proyectos Universitarios",
+      "icono": "🧪",
+      "orden": 4
+    },
+    "tecnologias_rel": [
+      {
+        "id": 10,
+        "nombre": "CSS",
+        "categoria": "Web",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 5,
+        "nombre": "Django",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 9,
+        "nombre": "HTML",
+        "categoria": "Web",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 2,
+        "nombre": "JavaScript",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 13,
+        "nombre": "PostgreSQL",
+        "categoria": "Base de Datos",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 45,
+        "nombre": "REST API",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 46,
+        "nombre": "Testing",
+        "categoria": "",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "E-commerce con Django",
+    "descripcion": "Plataforma e-commerce robusta desarrollada completamente con Django, enfocada en las mejores prácticas de desarrollo web y arquitectura escalable.\r\n                \r\nArquitectura y funcionalidades:\r\n- Arquitectura MVT (Model-View-Template) bien estructurada\r\n- Sistema de autenticación y autorización avanzado\r\n- Gestión completa de inventario y productos\r\n- Carrito de compras con persistencia de sesión\r\n- Sistema de órdenes y facturación\r\n- Panel de administración personalizado\r\n- API REST para integración con terceros\r\n- Optimización SEO y rendimiento\r\n- Testing automatizado con cobertura completa\r\n                \r\nEste proyecto consolidó mis conocimientos en Django y desarrollo web profesional.",
+    "descripcion_corta": "Plataforma e-commerce robusta con arquitectura escalable",
+    "imagen": "https://masterslogic.com/media/proyectos/django.PNG",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Django, Python, PostgreSQL, HTML, CSS, JavaScript, REST API, Testing",
+    "estado": "completado",
+    "fecha_creacion": "2024-03-01",
+    "destacado": true,
+    "orden": 5
+  },
+  {
+    "id": 33,
+    "categoria": {
+      "id": 2,
+      "nombre": "Proyectos Propios",
+      "descripcion": "Sistemas web y apps desarrolladas para clientes",
+      "icono": "🛠️",
+      "orden": 2
+    },
+    "tecnologias_rel": [
+      {
+        "id": 3,
+        "nombre": "Dart",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 8,
+        "nombre": "Flutter",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "Monitor Cambiario VE - Dólar, euro y cripto",
+    "descripcion": "Aplicación de monitoreo de cambio en Venezuela para dólar, euro, USDT y USDC. Incluye calculadora de conversión y gráficas de variación en 1 semana, 1 mes y 1 año.",
+    "descripcion_corta": "App con tasas actualizadas y calculadora multi-moneda.",
+    "imagen": "https://masterslogic.com/media/proyectos/WhatsApp_Image_2026-02-26_at_8.39.59_PM.jpeg",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Flutter, Dart",
+    "estado": "completado",
+    "fecha_creacion": "2026-02-03",
+    "destacado": true,
+    "orden": 6
+  },
+  {
+    "id": 25,
+    "categoria": {
+      "id": 2,
+      "nombre": "Proyectos Propios",
+      "descripcion": "Sistemas web y apps desarrolladas para clientes",
+      "icono": "🛠️",
+      "orden": 2
+    },
+    "tecnologias_rel": [
+      {
+        "id": 61,
+        "nombre": "Celery",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 5,
+        "nombre": "Django",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 49,
+        "nombre": "Machine Learning",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 26,
+        "nombre": "NumPy",
+        "categoria": "Librerías Python",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 25,
+        "nombre": "Pandas",
+        "categoria": "Librerías Python",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 13,
+        "nombre": "PostgreSQL",
+        "categoria": "Base de Datos",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 62,
+        "nombre": "Scrapy",
+        "categoria": "",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [
+      {
+        "id": 5,
+        "imagen": "https://masterslogic.com/media/proyectos/galeria/Captura_de_pantalla_2026-02-26_203834.png",
+        "alt_text": "",
+        "orden": 0,
+        "proyecto": 25
+      }
+    ],
+    "estado_display": "Completado",
+    "titulo": "Sistema de Consolidación de Precios y Preventas IVOO",
+    "descripcion": "Sistema especializado para IVOO enfocado en la consolidación automática de precios de múltiples proveedores y la gestión inteligente de preventas comerciales con algoritmos de optimización avanzados.\r\n                \r\nComponentes técnicos:\r\n- Algoritmos de web scraping para captura automática de precios\r\n- Sistema de machine learning para predicción de tendencias de precios\r\n- Consolidación inteligente de datos de múltiples fuentes\r\n- Dashboard de comparación de precios en tiempo real\r\n- Sistema automatizado de generación de preventas\r\n- Análisis predictivo para optimización de márgenes de ganancia\r\n- Alertas automáticas de cambios significativos en precios\r\n- Integración con sistemas de inventario existentes\r\n- Módulo de análisis de competencia\r\n- API para integración con sistemas POS\r\n- Reportes ejecutivos con visualizaciones interactivas\r\n- Sistema de auditoría para trazabilidad de cambios\r\n                \r\nSistema procesando 10,000+ comparaciones de precios diarias con mejora del 25% en márgenes.",
+    "descripcion_corta": "Sistema IA para consolidación de precios y preventas",
+    "imagen": "https://masterslogic.com/media/proyectos/Captura_de_pantalla_2026-02-26_203841.png",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Django, Python, Pandas, NumPy, PostgreSQL, Celery, Scrapy, Machine Learning",
+    "estado": "completado",
+    "fecha_creacion": "2025-01-25",
+    "destacado": true,
+    "orden": 6
+  },
+  {
+    "id": 19,
+    "categoria": {
+      "id": 1,
+      "nombre": "Proyectos Universitarios",
+      "descripcion": "Proyectos Universitarios",
+      "icono": "🧪",
+      "orden": 4
+    },
+    "tecnologias_rel": [
+      {
+        "id": 50,
+        "nombre": "Chatbot",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 5,
+        "nombre": "Django",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 49,
+        "nombre": "Machine Learning",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 48,
+        "nombre": "NLP",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 13,
+        "nombre": "PostgreSQL",
+        "categoria": "Base de Datos",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 47,
+        "nombre": "RASA",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 17,
+        "nombre": "TensorFlow",
+        "categoria": "IA y Automatización",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [
+      {
+        "id": 4,
+        "imagen": "https://masterslogic.com/media/proyectos/galeria/TEDG.PNG",
+        "alt_text": "",
+        "orden": 1,
+        "proyecto": 19
+      },
+      {
+        "id": 3,
+        "imagen": "https://masterslogic.com/media/proyectos/galeria/TEDG2.PNG",
+        "alt_text": "",
+        "orden": 2,
+        "proyecto": 19
+      },
+      {
+        "id": 2,
+        "imagen": "https://masterslogic.com/media/proyectos/galeria/TEDG3.PNG",
+        "alt_text": "",
+        "orden": 3,
+        "proyecto": 19
+      },
+      {
+        "id": 1,
+        "imagen": "https://masterslogic.com/media/proyectos/galeria/TEDG4.PNG",
+        "alt_text": "",
+        "orden": 4,
+        "proyecto": 19
+      }
+    ],
+    "estado_display": "Completado",
+    "titulo": "E-commerce y Asistente virtual con Django y RASA",
+    "descripcion": "Plataforma e-commerce avanzada integrada con un asistente virtual inteligente desarrollado con RASA para proporcionar una experiencia de compra conversacional y personalizada.\r\n                \r\nComponentes del sistema:\r\n- Plataforma e-commerce completa con Django\r\n- Asistente virtual con procesamiento de lenguaje natural\r\n- Integración RASA para comprensión de intenciones\r\n- Chatbot contextual para recomendaciones de productos\r\n- Sistema de machine learning para personalización\r\n- Base de conocimiento dinámica\r\n- Análisis de sentimientos en conversaciones\r\n- Multi-idioma (español e inglés)\r\n- Integración con sistemas de pago conversacionales\r\n                \r\nProyecto de tesis que combina e-commerce tradicional con IA conversacional para crear una experiencia de usuario innovadora.",
+    "descripcion_corta": "E-commerce con asistente virtual inteligente usando IA",
+    "imagen": null,
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Django, Python, RASA, NLP, Machine Learning, PostgreSQL, TensorFlow, Chatbot",
+    "estado": "completado",
+    "fecha_creacion": "2024-08-01",
+    "destacado": true,
+    "orden": 6
+  },
+  {
+    "id": 34,
+    "categoria": {
+      "id": 2,
+      "nombre": "Proyectos Propios",
+      "descripcion": "Sistemas web y apps desarrolladas para clientes",
+      "icono": "🛠️",
+      "orden": 2
+    },
+    "tecnologias_rel": [
+      {
+        "id": 5,
+        "nombre": "Django",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 13,
+        "nombre": "PostgreSQL",
+        "categoria": "Base de Datos",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "En Desarrollo",
+    "titulo": "Sistema de Nómina Modular",
+    "descripcion": "Plataforma modular para gestionar contratación, cálculo de nómina, asistencia, liquidaciones y dispersión de pagos, con reportes y autoservicio para empleados.",
+    "descripcion_corta": "Sistema de nómina con módulos de identidad, cálculo y control de tiempo.",
+    "imagen": "https://masterslogic.com/media/proyectos/Captura_de_pantalla_2026-02-26_203656.png",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Django, Python, PostgreSQL",
+    "estado": "en_desarrollo",
+    "fecha_creacion": "2026-02-03",
+    "destacado": true,
+    "orden": 7
+  },
+  {
+    "id": 47,
+    "categoria": {
+      "id": 2,
+      "nombre": "Proyectos Propios",
+      "descripcion": "Sistemas web y apps desarrolladas para clientes",
+      "icono": "🛠️",
+      "orden": 2
+    },
+    "tecnologias_rel": [
+      {
+        "id": 74,
+        "nombre": "Cloudflare",
+        "categoria": "Infraestructura",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 23,
+        "nombre": "Django REST Framework",
+        "categoria": "Librerías Python",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 75,
+        "nombre": "Electron",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 2,
+        "nombre": "JavaScript",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "Cloud de Archivos - Almacenamiento Personal en la Nube",
+    "descripcion": "Plataforma de almacenamiento en la nube personal con dominio propio gestionado a través de Cloudflare, acompañada de una aplicación de escritorio desarrollada con Electron.\r\n\r\nEl backend está construido con Django REST Framework, proporcionando una API robusta para la gestión de archivos, mientras que la aplicación de escritorio ofrece una experiencia nativa para la sincronización y gestión de documentos.\r\n\r\nCaracterísticas principales:\r\n• Almacenamiento seguro de archivos en servidor propio\r\n• Dominio personalizado con Cloudflare (DNS, SSL, CDN)\r\n• Aplicación de escritorio con Electron para subir, descargar y organizar archivos\r\n• API REST completa para operaciones CRUD de archivos\r\n• Sistema de carpetas y organización de documentos\r\n• Previsualización de archivos multimedia\r\n• Control de acceso y compartición de archivos\r\n• Sincronización automática entre escritorio y nube",
+    "descripcion_corta": "Nube personal de archivos con app de escritorio Electron y Django REST API",
+    "imagen": "https://masterslogic.com/media/proyectos/Captura_de_pantalla_2026-02-26_212952.png",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Django REST Framework, Python, Electron, Cloudflare, JavaScript",
+    "estado": "completado",
+    "fecha_creacion": "2025-08-01",
+    "destacado": true,
+    "orden": 12
+  },
+  {
+    "id": 48,
+    "categoria": {
+      "id": 2,
+      "nombre": "Proyectos Propios",
+      "descripcion": "Sistemas web y apps desarrolladas para clientes",
+      "icono": "🛠️",
+      "orden": 2
+    },
+    "tecnologias_rel": [
+      {
+        "id": 74,
+        "nombre": "Cloudflare",
+        "categoria": "Infraestructura",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 3,
+        "nombre": "Dart",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 23,
+        "nombre": "Django REST Framework",
+        "categoria": "Librerías Python",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 8,
+        "nombre": "Flutter",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [
+      {
+        "id": 6,
+        "imagen": "https://masterslogic.com/media/proyectos/galeria/WhatsApp_Image_2026-02-26_at_9.28.31_PM.jpeg",
+        "alt_text": "",
+        "orden": 0,
+        "proyecto": 48
+      }
+    ],
+    "estado_display": "Completado",
+    "titulo": "Cloud de Música - Reproductor Personal en la Nube",
+    "descripcion": "Servicio de streaming de música personal desplegado en un dominio propio con Cloudflare, con una aplicación móvil que funciona como reproductor y un backend en Django REST API.\r\n\r\nPermite subir, organizar y reproducir tu colección musical desde cualquier lugar, con una app móvil dedicada que ofrece una experiencia de reproducción fluida.\r\n\r\nCaracterísticas principales:\r\n• Cloud de música con dominio propio protegido por Cloudflare\r\n• Aplicación móvil como reproductor con controles completos de audio\r\n• Backend Django REST API para gestión de biblioteca musical\r\n• Subida y organización de canciones por artista, álbum y género\r\n• Reproductor con cola de reproducción, shuffle y repetición\r\n• Streaming de audio optimizado para conexiones móviles\r\n• Listas de reproducción personalizables\r\n• Búsqueda y filtrado avanzado de canciones",
+    "descripcion_corta": "Streaming de música personal con app móvil reproductora y Django REST API",
+    "imagen": "https://masterslogic.com/media/proyectos/Captura_de_pantalla_2026-02-26_212811.png",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Django REST Framework, Python, Flutter, Dart, Cloudflare",
+    "estado": "completado",
+    "fecha_creacion": "2025-09-01",
+    "destacado": true,
+    "orden": 13
+  },
+  {
+    "id": 49,
+    "categoria": {
+      "id": 2,
+      "nombre": "Proyectos Propios",
+      "descripcion": "Sistemas web y apps desarrolladas para clientes",
+      "icono": "🛠️",
+      "orden": 2
+    },
+    "tecnologias_rel": [
+      {
+        "id": 23,
+        "nombre": "Django REST Framework",
+        "categoria": "Librerías Python",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 51,
+        "nombre": "JWT",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 2,
+        "nombre": "JavaScript",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 11,
+        "nombre": "MySQL",
+        "categoria": "Base de Datos",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 45,
+        "nombre": "REST API",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 59,
+        "nombre": "Vue.js",
+        "categoria": "",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "En Desarrollo",
+    "titulo": "CSEN v2 - Migración a Django REST API y Vue.js",
+    "descripcion": "Segunda versión del Sistema Integral de Gestión Comercial CSEN, migrado desde una arquitectura monolítica de Django con HTML, CSS y JavaScript puro, hacia una arquitectura moderna de API REST con Django REST Framework en el backend y Vue.js como framework frontend consumidor de la API.\r\n\r\nEsta migración permite una separación completa entre backend y frontend, mejorando la escalabilidad, mantenibilidad y experiencia de usuario.\r\n\r\nMejoras respecto a v1:\r\n• Backend completamente API REST con Django REST Framework\r\n• Frontend SPA con Vue.js consumiendo la API\r\n• Autenticación basada en tokens JWT\r\n• Interfaz de usuario más fluida y reactiva sin recargas de página\r\n• Mejor separación de responsabilidades (frontend/backend)\r\n• Mayor facilidad para integrar apps móviles en el futuro\r\n• Documentación automática de la API con Swagger/OpenAPI\r\n• Tests automatizados para endpoints de la API",
+    "descripcion_corta": "Migración del sistema CSEN de Django monolítico a Django REST API + Vue.js",
+    "imagen": "https://masterslogic.com/media/proyectos/WhatsApp_Image_2026-02-26_at_9.25.37_PM.jpeg",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Django REST Framework, Python, Vue.js, JavaScript, MySQL, JWT, REST API",
+    "estado": "en_desarrollo",
+    "fecha_creacion": "2025-11-01",
+    "destacado": true,
+    "orden": 14
+  },
+  {
+    "id": 50,
+    "categoria": {
+      "id": 2,
+      "nombre": "Proyectos Propios",
+      "descripcion": "Sistemas web y apps desarrolladas para clientes",
+      "icono": "🛠️",
+      "orden": 2
+    },
+    "tecnologias_rel": [
+      {
+        "id": 29,
+        "nombre": "Bootstrap",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 5,
+        "nombre": "Django",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 2,
+        "nombre": "JavaScript",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 13,
+        "nombre": "PostgreSQL",
+        "categoria": "Base de Datos",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "Sistema de Inventario y Menú Web para Tintos y Café",
+    "descripcion": "Sistema de gestión de inventario especializado para establecimientos de café y tintos, con menú web integrado para clientes y un módulo completo de costeo de platillos.\r\n\r\nPermite organizar los ingredientes de cada platillo del menú, calcular automáticamente el costo total basándose en el precio unitario de cada ingrediente, y gestionar el inventario de insumos.\r\n\r\nFuncionalidades principales:\r\n• Menú web interactivo para clientes con precios y descripciones\r\n• Registro de ingredientes con precios unitarios actualizables\r\n• Composición de platillos: asignación de ingredientes y cantidades\r\n• Cálculo automático del costo total de cada platillo\r\n• Análisis de margen de ganancia por producto\r\n• Control de inventario de ingredientes con alertas de stock bajo\r\n• Historial de precios de ingredientes para análisis de costos\r\n• Interfaz responsiva adaptada para tablets en cocina",
+    "descripcion_corta": "Inventario de café con menú web, costeo de ingredientes y cálculo de precios",
+    "imagen": "https://masterslogic.com/media/proyectos/Captura_de_pantalla_2026-02-26_211119_3G8t9le.png",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Django, Python, PostgreSQL, Bootstrap, JavaScript",
+    "estado": "completado",
+    "fecha_creacion": "2025-05-01",
+    "destacado": true,
+    "orden": 15
+  },
+  {
+    "id": 51,
+    "categoria": {
+      "id": 2,
+      "nombre": "Proyectos Propios",
+      "descripcion": "Sistemas web y apps desarrolladas para clientes",
+      "icono": "🛠️",
+      "orden": 2
+    },
+    "tecnologias_rel": [
+      {
+        "id": 29,
+        "nombre": "Bootstrap",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 57,
+        "nombre": "Chart.js",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 5,
+        "nombre": "Django",
+        "categoria": "Framework",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 39,
+        "nombre": "PDF Generation",
+        "categoria": "",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 13,
+        "nombre": "PostgreSQL",
+        "categoria": "Base de Datos",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 1,
+        "nombre": "Python",
+        "categoria": "Programación",
+        "color": "#3b82f6"
+      },
+      {
+        "id": 45,
+        "nombre": "REST API",
+        "categoria": "",
+        "color": "#3b82f6"
+      }
+    ],
+    "imagenes": [],
+    "estado_display": "Completado",
+    "titulo": "Smart Inventory - Plataforma de Gestión Logística Inteligente",
+    "descripcion": "Plataforma digital diseñada para digitalizar y centralizar la logística empresarial. Smart Inventory ofrece una solución integral para el control de inventarios, automatización de procesos y trazabilidad de operaciones.\r\n\r\nEl sistema se basa en cuatro pilares fundamentales:\r\n\r\nControl Centralizado:\r\nGestión de múltiples almacenes o bodegas desde un solo lugar, con rastreo en tiempo real de la ubicación de cada producto.\r\n\r\nAutomatización de Inventario:\r\nVigilancia automática de niveles de stock. El sistema envía alertas automáticas cuando un producto está por agotarse, previniendo quiebres de stock.\r\n\r\nSeguridad y Auditoría:\r\nSupervisión de accesos al sistema y cambios realizados mediante roles de usuario, garantizando transparencia y autorización en los movimientos de mercancía.\r\n\r\nContabilidad Logística (Kardex):\r\nGeneración de reportes detallados de entradas, salidas y saldos, facilitando el control de costos y la toma de decisiones basada en datos reales.",
+    "descripcion_corta": "Plataforma logística con control centralizado, automatización y Kardex",
+    "imagen": "https://masterslogic.com/media/proyectos/Captura_de_pantalla_2026-02-26_212337_W4h1ajD.png",
+    "url_link": "",
+    "url_demo": "",
+    "url_github": "",
+    "url_mas_info": "",
+    "tecnologias": "Django, Python, PostgreSQL, Bootstrap, Chart.js, PDF Generation, REST API",
+    "estado": "completado",
+    "fecha_creacion": "2025-07-01",
+    "destacado": true,
+    "orden": 16
+  }
+]
+

@@ -1,0 +1,577 @@
+[
+  {
+    "id": 15,
+    "categoria": {
+      "id": 1,
+      "nombre": "Habilidades Técnicas",
+      "descripcion": "",
+      "orden": 1
+    },
+    "nombre": "Python",
+    "nivel": 92,
+    "descripcion": "",
+    "icono": "fab fa-python",
+    "orden": 1
+  },
+  {
+    "id": 16,
+    "categoria": {
+      "id": 1,
+      "nombre": "Habilidades Técnicas",
+      "descripcion": "",
+      "orden": 1
+    },
+    "nombre": "Django/Flask",
+    "nivel": 88,
+    "descripcion": "",
+    "icono": "fas fa-server",
+    "orden": 2
+  },
+  {
+    "id": 17,
+    "categoria": {
+      "id": 1,
+      "nombre": "Habilidades Técnicas",
+      "descripcion": "",
+      "orden": 1
+    },
+    "nombre": "JavaScript/Vue.js",
+    "nivel": 82,
+    "descripcion": "",
+    "icono": "fab fa-js-square",
+    "orden": 3
+  },
+  {
+    "id": 18,
+    "categoria": {
+      "id": 1,
+      "nombre": "Habilidades Técnicas",
+      "descripcion": "",
+      "orden": 1
+    },
+    "nombre": "HTML/CSS",
+    "nivel": 90,
+    "descripcion": "",
+    "icono": "fab fa-html5",
+    "orden": 4
+  },
+  {
+    "id": 19,
+    "categoria": {
+      "id": 1,
+      "nombre": "Habilidades Técnicas",
+      "descripcion": "",
+      "orden": 1
+    },
+    "nombre": "Flutter/Dart",
+    "nivel": 78,
+    "descripcion": "",
+    "icono": "fas fa-mobile-alt",
+    "orden": 5
+  },
+  {
+    "id": 20,
+    "categoria": {
+      "id": 1,
+      "nombre": "Habilidades Técnicas",
+      "descripcion": "",
+      "orden": 1
+    },
+    "nombre": "MySQL/SQLite",
+    "nivel": 85,
+    "descripcion": "",
+    "icono": "fas fa-database",
+    "orden": 6
+  },
+  {
+    "id": 21,
+    "categoria": {
+      "id": 1,
+      "nombre": "Habilidades Técnicas",
+      "descripcion": "",
+      "orden": 1
+    },
+    "nombre": "IA: TensorFlow, Rasa, CrewAI, n8n",
+    "nivel": 75,
+    "descripcion": "",
+    "icono": "fas fa-brain",
+    "orden": 7
+  },
+  {
+    "id": 22,
+    "categoria": {
+      "id": 1,
+      "nombre": "Habilidades Técnicas",
+      "descripcion": "",
+      "orden": 1
+    },
+    "nombre": "Docker/VirtualBox",
+    "nivel": 70,
+    "descripcion": "",
+    "icono": "fab fa-docker",
+    "orden": 8
+  },
+  {
+    "id": 23,
+    "categoria": {
+      "id": 1,
+      "nombre": "Habilidades Técnicas",
+      "descripcion": "",
+      "orden": 1
+    },
+    "nombre": "ERP: Odoo",
+    "nivel": 65,
+    "descripcion": "",
+    "icono": "fas fa-cogs",
+    "orden": 9
+  },
+  {
+    "id": 24,
+    "categoria": {
+      "id": 1,
+      "nombre": "Habilidades Técnicas",
+      "descripcion": "",
+      "orden": 1
+    },
+    "nombre": "Simulación de Redes: Cisco Packet Tracer",
+    "nivel": 72,
+    "descripcion": "",
+    "icono": "fas fa-network-wired",
+    "orden": 10
+  },
+  {
+    "id": 25,
+    "categoria": {
+      "id": 1,
+      "nombre": "Habilidades Técnicas",
+      "descripcion": "",
+      "orden": 1
+    },
+    "nombre": "Git/GitHub",
+    "nivel": 80,
+    "descripcion": "",
+    "icono": "fab fa-git-alt",
+    "orden": 11
+  },
+  {
+    "id": 26,
+    "categoria": {
+      "id": 1,
+      "nombre": "Habilidades Técnicas",
+      "descripcion": "",
+      "orden": 1
+    },
+    "nombre": "Linux/Windows",
+    "nivel": 75,
+    "descripcion": "",
+    "icono": "fab fa-linux",
+    "orden": 12
+  },
+  {
+    "id": 33,
+    "categoria": {
+      "id": 2,
+      "nombre": "Aptitudes Personales",
+      "descripcion": "",
+      "orden": 2
+    },
+    "nombre": "Adaptabilidad",
+    "nivel": 90,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  },
+  {
+    "id": 34,
+    "categoria": {
+      "id": 2,
+      "nombre": "Aptitudes Personales",
+      "descripcion": "",
+      "orden": 2
+    },
+    "nombre": "Resolución de Problemas",
+    "nivel": 95,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  },
+  {
+    "id": 35,
+    "categoria": {
+      "id": 3,
+      "nombre": "Programación y Desarrollo",
+      "descripcion": "",
+      "orden": 2
+    },
+    "nombre": "Python",
+    "nivel": 90,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  },
+  {
+    "id": 36,
+    "categoria": {
+      "id": 3,
+      "nombre": "Programación y Desarrollo",
+      "descripcion": "",
+      "orden": 2
+    },
+    "nombre": "JavaScript",
+    "nivel": 85,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  },
+  {
+    "id": 37,
+    "categoria": {
+      "id": 3,
+      "nombre": "Programación y Desarrollo",
+      "descripcion": "",
+      "orden": 2
+    },
+    "nombre": "Dart",
+    "nivel": 75,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  },
+  {
+    "id": 38,
+    "categoria": {
+      "id": 3,
+      "nombre": "Programación y Desarrollo",
+      "descripcion": "",
+      "orden": 2
+    },
+    "nombre": "C#",
+    "nivel": 70,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  },
+  {
+    "id": 27,
+    "categoria": {
+      "id": 2,
+      "nombre": "Aptitudes Personales",
+      "descripcion": "",
+      "orden": 2
+    },
+    "nombre": "Adaptabilidad y Resolución de Problemas",
+    "nivel": 95,
+    "descripcion": "",
+    "icono": "fas fa-lightbulb",
+    "orden": 1
+  },
+  {
+    "id": 28,
+    "categoria": {
+      "id": 2,
+      "nombre": "Aptitudes Personales",
+      "descripcion": "",
+      "orden": 2
+    },
+    "nombre": "Capacidad de Autoaprendizaje",
+    "nivel": 95,
+    "descripcion": "",
+    "icono": "fas fa-graduation-cap",
+    "orden": 2
+  },
+  {
+    "id": 29,
+    "categoria": {
+      "id": 2,
+      "nombre": "Aptitudes Personales",
+      "descripcion": "",
+      "orden": 2
+    },
+    "nombre": "Trabajo en Equipo",
+    "nivel": 90,
+    "descripcion": "",
+    "icono": "fas fa-users",
+    "orden": 3
+  },
+  {
+    "id": 30,
+    "categoria": {
+      "id": 2,
+      "nombre": "Aptitudes Personales",
+      "descripcion": "",
+      "orden": 2
+    },
+    "nombre": "Inglés",
+    "nivel": 78,
+    "descripcion": "",
+    "icono": "fas fa-language",
+    "orden": 4
+  },
+  {
+    "id": 31,
+    "categoria": {
+      "id": 2,
+      "nombre": "Aptitudes Personales",
+      "descripcion": "",
+      "orden": 2
+    },
+    "nombre": "Liderazgo Técnico",
+    "nivel": 80,
+    "descripcion": "",
+    "icono": "fas fa-user-tie",
+    "orden": 5
+  },
+  {
+    "id": 32,
+    "categoria": {
+      "id": 2,
+      "nombre": "Aptitudes Personales",
+      "descripcion": "",
+      "orden": 2
+    },
+    "nombre": "Comunicación Efectiva",
+    "nivel": 85,
+    "descripcion": "",
+    "icono": "fas fa-comments",
+    "orden": 6
+  },
+  {
+    "id": 39,
+    "categoria": {
+      "id": 4,
+      "nombre": "Frameworks Web/Móvil",
+      "descripcion": "",
+      "orden": 3
+    },
+    "nombre": "Django",
+    "nivel": 90,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  },
+  {
+    "id": 40,
+    "categoria": {
+      "id": 4,
+      "nombre": "Frameworks Web/Móvil",
+      "descripcion": "",
+      "orden": 3
+    },
+    "nombre": "Flask",
+    "nivel": 85,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  },
+  {
+    "id": 41,
+    "categoria": {
+      "id": 4,
+      "nombre": "Frameworks Web/Móvil",
+      "descripcion": "",
+      "orden": 3
+    },
+    "nombre": "Vue.js",
+    "nivel": 80,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  },
+  {
+    "id": 42,
+    "categoria": {
+      "id": 4,
+      "nombre": "Frameworks Web/Móvil",
+      "descripcion": "",
+      "orden": 3
+    },
+    "nombre": "Flutter",
+    "nivel": 75,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  },
+  {
+    "id": 43,
+    "categoria": {
+      "id": 4,
+      "nombre": "Frameworks Web/Móvil",
+      "descripcion": "",
+      "orden": 3
+    },
+    "nombre": "HTML/CSS",
+    "nivel": 90,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  },
+  {
+    "id": 44,
+    "categoria": {
+      "id": 5,
+      "nombre": "Bases de Datos",
+      "descripcion": "",
+      "orden": 4
+    },
+    "nombre": "MySQL",
+    "nivel": 85,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  },
+  {
+    "id": 45,
+    "categoria": {
+      "id": 5,
+      "nombre": "Bases de Datos",
+      "descripcion": "",
+      "orden": 4
+    },
+    "nombre": "SQLite3",
+    "nivel": 85,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  },
+  {
+    "id": 46,
+    "categoria": {
+      "id": 5,
+      "nombre": "Bases de Datos",
+      "descripcion": "",
+      "orden": 4
+    },
+    "nombre": "PostgreSQL",
+    "nivel": 80,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  },
+  {
+    "id": 47,
+    "categoria": {
+      "id": 6,
+      "nombre": "Infraestructura y Virtualización",
+      "descripcion": "",
+      "orden": 5
+    },
+    "nombre": "Docker",
+    "nivel": 80,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  },
+  {
+    "id": 48,
+    "categoria": {
+      "id": 6,
+      "nombre": "Infraestructura y Virtualización",
+      "descripcion": "",
+      "orden": 5
+    },
+    "nombre": "VirtualBox",
+    "nivel": 75,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  },
+  {
+    "id": 49,
+    "categoria": {
+      "id": 6,
+      "nombre": "Infraestructura y Virtualización",
+      "descripcion": "",
+      "orden": 5
+    },
+    "nombre": "Cisco Packet Tracer",
+    "nivel": 70,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  },
+  {
+    "id": 50,
+    "categoria": {
+      "id": 7,
+      "nombre": "IA y Automatización",
+      "descripcion": "",
+      "orden": 6
+    },
+    "nombre": "TensorFlow",
+    "nivel": 70,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  },
+  {
+    "id": 51,
+    "categoria": {
+      "id": 7,
+      "nombre": "IA y Automatización",
+      "descripcion": "",
+      "orden": 6
+    },
+    "nombre": "Rasa",
+    "nivel": 70,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  },
+  {
+    "id": 52,
+    "categoria": {
+      "id": 7,
+      "nombre": "IA y Automatización",
+      "descripcion": "",
+      "orden": 6
+    },
+    "nombre": "CrewAI",
+    "nivel": 65,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  },
+  {
+    "id": 53,
+    "categoria": {
+      "id": 7,
+      "nombre": "IA y Automatización",
+      "descripcion": "",
+      "orden": 6
+    },
+    "nombre": "n8n",
+    "nivel": 85,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  },
+  {
+    "id": 54,
+    "categoria": {
+      "id": 8,
+      "nombre": "ERP / Gestión Empresarial",
+      "descripcion": "",
+      "orden": 7
+    },
+    "nombre": "Odoo",
+    "nivel": 80,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  },
+  {
+    "id": 55,
+    "categoria": {
+      "id": 8,
+      "nombre": "ERP / Gestión Empresarial",
+      "descripcion": "",
+      "orden": 7
+    },
+    "nombre": "SAP API",
+    "nivel": 85,
+    "descripcion": "",
+    "icono": "",
+    "orden": 0
+  }
+]
+

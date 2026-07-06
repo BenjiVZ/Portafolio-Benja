@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "titulo_sitio": "Benjamin Velazco - Portafolio",
+    "descripcion_meta": "Portafolio profesional de Benjamin Velazco, Técnico Superior en Informática especializado en desarrollo web y móvil con Python, Django, Flutter y tecnologías de IA.",
+    "palabras_clave": "Benjamin Velazco, desarrollador, programador, Python, Django, Flutter, técnico informática, Venezuela, Caracas, portafolio",
+    "google_analytics": "",
+    "favicon": null,
+    "logo": null,
+    "color_primario": "#007bff",
+    "color_secundario": "#6c757d",
+    "mostrar_blog": false,
+    "mostrar_testimonios": false
+  }
+]
+

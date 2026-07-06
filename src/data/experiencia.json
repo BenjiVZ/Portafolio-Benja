@@ -1,0 +1,36 @@
+[
+  {
+    "id": 5,
+    "empresa": "Damasco",
+    "cargo": "Desarrollador",
+    "ubicacion": "Caracas, Venezuela",
+    "fecha_inicio": "2026-01-01",
+    "fecha_fin": null,
+    "descripcion": "• Desarrollo de soluciones tecnológicas para la automatización de flujos de trabajo y procesos internos.\n• Integración de API de SAP con software a medida para la sincronización y optimización de datos.\n• Diseño e implementación de automatizaciones complejas utilizando n8n.\n• Diagnóstico y optimización de procesos operativos, incrementando la eficiencia de la empresa.",
+    "actual": true,
+    "orden": 1
+  },
+  {
+    "id": 3,
+    "empresa": "SIMAX (IVOO)",
+    "cargo": "Técnico en Garantía",
+    "ubicacion": "Caracas, Venezuela",
+    "fecha_inicio": "2025-06-01",
+    "fecha_fin": "2026-01-31",
+    "descripcion": "• Gestión integral de casos de garantía, desde la recepción del cliente hasta la resolución final.\n• Diagnóstico y reparación de equipos.\n• Soporte técnico y reparación de productos de tecnología.\n• Uso de sistemas internos para la gestión de inventario de repuestos y seguimiento de casos.",
+    "actual": false,
+    "orden": 2
+  },
+  {
+    "id": 4,
+    "empresa": "A.S 28 La Candelaria (Constructora - Sambil)",
+    "cargo": "Pasante de Informática",
+    "ubicacion": "Caracas, Venezuela",
+    "fecha_inicio": "2024-10-01",
+    "fecha_fin": "2024-11-30",
+    "descripcion": "Soporte especializado y desarrollo de soluciones tecnológicas:\n\n• Soporte en la implementación de sistemas de gestión de TI (osTicket, OCSInventory)\n• Desarrollo de herramientas internas personalizadas con Python utilizando Flask y Pandas\n• Automatización de reportes del centro comercial para optimizar procesos administrativos\n• Colaboración en proyectos de infraestructura tecnológica y soporte técnico\n• Documentación técnica y capacitación de usuarios finales\n• Automatización exitosa reduciendo tiempo de generación de reportes en 60%",
+    "actual": false,
+    "orden": 2
+  }
+]
+

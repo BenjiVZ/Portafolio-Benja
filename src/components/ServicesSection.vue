@@ -6,11 +6,13 @@
         <p class="section-subtitle">Soluciones tecnológicas adaptadas a tus necesidades</p>
       </div>
 
-      <div class="services-grid stagger-children" ref="gridRef">
+      <div class="services-grid">
         <div
           v-for="(service, i) in services"
           :key="service.id || i"
           class="service-card card"
+          v-reveal="i * 80"
+          v-spotlight
         >
           <div class="service-icon-wrapper">
             <component :is="getIcon(service.icon_name)" />
@@ -24,11 +26,10 @@
 </template>
 
 <script setup>
-import { h, onMounted, ref } from 'vue'
+import { h } from 'vue'
 import { useServices } from '../composables/useServices'
 
 const { services } = useServices()
-const gridRef = ref(null)
 
 const icons = {
   globe: () => h('svg', { width: 28, height: 28, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 1.5, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', innerHTML: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>' }),
@@ -41,18 +42,6 @@ const icons = {
 function getIcon(name) {
   return icons[name] || icons.code
 }
-
-onMounted(() => {
-  if (!gridRef.value) return
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible')
-      }
-    })
-  }, { threshold: 0.1 })
-  observer.observe(gridRef.value)
-})
 </script>
 
 <style scoped>

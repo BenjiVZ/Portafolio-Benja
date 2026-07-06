@@ -79,6 +79,7 @@
 <script setup>
 import { ref, nextTick, onMounted } from 'vue'
 import { supabase } from '../lib/supabase'
+import { fetchApiExperiences } from '../lib/api'
 
 const DEVICON_BASE = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons'
 const techIconMap = {
@@ -128,10 +129,18 @@ async function loadExperiences() {
       .select('*')
       .order('sort_order', { ascending: true })
     if (error) throw error
-    experiences.value = data || fallbackExperiences
+    if (!data || data.length === 0) throw new Error('Sin datos en Supabase')
+    experiences.value = data
   } catch (e) {
-    console.warn('Using fallback experiences:', e.message)
-    experiences.value = fallbackExperiences
+    console.warn('Supabase falló, intentando API Django:', e.message)
+    try {
+      const apiData = await fetchApiExperiences()
+      if (apiData.length === 0) throw new Error('Sin datos en la API')
+      experiences.value = apiData
+    } catch (e2) {
+      console.warn('Using fallback experiences:', e2.message)
+      experiences.value = fallbackExperiences
+    }
   }
 }
 

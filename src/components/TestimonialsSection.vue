@@ -1,16 +1,17 @@
 <template>
-  <section id="testimonials" class="section testimonials">
+  <section v-if="testimonials.length" id="testimonials" class="section testimonials">
     <div class="container">
       <div class="section-header">
         <h2 class="section-title">Testimonios</h2>
         <p class="section-subtitle">Lo que dicen mis clientes sobre mi trabajo</p>
       </div>
 
-      <div class="testimonials-track" ref="trackRef">
+      <div class="testimonials-track">
         <div
           v-for="(testimonial, i) in testimonials"
           :key="testimonial.id || i"
           class="testimonial-card"
+          v-reveal="i * 100"
         >
           <div class="testimonial-quote">
             <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" opacity="0.15">
@@ -34,23 +35,9 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue'
 import { useTestimonials } from '../composables/useTestimonials'
 
 const { testimonials } = useTestimonials()
-const trackRef = ref(null)
-
-onMounted(() => {
-  if (!trackRef.value) return
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible')
-      }
-    })
-  }, { threshold: 0.1 })
-  observer.observe(trackRef.value)
-})
 </script>
 
 <style scoped>

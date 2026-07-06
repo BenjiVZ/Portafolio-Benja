@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "titulo": "CSEN",
+    "descripcion": "",
+    "imagen": "https://masterslogic.com/media/flyers/1.png",
+    "url_contacto": "",
+    "precio": "",
+    "activo": true,
+    "orden": 1,
+    "fecha_creacion": "2026-02-26T21:35:52.671684-04:00"
+  },
+  {
+    "id": 2,
+    "titulo": "Inventario",
+    "descripcion": "",
+    "imagen": "https://masterslogic.com/media/flyers/2.png",
+    "url_contacto": "",
+    "precio": "",
+    "activo": true,
+    "orden": 2,
+    "fecha_creacion": "2026-02-26T21:37:07.946356-04:00"
+  },
+  {
+    "id": 3,
+    "titulo": "Pre Ventas",
+    "descripcion": "",
+    "imagen": "https://masterslogic.com/media/flyers/3.png",
+    "url_contacto": "",
+    "precio": "",
+    "activo": true,
+    "orden": 3,
+    "fecha_creacion": "2026-02-26T21:38:04.398043-04:00"
+  },
+  {
+    "id": 4,
+    "titulo": "Desarrollo",
+    "descripcion": "",
+    "imagen": "https://masterslogic.com/media/flyers/5.png",
+    "url_contacto": "",
+    "precio": "",
+    "activo": true,
+    "orden": 4,
+    "fecha_creacion": "2026-02-26T21:38:40.365807-04:00"
+  },
+  {
+    "id": 5,
+    "titulo": "Tecnico",
+    "descripcion": "",
+    "imagen": "https://masterslogic.com/media/flyers/4.png",
+    "url_contacto": "",
+    "precio": "",
+    "activo": true,
+    "orden": 5,
+    "fecha_creacion": "2026-02-26T21:39:11.496575-04:00"
+  }
+]
+

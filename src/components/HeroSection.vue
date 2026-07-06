@@ -52,39 +52,51 @@ const heroData = computed(() => getConfig('hero'))
 
 // Typing effect
 const roles = ['Desarrollador Full Stack', 'Automatización Empresarial', 'Integración de APIs', 'Soporte Técnico']
-const currentRoleIndex = ref(0)
-const currentCharIndex = ref(0)
-const isDeleting = ref(false)
 const displayText = ref('')
-let typingInterval = null
+let roleIndex = 0
+let charIndex = 0
+let deleting = false
+let typingTimeout = null
+
+const TYPE_SPEED = 90
+const DELETE_SPEED = 45
+const HOLD_FULL = 2200
+const HOLD_EMPTY = 400
 
 function typeEffect() {
-  const currentRole = roles[currentRoleIndex.value]
+  const role = roles[roleIndex]
+  let delay
 
-  if (!isDeleting.value) {
-    displayText.value = currentRole.substring(0, currentCharIndex.value + 1)
-    currentCharIndex.value++
-
-    if (currentCharIndex.value === currentRole.length) {
-      setTimeout(() => { isDeleting.value = true }, 2000)
+  if (!deleting) {
+    charIndex++
+    displayText.value = role.substring(0, charIndex)
+    if (charIndex === role.length) {
+      deleting = true
+      delay = HOLD_FULL
+    } else {
+      delay = TYPE_SPEED
     }
   } else {
-    displayText.value = currentRole.substring(0, currentCharIndex.value - 1)
-    currentCharIndex.value--
-
-    if (currentCharIndex.value === 0) {
-      isDeleting.value = false
-      currentRoleIndex.value = (currentRoleIndex.value + 1) % roles.length
+    charIndex--
+    displayText.value = role.substring(0, charIndex)
+    if (charIndex === 0) {
+      deleting = false
+      roleIndex = (roleIndex + 1) % roles.length
+      delay = HOLD_EMPTY
+    } else {
+      delay = DELETE_SPEED
     }
   }
+
+  typingTimeout = setTimeout(typeEffect, delay)
 }
 
 onMounted(() => {
-  typingInterval = setInterval(typeEffect, isDeleting.value ? 50 : 100)
+  typingTimeout = setTimeout(typeEffect, TYPE_SPEED)
 })
 
 onUnmounted(() => {
-  if (typingInterval) clearInterval(typingInterval)
+  if (typingTimeout) clearTimeout(typingTimeout)
 })
 </script>
 

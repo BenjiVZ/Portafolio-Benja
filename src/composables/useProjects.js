@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { supabase } from '../lib/supabase'
+import { fetchApiProjects } from '../lib/api'
 
 const fallbackProjects = [
   {
@@ -60,11 +61,19 @@ export function useProjects() {
         .order('sort_order', { ascending: true })
 
       if (err) throw err
-      projects.value = (data && data.length > 0) ? data : fallbackProjects
+      if (!data || data.length === 0) throw new Error('Sin datos en Supabase')
+      projects.value = data
     } catch (e) {
-      console.warn('Using fallback projects:', e.message)
-      error.value = e.message
-      projects.value = fallbackProjects
+      console.warn('Supabase falló, intentando API Django:', e.message)
+      try {
+        const apiData = await fetchApiProjects()
+        if (apiData.length === 0) throw new Error('Sin datos en la API')
+        projects.value = apiData
+      } catch (e2) {
+        console.warn('Using fallback projects:', e2.message)
+        error.value = e2.message
+        projects.value = fallbackProjects
+      }
     } finally {
       loading.value = false
     }

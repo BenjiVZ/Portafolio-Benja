@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { supabase } from '../lib/supabase'
+import { fetchApiFlyers } from '../lib/api'
 
 const fallbackFlyers = [
   { id: '1', title: 'Sistema de Gestión Integral', tag: 'Software ERP', image_url: '/flyers/1.png', sort_order: 1 },
@@ -23,11 +24,19 @@ export function useFlyers() {
         .order('sort_order', { ascending: true })
 
       if (err) throw err
-      flyers.value = (data && data.length > 0) ? data : fallbackFlyers
+      if (!data || data.length === 0) throw new Error('Sin datos en Supabase')
+      flyers.value = data
     } catch (e) {
-      console.warn('Using fallback flyers:', e.message)
-      error.value = e.message
-      flyers.value = fallbackFlyers
+      console.warn('Supabase falló, intentando API Django:', e.message)
+      try {
+        const apiData = await fetchApiFlyers()
+        if (apiData.length === 0) throw new Error('Sin datos en la API')
+        flyers.value = apiData
+      } catch (e2) {
+        console.warn('Using fallback flyers:', e2.message)
+        error.value = e2.message
+        flyers.value = fallbackFlyers
+      }
     } finally {
       loading.value = false
     }

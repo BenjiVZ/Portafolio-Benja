@@ -79,6 +79,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useSiteConfig } from '../composables/useSiteConfig'
 import { useProjects } from '../composables/useProjects'
 import { supabase } from '../lib/supabase'
+import { fetchApiExperiences } from '../lib/api'
 
 const { getConfig } = useSiteConfig()
 const aboutData = computed(() => getConfig('about'))
@@ -138,6 +139,10 @@ const techIconMap = {
   'odoo': `https://cdn.simpleicons.org/odoo/white`,
   'n8n': `https://cdn.simpleicons.org/n8n/white`,
   'sap': `https://cdn.simpleicons.org/sap/white`,
+  'sap api': `https://cdn.simpleicons.org/sap/white`,
+  'html/css': `${DEVICON_BASE}/html5/html5-original.svg`,
+  'c#': `${DEVICON_BASE}/csharp/csharp-original.svg`,
+  'git/github': `${DEVICON_BASE}/git/git-original.svg`,
   'rasa': `https://cdn.simpleicons.org/rasa/white`,
   'virtualbox': `https://cdn.simpleicons.org/virtualbox/white`,
   'cisco packet tracer': `https://cdn.simpleicons.org/cisco/white`,
@@ -156,9 +161,15 @@ const contentRef = ref(null)
 onMounted(async () => {
   // Load companies count
   try {
-    const { data } = await supabase.from('experiences').select('company')
-    if (data) experiences.value = data
-  } catch (e) { /* fallback to 0 */ }
+    const { data, error } = await supabase.from('experiences').select('company')
+    if (error) throw error
+    if (!data || data.length === 0) throw new Error('Sin datos en Supabase')
+    experiences.value = data
+  } catch (e) {
+    try {
+      experiences.value = await fetchApiExperiences()
+    } catch (e2) { /* fallback to 0 */ }
+  }
 
   // Reveal animations
   const observer = new IntersectionObserver((entries) => {

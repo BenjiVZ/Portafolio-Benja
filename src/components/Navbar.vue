@@ -7,7 +7,14 @@
       </a>
 
       <div class="navbar-links" :class="{ open: menuOpen }">
-        <a v-for="link in links" :key="link.href" :href="link.href" class="nav-link" @click="menuOpen = false">
+        <a
+          v-for="link in links"
+          :key="link.href"
+          :href="link.href"
+          class="nav-link"
+          :class="{ active: activeSection === link.href.slice(1) }"
+          @click="menuOpen = false"
+        >
           {{ link.label }}
         </a>
       </div>
@@ -36,7 +43,9 @@ const links = [
 const isScrolled = ref(false)
 const isHidden = ref(false)
 const menuOpen = ref(false)
+const activeSection = ref('hero')
 let lastScrollY = 0
+let sectionObserver = null
 
 function handleScroll() {
   const currentScrollY = window.scrollY
@@ -49,8 +58,28 @@ function handleScroll() {
   }
 }
 
-onMounted(() => window.addEventListener('scroll', handleScroll, { passive: true }))
-onUnmounted(() => window.removeEventListener('scroll', handleScroll))
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll, { passive: true })
+
+  // Scrollspy: resalta el enlace de la sección visible
+  sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        activeSection.value = entry.target.id
+      }
+    })
+  }, { rootMargin: '-40% 0px -55% 0px' })
+
+  links.forEach(link => {
+    const el = document.getElementById(link.href.slice(1))
+    if (el) sectionObserver.observe(el)
+  })
+})
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll)
+  if (sectionObserver) sectionObserver.disconnect()
+})
 </script>
 
 <style scoped>
@@ -134,6 +163,12 @@ onUnmounted(() => window.removeEventListener('scroll', handleScroll))
 .nav-link:hover {
   color: var(--color-accent);
   background: var(--color-accent-subtle);
+}
+
+.nav-link.active {
+  color: var(--color-accent);
+  background: var(--color-accent-subtle);
+  box-shadow: inset 0 0 0 1px var(--color-border-accent);
 }
 
 /* Hamburger */
