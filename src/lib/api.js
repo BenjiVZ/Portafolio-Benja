@@ -6,10 +6,10 @@
 
 const API_BASE = (
   import.meta.env.VITE_API_URL ||
-  (import.meta.env.DEV ? 'http://127.0.0.1:8000/api' : 'https://masterslogic.com/api')
+  (import.meta.env.DEV ? 'http://127.0.0.1:8000/api' : 'https://1000.masterslogic.com/api')
 ).replace(/\/$/, '')
 
-// Export local de export_data/ (la API en producción aún no está desplegada).
+// Export local de export_data/ (respaldo si la API no responde).
 // Los JSON se cargan bajo demanda; Vite los separa del bundle principal.
 const localData = {
   '/proyectos/': () => import('../data/proyectos.json'),
@@ -20,12 +20,24 @@ const localData = {
   '/flyers/': () => import('../data/flyers.json')
 }
 
-// Las URLs de media del export apuntan al dominio productivo (todavía caído);
-// las imágenes viven en public/media, así que se sirven desde el propio sitio.
+// Las URLs de media del export se sirven desde public/media del propio sitio
+// (copias locales ya optimizadas), sin depender del dominio del backend.
 function localizeMediaUrls(data) {
   const text = JSON.stringify(data)
+    .replaceAll('https://1000.masterslogic.com/media/', '/media/')
+    .replaceAll('http://1000.masterslogic.com/media/', '/media/')
     .replaceAll('https://masterslogic.com/media/', '/media/')
     .replaceAll('http://127.0.0.1:8000/media/', '/media/')
+  return JSON.parse(text)
+}
+
+// El backend corre detrás de un proxy y puede devolver URLs de media con
+// http:// en lugar de https:// — se normaliza el esquema hasta que el
+// backend despliegue el fix (SECURE_PROXY_SSL_HEADER).
+function forceHttpsMediaUrls(data) {
+  if (!API_BASE.startsWith('https://')) return data
+  const host = new URL(API_BASE).host
+  const text = JSON.stringify(data).replaceAll(`http://${host}/`, `https://${host}/`)
   return JSON.parse(text)
 }
 
@@ -35,7 +47,7 @@ async function apiGet(path) {
   try {
     const res = await fetch(`${API_BASE}${path}`, { signal: controller.signal })
     if (!res.ok) throw new Error(`API Django respondió ${res.status} en ${path}`)
-    return await res.json()
+    return forceHttpsMediaUrls(await res.json())
   } catch (e) {
     const loadLocal = localData[path]
     if (!loadLocal) throw e

@@ -10,7 +10,6 @@
       <ServicesSection />
       <ProjectsSection />
       <FlyersSection />
-      <TestimonialsSection />
       <ContactSection />
     </main>
     <FooterSection />
@@ -22,7 +21,6 @@
 import ScrollProgress from '../components/ScrollProgress.vue'
 import BackToTop from '../components/BackToTop.vue'
 import Navbar from '../components/Navbar.vue'
-import TestimonialsSection from '../components/TestimonialsSection.vue'
 import HeroSection from '../components/HeroSection.vue'
 // import LaptopScroll from '../components/LaptopScroll.vue'
 import AboutSection from '../components/AboutSection.vue'
