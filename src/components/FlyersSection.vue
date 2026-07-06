@@ -6,7 +6,15 @@
         <p class="section-subtitle">Flyers y material gráfico que he diseñado para promocionar productos y servicios</p>
       </div>
 
-      <div class="flyers-grid">
+      <div v-if="loading" class="flyers-grid" aria-busy="true">
+        <div v-for="n in 5" :key="'sk-' + n" class="sk-flyer">
+          <div class="skeleton sk-flyer-img"></div>
+          <div class="skeleton sk-line w-60"></div>
+          <div class="skeleton sk-line w-40"></div>
+        </div>
+      </div>
+
+      <div v-else class="flyers-grid">
         <div
           v-for="(flyer, index) in flyers"
           :key="flyer.id"
@@ -88,7 +96,7 @@
 import { ref, computed, watch, nextTick, onMounted, onUnmounted } from 'vue'
 import { useFlyers } from '../composables/useFlyers'
 
-const { flyers: rawFlyers } = useFlyers()
+const { flyers: rawFlyers, loading } = useFlyers()
 
 // Map to use image_url as src for template compatibility
 const flyers = computed(() =>
@@ -208,6 +216,25 @@ function nextFlyer() {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: var(--space-xl);
+}
+
+/* Skeleton de carga */
+.sk-flyer {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  padding-bottom: var(--space-md);
+}
+
+.sk-flyer-img {
+  aspect-ratio: 3 / 4;
+  border-radius: 0;
+  margin-bottom: var(--space-md);
+}
+
+.sk-flyer .sk-line {
+  margin-left: var(--space-md);
 }
 
 /* ---- Card ---- */

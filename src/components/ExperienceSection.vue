@@ -6,7 +6,22 @@
         <p class="section-subtitle">Mi trayectoria profesional</p>
       </div>
 
-      <div class="timeline">
+      <div v-if="loading" class="timeline" aria-busy="true">
+        <div v-for="n in 2" :key="'sk-' + n" class="timeline-item">
+          <div class="timeline-marker">
+            <div class="marker-dot"></div>
+            <div class="marker-line" v-if="n < 2"></div>
+          </div>
+          <div class="timeline-card sk-card">
+            <div class="skeleton sk-line w-40"></div>
+            <div class="skeleton sk-line w-60"></div>
+            <div class="skeleton sk-line w-full"></div>
+            <div class="skeleton sk-line w-80"></div>
+          </div>
+        </div>
+      </div>
+
+      <div v-else class="timeline">
         <div
           v-for="(job, i) in experiences"
           :key="i"
@@ -121,6 +136,7 @@ const fallbackExperiences = [
 
 const experiences = ref([])
 const itemRefs = ref([])
+const loading = ref(true)
 
 async function loadExperiences() {
   try {
@@ -141,6 +157,8 @@ async function loadExperiences() {
       console.warn('Using fallback experiences:', e2.message)
       experiences.value = fallbackExperiences
     }
+  } finally {
+    loading.value = false
   }
 }
 

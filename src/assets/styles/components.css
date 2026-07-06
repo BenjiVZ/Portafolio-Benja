@@ -309,3 +309,19 @@ textarea.input {
   0% { background-position: 200% 0; }
   100% { background-position: -200% 0; }
 }
+
+/* Líneas de texto skeleton */
+.sk-line {
+  height: 12px;
+  border-radius: var(--radius-sm);
+  margin-bottom: 10px;
+}
+
+.sk-line.w-40 { width: 40%; }
+.sk-line.w-60 { width: 60%; }
+.sk-line.w-80 { width: 80%; }
+.sk-line.w-full { width: 100%; }
+
+.sk-circle {
+  border-radius: var(--radius-full);
+}

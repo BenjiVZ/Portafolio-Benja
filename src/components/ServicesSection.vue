@@ -6,7 +6,16 @@
         <p class="section-subtitle">Soluciones tecnológicas adaptadas a tus necesidades</p>
       </div>
 
-      <div class="services-grid">
+      <div v-if="loading" class="services-grid" aria-busy="true">
+        <div v-for="n in 4" :key="'sk-' + n" class="service-card card sk-card">
+          <div class="skeleton sk-icon"></div>
+          <div class="skeleton sk-line w-60" style="margin: 0 auto 10px;"></div>
+          <div class="skeleton sk-line w-full"></div>
+          <div class="skeleton sk-line w-80" style="margin: 0 auto;"></div>
+        </div>
+      </div>
+
+      <div v-else class="services-grid">
         <div
           v-for="(service, i) in services"
           :key="service.id || i"
@@ -29,7 +38,7 @@
 import { h } from 'vue'
 import { useServices } from '../composables/useServices'
 
-const { services } = useServices()
+const { services, loading } = useServices()
 
 const icons = {
   globe: () => h('svg', { width: 28, height: 28, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 1.5, 'stroke-linecap': 'round', 'stroke-linejoin': 'round', innerHTML: '<circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>' }),
@@ -85,5 +94,17 @@ function getIcon(name) {
   font-size: var(--text-sm);
   color: var(--color-text-muted);
   line-height: var(--leading-relaxed);
+}
+
+/* Skeleton */
+.sk-card {
+  pointer-events: none;
+}
+
+.sk-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-lg);
+  margin: 0 auto var(--space-lg);
 }
 </style>

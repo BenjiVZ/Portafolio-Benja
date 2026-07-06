@@ -6,8 +6,20 @@
         <p class="section-subtitle">Una selección de mis trabajos más recientes</p>
       </div>
 
+      <!-- Skeleton mientras carga la data -->
+      <div v-if="loading" class="projects-grid" aria-busy="true">
+        <div v-for="n in 6" :key="'sk-' + n" class="project-card sk-card">
+          <div class="skeleton sk-thumb"></div>
+          <div class="project-info">
+            <div class="skeleton sk-line w-40"></div>
+            <div class="skeleton sk-line w-80"></div>
+            <div class="skeleton sk-line w-60"></div>
+          </div>
+        </div>
+      </div>
+
       <!-- Category filters -->
-      <div class="project-filters">
+      <div v-if="!loading" class="project-filters">
         <button
           v-for="cat in visibleCategories"
           :key="cat.value"
@@ -20,7 +32,7 @@
       </div>
 
       <!-- Projects Grid -->
-      <div class="projects-grid" ref="gridRef">
+      <div v-if="!loading" class="projects-grid" ref="gridRef">
         <TransitionGroup name="project-card">
           <div
             v-for="project in filteredProjects"
@@ -101,7 +113,7 @@
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useProjects } from '../composables/useProjects'
 
-const { projects } = useProjects()
+const { projects, loading } = useProjects()
 const activeFilter = ref('all')
 const selectedProject = ref(null)
 const gridRef = ref(null)
@@ -399,6 +411,16 @@ onUnmounted(() => {
 .modal-actions {
   display: flex;
   gap: var(--space-md);
+}
+
+/* Skeleton */
+.sk-card {
+  pointer-events: none;
+}
+
+.sk-thumb {
+  aspect-ratio: 16 / 10;
+  border-radius: 0;
 }
 
 /* Transition */
