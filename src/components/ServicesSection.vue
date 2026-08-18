@@ -28,6 +28,16 @@
           </div>
           <h3 class="service-title">{{ service.title }}</h3>
           <p class="service-description">{{ service.description }}</p>
+          <a
+            :href="waLink(`Hola! Me interesa el servicio de ${service.title}. ¿Podemos hablar?`)"
+            target="_blank"
+            rel="noopener"
+            class="service-cta"
+            @click.stop
+          >
+            Cotizar este servicio
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
         </div>
       </div>
     </div>
@@ -37,6 +47,7 @@
 <script setup>
 import { h } from 'vue'
 import { useServices } from '../composables/useServices'
+import { waLink } from '../lib/site'
 
 const { services, loading } = useServices()
 
@@ -94,6 +105,24 @@ function getIcon(name) {
   font-size: var(--text-sm);
   color: var(--color-text-muted);
   line-height: var(--leading-relaxed);
+}
+
+.service-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: var(--space-lg);
+  font-family: var(--font-heading);
+  font-size: var(--text-sm);
+  font-weight: 600;
+  color: var(--color-accent);
+  opacity: 0.85;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.service-cta:hover {
+  opacity: 1;
+  gap: 10px;
 }
 
 /* Skeleton */

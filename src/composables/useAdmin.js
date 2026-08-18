@@ -1,6 +1,12 @@
 import { ref } from 'vue'
 import { supabase } from '../lib/supabase'
 
+// ============================================
+// Panel de administración: escribe directo en Supabase.
+// Los repos de GitHub no se gestionan aquí — viven en
+// src/data/repos-github.json y se editan en el repo.
+// ============================================
+
 export function useAdmin() {
   const loading = ref(false)
   const error = ref(null)
@@ -149,14 +155,14 @@ export function useAdmin() {
     } finally { loading.value = false }
   }
 
-  // ── Site Config CRUD ──
+  // ── Site Config ──
   async function getSiteConfig() {
     const { data, error: err } = await supabase
       .from('site_config')
       .select('*')
     if (err) throw err
     const configMap = {}
-    data.forEach(row => { configMap[row.key] = row.value })
+    ;(data || []).forEach(row => { configMap[row.key] = row.value })
     return configMap
   }
 
@@ -244,22 +250,69 @@ export function useAdmin() {
     } finally { loading.value = false }
   }
 
+  // ── Testimonials CRUD ──
+  async function getTestimonials() {
+    const { data, error: err } = await supabase
+      .from('testimonials')
+      .select('*')
+      .order('sort_order', { ascending: true })
+    if (err) throw err
+    return data
+  }
+
+  async function createTestimonial(testimonial) {
+    loading.value = true
+    try {
+      const { data, error: err } = await supabase
+        .from('testimonials')
+        .insert(testimonial)
+        .select()
+        .single()
+      if (err) throw err
+      return data
+    } finally { loading.value = false }
+  }
+
+  async function updateTestimonial(id, updates) {
+    loading.value = true
+    try {
+      const { data, error: err } = await supabase
+        .from('testimonials')
+        .update(updates)
+        .eq('id', id)
+        .select()
+        .single()
+      if (err) throw err
+      return data
+    } finally { loading.value = false }
+  }
+
+  async function deleteTestimonial(id) {
+    loading.value = true
+    try {
+      const { error: err } = await supabase
+        .from('testimonials')
+        .delete()
+        .eq('id', id)
+      if (err) throw err
+    } finally { loading.value = false }
+  }
+
   // ── Image Upload ──
   async function uploadImage(file, bucket = 'portfolio') {
     loading.value = true
     try {
       const fileExt = file.name.split('.').pop()
       const fileName = `${Date.now()}-${Math.random().toString(36).substring(7)}.${fileExt}`
-      const filePath = `${fileName}`
 
       const { error: err } = await supabase.storage
         .from(bucket)
-        .upload(filePath, file)
+        .upload(fileName, file)
       if (err) throw err
 
       const { data } = supabase.storage
         .from(bucket)
-        .getPublicUrl(filePath)
+        .getPublicUrl(fileName)
 
       return data.publicUrl
     } finally { loading.value = false }
@@ -275,6 +328,8 @@ export function useAdmin() {
     getExperiences, createExperience, updateExperience, deleteExperience,
     // Flyers
     getFlyers, createFlyer, updateFlyer, deleteFlyer,
+    // Testimonials
+    getTestimonials, createTestimonial, updateTestimonial, deleteTestimonial,
     // Config
     getSiteConfig, updateSiteConfig,
     // Messages

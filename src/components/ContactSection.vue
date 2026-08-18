@@ -62,6 +62,9 @@ const sending = ref(false)
 const success = ref(false)
 const errorMsg = ref('')
 
+// El formulario está oculto en el template; el contacto se hace por los
+// enlaces directos de email, WhatsApp y redes. Si se descomenta, los
+// mensajes llegan a contact_messages y se leen desde /admin.
 async function handleSubmit() {
   sending.value = true
   success.value = false
@@ -232,10 +235,11 @@ async function handleSubmit() {
   align-items: center;
   gap: var(--space-sm);
   padding: var(--space-md);
+  /* Mensaje de éxito: verde semántico, no el acento de marca */
   background: rgba(34, 197, 94, 0.1);
   border: 1px solid rgba(34, 197, 94, 0.2);
   border-radius: var(--radius-md);
-  color: var(--color-accent);
+  color: var(--color-success);
   font-size: var(--text-sm);
 }
 

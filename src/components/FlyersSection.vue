@@ -340,7 +340,7 @@ function nextFlyer() {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: rgba(34, 197, 94, 0.15);
+  background: rgba(226, 232, 240, 0.14);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--color-accent);
@@ -353,7 +353,7 @@ function nextFlyer() {
 
 .flyer-card:hover .flyer-zoom-icon {
   transform: scale(1.1);
-  background: rgba(34, 197, 94, 0.25);
+  background: rgba(226, 232, 240, 0.22);
 }
 
 /* ---- Info ---- */

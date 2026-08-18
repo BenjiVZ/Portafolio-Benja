@@ -94,7 +94,6 @@
 <script setup>
 import { ref, nextTick, onMounted } from 'vue'
 import { supabase } from '../lib/supabase'
-import { fetchApiExperiences } from '../lib/api'
 
 const DEVICON_BASE = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons'
 const techIconMap = {
@@ -148,15 +147,8 @@ async function loadExperiences() {
     if (!data || data.length === 0) throw new Error('Sin datos en Supabase')
     experiences.value = data
   } catch (e) {
-    console.warn('Supabase falló, intentando API Django:', e.message)
-    try {
-      const apiData = await fetchApiExperiences()
-      if (apiData.length === 0) throw new Error('Sin datos en la API')
-      experiences.value = apiData
-    } catch (e2) {
-      console.warn('Using fallback experiences:', e2.message)
-      experiences.value = fallbackExperiences
-    }
+    console.warn('Usando experiencia de respaldo:', e.message)
+    experiences.value = fallbackExperiences
   } finally {
     loading.value = false
   }
@@ -345,7 +337,8 @@ onMounted(async () => {
 
 .job-period-text {
   font-size: var(--text-xs);
-  color: var(--color-text-faint);
+  /* Es información real, no decoración: necesita contraste de lectura */
+  color: var(--color-text-muted);
   font-family: var(--font-mono);
 }
 

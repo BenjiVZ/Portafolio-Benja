@@ -2,7 +2,7 @@
   <nav class="navbar" :class="{ scrolled: isScrolled, hidden: isHidden }">
     <div class="navbar-inner">
       <a href="#hero" class="navbar-logo">
-        <img src="/logo.jpeg" alt="MastersLogic" class="logo-img" />
+        <img src="/logo.png" alt="MastersLogic" class="logo-img" />
         <span class="logo-text">MastersLogic</span>
       </a>
 
