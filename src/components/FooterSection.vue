@@ -4,7 +4,7 @@
       <div class="footer-inner">
         <div class="footer-brand">
           <a href="#hero" class="footer-logo">
-            <img src="/logo.png" alt="MastersLogic" class="footer-logo-img" />
+            <img :src="logoUrl" alt="MastersLogic" class="footer-logo-img" />
             <span>MastersLogic</span>
           </a>
           <p class="footer-tagline">{{ footerData.tagline || 'Soluciones tecnológicas a tu medida' }}</p>
@@ -38,6 +38,7 @@
 </template>
 
 <script setup>
+import logoUrl from '../assets/logo.png'
 import { computed } from 'vue'
 import { useSiteConfig } from '../composables/useSiteConfig'
 

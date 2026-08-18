@@ -2,7 +2,7 @@
   <nav class="navbar" :class="{ scrolled: isScrolled, hidden: isHidden }">
     <div class="navbar-inner">
       <a href="#hero" class="navbar-logo">
-        <img src="/logo.png" alt="MastersLogic" class="logo-img" />
+        <img :src="logoUrl" alt="MastersLogic" class="logo-img" />
         <span class="logo-text">MastersLogic</span>
       </a>
 
@@ -29,6 +29,7 @@
 </template>
 
 <script setup>
+import logoUrl from '../assets/logo.png'
 import { ref, onMounted, onUnmounted } from 'vue'
 
 const links = [

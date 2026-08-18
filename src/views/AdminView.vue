@@ -3,7 +3,7 @@
   <div v-if="!isAuthenticated" class="admin-login">
     <div class="login-card">
       <div class="login-logo">
-        <img src="/logo.png" alt="MastersLogic" class="login-logo-img" />
+        <img :src="logoUrl" alt="MastersLogic" class="login-logo-img" />
         <h2>Admin Panel</h2>
         <p>Ingresa la clave para continuar</p>
       </div>
@@ -32,7 +32,7 @@
       <div class="admin-header-inner">
         <div class="admin-brand">
           <a href="/" class="admin-logo">
-            <img src="/logo.png" alt="MastersLogic" class="admin-logo-img" />
+            <img :src="logoUrl" alt="MastersLogic" class="admin-logo-img" />
             <span>MastersLogic</span>
           </a>
           <span class="admin-badge">Admin Panel</span>
@@ -716,6 +716,7 @@
 </template>
 
 <script setup>
+import logoUrl from '../assets/logo.png'
 import { ref, reactive, computed, onMounted, h } from 'vue'
 import { useAdmin } from '../composables/useAdmin'
 
