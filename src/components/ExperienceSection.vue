@@ -94,6 +94,7 @@
 <script setup>
 import { ref, nextTick, onMounted } from 'vue'
 import { supabase } from '../lib/supabase'
+import { localExperiences } from '../lib/localData'
 
 const DEVICON_BASE = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons'
 const techIconMap = {
@@ -147,8 +148,13 @@ async function loadExperiences() {
     if (!data || data.length === 0) throw new Error('Sin datos en Supabase')
     experiences.value = data
   } catch (e) {
-    console.warn('Usando experiencia de respaldo:', e.message)
-    experiences.value = fallbackExperiences
+    console.warn('Supabase no respondio, usando respaldo local:', e.message)
+    try {
+      const local = await localExperiences()
+      experiences.value = local.length ? local : fallbackExperiences
+    } catch (e2) {
+      experiences.value = fallbackExperiences
+    }
   } finally {
     loading.value = false
   }

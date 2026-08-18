@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { supabase } from '../lib/supabase'
+import { localFlyers } from '../lib/localData'
 
 export function useFlyers() {
   const flyers = ref([])
@@ -16,11 +17,12 @@ export function useFlyers() {
         .order('sort_order', { ascending: true })
 
       if (err) throw err
-      flyers.value = data || []
+      if (!data || data.length === 0) throw new Error('Sin datos en Supabase')
+      flyers.value = data
     } catch (e) {
-      console.error('No se pudieron cargar los flyers de Supabase:', e.message)
+      console.warn('Supabase no respondio, usando respaldo local:', e.message)
       error.value = e.message
-      flyers.value = []
+      flyers.value = await localFlyers().catch(() => [])
     } finally {
       loading.value = false
     }

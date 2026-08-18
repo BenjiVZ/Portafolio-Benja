@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { supabase } from '../lib/supabase'
+import { localProjects } from '../lib/localData'
 import { mergeWithGithub, fetchGithubProjects } from '../lib/githubRepos'
 
 export function useProjects() {
@@ -17,13 +18,19 @@ export function useProjects() {
         .order('sort_order', { ascending: true })
 
       if (err) throw err
+      if (!data || data.length === 0) throw new Error('Sin datos en Supabase')
       // Los repos de GitHub se guardan en el repo, no en la base
-      projects.value = await mergeWithGithub(data || [])
+      projects.value = await mergeWithGithub(data)
     } catch (e) {
-      console.error('No se pudieron cargar los proyectos de Supabase:', e.message)
+      console.warn('Supabase no respondio, usando respaldo local:', e.message)
       error.value = e.message
-      // Sin la base solo quedan los repos de GitHub, que son locales
-      projects.value = await fetchGithubProjects()
+      // Respaldo: los JSON del repo, fusionados igual con los repos de GitHub
+      try {
+        projects.value = await mergeWithGithub(await localProjects())
+      } catch (e2) {
+        console.error('Respaldo local tambien fallo:', e2.message)
+        projects.value = await fetchGithubProjects()
+      }
     } finally {
       loading.value = false
     }

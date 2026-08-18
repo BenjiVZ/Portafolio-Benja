@@ -79,6 +79,7 @@ import { ref, computed, onMounted } from 'vue'
 import { useSiteConfig } from '../composables/useSiteConfig'
 import { useProjects } from '../composables/useProjects'
 import { supabase } from '../lib/supabase'
+import { localExperiences } from '../lib/localData'
 
 const { getConfig } = useSiteConfig()
 const aboutData = computed(() => getConfig('about'))
@@ -162,9 +163,11 @@ onMounted(async () => {
   try {
     const { data, error } = await supabase.from('experiences').select('company')
     if (error) throw error
-    experiences.value = data || []
+    if (!data || data.length === 0) throw new Error('Sin datos en Supabase')
+    experiences.value = data
   } catch (e) {
-    console.warn('No se pudo cargar la experiencia:', e.message)
+    console.warn('Supabase no respondio, usando respaldo local:', e.message)
+    experiences.value = await localExperiences().catch(() => [])
   }
 
   // Reveal animations

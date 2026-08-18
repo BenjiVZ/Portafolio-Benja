@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { supabase } from '../lib/supabase'
+import { localServices } from '../lib/localData'
 
 export function useServices() {
   const services = ref([])
@@ -16,11 +17,12 @@ export function useServices() {
         .order('sort_order', { ascending: true })
 
       if (err) throw err
-      services.value = data || []
+      if (!data || data.length === 0) throw new Error('Sin datos en Supabase')
+      services.value = data
     } catch (e) {
-      console.error('No se pudieron cargar los servicios de Supabase:', e.message)
+      console.warn('Supabase no respondio, usando respaldo local:', e.message)
       error.value = e.message
-      services.value = []
+      services.value = await localServices().catch(() => [])
     } finally {
       loading.value = false
     }

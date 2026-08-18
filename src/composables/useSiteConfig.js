@@ -1,5 +1,6 @@
 import { ref } from 'vue'
 import { supabase } from '../lib/supabase'
+import { localSiteConfig } from '../lib/localData'
 
 // Respaldo mínimo para que el sitio no aparezca vacío mientras carga
 // o si la tabla site_config quedara sin filas.
@@ -43,16 +44,22 @@ export function useSiteConfig() {
         .select('key, value')
 
       if (err) throw err
+      if (!data || data.length === 0) throw new Error('Sin datos en Supabase')
 
       const configMap = {}
-      ;(data || []).forEach(row => {
+      data.forEach(row => {
         configMap[row.key] = row.value
       })
       config.value = configMap
     } catch (e) {
-      console.error('No se pudo cargar site_config de Supabase:', e.message)
+      console.warn('Supabase no respondio, usando respaldo local:', e.message)
       error.value = e.message
-      config.value = {}
+      try {
+        config.value = await localSiteConfig()
+      } catch (e2) {
+        console.error('Respaldo local tambien fallo:', e2.message)
+        config.value = {}
+      }
     } finally {
       loading.value = false
     }
