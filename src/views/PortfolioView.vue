@@ -8,18 +8,22 @@
       <AboutSection />
       <ExperienceSection />
       <ServicesSection />
+      <CtaBand />
       <ProjectsSection />
       <FlyersSection />
       <ContactSection />
     </main>
     <FooterSection />
     <BackToTop />
+    <WhatsAppFloat />
   </div>
 </template>
 
 <script setup>
 import ScrollProgress from '../components/ScrollProgress.vue'
 import BackToTop from '../components/BackToTop.vue'
+import WhatsAppFloat from '../components/WhatsAppFloat.vue'
+import CtaBand from '../components/CtaBand.vue'
 import Navbar from '../components/Navbar.vue'
 import HeroSection from '../components/HeroSection.vue'
 // import LaptopScroll from '../components/LaptopScroll.vue'

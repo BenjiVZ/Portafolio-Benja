@@ -3,17 +3,13 @@
   <div v-if="!isAuthenticated" class="admin-login">
     <div class="login-card">
       <div class="login-logo">
-        <img src="/logo.jpeg" alt="MastersLogic" class="login-logo-img" />
+        <img src="/logo.png" alt="MastersLogic" class="login-logo-img" />
         <h2>Admin Panel</h2>
-        <p>Ingresa tus credenciales para continuar</p>
+        <p>Ingresa la clave para continuar</p>
       </div>
       <form @submit.prevent="handleLogin" class="login-form">
         <div class="input-group">
-          <label class="input-label">Email</label>
-          <input class="input" v-model="loginUser" placeholder="tu@email.com" autocomplete="username" type="email" />
-        </div>
-        <div class="input-group">
-          <label class="input-label">Contraseña</label>
+          <label class="input-label">Clave</label>
           <div class="password-wrapper">
             <input :type="showPassword ? 'text' : 'password'" class="input" v-model="loginPass" placeholder="Contraseña" autocomplete="current-password" />
             <button type="button" class="password-toggle" @click="showPassword = !showPassword">
@@ -36,15 +32,21 @@
       <div class="admin-header-inner">
         <div class="admin-brand">
           <a href="/" class="admin-logo">
-            <img src="/logo.jpeg" alt="MastersLogic" class="admin-logo-img" />
+            <img src="/logo.png" alt="MastersLogic" class="admin-logo-img" />
             <span>MastersLogic</span>
           </a>
           <span class="admin-badge">Admin Panel</span>
         </div>
-        <a href="/" class="btn btn-ghost btn-sm">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-          Ver sitio
-        </a>
+        <div class="admin-header-actions">
+          <a href="/" class="btn btn-ghost btn-sm">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            Ver sitio
+          </a>
+          <button class="btn btn-ghost btn-sm" @click="handleLogout">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Salir
+          </button>
+        </div>
       </div>
     </header>
 
@@ -185,6 +187,40 @@
             </div>
           </div>
           <p v-if="flyersList.length === 0" class="empty-state">No hay flyers. Crea el primero.</p>
+        </div>
+      </div>
+
+      <!-- TESTIMONIALS TAB -->
+      <div v-if="activeTab === 'testimonials'" class="admin-panel">
+        <div class="panel-header">
+          <h2>Testimonios</h2>
+          <button class="btn btn-primary btn-sm" @click="openTestimonialForm()">+ Nuevo Testimonio</button>
+        </div>
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Cargo</th>
+                <th>Empresa</th>
+                <th>Orden</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="t in testimonialsList" :key="t.id">
+                <td class="td-title">{{ t.name }}</td>
+                <td>{{ t.role }}</td>
+                <td><span class="badge badge-neutral">{{ t.company }}</span></td>
+                <td>{{ t.sort_order }}</td>
+                <td class="td-actions">
+                  <button class="btn btn-ghost btn-sm" @click="openTestimonialForm(t)">Editar</button>
+                  <button class="btn btn-ghost btn-sm btn-danger" @click="handleDeleteTestimonial(t.id)">Eliminar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p v-if="testimonialsList.length === 0" class="empty-state">No hay testimonios.</p>
         </div>
       </div>
 
@@ -462,6 +498,52 @@
     </Transition>
 
     <Transition name="modal">
+      <div v-if="showTestimonialModal" class="modal-overlay" @click.self="showTestimonialModal = false">
+        <div class="modal admin-modal">
+          <div class="modal-header">
+            <h3>{{ editingTestimonial ? 'Editar Testimonio' : 'Nuevo Testimonio' }}</h3>
+            <button class="modal-close" @click="showTestimonialModal = false">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+          </div>
+          <form @submit.prevent="handleSaveTestimonial" class="admin-form">
+            <div class="input-group">
+              <label class="input-label">Nombre</label>
+              <input class="input" v-model="testimonialForm.name" required />
+            </div>
+            <div class="form-row">
+              <div class="input-group">
+                <label class="input-label">Cargo</label>
+                <input class="input" v-model="testimonialForm.role" />
+              </div>
+              <div class="input-group">
+                <label class="input-label">Empresa</label>
+                <input class="input" v-model="testimonialForm.company" />
+              </div>
+            </div>
+            <div class="input-group">
+              <label class="input-label">Testimonio</label>
+              <textarea class="input" v-model="testimonialForm.content" rows="4" required></textarea>
+            </div>
+            <div class="form-row">
+              <div class="input-group">
+                <label class="input-label">URL del avatar</label>
+                <input class="input" v-model="testimonialForm.avatar_url" placeholder="/media/avatar.jpg" />
+              </div>
+              <div class="input-group">
+                <label class="input-label">Orden</label>
+                <input class="input" type="number" v-model.number="testimonialForm.sort_order" />
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" :disabled="admin.loading.value">
+              {{ admin.loading.value ? 'Guardando...' : 'Guardar' }}
+            </button>
+          </form>
+        </div>
+      </div>
+    </Transition>
+
+    <Transition name="modal">
       <div v-if="showServiceModal" class="modal-overlay" @click.self="showServiceModal = false">
         <div class="modal admin-modal">
           <div class="modal-header">
@@ -636,41 +718,46 @@
 <script setup>
 import { ref, reactive, computed, onMounted, h } from 'vue'
 import { useAdmin } from '../composables/useAdmin'
-import { supabase } from '../lib/supabase'
 
-// ── Auth (Supabase Auth) ──
-const isAuthenticated = ref(false)
+// ── Acceso al panel ──
+// La clave sale de VITE_ADMIN_PASSWORD (se define en .env local y en las
+// Environment Variables de Vercel).
+//
+// OJO: Vite incrusta las variables VITE_* en el bundle que descarga el
+// navegador, así que esta clave es legible con las devtools. Sirve para
+// evitar accesos casuales, no como seguridad real. Lo que de verdad
+// protege los datos son las políticas RLS de Supabase.
+const CLAVE_ADMIN = import.meta.env.VITE_ADMIN_PASSWORD || ''
+const SESSION_KEY = 'portafolio-admin-sesion'
+
+const isAuthenticated = ref(sessionStorage.getItem(SESSION_KEY) === 'ok')
 const loginUser = ref('')
 const loginPass = ref('')
 const loginError = ref('')
 const showPassword = ref(false)
 const loginLoading = ref(false)
 
-async function handleLogin() {
+function handleLogin() {
   loginLoading.value = true
   loginError.value = ''
-  try {
-    const { error } = await supabase.auth.signInWithPassword({
-      email: loginUser.value,
-      password: loginPass.value
-    })
-    if (error) {
-      loginError.value = 'Credenciales incorrectas'
-    } else {
-      isAuthenticated.value = true
-    }
-  } catch (e) {
-    loginError.value = 'Error de conexión'
+
+  if (!CLAVE_ADMIN) {
+    loginError.value = 'Falta definir VITE_ADMIN_PASSWORD en las variables de entorno'
+  } else if (loginPass.value === CLAVE_ADMIN) {
+    isAuthenticated.value = true
+    sessionStorage.setItem(SESSION_KEY, 'ok')
+    loginPass.value = ''
+  } else {
+    loginError.value = 'Clave incorrecta'
   }
+
   loginLoading.value = false
 }
 
-// Check existing session on load
-async function checkSession() {
-  const { data: { session } } = await supabase.auth.getSession()
-  if (session) isAuthenticated.value = true
+function handleLogout() {
+  sessionStorage.removeItem(SESSION_KEY)
+  isAuthenticated.value = false
 }
-checkSession()
 
 const admin = useAdmin()
 const activeTab = ref('projects')
@@ -743,6 +830,10 @@ async function handleProjectImgUpload(event) {
 
 // Modals
 const showProjectModal = ref(false)
+const showTestimonialModal = ref(false)
+const editingTestimonial = ref(null)
+const testimonialsList = ref([])
+const testimonialForm = reactive({ name: '', role: '', company: '', content: '', avatar_url: '', sort_order: 0 })
 const showServiceModal = ref(false)
 const showExperienceModal = ref(false)
 const showFlyerModal = ref(false)
@@ -806,6 +897,7 @@ const tabs = [
   { id: 'services', label: 'Servicios', icon: () => h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, innerHTML: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>' }) },
   { id: 'experiences', label: 'Experiencia', icon: () => h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, innerHTML: '<rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>' }) },
   { id: 'flyers', label: 'Flyers', icon: () => h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, innerHTML: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>' }) },
+  { id: 'testimonials', label: 'Testimonios', icon: () => h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, innerHTML: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>' }) },
   { id: 'config', label: 'Configuración', icon: () => h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, innerHTML: '<line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/>' }) },
   { id: 'messages', label: 'Mensajes', icon: () => h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, innerHTML: '<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>' }) }
 ]
@@ -815,6 +907,7 @@ async function loadAll() {
   try {
     projectsList.value = await admin.getProjects() || []
     servicesList.value = await admin.getServices() || []
+    try { testimonialsList.value = await admin.getTestimonials() || [] } catch (e) { console.warn('Tabla testimonials no disponible:', e.message) }
     experiencesList.value = await admin.getExperiences() || []
     try { flyersList.value = await admin.getFlyers() || [] } catch(e) { console.warn('Flyers table may not exist yet:', e.message) }
     messagesList.value = await admin.getMessages() || []
@@ -871,6 +964,43 @@ async function handleDeleteProject(id) {
   if (!confirm('¿Eliminar este proyecto?')) return
   await admin.deleteProject(id)
   projectsList.value = await admin.getProjects()
+}
+
+// Testimonials
+function openTestimonialForm(testimonial = null) {
+  editingTestimonial.value = testimonial
+  if (testimonial) {
+    Object.assign(testimonialForm, { ...testimonial })
+  } else {
+    Object.assign(testimonialForm, { name: '', role: '', company: '', content: '', avatar_url: '', sort_order: 0 })
+  }
+  showTestimonialModal.value = true
+}
+
+async function handleSaveTestimonial() {
+  const data = { ...testimonialForm }
+  delete data.id
+  try {
+    if (editingTestimonial.value) {
+      await admin.updateTestimonial(editingTestimonial.value.id, data)
+    } else {
+      await admin.createTestimonial(data)
+    }
+    showTestimonialModal.value = false
+    testimonialsList.value = await admin.getTestimonials()
+  } catch (e) {
+    alert('Error al guardar: ' + e.message)
+  }
+}
+
+async function handleDeleteTestimonial(id) {
+  if (!confirm('¿Eliminar este testimonio?')) return
+  try {
+    await admin.deleteTestimonial(id)
+    testimonialsList.value = await admin.getTestimonials()
+  } catch (e) {
+    alert('Error al eliminar: ' + e.message)
+  }
 }
 
 // Services
@@ -1075,6 +1205,21 @@ onMounted(loadAll)
   object-fit: cover;
 }
 
+.admin-header-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+@media (max-width: 768px) {
+  .admin-header-inner {
+    height: auto;
+    padding: var(--space-sm) 0;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+  }
+}
+
 .admin-badge {
   padding: 4px 12px;
   background: var(--color-accent-subtle);
@@ -1084,6 +1229,7 @@ onMounted(loadAll)
   border-radius: var(--radius-full);
   border: 1px solid var(--color-border-accent);
 }
+
 
 .admin-tabs {
   border-bottom: 1px solid var(--color-border);
@@ -1605,7 +1751,7 @@ onMounted(loadAll)
   align-items: center;
   justify-content: center;
   background-color: var(--color-bg);
-  background-image: radial-gradient(circle at 50% 30%, rgba(34, 197, 94, 0.1) 0%, transparent 50%),
+  background-image: radial-gradient(circle at 50% 30%, rgba(226, 232, 240, 0.08) 0%, transparent 50%),
                     radial-gradient(circle at 80% 80%, rgba(6, 182, 212, 0.06) 0%, transparent 50%);
   padding: var(--space-lg);
 }

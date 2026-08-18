@@ -4,7 +4,7 @@
       <div class="footer-inner">
         <div class="footer-brand">
           <a href="#hero" class="footer-logo">
-            <img src="/logo.jpeg" alt="MastersLogic" class="footer-logo-img" />
+            <img src="/logo.png" alt="MastersLogic" class="footer-logo-img" />
             <span>MastersLogic</span>
           </a>
           <p class="footer-tagline">{{ footerData.tagline || 'Soluciones tecnológicas a tu medida' }}</p>
@@ -130,7 +130,7 @@ const social = computed(() => contactData.value.social || {})
 
 .footer-copyright {
   font-size: var(--text-sm);
-  color: var(--color-text-faint);
+  color: var(--color-text-muted);
 }
 
 @media (max-width: 768px) {

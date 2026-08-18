@@ -11,21 +11,29 @@
   --color-bg-surface: rgba(51, 65, 85, 0.8);
   --color-bg-hover: rgba(59, 77, 106, 0.85);
 
-  --color-accent: #22C55E;
-  --color-accent-sec: #06B6D4; /* Cyan */
-  --color-accent-hover: #16A34A;
-  --color-accent-glow: rgba(34, 197, 94, 0.2);
-  --color-accent-subtle: rgba(34, 197, 94, 0.1);
+  /* Acento monocromo: el logo es line-art neutro (100% de sus píxeles sin
+     saturación), así que la identidad la llevan la tipografía y el logo,
+     no un color de marca. El verde queda reservado para estado (success). */
+  --color-accent: #E2E8F0;
+  --color-accent-sec: #94A3B8;
+  --color-accent-hover: #FFFFFF;
+  --color-accent-glow: rgba(226, 232, 240, 0.18);
+  --color-accent-subtle: rgba(226, 232, 240, 0.08);
   --gradient-accent: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-sec) 100%);
 
+  /* Contraste sobre --color-bg (#0F172A), medido en WCAG:
+     text 17.1:1 · secondary 12.0:1 · muted 4.9:1 · faint 3.8:1.
+     `muted` se subió de #64748B (3.75:1) porque no llegaba al mínimo
+     AA de 4.5:1 y se usa en texto de lectura. `faint` queda para
+     placeholders y elementos decorativos, no para texto informativo. */
   --color-text: #F8FAFC;
   --color-text-secondary: #CBD5E1;
-  --color-text-muted: #64748B;
-  --color-text-faint: #475569;
+  --color-text-muted: #7688A0;
+  --color-text-faint: #64748B;
 
   --color-border: rgba(148, 163, 184, 0.12);
   --color-border-strong: rgba(148, 163, 184, 0.25);
-  --color-border-accent: rgba(34, 197, 94, 0.3);
+  --color-border-accent: rgba(226, 232, 240, 0.28);
 
   --color-error: #EF4444;
   --color-warning: #F59E0B;
@@ -80,8 +88,8 @@
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
   --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
-  --shadow-accent: 0 4px 24px rgba(34, 197, 94, 0.2);
-  --shadow-accent-lg: 0 8px 32px rgba(34, 197, 94, 0.3);
+  --shadow-accent: 0 4px 24px rgba(226, 232, 240, 0.14);
+  --shadow-accent-lg: 0 8px 32px rgba(226, 232, 240, 0.2);
 
   /* ── Transitions ── */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);

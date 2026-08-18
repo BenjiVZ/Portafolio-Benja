@@ -79,7 +79,6 @@ import { ref, computed, onMounted } from 'vue'
 import { useSiteConfig } from '../composables/useSiteConfig'
 import { useProjects } from '../composables/useProjects'
 import { supabase } from '../lib/supabase'
-import { fetchApiExperiences } from '../lib/api'
 
 const { getConfig } = useSiteConfig()
 const aboutData = computed(() => getConfig('about'))
@@ -163,12 +162,9 @@ onMounted(async () => {
   try {
     const { data, error } = await supabase.from('experiences').select('company')
     if (error) throw error
-    if (!data || data.length === 0) throw new Error('Sin datos en Supabase')
-    experiences.value = data
+    experiences.value = data || []
   } catch (e) {
-    try {
-      experiences.value = await fetchApiExperiences()
-    } catch (e2) { /* fallback to 0 */ }
+    console.warn('No se pudo cargar la experiencia:', e.message)
   }
 
   // Reveal animations
@@ -196,6 +192,8 @@ onMounted(async () => {
 .about-image-wrapper {
   position: relative;
   z-index: 1;
+  /* Contiene el resplandor de fondo, que mide 120% y se salía del viewport */
+  overflow: hidden;
 }
 
 .about-bg-glow {

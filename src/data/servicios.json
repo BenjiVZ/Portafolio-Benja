@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "title": "Desarrollo Web",
+    "description": "Creo aplicaciones web modernas, responsivas y de alto rendimiento usando las últimas tecnologías.",
+    "icon_name": "globe",
+    "sort_order": 1
+  },
+  {
+    "id": "2",
+    "title": "Desarrollo Backend",
+    "description": "Diseño e implemento APIs robustas, bases de datos optimizadas y arquitecturas escalables.",
+    "icon_name": "server",
+    "sort_order": 2
+  },
+  {
+    "id": "3",
+    "title": "Aplicaciones Móviles",
+    "description": "Desarrollo apps nativas y multiplataforma con experiencias de usuario fluidas.",
+    "icon_name": "smartphone",
+    "sort_order": 3
+  },
+  {
+    "id": "4",
+    "title": "Consultoría Tech",
+    "description": "Te ayudo a elegir las mejores tecnologías y arquitecturas para tu proyecto.",
+    "icon_name": "message-circle",
+    "sort_order": 4
+  }
+]
