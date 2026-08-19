@@ -38,14 +38,23 @@ export async function fetchRepoLinks() {
   return github.enlaces || {}
 }
 
-// Aplica los enlaces a los proyectos de Supabase y añade los repos propios
-export async function mergeWithGithub(projects) {
-  const [enlaces, deGithub] = await Promise.all([fetchRepoLinks(), fetchGithubProjects()])
-
-  const conRepo = projects.map(p => ({
+// Solo completa el repo_url que falte. NO añade proyectos nuevos: es lo que
+// usa el sitio cuando Supabase responde, para que ahi mande unicamente la base.
+export async function applyRepoLinks(projects) {
+  const enlaces = await fetchRepoLinks()
+  return projects.map(p => ({
     ...p,
     repo_url: p.repo_url || enlaces[String(p.id)] || ''
   }))
+}
+
+// Aplica los enlaces y ademas publica los repos como proyectos propios.
+// Reservado para el modo respaldo (sin Supabase) y para las sugerencias del panel.
+export async function mergeWithGithub(projects) {
+  const [conRepo, deGithub] = await Promise.all([
+    applyRepoLinks(projects),
+    fetchGithubProjects()
+  ])
 
   return [...conRepo, ...deGithub]
 }

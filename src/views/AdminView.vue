@@ -61,6 +61,7 @@
         <component :is="tab.icon" />
         {{ tab.label }}
         <span v-if="tab.id === 'messages' && unreadCount > 0" class="tab-badge">{{ unreadCount }}</span>
+        <span v-if="tab.id === 'suggestions' && suggestions.length > 0" class="tab-badge">{{ suggestions.length }}</span>
       </button>
     </nav>
 
@@ -96,6 +97,71 @@
             </tbody>
           </table>
           <p v-if="projectsList.length === 0" class="empty-state">No hay proyectos. Crea el primero.</p>
+        </div>
+      </div>
+
+      <!-- SUGGESTIONS TAB -->
+      <div v-if="activeTab === 'suggestions'" class="admin-panel">
+        <div class="panel-header">
+          <div>
+            <h2>Sugerencias</h2>
+            <p class="panel-hint">
+              Proyectos que estan en los archivos del repositorio (el export de Django y tus repos de
+              GitHub) pero todavia no en Supabase. El sitio publico no los muestra mientras la base
+              responda; si Supabase se cae, vuelven a salir solos.
+            </p>
+          </div>
+          <button
+            class="btn btn-primary btn-sm"
+            :disabled="suggestions.length === 0 || importingAll"
+            @click="handleImportAll"
+          >
+            {{ importingAll ? 'Importando...' : `Importar todos (${suggestions.length})` }}
+          </button>
+        </div>
+
+        <p v-if="suggestionsError" class="empty-state">{{ suggestionsError }}</p>
+
+        <div class="admin-table-wrapper">
+          <table class="admin-table">
+            <thead>
+              <tr>
+                <th>Título</th>
+                <th>Origen</th>
+                <th>Categoría</th>
+                <th>Enlace</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="s in suggestions" :key="s.origen + '-' + s.id">
+                <td class="td-title">
+                  {{ s.title }}
+                  <span class="suggestion-desc">{{ s.short_description }}</span>
+                </td>
+                <td><span class="badge badge-neutral">{{ s.origen }}</span></td>
+                <td><span class="badge badge-neutral">{{ s.category }}</span></td>
+                <td>
+                  <a v-if="s.repo_url" :href="s.repo_url" target="_blank" rel="noopener" class="suggestion-link">repo</a>
+                  <a v-if="s.live_url" :href="s.live_url" target="_blank" rel="noopener" class="suggestion-link">demo</a>
+                  <span v-if="!s.repo_url && !s.live_url">—</span>
+                </td>
+                <td class="td-actions">
+                  <button
+                    class="btn btn-ghost btn-sm"
+                    :disabled="importingId === s.id"
+                    @click="handleImportSuggestion(s)"
+                  >
+                    {{ importingId === s.id ? 'Importando...' : 'Importar' }}
+                  </button>
+                  <button class="btn btn-ghost btn-sm" @click="openSuggestionForm(s)">Editar y crear</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <p v-if="suggestions.length === 0 && !suggestionsError" class="empty-state">
+            Todo importado: no queda ningun proyecto local fuera de Supabase.
+          </p>
         </div>
       </div>
 
@@ -719,6 +785,7 @@
 import logoUrl from '../assets/logo.png'
 import { ref, reactive, computed, onMounted, h } from 'vue'
 import { useAdmin } from '../composables/useAdmin'
+import { getProjectSuggestions, toProjectRow } from '../lib/suggestions'
 
 // ── Acceso al panel ──
 // La clave sale de VITE_ADMIN_PASSWORD (se define en .env local y en las
@@ -769,6 +836,62 @@ const servicesList = ref([])
 const experiencesList = ref([])
 const flyersList = ref([])
 const messagesList = ref([])
+
+// ── Sugerencias ──
+// Proyectos de los archivos del repo que aun no estan en Supabase.
+const suggestions = ref([])
+const suggestionsError = ref('')
+const importingId = ref(null)
+const importingAll = ref(false)
+
+async function loadSuggestions() {
+  suggestionsError.value = ''
+  try {
+    suggestions.value = await getProjectSuggestions(projectsList.value)
+  } catch (e) {
+    suggestions.value = []
+    suggestionsError.value = 'No se pudieron leer los archivos locales: ' + e.message
+  }
+}
+
+async function handleImportSuggestion(s) {
+  importingId.value = s.id
+  try {
+    await admin.createProject(toProjectRow(s))
+    projectsList.value = await admin.getProjects() || []
+    await loadSuggestions()
+  } catch (e) {
+    alert('No se pudo importar: ' + e.message)
+  } finally {
+    importingId.value = null
+  }
+}
+
+async function handleImportAll() {
+  if (!confirm(`Se van a crear ${suggestions.value.length} proyectos en Supabase. ¿Continuar?`)) return
+  importingAll.value = true
+  const fallidos = []
+  // De a uno para que un fallo no tumbe el resto
+  for (const s of [...suggestions.value]) {
+    try {
+      await admin.createProject(toProjectRow(s))
+    } catch (e) {
+      fallidos.push(`${s.title}: ${e.message}`)
+    }
+  }
+  projectsList.value = await admin.getProjects() || []
+  await loadSuggestions()
+  importingAll.value = false
+  if (fallidos.length) alert(`No se importaron ${fallidos.length}:\n` + fallidos.join('\n'))
+}
+
+// Prellena el formulario de proyecto sin marcarlo como edicion,
+// para revisar los datos antes de guardarlos en la base.
+function openSuggestionForm(s) {
+  openProjectForm()
+  Object.assign(projectForm, toProjectRow(s))
+  projectForm.tech_stack = [...(s.tech_stack || [])]
+}
 
 // Config
 const configForm = reactive({
@@ -895,6 +1018,7 @@ const unreadCount = computed(() => messagesList.value.filter(m => !m.read).lengt
 // Tab icons
 const tabs = [
   { id: 'projects', label: 'Proyectos', icon: () => h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, innerHTML: '<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>' }) },
+  { id: 'suggestions', label: 'Sugerencias', icon: () => h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, innerHTML: '<path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/>' }) },
   { id: 'services', label: 'Servicios', icon: () => h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, innerHTML: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>' }) },
   { id: 'experiences', label: 'Experiencia', icon: () => h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, innerHTML: '<rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/>' }) },
   { id: 'flyers', label: 'Flyers', icon: () => h('svg', { width: 18, height: 18, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', 'stroke-width': 2, innerHTML: '<rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/>' }) },
@@ -926,6 +1050,10 @@ async function loadAll() {
     if (config.footer) Object.assign(configForm.footer, config.footer)
   } catch (e) {
     console.error('Error loading admin data:', e)
+  } finally {
+    // Fuera del try: si Supabase esta caido, las sugerencias son justo
+    // lo unico que si se puede mostrar.
+    await loadSuggestions()
   }
 }
 
@@ -1298,6 +1426,35 @@ onMounted(loadAll)
 
 .panel-header h2 {
   font-size: var(--text-2xl);
+}
+
+/* Sugerencias */
+.panel-hint {
+  margin-top: var(--space-xs);
+  max-width: 620px;
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  line-height: var(--leading-relaxed);
+}
+
+.suggestion-desc {
+  display: block;
+  margin-top: 2px;
+  max-width: 420px;
+  font-size: var(--text-xs);
+  font-weight: 400;
+  color: var(--color-text-muted);
+}
+
+.suggestion-link {
+  color: var(--color-accent);
+  font-size: var(--text-sm);
+  text-decoration: none;
+  margin-right: var(--space-sm);
+}
+
+.suggestion-link:hover {
+  text-decoration: underline;
 }
 
 /* Table */
