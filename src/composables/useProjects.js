@@ -16,6 +16,7 @@ export function useProjects() {
     error.value = null
 
     const res = await loadWithFallback({
+      nombre: 'Proyectos',
       query: () => supabase.from('projects').select('*').order('sort_order', { ascending: true }),
       // Con Supabase vivo manda solo la base: los proyectos locales y los repos
       // de GitHub quedan como sugerencias en /admin. De los repos se aprovecha

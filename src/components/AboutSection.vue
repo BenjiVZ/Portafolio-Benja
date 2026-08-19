@@ -175,6 +175,7 @@ onMounted(async () => {
 
   // El contador de empresas puede llegar despues
   const res = await loadWithFallback({
+    nombre: 'Sobre mi (empresas)',
     query: () => supabase.from('experiences').select('company'),
     local: localExperiences,
     onError: []

@@ -141,6 +141,7 @@ const loading = ref(true)
 
 async function loadExperiences() {
   const res = await loadWithFallback({
+    nombre: 'Experiencia',
     query: () => supabase.from('experiences').select('*').order('sort_order', { ascending: true }),
     local: async () => {
       const local = await localExperiences()

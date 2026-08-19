@@ -13,6 +13,7 @@ export function useServices() {
     error.value = null
 
     const res = await loadWithFallback({
+      nombre: 'Servicios',
       query: () => supabase.from('services').select('*').order('sort_order', { ascending: true }),
       local: localServices,
       onError: [],

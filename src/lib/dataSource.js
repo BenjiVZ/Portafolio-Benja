@@ -10,6 +10,8 @@
 // secciones se quedan en modo esqueleto.
 // ============================================
 
+import { registrarOrigen } from './origen'
+
 export const TIMEOUT_MS = 2500
 
 // Si a los 700 ms Supabase sigue sin contestar, se pinta ya el respaldo local
@@ -59,7 +61,17 @@ function esFalloDeConexion(e) {
  * @param {Function} [opts.onEarly]  recibe el respaldo a los EARLY_MS si la base tarda
  * @returns {Promise<{ value: *, usingLocal: boolean, error: string|null }>}
  */
-export async function loadWithFallback({ query, local, transform, onError = null, onEarly }) {
+export async function loadWithFallback({ query, local, transform, onError = null, onEarly, nombre }) {
+  const res = await intentar({ query, local, transform, onError, onEarly })
+  registrarOrigen(nombre, {
+    usingLocal: res.usingLocal,
+    error: res.error,
+    total: Array.isArray(res.value) ? res.value.length : undefined
+  })
+  return res
+}
+
+async function intentar({ query, local, transform, onError, onEarly }) {
   if (!supabaseCaido) {
     let resuelta = false
     const consulta = withTimeout(query()).finally(() => { resuelta = true })

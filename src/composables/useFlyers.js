@@ -13,6 +13,7 @@ export function useFlyers() {
     error.value = null
 
     const res = await loadWithFallback({
+      nombre: 'Flyers',
       query: () => supabase.from('flyers').select('*').order('sort_order', { ascending: true }),
       local: localFlyers,
       onError: [],

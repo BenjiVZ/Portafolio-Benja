@@ -41,6 +41,7 @@ export function useSiteConfig() {
     error.value = null
 
     const res = await loadWithFallback({
+      nombre: 'Configuracion del sitio',
       query: () => supabase.from('site_config').select('key, value'),
       // La tabla guarda una fila por clave; el sitio espera un objeto
       transform: rows => Object.fromEntries(rows.map(r => [r.key, r.value])),

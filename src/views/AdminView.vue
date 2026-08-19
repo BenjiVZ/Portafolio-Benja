@@ -38,6 +38,10 @@
           <span class="admin-badge">Admin Panel</span>
         </div>
         <div class="admin-header-actions">
+          <span class="conexion" :class="conexionOk === false ? 'conexion-mal' : conexionOk ? 'conexion-bien' : 'conexion-espera'">
+            <span class="conexion-punto"></span>
+            {{ conexionOk === false ? 'Sin conexión con Supabase' : conexionOk ? 'Supabase conectado' : 'Comprobando…' }}
+          </span>
           <a href="/" class="btn btn-ghost btn-sm">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
             Ver sitio
@@ -837,6 +841,9 @@ const experiencesList = ref([])
 const flyersList = ref([])
 const messagesList = ref([])
 
+// null mientras se comprueba, true/false despues de la primera consulta
+const conexionOk = ref(null)
+
 // ── Sugerencias ──
 // Proyectos de los archivos del repo que aun no estan en Supabase.
 const suggestions = ref([])
@@ -1031,6 +1038,8 @@ const tabs = [
 async function loadAll() {
   try {
     projectsList.value = await admin.getProjects() || []
+    // Si la primera consulta paso, la base responde: el panel puede guardar
+    conexionOk.value = true
     servicesList.value = await admin.getServices() || []
     try { testimonialsList.value = await admin.getTestimonials() || [] } catch (e) { console.warn('Tabla testimonials no disponible:', e.message) }
     experiencesList.value = await admin.getExperiences() || []
@@ -1050,6 +1059,7 @@ async function loadAll() {
     if (config.footer) Object.assign(configForm.footer, config.footer)
   } catch (e) {
     console.error('Error loading admin data:', e)
+    if (conexionOk.value === null) conexionOk.value = false
   } finally {
     // Fuera del try: si Supabase esta caido, las sugerencias son justo
     // lo unico que si se puede mostrar.
@@ -1427,6 +1437,32 @@ onMounted(loadAll)
 .panel-header h2 {
   font-size: var(--text-2xl);
 }
+
+/* Estado de la conexion */
+.conexion {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  font-size: var(--text-xs);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.conexion-punto {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-text-faint);
+}
+
+.conexion-bien { color: var(--color-success); border-color: rgba(34, 197, 94, 0.35); }
+.conexion-bien .conexion-punto { background: var(--color-success); }
+
+.conexion-mal { color: var(--color-warning); border-color: rgba(245, 158, 11, 0.35); }
+.conexion-mal .conexion-punto { background: var(--color-warning); }
 
 /* Sugerencias */
 .panel-hint {

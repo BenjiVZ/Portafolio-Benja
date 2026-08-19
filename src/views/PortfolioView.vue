@@ -16,6 +16,7 @@
     <FooterSection />
     <BackToTop />
     <WhatsAppFloat />
+    <OrigenDatos />
   </div>
 </template>
 
@@ -23,6 +24,7 @@
 import ScrollProgress from '../components/ScrollProgress.vue'
 import BackToTop from '../components/BackToTop.vue'
 import WhatsAppFloat from '../components/WhatsAppFloat.vue'
+import OrigenDatos from '../components/OrigenDatos.vue'
 import CtaBand from '../components/CtaBand.vue'
 import Navbar from '../components/Navbar.vue'
 import HeroSection from '../components/HeroSection.vue'
