@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { supabase } from '../lib/supabase'
 import { localServices } from '../lib/localData'
+import { loadWithFallback } from '../lib/dataSource'
 
 export function useServices() {
   const services = ref([])
@@ -10,22 +11,18 @@ export function useServices() {
   async function fetchServices() {
     loading.value = true
     error.value = null
-    try {
-      const { data, error: err } = await supabase
-        .from('services')
-        .select('*')
-        .order('sort_order', { ascending: true })
 
-      if (err) throw err
-      if (!data || data.length === 0) throw new Error('Sin datos en Supabase')
-      services.value = data
-    } catch (e) {
-      console.warn('Supabase no respondio, usando respaldo local:', e.message)
-      error.value = e.message
-      services.value = await localServices().catch(() => [])
-    } finally {
-      loading.value = false
-    }
+    const res = await loadWithFallback({
+      query: () => supabase.from('services').select('*').order('sort_order', { ascending: true }),
+      local: localServices,
+      onError: [],
+      // Corta el esqueleto sin esperar el tope completo
+      onEarly: valor => { services.value = valor; loading.value = false }
+    })
+
+    services.value = res.value || []
+    error.value = res.error
+    loading.value = false
   }
 
   fetchServices()

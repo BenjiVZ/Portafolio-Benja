@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { supabase } from '../lib/supabase'
 import { localSiteConfig } from '../lib/localData'
+import { loadWithFallback } from '../lib/dataSource'
 
 // Respaldo mínimo para que el sitio no aparezca vacío mientras carga
 // o si la tabla site_config quedara sin filas.
@@ -38,31 +39,19 @@ export function useSiteConfig() {
   async function fetchConfig() {
     loading.value = true
     error.value = null
-    try {
-      const { data, error: err } = await supabase
-        .from('site_config')
-        .select('key, value')
 
-      if (err) throw err
-      if (!data || data.length === 0) throw new Error('Sin datos en Supabase')
+    const res = await loadWithFallback({
+      query: () => supabase.from('site_config').select('key, value'),
+      // La tabla guarda una fila por clave; el sitio espera un objeto
+      transform: rows => Object.fromEntries(rows.map(r => [r.key, r.value])),
+      local: localSiteConfig,
+      onError: {},
+      onEarly: valor => { config.value = valor; loading.value = false }
+    })
 
-      const configMap = {}
-      data.forEach(row => {
-        configMap[row.key] = row.value
-      })
-      config.value = configMap
-    } catch (e) {
-      console.warn('Supabase no respondio, usando respaldo local:', e.message)
-      error.value = e.message
-      try {
-        config.value = await localSiteConfig()
-      } catch (e2) {
-        console.error('Respaldo local tambien fallo:', e2.message)
-        config.value = {}
-      }
-    } finally {
-      loading.value = false
-    }
+    config.value = res.value || {}
+    error.value = res.error
+    loading.value = false
   }
 
   function getConfig(key) {

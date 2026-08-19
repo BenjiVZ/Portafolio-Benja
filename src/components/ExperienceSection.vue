@@ -95,6 +95,7 @@
 import { ref, nextTick, onMounted } from 'vue'
 import { supabase } from '../lib/supabase'
 import { localExperiences } from '../lib/localData'
+import { loadWithFallback } from '../lib/dataSource'
 
 const DEVICON_BASE = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons'
 const techIconMap = {
@@ -139,25 +140,18 @@ const itemRefs = ref([])
 const loading = ref(true)
 
 async function loadExperiences() {
-  try {
-    const { data, error } = await supabase
-      .from('experiences')
-      .select('*')
-      .order('sort_order', { ascending: true })
-    if (error) throw error
-    if (!data || data.length === 0) throw new Error('Sin datos en Supabase')
-    experiences.value = data
-  } catch (e) {
-    console.warn('Supabase no respondio, usando respaldo local:', e.message)
-    try {
+  const res = await loadWithFallback({
+    query: () => supabase.from('experiences').select('*').order('sort_order', { ascending: true }),
+    local: async () => {
       const local = await localExperiences()
-      experiences.value = local.length ? local : fallbackExperiences
-    } catch (e2) {
-      experiences.value = fallbackExperiences
-    }
-  } finally {
-    loading.value = false
-  }
+      return local.length ? local : fallbackExperiences
+    },
+    onError: fallbackExperiences,
+    onEarly: valor => { experiences.value = valor; loading.value = false }
+  })
+
+  experiences.value = res.value || fallbackExperiences
+  loading.value = false
 }
 
 onMounted(async () => {

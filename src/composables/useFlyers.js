@@ -1,6 +1,7 @@
 import { ref } from 'vue'
 import { supabase } from '../lib/supabase'
 import { localFlyers } from '../lib/localData'
+import { loadWithFallback } from '../lib/dataSource'
 
 export function useFlyers() {
   const flyers = ref([])
@@ -10,22 +11,18 @@ export function useFlyers() {
   async function fetchFlyers() {
     loading.value = true
     error.value = null
-    try {
-      const { data, error: err } = await supabase
-        .from('flyers')
-        .select('*')
-        .order('sort_order', { ascending: true })
 
-      if (err) throw err
-      if (!data || data.length === 0) throw new Error('Sin datos en Supabase')
-      flyers.value = data
-    } catch (e) {
-      console.warn('Supabase no respondio, usando respaldo local:', e.message)
-      error.value = e.message
-      flyers.value = await localFlyers().catch(() => [])
-    } finally {
-      loading.value = false
-    }
+    const res = await loadWithFallback({
+      query: () => supabase.from('flyers').select('*').order('sort_order', { ascending: true }),
+      local: localFlyers,
+      onError: [],
+      // Corta el esqueleto sin esperar el tope completo
+      onEarly: valor => { flyers.value = valor; loading.value = false }
+    })
+
+    flyers.value = res.value || []
+    error.value = res.error
+    loading.value = false
   }
 
   fetchFlyers()

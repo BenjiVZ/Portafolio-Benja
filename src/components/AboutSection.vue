@@ -80,6 +80,7 @@ import { useSiteConfig } from '../composables/useSiteConfig'
 import { useProjects } from '../composables/useProjects'
 import { supabase } from '../lib/supabase'
 import { localExperiences } from '../lib/localData'
+import { loadWithFallback } from '../lib/dataSource'
 
 const { getConfig } = useSiteConfig()
 const aboutData = computed(() => getConfig('about'))
@@ -159,18 +160,8 @@ const imageRef = ref(null)
 const contentRef = ref(null)
 
 onMounted(async () => {
-  // Load companies count
-  try {
-    const { data, error } = await supabase.from('experiences').select('company')
-    if (error) throw error
-    if (!data || data.length === 0) throw new Error('Sin datos en Supabase')
-    experiences.value = data
-  } catch (e) {
-    console.warn('Supabase no respondio, usando respaldo local:', e.message)
-    experiences.value = await localExperiences().catch(() => [])
-  }
-
-  // Reveal animations
+  // Las animaciones se enganchan primero: antes esperaban al fetch y la
+  // seccion se quedaba invisible todo lo que tardara Supabase en fallar.
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -181,6 +172,14 @@ onMounted(async () => {
 
   if (imageRef.value) observer.observe(imageRef.value)
   if (contentRef.value) observer.observe(contentRef.value)
+
+  // El contador de empresas puede llegar despues
+  const res = await loadWithFallback({
+    query: () => supabase.from('experiences').select('company'),
+    local: localExperiences,
+    onError: []
+  })
+  experiences.value = res.value || []
 })
 </script>
 
