@@ -22,6 +22,14 @@ export function marcarSupabaseCaido() {
   supabaseCaido = true
 }
 
+// La base contesto bien, solo que esa tabla esta vacia
+class SinFilas extends Error {
+  constructor() {
+    super('La tabla esta vacia en Supabase')
+    this.name = 'SinFilas'
+  }
+}
+
 export function withTimeout(promise, ms = TIMEOUT_MS) {
   let id
   const limite = new Promise((_, reject) => {
@@ -61,11 +69,14 @@ export async function loadWithFallback({ query, local, transform, onError = null
     try {
       const { data, error } = await consulta
       if (error) throw error
-      if (!data || data.length === 0) throw new Error('Sin datos en Supabase')
+      if (!data || data.length === 0) throw new SinFilas()
       return { value: transform ? await transform(data) : data, usingLocal: false, error: null }
     } catch (e) {
-      console.warn('Supabase no respondio, usando respaldo local:', e.message)
-      supabaseCaido = true
+      console.warn('Sin datos de Supabase, usando respaldo local:', e.message)
+      // Una tabla vacia NO significa que la base este caida: puede que todavia
+      // no le hayas cargado flyers o testimonios. Solo un fallo de conexion
+      // marca a Supabase como caido para las demas secciones.
+      if (!(e instanceof SinFilas)) supabaseCaido = true
       return { ...(await respaldo(local, onError)), error: e.message }
     }
   }
