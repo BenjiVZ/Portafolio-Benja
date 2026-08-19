@@ -57,9 +57,18 @@ const social = computed(() => contactData.value.social || {})
 
 .footer-inner {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
+  gap: var(--space-lg) var(--space-2xl);
   margin-bottom: var(--space-xl);
+}
+
+/* Sin tope de ancho la descripcion se metia debajo de los enlaces */
+.footer-brand {
+  flex: 1 1 320px;
+  max-width: 420px;
+  min-width: 0;
 }
 
 .footer-logo {
@@ -88,7 +97,11 @@ const social = computed(() => contactData.value.social || {})
 
 .footer-links {
   display: flex;
+  flex: 0 1 auto;
+  align-items: center;
   gap: var(--space-lg);
+  /* "Sobre Mi" se partia en dos lineas al comprimirse la fila */
+  white-space: nowrap;
 }
 
 .footer-links a {
@@ -104,12 +117,14 @@ const social = computed(() => contactData.value.social || {})
 
 .footer-socials {
   display: flex;
+  flex: 0 0 auto;
   gap: var(--space-sm);
 }
 
 .social-link {
   width: 36px;
   height: 36px;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -134,11 +149,21 @@ const social = computed(() => contactData.value.social || {})
   color: var(--color-text-muted);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 900px) {
   .footer-inner {
     flex-direction: column;
+    align-items: center;
     gap: var(--space-xl);
     text-align: center;
+  }
+
+  .footer-brand {
+    flex: 1 1 auto;
+    max-width: 520px;
+  }
+
+  .footer-logo {
+    justify-content: center;
   }
 
   .footer-links {
