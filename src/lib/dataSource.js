@@ -12,8 +12,8 @@ import { registrarOrigen } from './origen'
 // Tiempo que se espera a Supabase antes de mostrar el respaldo local
 export const TIMEOUT_MS = 60000
 
-// Pausa entre reintentos mientras no se cumple el minuto
-const REINTENTO_MS = 5000
+// Primera pausa antes de reintentar; luego se va duplicando hasta 15 s
+const REINTENTO_MS = 1000
 
 // Si una seccion ya comprobo que no hay conexion, las demas no vuelven
 // a esperar el tope completo: se van directo al respaldo.
@@ -68,38 +68,74 @@ export async function loadWithFallback({ query, local, transform, onError = null
 
 const esperar = ms => new Promise(resolve => setTimeout(resolve, ms))
 
-async function intentar({ query, local, transform, onError }) {
-  if (!supabaseCaido) {
-    const inicio = Date.now()
-    let ultimoError = null
+// Una sola sonda para todo el sitio. Antes cada seccion reintentaba por su
+// cuenta cada 5 s durante el minuto: seis secciones = 72 peticiones fallidas
+// llenando la consola. Ahora la primera que se cae abre la sonda y las demas
+// esperan su resultado.
+let sonda = null
 
-    // Reintenta hasta cumplir el minuto: el respaldo local solo entra
-    // cuando Supabase lleva todo ese tiempo sin dar una respuesta valida.
-    while (Date.now() - inicio < TIMEOUT_MS) {
-      try {
-        const { data, error } = await withTimeout(query(), TIMEOUT_MS - (Date.now() - inicio))
-        if (error) throw error
-        // data puede ser [] y esta bien: la base dice que no hay nada
-        const filas = data || []
-        return { value: transform ? await transform(filas) : filas, usingLocal: false, error: null }
-      } catch (e) {
-        ultimoError = e
-        // Un error de la propia base (tabla que no existe, permisos) si
-        // llego al servidor: no se insiste, se va al respaldo de una vez.
-        if (!esFalloDeConexion(e)) break
-        const restante = TIMEOUT_MS - (Date.now() - inicio)
-        if (restante > 0) await esperar(Math.min(REINTENTO_MS, restante))
-      }
+function esperarConexion(query) {
+  // Se limpia al terminar para que una caida posterior vuelva a sondear
+  // en vez de reutilizar el veredicto de la vez anterior.
+  if (!sonda) sonda = sondear(query).finally(() => { sonda = null })
+  return sonda
+}
+
+async function sondear(query) {
+  const inicio = Date.now()
+  // Espera creciente: si la base no vuelve rapido, tampoco tiene sentido
+  // insistir cada pocos segundos.
+  let espera = REINTENTO_MS
+
+  while (true) {
+    const restante = TIMEOUT_MS - (Date.now() - inicio)
+    if (restante <= 0) return false
+
+    await esperar(Math.min(espera, restante))
+    if (Date.now() - inicio >= TIMEOUT_MS) return false
+
+    try {
+      const { error } = await withTimeout(query(), TIMEOUT_MS - (Date.now() - inicio))
+      // Cualquier respuesta con codigo de PostgREST significa que el servidor
+      // esta ahi; el problema seria de esa tabla, no de la conexion.
+      if (!error || !esFalloDeConexion(error)) return true
+    } catch (e) {
+      if (!esFalloDeConexion(e)) return true
     }
 
-    console.warn('Supabase fallo, usando respaldo local:', ultimoError?.message)
-    // Solo un fallo de conexion condena a las demas secciones. Un error de
-    // la propia base (tabla que no existe, permisos) es cosa de esa tabla.
-    if (esFalloDeConexion(ultimoError)) supabaseCaido = true
-    return { ...(await respaldo(local, onError)), error: ultimoError?.message || 'Sin conexion con Supabase' }
+    espera = Math.min(espera * 2, 15000)
+  }
+}
+
+async function intentar({ query, local, transform, onError }) {
+  if (supabaseCaido) {
+    return { ...(await respaldo(local, onError)), error: 'Sin conexion con Supabase' }
   }
 
-  return { ...(await respaldo(local, onError)), error: 'Sin conexion con Supabase' }
+  let ultimoError = null
+
+  // Dos pasadas: la primera de entrada, la segunda solo si la sonda
+  // confirma que Supabase volvio dentro del minuto.
+  for (let intento = 0; intento < 2; intento++) {
+    try {
+      const { data, error } = await withTimeout(query())
+      if (error) throw error
+      // data puede ser [] y esta bien: la base dice que no hay nada
+      const filas = data || []
+      return { value: transform ? await transform(filas) : filas, usingLocal: false, error: null }
+    } catch (e) {
+      ultimoError = e
+      // Un error de la propia base (tabla que no existe, permisos) si llego
+      // al servidor: no se insiste, es cosa de esa tabla y no del enlace.
+      if (!esFalloDeConexion(e)) break
+      if (intento === 0 && !(await esperarConexion(query))) break
+    }
+  }
+
+  console.warn('Supabase fallo, usando respaldo local:', ultimoError?.message)
+  // Solo un fallo de conexion condena a las demas secciones.
+  if (esFalloDeConexion(ultimoError)) supabaseCaido = true
+  return { ...(await respaldo(local, onError)), error: ultimoError?.message || 'Sin conexion con Supabase' }
 }
 
 async function respaldo(local, onError) {
