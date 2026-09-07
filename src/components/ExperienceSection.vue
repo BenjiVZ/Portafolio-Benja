@@ -147,8 +147,7 @@ async function loadExperiences() {
       const local = await localExperiences()
       return local.length ? local : fallbackExperiences
     },
-    onError: fallbackExperiences,
-    onEarly: valor => { experiences.value = valor; loading.value = false }
+    onError: fallbackExperiences
   })
 
   experiences.value = res.value || fallbackExperiences

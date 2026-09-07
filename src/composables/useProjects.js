@@ -26,13 +26,7 @@ export function useProjects() {
       // y ahi si se publican tambien los repos de GitHub.
       local: async () => mergeWithGithub(await localProjects()),
       // Ultimo recurso si ni los JSON cargan: al menos los repos de GitHub
-      onError: () => fetchGithubProjects().catch(() => []),
-      // Corta el esqueleto sin esperar el tope completo
-      onEarly: valor => {
-        projects.value = valor
-        usingLocal.value = true
-        loading.value = false
-      }
+      onError: () => fetchGithubProjects().catch(() => [])
     })
 
     projects.value = res.value || []

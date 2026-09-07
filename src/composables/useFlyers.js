@@ -16,9 +16,7 @@ export function useFlyers() {
       nombre: 'Flyers',
       query: () => supabase.from('flyers').select('*').order('sort_order', { ascending: true }),
       local: localFlyers,
-      onError: [],
-      // Corta el esqueleto sin esperar el tope completo
-      onEarly: valor => { flyers.value = valor; loading.value = false }
+      onError: []
     })
 
     flyers.value = res.value || []
