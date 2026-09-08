@@ -117,7 +117,8 @@ ul, ol {
 
 /* ── Section ── */
 .section {
-  padding: var(--space-5xl) 0;
+  /* 8rem arriba y abajo dejaba huecos de 250px entre bloques */
+  padding: var(--space-4xl) 0;
 }
 
 .section-header {

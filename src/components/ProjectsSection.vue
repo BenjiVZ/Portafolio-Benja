@@ -35,7 +35,7 @@
       <div v-if="!loading" class="projects-grid" ref="gridRef">
         <TransitionGroup name="project-card">
           <div
-            v-for="project in filteredProjects"
+            v-for="project in visibleProjects"
             :key="project.id"
             class="project-card"
             v-spotlight
@@ -43,10 +43,10 @@
           >
             <div class="project-thumbnail">
               <div v-if="project.image_url" class="project-image" :style="{ backgroundImage: `url(${project.image_url})` }"></div>
-              <div v-else class="project-image-placeholder">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
-                </svg>
+              <!-- Sin imagen: portada generada con el tono de la categoria y el monograma del titulo -->
+              <div v-else class="project-image-placeholder" :style="placeholderStyle(project)">
+                <span class="placeholder-monogram">{{ monogram(project.title) }}</span>
+                <span v-if="project.tech_stack?.[0]" class="placeholder-tech">{{ project.tech_stack[0] }}</span>
               </div>
               <div class="project-overlay">
                 <span class="overlay-text">Ver detalle</span>
@@ -67,6 +67,18 @@
             </div>
           </div>
         </TransitionGroup>
+      </div>
+
+      <!-- Paginado: 56 tarjetas seguidas eran una pared; se muestran de a 9 -->
+      <div v-if="!loading && hiddenCount > 0" class="projects-more">
+        <button class="btn btn-secondary" @click="showMore">
+          Ver más proyectos
+          <span class="more-count">+{{ Math.min(PAGE, hiddenCount) }}</span>
+        </button>
+        <p class="projects-count">Mostrando {{ visibleProjects.length }} de {{ filteredProjects.length }}</p>
+      </div>
+      <div v-else-if="!loading && filteredProjects.length > PAGE" class="projects-more">
+        <button class="btn btn-ghost" @click="showLess">Ver menos</button>
       </div>
 
       <!-- Project Modal -->
@@ -150,6 +162,51 @@ const filteredProjects = computed(() => {
 function getCategoryLabel(cat) {
   const found = categories.find(c => c.value === cat)
   return found ? found.label : cat
+}
+
+// ── Paginado ──
+const PAGE = 9
+const visibleCount = ref(PAGE)
+const visibleProjects = computed(() => filteredProjects.value.slice(0, visibleCount.value))
+const hiddenCount = computed(() => Math.max(0, filteredProjects.value.length - visibleCount.value))
+
+function showMore() {
+  visibleCount.value += PAGE
+}
+
+function showLess() {
+  visibleCount.value = PAGE
+  gridRef.value?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
+// Al cambiar de filtro se vuelve a la primera pagina
+watch(activeFilter, () => { visibleCount.value = PAGE })
+
+// ── Portada generada ──
+// Tono por categoria, siempre poco saturado para no romper la paleta gris.
+const CATEGORY_HUE = {
+  web: 210, app: 160, backend: 265, sistemas: 190, university: 35,
+  internship: 300, work: 20, personal: 230, future: 130
+}
+
+function placeholderStyle(project) {
+  const h = CATEGORY_HUE[project.category] ?? 220
+  return {
+    background: `linear-gradient(135deg, hsl(${h} 26% 21%) 0%, hsl(${h + 25} 30% 12%) 100%)`
+  }
+}
+
+// "Cloud de Música" -> "CM", "SHOWROOTS" -> "SH". Se saltan conectores.
+const CONECTORES = new Set(['de', 'del', 'la', 'el', 'los', 'las', 'y', 'e', 'con', 'en', 'para', 'a', 'un', 'una', 'por', 'sobre'])
+
+function monogram(title = '') {
+  const words = String(title)
+    .replace(/[^\p{L}\p{N} ]/gu, ' ')
+    .split(/\s+/)
+    .filter(w => w && !CONECTORES.has(w.toLowerCase()))
+  if (!words.length) return '<>'
+  if (words.length === 1) return words[0].slice(0, 2).toUpperCase()
+  return (words[0][0] + words[1][0]).toUpperCase()
 }
 
 function openProject(project) {
@@ -270,12 +327,67 @@ onUnmounted(() => {
 }
 
 .project-image-placeholder {
+  position: relative;
   width: 100%;
   height: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(135deg, var(--color-bg-elevated) 0%, var(--color-bg-surface) 100%);
+  gap: 6px;
+  /* El degradado de fondo llega inline, por categoria */
+}
+
+/* Brillo suave en una esquina para que no sea un rectangulo plano */
+.project-image-placeholder::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 25% 15%, rgba(255, 255, 255, 0.09), transparent 55%);
+}
+
+.placeholder-monogram {
+  position: relative;
+  font-family: var(--font-heading);
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: rgba(226, 232, 240, 0.9);
+  transition: transform var(--duration-slow) var(--ease-out);
+}
+
+.project-card:hover .placeholder-monogram {
+  transform: scale(1.06);
+}
+
+.placeholder-tech {
+  position: relative;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+.projects-more {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-2xl);
+}
+
+.more-count {
+  margin-left: 6px;
+  padding: 1px 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent-subtle);
+  font-size: var(--text-xs);
+}
+
+.projects-count {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
   color: var(--color-text-faint);
 }
 
@@ -311,11 +423,13 @@ onUnmounted(() => {
   top: 12px;
   right: 12px;
   z-index: 5;
-  background: var(--color-bg-deep);
+  /* Mas discreta: con la mitad de las tarjetas destacadas, el borde con
+     resplandor competia con el contenido */
+  background: rgba(245, 158, 11, 0.12);
   color: var(--color-warning);
-  border: 1px solid var(--color-warning);
-  box-shadow: 0 0 10px rgba(245, 158, 11, 0.3);
-  padding: 4px 12px;
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  backdrop-filter: blur(6px);
+  padding: 3px 10px;
   border-radius: var(--radius-full);
   font-size: var(--text-xs);
   font-weight: 600;

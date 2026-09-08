@@ -56,7 +56,8 @@ const motivo = computed(() => {
 .origen-panel {
   position: fixed;
   left: var(--space-md);
-  bottom: var(--space-md);
+  /* Por encima del boton flotante de WhatsApp, que ocupa la esquina */
+  bottom: 96px;
   z-index: 900;
   max-width: min(340px, calc(100vw - 2 * var(--space-md)));
   background: rgba(11, 17, 32, 0.94);

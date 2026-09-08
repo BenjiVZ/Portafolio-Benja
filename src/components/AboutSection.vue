@@ -4,7 +4,7 @@
       <div class="about-grid">
         <div class="about-image-wrapper reveal" ref="imageRef">
           <div class="about-bg-glow"></div>
-          <div class="about-image-frame">
+          <div class="about-image-frame" :class="{ 'is-logo': isLogo }">
             <img
               v-if="aboutData.image_url"
               :src="aboutData.image_url"
@@ -84,6 +84,9 @@ import { loadWithFallback } from '../lib/dataSource'
 
 const { getConfig } = useSiteConfig()
 const aboutData = computed(() => getConfig('about'))
+// Mientras no haya foto, la "foto" es el logo (splash en blanco y negro).
+// Se marca para invertirlo y que quede claro sobre oscuro, sin el bloque blanco.
+const isLogo = computed(() => /splash|logo/i.test(aboutData.value.image_url || ''))
 const { projects } = useProjects()
 
 const projectsCount = computed(() => projects.value.length || 0)
@@ -197,8 +200,9 @@ onMounted(async () => {
 .about-image-wrapper {
   position: relative;
   z-index: 1;
-  /* Contiene el resplandor de fondo, que mide 120% y se salía del viewport */
-  overflow: hidden;
+  /* Del ancho del marco: asi la insignia se ancla a la foto y no a la columna.
+     Sin overflow hidden, que recortaba la insignia que sobresale 16px. */
+  max-width: 380px;
 }
 
 .about-bg-glow {
@@ -206,8 +210,9 @@ onMounted(async () => {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 120%;
-  height: 120%;
+  /* El degradado ya se desvanece al 60%: al 100% no se sale del viewport */
+  width: 100%;
+  height: 100%;
   background: radial-gradient(circle, var(--color-accent-subtle) 0%, transparent 60%);
   z-index: -1;
   pointer-events: none;
@@ -229,6 +234,21 @@ onMounted(async () => {
   height: 100%;
   object-fit: cover;
   object-position: center top;
+}
+
+/* Logo en vez de foto: fondo oscuro, trazo invertido a claro y aire alrededor */
+.about-image-frame.is-logo {
+  background: radial-gradient(circle at 50% 40%, var(--color-bg-surface) 0%, var(--color-bg-deep) 75%);
+}
+
+.about-image-frame.is-logo .about-image {
+  object-fit: contain;
+  padding: 18%;
+  filter: invert(1);
+  /* Tras invertir, el fondo blanco del PNG queda negro; screen lo vuelve
+     transparente y solo sobrevive el trazo claro del logo */
+  mix-blend-mode: screen;
+  opacity: 0.92;
 }
 
 .about-image-placeholder {
@@ -338,13 +358,19 @@ onMounted(async () => {
     gap: var(--space-2xl);
   }
 
-  .about-image-frame {
+  .about-image-wrapper {
     max-width: 280px;
     margin: 0 auto;
   }
 
+  .about-image-frame {
+    max-width: 280px;
+  }
+
   .about-exp-badge {
-    right: 0;
+    right: -8px;
+    bottom: -12px;
+    padding: 12px 16px;
   }
 
   .about-stats {

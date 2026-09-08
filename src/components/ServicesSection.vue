@@ -74,6 +74,10 @@ function getIcon(name) {
 .service-card {
   text-align: center;
   padding: var(--space-2xl) var(--space-xl);
+  /* Columna flex para que "Cotizar" quede al pie en todas las tarjetas */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .service-icon-wrapper {
@@ -111,7 +115,8 @@ function getIcon(name) {
   display: inline-flex;
   align-items: center;
   gap: 6px;
-  margin-top: var(--space-lg);
+  margin-top: auto;
+  padding-top: var(--space-lg);
   font-family: var(--font-heading);
   font-size: var(--text-sm);
   font-weight: 600;
