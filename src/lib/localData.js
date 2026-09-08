@@ -65,9 +65,23 @@ function mapCategory(nombre = '') {
   return 'personal'
 }
 
+// Cambios guardados desde /admin en modo local (vite.config.js los escribe
+// en public/data). Vive en public para pedirse siempre fresco por fetch:
+// los JSON de src/data van en cache de modulo y no verian las ediciones.
+async function loadEditsProyectos() {
+  try {
+    const res = await fetch('/data/proyectos-edit.json', { cache: 'no-store' })
+    if (!res.ok) return []
+    const edits = await res.json()
+    return Array.isArray(edits) ? edits : []
+  } catch {
+    return []
+  }
+}
+
 export async function localProjects() {
-  const data = await load('proyectos')
-  return data.map(p => ({
+  const [data, edits] = await Promise.all([load('proyectos'), loadEditsProyectos()])
+  const mapped = data.map(p => ({
     id: p.id,
     title: p.titulo,
     description: p.descripcion,
@@ -82,6 +96,16 @@ export async function localProjects() {
     image_url: p.imagen || '',
     sort_order: p.orden ?? 0
   }))
+
+  // Las ediciones del admin pisan por id; ids nuevos se agregan al final
+  if (!edits.length) return mapped
+  const porId = new Map(mapped.map(p => [String(p.id), p]))
+  for (const e of edits) {
+    const original = porId.get(String(e.id))
+    if (original) Object.assign(original, e)
+    else mapped.push(e)
+  }
+  return mapped
 }
 
 export async function localServices() {

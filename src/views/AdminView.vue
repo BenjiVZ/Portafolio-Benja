@@ -74,32 +74,111 @@
       <div v-if="activeTab === 'projects'" class="admin-panel">
         <div class="panel-header">
           <h2>Proyectos</h2>
-          <button class="btn btn-primary btn-sm" @click="openProjectForm()">+ Nuevo Proyecto</button>
+          <button class="btn btn-primary btn-sm" @click="nuevoProyecto()">+ Nuevo Proyecto</button>
         </div>
-        <div class="admin-table-wrapper">
-          <table class="admin-table">
-            <thead>
-              <tr>
-                <th>Título</th>
-                <th>Categoría</th>
-                <th>Featured</th>
-                <th>Orden</th>
-                <th>Acciones</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="p in projectsList" :key="p.id">
-                <td class="td-title">{{ p.title }}</td>
-                <td><span class="badge-neutral badge">{{ p.category }}</span></td>
-                <td><span :class="p.featured ? 'badge' : 'badge badge-neutral'">{{ p.featured ? 'Sí' : 'No' }}</span></td>
-                <td>{{ p.sort_order }}</td>
-                <td class="td-actions">
-                  <button class="btn btn-ghost btn-sm" @click="openProjectForm(p)">Editar</button>
-                  <button class="btn btn-ghost btn-sm btn-danger" @click="handleDeleteProject(p.id)">Eliminar</button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+        <p class="panel-hint">Todo se edita aqui mismo: cambia lo que necesites y pulsa Guardar en la fila del proyecto.</p>
+
+        <div class="project-edit-list">
+          <div v-for="p in projectsList" :key="p.id" class="project-edit-row" :class="{ 'es-nuevo': p._nuevo }">
+            <div class="pe-imagen">
+              <div class="project-img-preview" v-if="p.image_url">
+                <img :src="p.image_url" alt="Preview" @error="$event.target.style.display='none'" />
+              </div>
+              <div class="project-img-preview project-img-placeholder" v-else>
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+              </div>
+              <label class="btn btn-primary btn-sm profile-upload-btn" :class="{ disabled: uploadingImgId === p.id }">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                    {{ uploadingImgId === p.id ? 'Subiendo...' : 'Subir' }}
+                    <input type="file" accept="image/*" @change="handleProjectImgUpload($event, p)" style="display:none" :disabled="uploadingImgId === p.id" />
+                  </label>
+              <input class="input" v-model="p.image_url" placeholder="o pega una URL..." style="font-size:13px;" />
+            </div>
+
+            <div class="pe-campos">
+              <div class="pe-fila-3">
+                <div class="input-group">
+                  <label class="input-label">Título</label>
+                  <input class="input" v-model="p.title" />
+                </div>
+                <div class="input-group">
+                  <label class="input-label">Categoría</label>
+                  <select class="input" v-model="p.category">
+                    <option value="web">Web</option>
+                    <option value="app">App</option>
+                    <option value="backend">Backend</option>
+                    <option value="sistemas">Sistemas</option>
+                    <option value="university">Universitario</option>
+                    <option value="internship">Pasantías</option>
+                    <option value="work">Laboral</option>
+                    <option value="personal">Personal</option>
+                    <option value="future">Futuro</option>
+                  </select>
+                </div>
+                <div class="input-group">
+                  <label class="input-label">Subcategoría</label>
+                  <select class="input" v-model="p.subcategory">
+                    <option value="">— Ninguna —</option>
+                    <option value="web">Web</option>
+                    <option value="app">App</option>
+                    <option value="backend">Backend</option>
+                    <option value="sistemas">Sistemas</option>
+                    <option value="university">Universitario</option>
+                    <option value="internship">Pasantías</option>
+                    <option value="work">Laboral</option>
+                    <option value="personal">Personal</option>
+                    <option value="future">Futuro</option>
+                  </select>
+                </div>
+              </div>
+              <div class="input-group">
+                <label class="input-label">Descripción corta</label>
+                <input class="input" v-model="p.short_description" />
+              </div>
+              <div class="input-group">
+                <label class="input-label">Descripción completa</label>
+                <textarea class="input" v-model="p.description" rows="2"></textarea>
+              </div>
+              <div class="form-row">
+                <div class="input-group">
+                  <label class="input-label">URL Demo</label>
+                  <input class="input" v-model="p.live_url" />
+                </div>
+                <div class="input-group">
+                  <label class="input-label">URL Repositorio</label>
+                  <input class="input" v-model="p.repo_url" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="input-group">
+                  <label class="input-label">Tech Stack <small style="color:var(--color-text-muted);font-weight:400;">(separadas por coma)</small></label>
+                  <input class="input" :value="(p.tech_stack || []).join(', ')" @change="setTechStack(p, $event)" />
+                </div>
+                <div class="input-group">
+                  <label class="input-label">Sub-Skills <small style="color:var(--color-text-muted);font-weight:400;">(separadas por coma)</small></label>
+                  <input class="input" :value="(p.sub_skills || []).join(', ')" @change="setSubSkills(p, $event)" />
+                </div>
+              </div>
+            </div>
+
+            <div class="pe-acciones">
+              <div class="input-group">
+                <label class="input-label">Orden</label>
+                <input class="input" type="number" v-model.number="p.sort_order" />
+              </div>
+              <div class="input-group">
+                <label class="input-label">Destacado</label>
+                <label class="toggle">
+                  <input type="checkbox" v-model="p.featured" />
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+              <button class="btn btn-primary btn-sm" :disabled="savingProjectId === p.id" @click="guardarProyecto(p)">
+                {{ savingProjectId === p.id ? 'Guardando...' : 'Guardar' }}
+              </button>
+              <button class="btn btn-ghost btn-sm btn-danger" @click="handleDeleteProject(p.id)">Eliminar</button>
+            </div>
+          </div>
           <p v-if="projectsList.length === 0" class="empty-state">No hay proyectos. Crea el primero.</p>
         </div>
       </div>
@@ -158,7 +237,7 @@
                   >
                     {{ importingId === s.id ? 'Importando...' : 'Importar' }}
                   </button>
-                  <button class="btn btn-ghost btn-sm" @click="openSuggestionForm(s)">Editar y crear</button>
+                  <button class="btn btn-ghost btn-sm" @click="handleImportYEditar(s)">Importar y editar</button>
                 </td>
               </tr>
             </tbody>
@@ -437,136 +516,6 @@
     </main>
 
     <!-- MODALS -->
-    <Transition name="modal">
-      <div v-if="showProjectModal" class="modal-overlay" @click.self="showProjectModal = false">
-        <div class="modal admin-modal">
-          <div class="modal-header">
-            <h3>{{ editingProject ? 'Editar Proyecto' : 'Nuevo Proyecto' }}</h3>
-            <button class="modal-close" @click="showProjectModal = false">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-            </button>
-          </div>
-          <form @submit.prevent="handleSaveProject" class="admin-form">
-            <div class="form-row">
-              <div class="input-group">
-                <label class="input-label">Título</label>
-                <input class="input" v-model="projectForm.title" required />
-              </div>
-              <div class="input-group">
-                <label class="input-label">Categoría</label>
-                <select class="input" v-model="projectForm.category">
-                  <option value="web">Web</option>
-                  <option value="app">App</option>
-                  <option value="backend">Backend</option>
-                  <option value="university">Universitario</option>
-                  <option value="internship">Pasantías</option>
-                  <option value="work">Laboral</option>
-                  <option value="personal">Personal</option>
-                </select>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="input-group">
-                <label class="input-label">Subcategoría <small style="color:var(--color-text-muted);font-weight:400;">(opcional)</small></label>
-                <select class="input" v-model="projectForm.subcategory">
-                  <option value="">— Ninguna —</option>
-                  <option value="web">Web</option>
-                  <option value="app">App</option>
-                  <option value="backend">Backend</option>
-                  <option value="university">Universitario</option>
-                  <option value="internship">Pasantías</option>
-                  <option value="work">Laboral</option>
-                  <option value="personal">Personal</option>
-                </select>
-              </div>
-            </div>
-            <div class="input-group">
-              <label class="input-label">Descripción corta</label>
-              <input class="input" v-model="projectForm.short_description" />
-            </div>
-            <div class="input-group">
-              <label class="input-label">Descripción completa</label>
-              <textarea class="input" v-model="projectForm.description" rows="3"></textarea>
-            </div>
-            <div class="form-row">
-              <div class="input-group">
-                <label class="input-label">URL Demo</label>
-                <input class="input" v-model="projectForm.live_url" />
-              </div>
-              <div class="input-group">
-                <label class="input-label">URL Repositorio</label>
-                <input class="input" v-model="projectForm.repo_url" />
-              </div>
-            </div>
-            <div class="input-group">
-              <label class="input-label">Tech Stack <small style="color:var(--color-text-muted);font-weight:400;">(click para seleccionar)</small></label>
-              <div class="tech-selector">
-                <span
-                  v-for="skill in skillsList"
-                  :key="skill"
-                  class="tech-chip"
-                  :class="{ selected: projectForm.tech_stack.includes(skill) }"
-                  @click="toggleProjectTech(skill)"
-                >{{ skill }}</span>
-                <span v-if="skillsList.length === 0" style="color:var(--color-text-muted);font-size:13px;">Agrega skills en Configuración → About → Skills</span>
-              </div>
-            </div>
-            <div class="input-group">
-              <label class="input-label">Sub-Skills <small style="color:var(--color-text-muted);font-weight:400;">(tecnologías específicas del proyecto)</small></label>
-              <div class="skills-tags-container">
-                <span v-for="(ss, i) in projectForm.sub_skills" :key="i" class="skill-tag">
-                  {{ ss }}
-                  <button type="button" class="skill-tag-remove" @click="projectForm.sub_skills.splice(i, 1)">&times;</button>
-                </span>
-                <div class="skill-add-wrapper">
-                  <input class="input skill-add-input" v-model="subSkillInput" placeholder="Ej: Pandas, Selenium..." @keydown.enter.prevent="addSubSkill" />
-                  <button type="button" class="btn btn-primary btn-sm" @click="addSubSkill">+</button>
-                </div>
-              </div>
-            </div>
-            <div class="input-group">
-              <label class="input-label">Imagen del Proyecto</label>
-              <div class="project-image-upload">
-                <div class="project-img-preview" v-if="projectForm.image_url">
-                  <img :src="projectForm.image_url" alt="Preview" @error="$event.target.style.display='none'" />
-                </div>
-                <div class="project-img-preview project-img-placeholder" v-else>
-                  <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
-                </div>
-                <div class="project-img-controls">
-                  <label class="btn btn-primary btn-sm profile-upload-btn" :class="{ disabled: uploadingProjectImg }">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                    {{ uploadingProjectImg ? 'Subiendo...' : 'Subir Imagen' }}
-                    <input type="file" accept="image/*" @change="handleProjectImgUpload" style="display:none" :disabled="uploadingProjectImg" />
-                  </label>
-                  <div class="profile-url-row">
-                    <input class="input" v-model="projectForm.image_url" placeholder="o pega una URL..." style="font-size:13px;" />
-                    <button type="button" class="btn btn-ghost btn-sm" v-if="projectForm.image_url" @click="projectForm.image_url = ''" title="Quitar imagen">✕</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="form-row">
-              <div class="input-group">
-                <label class="input-label">Orden</label>
-                <input class="input" type="number" v-model.number="projectForm.sort_order" />
-              </div>
-              <div class="input-group">
-                <label class="input-label">Destacado</label>
-                <label class="toggle">
-                  <input type="checkbox" v-model="projectForm.featured" />
-                  <span class="toggle-slider"></span>
-                </label>
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary" :disabled="admin.loading.value">
-              {{ admin.loading.value ? 'Guardando...' : 'Guardar' }}
-            </button>
-          </form>
-        </div>
-      </div>
-    </Transition>
-
     <Transition name="modal">
       <div v-if="showTestimonialModal" class="modal-overlay" @click.self="showTestimonialModal = false">
         <div class="modal admin-modal">
@@ -892,12 +841,10 @@ async function handleImportAll() {
   if (fallidos.length) alert(`No se importaron ${fallidos.length}:\n` + fallidos.join('\n'))
 }
 
-// Prellena el formulario de proyecto sin marcarlo como edicion,
-// para revisar los datos antes de guardarlos en la base.
-function openSuggestionForm(s) {
-  openProjectForm()
-  Object.assign(projectForm, toProjectRow(s))
-  projectForm.tech_stack = [...(s.tech_stack || [])]
+// Importa la sugerencia y salta al listado, donde queda editable en su fila.
+async function handleImportYEditar(s) {
+  await handleImportSuggestion(s)
+  activeTab.value = 'projects'
 }
 
 // Config
@@ -941,26 +888,24 @@ async function handlePhotoUpload(event) {
   }
 }
 
-// Project Image Upload
-const uploadingProjectImg = ref(false)
+// Project Image Upload — por fila, en el listado
+const uploadingImgId = ref(null)
 
-async function handleProjectImgUpload(event) {
+async function handleProjectImgUpload(event, p) {
   const file = event.target.files[0]
   if (!file) return
-  uploadingProjectImg.value = true
+  uploadingImgId.value = p.id
   try {
-    const url = await admin.uploadImage(file, 'masterslogic Org')
-    projectForm.image_url = url
+    p.image_url = await admin.uploadImage(file, 'masterslogic Org')
   } catch (err) {
     alert('Error subiendo imagen: ' + err.message)
   } finally {
-    uploadingProjectImg.value = false
+    uploadingImgId.value = null
     event.target.value = ''
   }
 }
 
 // Modals
-const showProjectModal = ref(false)
 const showTestimonialModal = ref(false)
 const editingTestimonial = ref(null)
 const testimonialsList = ref([])
@@ -968,26 +913,9 @@ const testimonialForm = reactive({ name: '', role: '', company: '', content: '',
 const showServiceModal = ref(false)
 const showExperienceModal = ref(false)
 const showFlyerModal = ref(false)
-const editingProject = ref(null)
 const editingService = ref(null)
 const editingExperience = ref(null)
 const editingFlyer = ref(null)
-
-// Forms
-const projectForm = reactive({
-  title: '', description: '', short_description: '', category: 'web', subcategory: '',
-  image_url: '', tech_stack: [], sub_skills: [], live_url: '', repo_url: '',
-  featured: false, sort_order: 0
-})
-const subSkillInput = ref('')
-
-function addSubSkill() {
-  const s = subSkillInput.value.trim()
-  if (s && !projectForm.sub_skills.includes(s)) {
-    projectForm.sub_skills.push(s)
-  }
-  subSkillInput.value = ''
-}
 
 const serviceForm = reactive({
   title: '', description: '', icon_name: 'code', sort_order: 0
@@ -1011,13 +939,6 @@ function toggleExpTech(skill) {
   const idx = experienceForm.techs.indexOf(skill)
   if (idx >= 0) { experienceForm.techs.splice(idx, 1) }
   else { experienceForm.techs.push(skill) }
-}
-
-// Toggle tech for projects
-function toggleProjectTech(skill) {
-  const idx = projectForm.tech_stack.indexOf(skill)
-  if (idx >= 0) { projectForm.tech_stack.splice(idx, 1) }
-  else { projectForm.tech_stack.push(skill) }
 }
 
 const unreadCount = computed(() => messagesList.value.filter(m => !m.read).length)
@@ -1067,36 +988,46 @@ async function loadAll() {
   }
 }
 
-// Projects
-function openProjectForm(project = null) {
-  editingProject.value = project
-  if (project) {
-    Object.assign(projectForm, { ...project })
-    projectForm.tech_stack = [...(project.tech_stack || [])]
-    projectForm.sub_skills = [...(project.sub_skills || [])]
-  } else {
-    Object.assign(projectForm, {
-      title: '', description: '', short_description: '', category: 'web', subcategory: '',
-      image_url: '', tech_stack: [], sub_skills: [], live_url: '', repo_url: '',
-      featured: false, sort_order: 0
-    })
-  }
-  subSkillInput.value = ''
-  showProjectModal.value = true
+// Projects — edicion directa en el listado, sin modal
+const savingProjectId = ref(null)
+
+function nuevoProyecto() {
+  projectsList.value.unshift({
+    id: `nuevo-${Date.now()}`,
+    _nuevo: true,
+    title: '', description: '', short_description: '', category: 'web', subcategory: '',
+    image_url: '', tech_stack: [], sub_skills: [], live_url: '', repo_url: '',
+    featured: false, sort_order: 0
+  })
 }
 
-async function handleSaveProject() {
-  const data = { ...projectForm, tech_stack: [...projectForm.tech_stack], sub_skills: [...projectForm.sub_skills] }
-  delete data.id
-  delete data.created_at
+function setTechStack(p, e) {
+  p.tech_stack = e.target.value.split(',').map(s => s.trim()).filter(Boolean)
+}
 
-  if (editingProject.value) {
-    await admin.updateProject(editingProject.value.id, data)
-  } else {
-    await admin.createProject(data)
+function setSubSkills(p, e) {
+  p.sub_skills = e.target.value.split(',').map(s => s.trim()).filter(Boolean)
+}
+
+async function guardarProyecto(p) {
+  savingProjectId.value = p.id
+  try {
+    const data = { ...p, tech_stack: [...(p.tech_stack || [])], sub_skills: [...(p.sub_skills || [])] }
+    delete data.id
+    delete data.created_at
+    delete data._nuevo
+
+    if (p._nuevo) {
+      await admin.createProject(data)
+    } else {
+      await admin.updateProject(p.id, data)
+    }
+    projectsList.value = await admin.getProjects()
+  } catch (e) {
+    alert('No se pudo guardar: ' + e.message)
+  } finally {
+    savingProjectId.value = null
   }
-  showProjectModal.value = false
-  projectsList.value = await admin.getProjects()
 }
 
 async function handleDeleteProject(id) {
@@ -1499,6 +1430,71 @@ onMounted(loadAll)
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   overflow: hidden;
+}
+
+/* Listado editable de proyectos (sin modal) */
+.project-edit-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.project-edit-row {
+  display: grid;
+  grid-template-columns: 180px 1fr 150px;
+  gap: var(--space-lg);
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  align-items: start;
+}
+
+.project-edit-row.es-nuevo {
+  border-color: var(--color-border-accent);
+  border-style: dashed;
+}
+
+.pe-imagen {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.pe-imagen .project-img-preview {
+  width: 100%;
+  height: 100px;
+}
+
+.pe-campos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  min-width: 0;
+}
+
+.pe-fila-3 {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.pe-acciones {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  align-items: stretch;
+}
+
+@media (max-width: 900px) {
+  .project-edit-row {
+    grid-template-columns: 1fr;
+  }
+
+  .pe-acciones {
+    flex-direction: row;
+    align-items: end;
+  }
 }
 
 .admin-table {

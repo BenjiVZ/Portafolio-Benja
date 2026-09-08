@@ -16,7 +16,9 @@ export function useServices() {
       nombre: 'Servicios',
       query: () => supabase.from('services').select('*').order('sort_order', { ascending: true }),
       local: localServices,
-      onError: []
+      onError: [],
+      // Pinta lo local al instante; si Supabase contesta, lo reemplaza
+      onEarly: valor => { services.value = valor; loading.value = false }
     })
 
     services.value = res.value || []

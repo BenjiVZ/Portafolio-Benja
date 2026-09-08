@@ -92,7 +92,7 @@
 </template>
 
 <script setup>
-import { ref, nextTick, onMounted } from 'vue'
+import { ref, nextTick, onMounted, watch } from 'vue'
 import { supabase } from '../lib/supabase'
 import { localExperiences } from '../lib/localData'
 import { loadWithFallback } from '../lib/dataSource'
@@ -147,29 +147,45 @@ async function loadExperiences() {
       const local = await localExperiences()
       return local.length ? local : fallbackExperiences
     },
-    onError: fallbackExperiences
+    onError: fallbackExperiences,
+    // Pinta lo local al instante; si Supabase contesta, lo reemplaza
+    onEarly: valor => { experiences.value = valor; loading.value = false }
   })
 
   experiences.value = res.value || fallbackExperiences
   loading.value = false
 }
 
-onMounted(async () => {
-  await loadExperiences()
+// El observador no puede esperar a que termine la carga: con Supabase caido
+// la promesa tarda hasta 1 minuto y los items quedan invisibles (opacity: 0).
+let observer = null
 
-  await nextTick()
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible')
-      }
-    })
-  }, { threshold: 0.1 })
-
+function observarItems() {
+  if (!observer) {
+    observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible')
+        }
+      })
+    }, { threshold: 0.1 })
+  }
   itemRefs.value.forEach(el => {
     if (el) observer.observe(el)
   })
+}
+
+onMounted(async () => {
+  loadExperiences()
+  await nextTick()
+  observarItems()
+})
+
+// Lo local pinta al instante y si Supabase responde lo reemplaza: en ambos
+// casos los items nuevos tambien hay que observarlos
+watch(experiences, async () => {
+  await nextTick()
+  observarItems()
 })
 </script>
 

@@ -178,7 +178,9 @@ onMounted(async () => {
     nombre: 'Sobre mi (empresas)',
     query: () => supabase.from('experiences').select('company'),
     local: localExperiences,
-    onError: []
+    onError: [],
+    // Pinta lo local al instante; si Supabase contesta, lo reemplaza
+    onEarly: valor => { experiences.value = valor }
   })
   experiences.value = res.value || []
 })

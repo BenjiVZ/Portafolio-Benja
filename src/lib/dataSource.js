@@ -1,15 +1,15 @@
 // ============================================
-// Carga de datos con tope de espera.
+// Carga de datos: todo local primero, Supabase cuando responda.
 //
-// Regla: manda Supabase. Si la base contesta, se usa lo que diga — aunque
-// una tabla venga vacia. El respaldo local (los JSON del repo) entra
-// unicamente cuando Supabase lleva 1 minuto sin dar una respuesta valida:
-// hasta entonces se reintenta y las secciones esperan en modo esqueleto.
+// Regla: el sitio pinta al instante con los JSON del repo (sin esqueletos
+// ni esperas) y en paralelo consulta Supabase. Si la base contesta, sus
+// datos reemplazan a los locales — aunque una tabla venga vacia. Si no
+// contesta dentro del minuto, se queda lo local y listo.
 // ============================================
 
 import { registrarOrigen } from './origen'
 
-// Tiempo que se espera a Supabase antes de mostrar el respaldo local
+// Tiempo que se sigue sondeando a Supabase antes de dar por buena la copia local
 export const TIMEOUT_MS = 60000
 
 // Primera pausa antes de reintentar; luego se va duplicando hasta 15 s
@@ -46,18 +46,20 @@ function esFalloDeConexion(e) {
 }
 
 /**
- * Lee de Supabase y solo cae al respaldo local si la base no responde.
- * Una tabla vacia es una respuesta valida: devuelve vacio, no el respaldo.
+ * Pinta de inmediato los datos locales y consulta Supabase en segundo plano.
+ * Si la base responde, su resultado es el definitivo (una tabla vacia es una
+ * respuesta valida: devuelve vacio, no lo local). Si no, se queda lo local.
  *
  * @param {object}   opts
  * @param {Function} opts.query     () => consulta de supabase-js
  * @param {Function} opts.local     () => datos de los archivos del repo
  * @param {Function} [opts.transform] convierte las filas de Supabase
- * @param {*}        [opts.onError]  valor (o funcion) si tambien falla el respaldo
+ * @param {*}        [opts.onError]  valor (o funcion) si tambien falla lo local
+ * @param {Function} [opts.onEarly]  recibe los datos locales al instante
  * @returns {Promise<{ value: *, usingLocal: boolean, error: string|null }>}
  */
-export async function loadWithFallback({ query, local, transform, onError = null, nombre }) {
-  const res = await intentar({ query, local, transform, onError })
+export async function loadWithFallback({ query, local, transform, onError = null, onEarly, nombre }) {
+  const res = await intentar({ query, local, transform, onError, onEarly })
   registrarOrigen(nombre, {
     usingLocal: res.usingLocal,
     error: res.error,
@@ -107,8 +109,19 @@ async function sondear(query) {
   }
 }
 
-async function intentar({ query, local, transform, onError }) {
+async function intentar({ query, local, transform, onError, onEarly }) {
+  // Todo local primero: se pinta al instante con los JSON del repo. Si luego
+  // Supabase contesta, lo de la base pisa a lo local.
+  let valorLocal
+  let localListo = false
+  try {
+    valorLocal = await local()
+    localListo = true
+    if (onEarly) onEarly(valorLocal)
+  } catch (e) { /* mas abajo se prueba el ultimo recurso */ }
+
   if (supabaseCaido) {
+    if (localListo) return { value: valorLocal, usingLocal: true, error: 'Sin conexion con Supabase' }
     return { ...(await respaldo(local, onError)), error: 'Sin conexion con Supabase' }
   }
 
@@ -132,9 +145,10 @@ async function intentar({ query, local, transform, onError }) {
     }
   }
 
-  console.warn('Supabase fallo, usando respaldo local:', ultimoError?.message)
+  console.warn('Supabase no respondio, se mantiene lo local:', ultimoError?.message)
   // Solo un fallo de conexion condena a las demas secciones.
   if (esFalloDeConexion(ultimoError)) supabaseCaido = true
+  if (localListo) return { value: valorLocal, usingLocal: true, error: ultimoError?.message }
   return { ...(await respaldo(local, onError)), error: ultimoError?.message || 'Sin conexion con Supabase' }
 }
 

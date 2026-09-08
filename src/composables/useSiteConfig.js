@@ -46,7 +46,9 @@ export function useSiteConfig() {
       // La tabla guarda una fila por clave; el sitio espera un objeto
       transform: rows => Object.fromEntries(rows.map(r => [r.key, r.value])),
       local: localSiteConfig,
-      onError: {}
+      onError: {},
+      // Pinta lo local al instante; si Supabase contesta, lo reemplaza
+      onEarly: valor => { config.value = valor; loading.value = false }
     })
 
     config.value = res.value || {}

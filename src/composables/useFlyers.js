@@ -16,7 +16,9 @@ export function useFlyers() {
       nombre: 'Flyers',
       query: () => supabase.from('flyers').select('*').order('sort_order', { ascending: true }),
       local: localFlyers,
-      onError: []
+      onError: [],
+      // Pinta lo local al instante; si Supabase contesta, lo reemplaza
+      onEarly: valor => { flyers.value = valor; loading.value = false }
     })
 
     flyers.value = res.value || []

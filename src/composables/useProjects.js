@@ -26,7 +26,13 @@ export function useProjects() {
       // y ahi si se publican tambien los repos de GitHub.
       local: async () => mergeWithGithub(await localProjects()),
       // Ultimo recurso si ni los JSON cargan: al menos los repos de GitHub
-      onError: () => fetchGithubProjects().catch(() => [])
+      onError: () => fetchGithubProjects().catch(() => []),
+      // Pinta lo local al instante; si Supabase contesta, lo reemplaza
+      onEarly: valor => {
+        projects.value = valor
+        usingLocal.value = true
+        loading.value = false
+      }
     })
 
     projects.value = res.value || []
