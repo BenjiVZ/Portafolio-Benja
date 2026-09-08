@@ -88,27 +88,68 @@
       <!-- Project Modal -->
       <Transition name="modal">
         <div v-if="selectedProject" class="modal-overlay" @click.self="selectedProject = null">
-          <div class="modal">
+          <div class="modal project-modal">
             <div class="modal-header">
-              <h3>{{ selectedProject.title }}</h3>
-              <button class="modal-close" @click="selectedProject = null">
+              <div class="modal-heading">
+                <div class="project-badges">
+                  <span class="project-category-badge">{{ getCategoryLabel(selectedProject.category) }}</span>
+                  <span v-if="selectedProject.subcategory" class="project-category-badge sub-badge">{{ getCategoryLabel(selectedProject.subcategory) }}</span>
+                  <span v-if="selectedProject.featured" class="modal-featured">★ Destacado</span>
+                </div>
+                <h3>{{ selectedProject.title }}</h3>
+              </div>
+              <button class="modal-close" @click="selectedProject = null" aria-label="Cerrar">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
               </button>
             </div>
 
-            <img v-if="selectedProject.image_url" class="modal-image" :src="selectedProject.image_url" :alt="selectedProject.title" />
+            <!-- Portada: la imagen real o la misma generada de la tarjeta -->
+            <div class="modal-cover" :style="selectedProject.image_url ? null : placeholderStyle(selectedProject)">
+              <img v-if="selectedProject.image_url" class="modal-cover-img" :src="selectedProject.image_url" :alt="selectedProject.title" />
+              <template v-else>
+                <span class="placeholder-monogram">{{ monogram(selectedProject.title) }}</span>
+                <span v-if="selectedProject.tech_stack?.[0]" class="placeholder-tech">{{ selectedProject.tech_stack[0] }}</span>
+              </template>
+            </div>
 
-            <p class="modal-description">{{ selectedProject.description }}</p>
+            <!-- Las descripciones traen listas escritas con " - " en una sola linea:
+                 se separan en parrafo + viñetas para que se puedan leer -->
+            <div class="modal-description">
+              <p v-if="modalDesc.intro">{{ modalDesc.intro }}</p>
+              <ul v-if="modalDesc.items.length" class="modal-desc-list">
+                <li v-for="(item, i) in modalDesc.items" :key="i">{{ item }}</li>
+              </ul>
+              <p v-if="modalDesc.cierre">{{ modalDesc.cierre }}</p>
+            </div>
 
             <div class="modal-tech">
-              <h4 class="modal-tech-title">Tecnologías</h4>
-              <div class="modal-tech-list">
-                <span v-for="tech in selectedProject.tech_stack" :key="tech" class="tech-tag">{{ tech }}</span>
-                <span v-for="sub in (selectedProject.sub_skills || [])" :key="'s-'+sub" class="tech-tag sub-tech">{{ sub }}</span>
+              <h4 class="modal-tech-title">
+                Tecnologías
+                <span class="modal-tech-count">{{ modalTechs.length }}</span>
+              </h4>
+              <div class="modal-tech-grid">
+                <div
+                  v-for="(t, i) in modalTechs"
+                  :key="t.name"
+                  class="tech-card"
+                  :class="{ 'is-sub': t.sub }"
+                  :style="{ '--i': i }"
+                  :title="t.name"
+                >
+                  <span class="tech-card-icon">
+                    <img v-if="t.icon" :src="t.icon" :alt="t.name" loading="lazy" @error="t.icon = null" />
+                    <svg v-else width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                  </span>
+                  <span class="tech-card-name">{{ t.name }}</span>
+                </div>
               </div>
             </div>
 
-            <div class="modal-actions">
+            <!-- Sin enlaces a repos por decision del autor (ver _meta en repos-github.json) -->
+            <p v-if="!selectedProject.live_url && !selectedProject.repo_url" class="modal-nolinks">
+              Este proyecto no tiene demo pública.
+            </p>
+            <div v-else class="modal-actions">
               <a v-if="selectedProject.live_url" :href="selectedProject.live_url" target="_blank" rel="noopener" class="btn btn-primary">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                 Ver Demo
@@ -128,8 +169,41 @@
 <script setup>
 import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { useProjects } from '../composables/useProjects'
+import { getTechIcon } from '../lib/techIcons'
 
 const { projects, loading } = useProjects()
+
+// Descripcion del modal partida en intro + viñetas + cierre. Los textos vienen
+// del export de Django con las viñetas pegadas como " - Item - Item". Si no hay
+// al menos dos, se deja como un parrafo normal.
+const modalDesc = computed(() => {
+  const p = selectedProject.value
+  const texto = String(p?.description || p?.short_description || '').trim()
+  const partes = texto.split(/\s+-\s+/)
+  if (partes.length < 3) return { intro: texto, items: [], cierre: '' }
+
+  const intro = partes[0]
+  let items = partes.slice(1)
+  let cierre = ''
+  // Si el ultimo item lleva un punto y sigue una frase larga, esa frase es el cierre
+  const ultimo = items[items.length - 1]
+  const corte = ultimo.search(/\.\s+[A-ZÁÉÍÓÚ]/)
+  if (corte > 0) {
+    items[items.length - 1] = ultimo.slice(0, corte + 1)
+    cierre = ultimo.slice(corte + 1).trim()
+  }
+  return { intro, items: items.map(s => s.replace(/\.?\s*$/, '')), cierre }
+})
+
+// Tecnologias del modal con su logo. Objetos reactivos para poder quitar el
+// icono si la CDN no lo tiene (@error) y caer al generico.
+const modalTechs = computed(() => {
+  const p = selectedProject.value
+  if (!p) return []
+  const principales = (p.tech_stack || []).map(name => ({ name, icon: getTechIcon(name), sub: false }))
+  const extras = (p.sub_skills || []).map(name => ({ name, icon: getTechIcon(name), sub: true }))
+  return [...principales, ...extras]
+})
 const activeFilter = ref('all')
 const selectedProject = ref(null)
 const gridRef = ref(null)
@@ -534,14 +608,61 @@ onUnmounted(() => {
   opacity: 0.75;
 }
 
-/* Modal extra */
-.modal-image {
+/* ── Modal de proyecto ── */
+.project-modal {
+  max-width: 780px;
+}
+
+.modal-heading {
+  min-width: 0;
+}
+
+.modal-heading h3 {
+  margin-top: var(--space-sm);
+  font-size: var(--text-2xl);
+  line-height: var(--leading-tight);
+}
+
+.modal-featured {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: var(--radius-full);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--color-warning);
+  background: rgba(245, 158, 11, 0.12);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.modal-cover {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   width: 100%;
-  max-height: 420px;
-  object-fit: contain;
-  border-radius: var(--radius-md);
+  aspect-ratio: 16 / 7;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
   margin-bottom: var(--space-xl);
-  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border);
+  background: var(--color-bg-surface);
+}
+
+.modal-cover::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 25% 15%, rgba(255, 255, 255, 0.09), transparent 55%);
+}
+
+.modal-cover-img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
   display: block;
 }
 
@@ -550,19 +671,121 @@ onUnmounted(() => {
   line-height: var(--leading-relaxed);
 }
 
+.modal-description p + ul,
+.modal-description ul + p {
+  margin-top: var(--space-md);
+}
+
+.modal-desc-list {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.modal-desc-list li {
+  position: relative;
+  padding-left: 1.4em;
+  color: var(--color-text-secondary);
+}
+
+.modal-desc-list li::before {
+  content: '';
+  position: absolute;
+  left: 0.35em;
+  top: 0.62em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+}
+
 .modal-tech-title {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
   font-size: var(--text-sm);
   text-transform: uppercase;
   letter-spacing: var(--tracking-wide);
   color: var(--color-text-muted);
-  margin-bottom: var(--space-sm);
+  margin-bottom: var(--space-md);
 }
 
-.modal-tech-list {
-  display: flex;
-  flex-wrap: wrap;
+.modal-tech-count {
+  padding: 1px 8px;
+  border-radius: var(--radius-full);
+  background: var(--color-accent-subtle);
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+/* Cada tecnologia es una ficha con el logo sobre una baldosa blanca:
+   asi los logos de marca (Django verde oscuro, GitHub negro) se ven en
+   los dos temas. */
+.modal-tech-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(112px, 1fr));
   gap: var(--space-sm);
   margin-bottom: var(--space-xl);
+}
+
+.tech-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: var(--space-md) var(--space-sm);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  text-align: center;
+  transition: transform var(--duration-fast) var(--ease-out), border-color var(--duration-fast) var(--ease-out), box-shadow var(--duration-fast) var(--ease-out);
+  animation: fadeInUp 0.4s var(--ease-out) both;
+  animation-delay: calc(var(--i, 0) * 40ms);
+}
+
+.tech-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--color-accent);
+  box-shadow: 0 6px 16px var(--color-accent-glow);
+}
+
+.tech-card.is-sub {
+  border-style: dashed;
+}
+
+.tech-card-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: #FFFFFF;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-faint);
+}
+
+.tech-card-icon img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
+
+.tech-card-name {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--color-text-secondary);
+  overflow-wrap: anywhere;
+}
+
+.modal-nolinks {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  font-style: italic;
 }
 
 .modal-actions {

@@ -8,21 +8,23 @@
     <meta name="description" content="MastersLogic — Soluciones tecnológicas profesionales. Desarrollo web, aplicaciones móviles, APIs robustas y consultoría tech." />
     <meta name="keywords" content="masterslogic, desarrollador, full stack, programador, portfolio, web, aplicaciones, vue, javascript" />
     <meta name="author" content="MastersLogic" />
-    <meta name="theme-color" content="#0F172A" />
+    <meta name="theme-color" content="#F8FAFC" />
     <title>MastersLogic — Portafolio</title>
 
-    <!-- Tema antes de pintar: preferencia guardada o la del sistema. Evita el
-         parpadeo de cargar oscuro y saltar a claro. -->
+    <!-- Tema antes de pintar. El predeterminado es CLARO; solo se usa oscuro si
+         el visitante lo eligio con el interruptor. Evita el parpadeo al cargar. -->
     <script>
       (function () {
-        var t = 'dark';
+        var t = 'light';
         try {
-          t = localStorage.getItem('portafolio-tema');
-          if (t !== 'light' && t !== 'dark') {
-            t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-          }
-        } catch (e) { t = 'dark'; }
+          var g = localStorage.getItem('portafolio-tema');
+          if (g === 'dark' || g === 'light') t = g;
+        } catch (e) { /* sin localStorage: claro */ }
         document.documentElement.setAttribute('data-theme', t);
+        if (t === 'dark') {
+          var m = document.querySelector('meta[name="theme-color"]');
+          if (m) m.setAttribute('content', '#0F172A');
+        }
       })();
     </script>
 

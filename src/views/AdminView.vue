@@ -1,6 +1,7 @@
 <template>
   <!-- Login Gate -->
-  <div v-if="!isAuthenticated" class="admin-login">
+  <!-- El panel tiene colores propios pensados para oscuro: se fija ese tema aqui -->
+  <div v-if="!isAuthenticated" class="admin-login" data-theme="dark">
     <div class="login-card">
       <div class="login-logo">
         <img :src="logoUrl" alt="MastersLogic" class="login-logo-img" />
@@ -27,7 +28,7 @@
   </div>
 
   <!-- Admin Panel -->
-  <div v-else class="admin">
+  <div v-else class="admin" data-theme="dark">
     <header class="admin-header">
       <div class="admin-header-inner">
         <div class="admin-brand">

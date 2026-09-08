@@ -264,9 +264,9 @@ onMounted(async () => {
   align-items: center;
   gap: var(--space-sm);
   padding: 16px 20px;
-  background: var(--color-bg-elevated);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  /* Opaco a proposito: la insignia pisa la foto (fondo blanco) y con el
+     fondo translucido el texto se perdia en modo oscuro */
+  background: var(--color-bg);
   border: 1px solid var(--color-border-accent);
   border-radius: var(--radius-lg);
   box-shadow: 0 10px 20px rgba(0,0,0,0.3), 0 0 15px var(--color-accent-subtle);

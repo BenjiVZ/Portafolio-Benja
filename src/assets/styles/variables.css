@@ -79,9 +79,12 @@
 }
 
 /* ============================================
-   TEMA OSCURO (predeterminado)
+   TEMA OSCURO (se activa con el interruptor)
+   :root[data-theme] pesa mas que el :root del bloque claro; sin eso, <html>
+   cumple ambos selectores y gana el claro por ir despues en el archivo.
+   El selector suelto cubre contenedores anidados como el panel /admin.
    ============================================ */
-:root,
+:root[data-theme="dark"],
 [data-theme="dark"] {
   color-scheme: dark;
 
@@ -136,8 +139,9 @@
 }
 
 /* ============================================
-   TEMA CLARO
+   TEMA CLARO (predeterminado; tambien si el script no corre)
    ============================================ */
+:root,
 [data-theme="light"] {
   color-scheme: light;
 
