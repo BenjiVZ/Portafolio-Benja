@@ -4,7 +4,7 @@
       <div class="about-grid">
         <div class="about-image-wrapper reveal" ref="imageRef">
           <div class="about-bg-glow"></div>
-          <div class="about-image-frame" :class="{ 'is-logo': isLogo }">
+          <div class="about-image-frame">
             <img
               v-if="aboutData.image_url"
               :src="aboutData.image_url"
@@ -84,9 +84,6 @@ import { loadWithFallback } from '../lib/dataSource'
 
 const { getConfig } = useSiteConfig()
 const aboutData = computed(() => getConfig('about'))
-// Mientras no haya foto, la "foto" es el logo (splash en blanco y negro).
-// Se marca para invertirlo y que quede claro sobre oscuro, sin el bloque blanco.
-const isLogo = computed(() => /splash|logo/i.test(aboutData.value.image_url || ''))
 const { projects } = useProjects()
 
 const projectsCount = computed(() => projects.value.length || 0)
@@ -235,22 +232,6 @@ onMounted(async () => {
   object-fit: cover;
   object-position: center top;
 }
-
-/* Logo en vez de foto: fondo oscuro, trazo invertido a claro y aire alrededor */
-.about-image-frame.is-logo {
-  background: radial-gradient(circle at 50% 40%, var(--color-bg-surface) 0%, var(--color-bg-deep) 75%);
-}
-
-.about-image-frame.is-logo .about-image {
-  object-fit: contain;
-  padding: 18%;
-  filter: invert(1);
-  /* Tras invertir, el fondo blanco del PNG queda negro; screen lo vuelve
-     transparente y solo sobrevive el trazo claro del logo */
-  mix-blend-mode: screen;
-  opacity: 0.92;
-}
-
 .about-image-placeholder {
   width: 100%;
   height: 100%;
