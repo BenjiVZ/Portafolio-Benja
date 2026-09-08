@@ -42,4 +42,28 @@ app.directive('spotlight', {
   }
 })
 
+// v-tilt — inclinacion 3D suave siguiendo el cursor. Solo con mouse (en tactil
+// no tiene sentido) y respetando prefers-reduced-motion. El CSS del elemento
+// debe usar --rx / --ry en su transform.
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+app.directive('tilt', {
+  mounted(el) {
+    if (reduceMotion) return
+    const MAX = 6 // grados
+    el.addEventListener('pointermove', (e) => {
+      if (e.pointerType !== 'mouse') return
+      const r = el.getBoundingClientRect()
+      const px = (e.clientX - r.left) / r.width - 0.5
+      const py = (e.clientY - r.top) / r.height - 0.5
+      el.style.setProperty('--ry', `${(px * MAX * 2).toFixed(2)}deg`)
+      el.style.setProperty('--rx', `${(-py * MAX * 2).toFixed(2)}deg`)
+    }, { passive: true })
+    el.addEventListener('pointerleave', () => {
+      el.style.setProperty('--rx', '0deg')
+      el.style.setProperty('--ry', '0deg')
+    })
+  }
+})
+
 app.mount('#app')

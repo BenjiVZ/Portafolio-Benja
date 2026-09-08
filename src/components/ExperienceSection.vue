@@ -332,7 +332,7 @@ watch(experiences, async () => {
   font-size: var(--text-xs);
   font-weight: 600;
   border-radius: var(--radius-full);
-  background: rgba(148, 163, 184, 0.1);
+  background: var(--color-chip);
   color: var(--color-text-secondary);
   border: 1px solid var(--color-border);
   white-space: nowrap;

@@ -23,7 +23,7 @@
 
 .btn-primary {
   background: var(--gradient-accent);
-  color: var(--color-bg-deep);
+  color: var(--color-on-accent);
   box-shadow: 0 4px 15px var(--color-accent-glow);
   position: relative;
   overflow: hidden;
@@ -41,7 +41,7 @@
 }
 
 .btn-primary:hover {
-  box-shadow: 0 6px 20px rgba(6, 182, 212, 0.4);
+  box-shadow: 0 6px 20px var(--color-accent-glow);
   transform: translateY(-2px) scale(1.02);
 }
 
@@ -84,6 +84,14 @@
   border-radius: var(--radius-md);
 }
 
+/* ── Logo ──
+   El PNG es trazo blanco sobre transparente, pensado para fondo oscuro.
+   En claro se invierte: como es line-art puro, queda el mismo trazo en oscuro. */
+[data-theme="light"] .logo-img,
+[data-theme="light"] .footer-logo-img {
+  filter: invert(1);
+}
+
 /* ── Cards ── */
 .card {
   background: var(--color-bg-elevated);
@@ -100,7 +108,7 @@
 
 .card:hover {
   border-color: var(--color-accent-subtle);
-  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5), 0 0 15px var(--color-accent-subtle);
+  box-shadow: var(--shadow-card-hover);
   transform: translateY(-6px);
 }
 
@@ -173,7 +181,7 @@ textarea.input {
 }
 
 .badge-neutral {
-  background: rgba(148, 163, 184, 0.1);
+  background: var(--color-chip);
   color: var(--color-text-secondary);
   border-color: var(--color-border);
 }
@@ -212,7 +220,7 @@ textarea.input {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: var(--color-backdrop);
   backdrop-filter: blur(8px);
   z-index: var(--z-modal-backdrop);
   display: flex;
@@ -267,7 +275,7 @@ textarea.input {
   inset: 0;
   background: radial-gradient(
     420px circle at var(--mx, 50%) var(--my, 50%),
-    rgba(226, 232, 240, 0.07),
+    var(--color-spotlight),
     transparent 65%
   );
   opacity: 0;

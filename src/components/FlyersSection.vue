@@ -322,8 +322,8 @@ function nextFlyer() {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(15, 23, 42, 0) 40%,
-    rgba(15, 23, 42, 0.85) 100%
+    transparent 40%,
+    var(--color-overlay) 100%
   );
   display: flex;
   align-items: center;
@@ -340,7 +340,7 @@ function nextFlyer() {
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: rgba(226, 232, 240, 0.14);
+  background: var(--color-accent-subtle);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border: 1px solid var(--color-accent);
@@ -353,7 +353,7 @@ function nextFlyer() {
 
 .flyer-card:hover .flyer-zoom-icon {
   transform: scale(1.1);
-  background: rgba(226, 232, 240, 0.22);
+  background: var(--color-accent-glow);
 }
 
 /* ---- Info ---- */

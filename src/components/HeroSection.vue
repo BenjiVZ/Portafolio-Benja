@@ -118,8 +118,8 @@ onUnmounted(() => {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(226, 232, 240, 0.035) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(226, 232, 240, 0.035) 1px, transparent 1px);
+    linear-gradient(var(--color-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px);
   background-size: 60px 60px;
   mask-image: radial-gradient(ellipse 60% 60% at 50% 50%, black 20%, transparent 70%);
 }

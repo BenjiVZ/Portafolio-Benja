@@ -20,7 +20,7 @@
             <div class="about-image-border"></div>
           </div>
           <div class="about-exp-badge float">
-            <span class="exp-number">{{ aboutData.years_exp || '1+' }}</span>
+            <span class="exp-number"><CountUp :value="aboutData.years_exp || '1+'" /></span>
             <span class="exp-label">Año(s) de<br>experiencia</span>
           </div>
         </div>
@@ -56,15 +56,15 @@
 
           <div class="about-stats">
             <div class="stat-item">
-              <span class="stat-number">{{ projectsCount }}+</span>
+              <span class="stat-number"><CountUp :value="projectsCount" suffix="+" /></span>
               <span class="stat-label">Proyectos</span>
             </div>
             <div class="stat-item">
-              <span class="stat-number">{{ companiesCount }}+</span>
+              <span class="stat-number"><CountUp :value="companiesCount" suffix="+" /></span>
               <span class="stat-label">Empresas</span>
             </div>
             <div class="stat-item">
-              <span class="stat-number">{{ aboutData.years_exp || '1+' }}</span>
+              <span class="stat-number"><CountUp :value="aboutData.years_exp || '1+'" /></span>
               <span class="stat-label">Años Exp.</span>
             </div>
           </div>
@@ -81,6 +81,7 @@ import { useProjects } from '../composables/useProjects'
 import { supabase } from '../lib/supabase'
 import { localExperiences } from '../lib/localData'
 import { loadWithFallback } from '../lib/dataSource'
+import CountUp from './CountUp.vue'
 
 const { getConfig } = useSiteConfig()
 const aboutData = computed(() => getConfig('about'))

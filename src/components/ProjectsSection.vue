@@ -33,12 +33,16 @@
 
       <!-- Projects Grid -->
       <div v-if="!loading" class="projects-grid" ref="gridRef">
-        <TransitionGroup name="project-card">
+        <!-- appear: la primera tanda tambien entra escalonada, no solo al filtrar -->
+        <TransitionGroup name="project-card" appear>
           <div
-            v-for="project in visibleProjects"
+            v-for="(project, idx) in visibleProjects"
             :key="project.id"
             class="project-card"
+            :class="{ 'is-featured': project.featured }"
+            :style="{ '--i': idx % PAGE }"
             v-spotlight
+            v-tilt
             @click="openProject(project)"
           >
             <div class="project-thumbnail">
@@ -259,7 +263,7 @@ onUnmounted(() => {
 }
 
 .filter-btn.active {
-  color: var(--color-bg);
+  color: var(--color-on-accent);
   background: var(--color-accent);
   border-color: var(--color-accent);
   box-shadow: var(--shadow-accent);
@@ -283,12 +287,51 @@ onUnmounted(() => {
   cursor: pointer;
   transition: all var(--duration-normal) var(--ease-out);
   position: relative;
+  /* --rx / --ry los pone la directiva v-tilt; --ty lo pone el hover */
+  transform: perspective(900px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg)) translateY(var(--ty, 0));
+  transform-style: preserve-3d;
 }
 
 .project-card:hover {
+  --ty: -6px;
   border-color: var(--color-accent-subtle);
-  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5), 0 0 15px var(--color-accent-subtle);
-  transform: translateY(-6px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Destacado: el anillo del borde gira con un degradado de acento */
+@property --angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.project-card.is-featured::after {
+  opacity: 1;
+  box-shadow: none;
+  padding: 1px;
+  background: conic-gradient(
+    from var(--angle),
+    transparent 0%,
+    var(--color-accent) 12%,
+    transparent 28%,
+    transparent 60%,
+    var(--color-warning) 74%,
+    transparent 88%
+  );
+  /* Solo queda el anillo de 1px: se recorta el interior */
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: girar-borde 5s linear infinite;
+}
+
+@keyframes girar-borde {
+  to { --angle: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card.is-featured::after { animation: none; }
 }
 
 .project-card::after {
@@ -394,7 +437,7 @@ onUnmounted(() => {
 .project-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(15, 23, 42, 0.8);
+  background: var(--color-overlay);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -460,7 +503,7 @@ onUnmounted(() => {
 }
 
 .project-category-badge.sub-badge {
-  background: rgba(148, 163, 184, 0.1);
+  background: var(--color-chip);
   color: var(--color-text-muted);
   border: 1px solid var(--color-border);
 }
@@ -541,6 +584,11 @@ onUnmounted(() => {
 .project-card-enter-active,
 .project-card-leave-active {
   transition: all 0.4s var(--ease-out);
+}
+
+/* Entrada escalonada: cada tarjeta espera 60ms mas que la anterior (--i) */
+.project-card-enter-active {
+  transition-delay: calc(var(--i, 0) * 60ms);
 }
 
 .project-card-enter-from,

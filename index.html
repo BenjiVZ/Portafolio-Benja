@@ -11,6 +11,21 @@
     <meta name="theme-color" content="#0F172A" />
     <title>MastersLogic — Portafolio</title>
 
+    <!-- Tema antes de pintar: preferencia guardada o la del sistema. Evita el
+         parpadeo de cargar oscuro y saltar a claro. -->
+    <script>
+      (function () {
+        var t = 'dark';
+        try {
+          t = localStorage.getItem('portafolio-tema');
+          if (t !== 'light' && t !== 'dark') {
+            t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+          }
+        } catch (e) { t = 'dark'; }
+        document.documentElement.setAttribute('data-theme', t);
+      })();
+    </script>
+
     <!-- Open Graph / redes sociales -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="MastersLogic — Soluciones Tecnológicas" />

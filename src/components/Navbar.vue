@@ -19,11 +19,25 @@
         </a>
       </div>
 
-      <button class="menu-toggle" :class="{ active: menuOpen }" @click="menuOpen = !menuOpen" aria-label="Menú">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <div class="navbar-actions">
+        <button
+          class="theme-toggle"
+          @click="toggleTheme"
+          :aria-label="isDark ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'"
+          :title="isDark ? 'Tema claro' : 'Tema oscuro'"
+        >
+          <!-- Sol: se muestra en oscuro, invita a pasar a claro -->
+          <svg v-if="isDark" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>
+          <!-- Luna: se muestra en claro -->
+          <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        </button>
+
+        <button class="menu-toggle" :class="{ active: menuOpen }" @click="menuOpen = !menuOpen" aria-label="Menú">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
     </div>
   </nav>
 </template>
@@ -31,6 +45,9 @@
 <script setup>
 import logoUrl from '../assets/logo.png'
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useTheme } from '../composables/useTheme'
+
+const { isDark, toggle: toggleTheme } = useTheme()
 
 const links = [
   { label: 'Inicio', href: '#hero' },
@@ -105,7 +122,7 @@ onUnmounted(() => {
   align-items: center;
   justify-content: space-between;
   padding: 14px 24px;
-  background: rgba(15, 23, 42, 0.75);
+  background: var(--color-glass);
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
@@ -113,8 +130,35 @@ onUnmounted(() => {
 }
 
 .navbar.scrolled .navbar-inner {
-  background: rgba(15, 23, 42, 0.92);
+  background: var(--color-glass-strong);
   border-color: var(--color-border-strong);
+}
+
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  border: 1px solid transparent;
+  background: none;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-out);
+}
+
+.theme-toggle:hover {
+  color: var(--color-accent);
+  background: var(--color-accent-subtle);
+  border-color: var(--color-border-accent);
+  transform: rotate(15deg);
 }
 
 .navbar-logo {
@@ -225,7 +269,7 @@ onUnmounted(() => {
     right: 0;
     flex-direction: column;
     padding: var(--space-md);
-    background: rgba(15, 23, 42, 0.95);
+    background: var(--color-glass-strong);
     backdrop-filter: blur(20px);
     border: 1px solid var(--color-border);
     border-radius: var(--radius-lg);

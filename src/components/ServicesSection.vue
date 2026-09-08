@@ -96,7 +96,7 @@ function getIcon(name) {
 
 .service-card:hover .service-icon-wrapper {
   background: var(--color-accent);
-  color: var(--color-bg);
+  color: var(--color-on-accent);
   box-shadow: var(--shadow-accent);
 }
 

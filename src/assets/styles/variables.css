@@ -1,45 +1,13 @@
 /* ============================================
    DESIGN TOKENS — Portfolio Benja
-   Based on: Space Grotesk + DM Sans, Dark Terminal Theme
+   Space Grotesk + DM Sans. Dos temas: oscuro (predeterminado) y claro.
+
+   El tema se elige con el atributo data-theme en <html>. Lo pone un script
+   en index.html antes de pintar (preferencia guardada o la del sistema) y
+   lo cambia el interruptor de la barra (src/composables/useTheme.js).
    ============================================ */
 
 :root {
-  /* ── Color Palette ── */
-  --color-bg-deep: #080D19;
-  --color-bg: #0F172A;
-  --color-bg-elevated: rgba(30, 41, 59, 0.65);
-  --color-bg-surface: rgba(51, 65, 85, 0.8);
-  --color-bg-hover: rgba(59, 77, 106, 0.85);
-
-  /* Acento monocromo: el logo es line-art neutro (100% de sus píxeles sin
-     saturación), así que la identidad la llevan la tipografía y el logo,
-     no un color de marca. El verde queda reservado para estado (success). */
-  --color-accent: #E2E8F0;
-  --color-accent-sec: #94A3B8;
-  --color-accent-hover: #FFFFFF;
-  --color-accent-glow: rgba(226, 232, 240, 0.18);
-  --color-accent-subtle: rgba(226, 232, 240, 0.08);
-  --gradient-accent: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-sec) 100%);
-
-  /* Contraste sobre --color-bg (#0F172A), medido en WCAG:
-     text 17.1:1 · secondary 12.0:1 · muted 4.9:1 · faint 3.8:1.
-     `muted` se subió de #64748B (3.75:1) porque no llegaba al mínimo
-     AA de 4.5:1 y se usa en texto de lectura. `faint` queda para
-     placeholders y elementos decorativos, no para texto informativo. */
-  --color-text: #F8FAFC;
-  --color-text-secondary: #CBD5E1;
-  --color-text-muted: #7688A0;
-  --color-text-faint: #64748B;
-
-  --color-border: rgba(148, 163, 184, 0.12);
-  --color-border-strong: rgba(148, 163, 184, 0.25);
-  --color-border-accent: rgba(226, 232, 240, 0.28);
-
-  --color-error: #EF4444;
-  --color-warning: #F59E0B;
-  --color-success: #22C55E;
-  --color-info: #3B82F6;
-
   /* ── Typography ── */
   --font-heading: 'Space Grotesk', system-ui, sans-serif;
   --font-body: 'DM Sans', system-ui, sans-serif;
@@ -83,14 +51,6 @@
   --radius-xl: 24px;
   --radius-full: 9999px;
 
-  /* ── Shadows ── */
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
-  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
-  --shadow-accent: 0 4px 24px rgba(226, 232, 240, 0.14);
-  --shadow-accent-lg: 0 8px 32px rgba(226, 232, 240, 0.2);
-
   /* ── Transitions ── */
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
@@ -110,4 +70,118 @@
   /* ── Layout ── */
   --max-width: 1200px;
   --navbar-height: 72px;
+
+  /* Semanticos: iguales en ambos temas */
+  --color-error: #EF4444;
+  --color-warning: #F59E0B;
+  --color-success: #22C55E;
+  --color-info: #3B82F6;
+}
+
+/* ============================================
+   TEMA OSCURO (predeterminado)
+   ============================================ */
+:root,
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-bg-deep: #080D19;
+  --color-bg: #0F172A;
+  --color-bg-elevated: rgba(30, 41, 59, 0.65);
+  --color-bg-surface: rgba(51, 65, 85, 0.8);
+  --color-bg-hover: rgba(59, 77, 106, 0.85);
+
+  /* Acento: cian electrico. El logo es line-art neutro, asi que el color lo
+     aporta el acento en botones, filtro activo, subrayados y destacados. */
+  --color-accent: #22D3EE;
+  --color-accent-sec: #38BDF8;
+  --color-accent-hover: #67E8F9;
+  --color-accent-glow: rgba(34, 211, 238, 0.25);
+  --color-accent-subtle: rgba(34, 211, 238, 0.10);
+  --gradient-accent: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-sec) 100%);
+  /* Texto sobre un fondo de acento (botones primarios, filtro activo) */
+  --color-on-accent: #06202B;
+
+  /* Contraste sobre --color-bg (#0F172A), WCAG:
+     text 17.1:1 · secondary 12.0:1 · muted 4.9:1 · faint 3.8:1.
+     `faint` es solo para placeholders y decoracion. */
+  --color-text: #F8FAFC;
+  --color-text-secondary: #CBD5E1;
+  --color-text-muted: #7688A0;
+  --color-text-faint: #64748B;
+
+  --color-border: rgba(148, 163, 184, 0.12);
+  --color-border-strong: rgba(148, 163, 184, 0.25);
+  --color-border-accent: rgba(34, 211, 238, 0.35);
+
+  /* Superficies auxiliares que antes iban escritas a mano en cada componente */
+  --color-glass: rgba(15, 23, 42, 0.75);          /* barra de navegacion */
+  --color-glass-strong: rgba(15, 23, 42, 0.92);   /* barra al hacer scroll */
+  --color-overlay: rgba(15, 23, 42, 0.8);         /* velo sobre miniaturas */
+  --color-backdrop: rgba(0, 0, 0, 0.7);           /* fondo de modales */
+  --color-chip: rgba(148, 163, 184, 0.1);         /* etiquetas neutras */
+  --color-grid-line: rgba(226, 232, 240, 0.035);  /* rejilla del hero */
+  --color-spotlight: rgba(226, 232, 240, 0.07);   /* resplandor que sigue al cursor */
+  --color-shimmer: rgba(226, 232, 240, 0.07);     /* brillo de los esqueletos */
+  --bg-glow-1: rgba(34, 211, 238, 0.06);
+  --bg-glow-2: rgba(56, 189, 248, 0.05);
+
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.6);
+  --shadow-accent: 0 4px 24px rgba(34, 211, 238, 0.22);
+  --shadow-accent-lg: 0 8px 32px rgba(34, 211, 238, 0.3);
+  --shadow-card-hover: 0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 0 15px var(--color-accent-subtle);
+}
+
+/* ============================================
+   TEMA CLARO
+   ============================================ */
+[data-theme="light"] {
+  color-scheme: light;
+
+  --color-bg-deep: #E8EDF4;
+  --color-bg: #F8FAFC;
+  --color-bg-elevated: rgba(255, 255, 255, 0.85);
+  --color-bg-surface: rgba(226, 232, 240, 0.8);
+  --color-bg-hover: rgba(203, 213, 225, 0.7);
+
+  /* Mismo cian, mas oscuro para que aguante sobre blanco (4.6:1) */
+  --color-accent: #0891B2;
+  --color-accent-sec: #0284C7;
+  --color-accent-hover: #0E7490;
+  --color-accent-glow: rgba(8, 145, 178, 0.22);
+  --color-accent-subtle: rgba(8, 145, 178, 0.08);
+  --gradient-accent: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-sec) 100%);
+  --color-on-accent: #FFFFFF;
+
+  /* Contraste sobre #F8FAFC: text 16.9:1 · secondary 9.9:1 · muted 5.0:1 */
+  --color-text: #0F172A;
+  --color-text-secondary: #334155;
+  --color-text-muted: #5B6B82;
+  --color-text-faint: #8391A6;
+
+  --color-border: rgba(15, 23, 42, 0.10);
+  --color-border-strong: rgba(15, 23, 42, 0.20);
+  --color-border-accent: rgba(8, 145, 178, 0.35);
+
+  --color-glass: rgba(255, 255, 255, 0.75);
+  --color-glass-strong: rgba(255, 255, 255, 0.92);
+  --color-overlay: rgba(15, 23, 42, 0.6);
+  --color-backdrop: rgba(15, 23, 42, 0.5);
+  --color-chip: rgba(15, 23, 42, 0.06);
+  --color-grid-line: rgba(15, 23, 42, 0.06);
+  --color-spotlight: rgba(8, 145, 178, 0.08);
+  --color-shimmer: rgba(15, 23, 42, 0.06);
+  --bg-glow-1: rgba(8, 145, 178, 0.08);
+  --bg-glow-2: rgba(2, 132, 199, 0.06);
+
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.08);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.10);
+  --shadow-lg: 0 8px 24px rgba(15, 23, 42, 0.12);
+  --shadow-xl: 0 16px 48px rgba(15, 23, 42, 0.16);
+  --shadow-accent: 0 4px 24px rgba(8, 145, 178, 0.2);
+  --shadow-accent-lg: 0 8px 32px rgba(8, 145, 178, 0.28);
+  --shadow-card-hover: 0 12px 30px -12px rgba(15, 23, 42, 0.22), 0 0 15px var(--color-accent-subtle);
 }

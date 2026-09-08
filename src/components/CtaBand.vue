@@ -47,7 +47,7 @@ import { waLink } from '../lib/site'
   position: relative;
   text-align: center;
   padding: var(--space-3xl) var(--space-xl);
-  background: linear-gradient(135deg, rgba(226, 232, 240, 0.06) 0%, rgba(148, 163, 184, 0.07) 100%),
+  background: linear-gradient(135deg, var(--color-accent-subtle) 0%, var(--color-chip) 100%),
     var(--color-bg-elevated);
   border: 1px solid var(--color-border-accent);
   border-radius: var(--radius-xl);
