@@ -210,8 +210,14 @@ textarea.input {
 }
 
 .tech-icon {
-  width: 16px;
-  height: 16px;
+  /* Baldosa blanca: los logos van en color de marca y varios son casi negros
+     (Django, GitHub, VirtualBox); sin fondo se perdian en el tema oscuro */
+  width: 20px;
+  height: 20px;
+  padding: 3px;
+  box-sizing: border-box;
+  border-radius: 5px;
+  background: #FFFFFF;
   object-fit: contain;
   flex-shrink: 0;
 }

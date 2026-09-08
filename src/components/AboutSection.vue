@@ -81,6 +81,9 @@ import { useProjects } from '../composables/useProjects'
 import { supabase } from '../lib/supabase'
 import { localExperiences } from '../lib/localData'
 import { loadWithFallback } from '../lib/dataSource'
+// Logos con color de marca (modulo compartido). Antes cada seccion tenia su
+// mapa con logos forzados a blanco y en el tema claro desaparecian.
+import { getTechIcon } from '../lib/techIcons'
 import CountUp from './CountUp.vue'
 
 const { getConfig } = useSiteConfig()
@@ -102,60 +105,6 @@ const defaultSkills = [
   'FastAPI', 'Django REST API'
 ]
 
-// Tech icon mapping using Devicon CDN
-const DEVICON_BASE = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons'
-const techIconMap = {
-  'python': `${DEVICON_BASE}/python/python-original.svg`,
-  'javascript': `${DEVICON_BASE}/javascript/javascript-original.svg`,
-  'dart': `${DEVICON_BASE}/dart/dart-original.svg`,
-  'django': `${DEVICON_BASE}/django/django-plain.svg`,
-  'flask': `${DEVICON_BASE}/flask/flask-original.svg`,
-  'vue': `${DEVICON_BASE}/vuejs/vuejs-original.svg`,
-  'vue.js': `${DEVICON_BASE}/vuejs/vuejs-original.svg`,
-  'vuejs': `${DEVICON_BASE}/vuejs/vuejs-original.svg`,
-  'flutter': `${DEVICON_BASE}/flutter/flutter-original.svg`,
-  'html': `${DEVICON_BASE}/html5/html5-original.svg`,
-  'html5': `${DEVICON_BASE}/html5/html5-original.svg`,
-  'css': `${DEVICON_BASE}/css3/css3-original.svg`,
-  'css3': `${DEVICON_BASE}/css3/css3-original.svg`,
-  'mysql': `${DEVICON_BASE}/mysql/mysql-original.svg`,
-  'sqlite3': `${DEVICON_BASE}/sqlite/sqlite-original.svg`,
-  'sqlite': `${DEVICON_BASE}/sqlite/sqlite-original.svg`,
-  'postgresql': `${DEVICON_BASE}/postgresql/postgresql-original.svg`,
-  'postgres': `${DEVICON_BASE}/postgresql/postgresql-original.svg`,
-  'sql server': `${DEVICON_BASE}/microsoftsqlserver/microsoftsqlserver-plain.svg`,
-  'docker': `${DEVICON_BASE}/docker/docker-original.svg`,
-  'anaconda': `${DEVICON_BASE}/anaconda/anaconda-original.svg`,
-  'tensorflow': `${DEVICON_BASE}/tensorflow/tensorflow-original.svg`,
-  'fastapi': `${DEVICON_BASE}/fastapi/fastapi-original.svg`,
-  'react': `${DEVICON_BASE}/react/react-original.svg`,
-  'node.js': `${DEVICON_BASE}/nodejs/nodejs-original.svg`,
-  'nodejs': `${DEVICON_BASE}/nodejs/nodejs-original.svg`,
-  'typescript': `${DEVICON_BASE}/typescript/typescript-original.svg`,
-  'git': `${DEVICON_BASE}/git/git-original.svg`,
-  'linux': `${DEVICON_BASE}/linux/linux-original.svg`,
-  'mongodb': `${DEVICON_BASE}/mongodb/mongodb-original.svg`,
-  'redis': `${DEVICON_BASE}/redis/redis-original.svg`,
-  'supabase': `${DEVICON_BASE}/supabase/supabase-original.svg`,
-  'firebase': `${DEVICON_BASE}/firebase/firebase-original.svg`,
-  'odoo': `https://cdn.simpleicons.org/odoo/white`,
-  'n8n': `https://cdn.simpleicons.org/n8n/white`,
-  'sap': `https://cdn.simpleicons.org/sap/white`,
-  'sap api': `https://cdn.simpleicons.org/sap/white`,
-  'html/css': `${DEVICON_BASE}/html5/html5-original.svg`,
-  'c#': `${DEVICON_BASE}/csharp/csharp-original.svg`,
-  'git/github': `${DEVICON_BASE}/git/git-original.svg`,
-  'rasa': `https://cdn.simpleicons.org/rasa/white`,
-  'virtualbox': `https://cdn.simpleicons.org/virtualbox/white`,
-  'cisco packet tracer': `https://cdn.simpleicons.org/cisco/white`,
-  'crewai': `https://cdn.simpleicons.org/crewai/white`,
-  'django rest api': `${DEVICON_BASE}/djangorest/djangorest-original.svg`,
-  'electron': `${DEVICON_BASE}/electron/electron-original.svg`,
-}
-
-function getTechIcon(name) {
-  return techIconMap[name.toLowerCase()] || null
-}
 
 const imageRef = ref(null)
 const contentRef = ref(null)
@@ -220,18 +169,20 @@ onMounted(async () => {
   position: relative;
   width: 100%;
   max-width: 380px;
-  aspect-ratio: 4 / 5;
+  /* Cuadrado: el logo es 500x500 y con 4:5 + cover se cortaban los lados */
+  aspect-ratio: 1;
   border-radius: var(--radius-xl);
   overflow: hidden;
-  background: var(--color-bg-elevated);
+  /* Blanco fijo: la imagen trae fondo blanco y con contain se veria el borde */
+  background: #FFFFFF;
   border: 1px solid var(--color-border);
 }
 
 .about-image {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center top;
+  object-fit: contain;
+  object-position: center;
 }
 .about-image-placeholder {
   width: 100%;

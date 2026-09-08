@@ -97,34 +97,10 @@ import { ref, nextTick, onMounted, watch } from 'vue'
 import { supabase } from '../lib/supabase'
 import { localExperiences } from '../lib/localData'
 import { loadWithFallback } from '../lib/dataSource'
+// Logos con color de marca (modulo compartido). Antes cada seccion tenia su
+// mapa con logos forzados a blanco y en el tema claro desaparecian.
+import { getTechIcon } from '../lib/techIcons'
 
-const DEVICON_BASE = 'https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons'
-const techIconMap = {
-  'python': `${DEVICON_BASE}/python/python-original.svg`,
-  'javascript': `${DEVICON_BASE}/javascript/javascript-original.svg`,
-  'dart': `${DEVICON_BASE}/dart/dart-original.svg`,
-  'django': `${DEVICON_BASE}/django/django-plain.svg`,
-  'flask': `${DEVICON_BASE}/flask/flask-original.svg`,
-  'vue': `${DEVICON_BASE}/vuejs/vuejs-original.svg`,
-  'flutter': `${DEVICON_BASE}/flutter/flutter-original.svg`,
-  'html': `${DEVICON_BASE}/html5/html5-original.svg`,
-  'css': `${DEVICON_BASE}/css3/css3-original.svg`,
-  'mysql': `${DEVICON_BASE}/mysql/mysql-original.svg`,
-  'postgresql': `${DEVICON_BASE}/postgresql/postgresql-original.svg`,
-  'docker': `${DEVICON_BASE}/docker/docker-original.svg`,
-  'tensorflow': `${DEVICON_BASE}/tensorflow/tensorflow-original.svg`,
-  'fastapi': `${DEVICON_BASE}/fastapi/fastapi-original.svg`,
-  'pandas': `${DEVICON_BASE}/pandas/pandas-original.svg`,
-  'n8n': `https://cdn.simpleicons.org/n8n/white`,
-  'sap': `https://cdn.simpleicons.org/sap/white`,
-  'odoo': `https://cdn.simpleicons.org/odoo/white`,
-  'rasa': `https://cdn.simpleicons.org/rasa/white`,
-  'electron': `${DEVICON_BASE}/electron/electron-original.svg`,
-}
-
-function getTechIcon(name) {
-  return techIconMap[name.toLowerCase()] || null
-}
 
 // Las tareas vienen con su propia vinieta ("• Desarrollo...") y la lista ya
 // pone un icono delante: se quita para no ver dos marcas seguidas.

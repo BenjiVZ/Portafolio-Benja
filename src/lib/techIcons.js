@@ -76,6 +76,7 @@ const SIMPLE_SLUGS = {
   'sap api': 'sap',
   odoo: 'odoo',
   n8n: 'n8n',
+  crewai: 'crewai',
   qt: 'qt',
   pyqt5: 'qt',
   pyqt: 'qt',
