@@ -11,6 +11,12 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: () => import('../views/AdminView.vue')
+  },
+  {
+    // Descarga del respaldo completo (misma sesion que /admin)
+    path: '/admin/respaldo',
+    name: 'admin-respaldo',
+    component: () => import('../views/BackupView.vue')
   }
 ]
 
