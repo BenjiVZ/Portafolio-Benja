@@ -1,0 +1,790 @@
+{
+  "_meta": {
+    "fecha": "2026-09-09",
+    "origen": "public/data/proyectos-edit.json",
+    "descripcion": "Copia de seguridad de las ediciones hechas desde /admin en modo local. Para restaurar, copiar el array de \"ediciones\" a public/data/proyectos-edit.json.",
+    "total_ediciones": 30,
+    "eliminados": [
+      {
+        "id": "gh-lumi-booth",
+        "titulo": "Lumi Booth - Cabina de fotos web"
+      },
+      {
+        "id": "gh-nuestra-noche",
+        "titulo": "El cielo que nos vio - Mapa estelar de una fecha"
+      },
+      {
+        "id": "gh-currucumor",
+        "titulo": "Un date especial - Página interactiva"
+      },
+      {
+        "id": "gh-webscraping",
+        "titulo": "Scraper de precios de la competencia"
+      },
+      {
+        "id": "gh-goldmach",
+        "titulo": "GoldMach - Red social de matching con pagos"
+      }
+    ],
+    "editados": [
+      "gh-va-bus",
+      "gh-portafolio-sofi",
+      "gh-projectmanager",
+      "gh-respaldo-sql",
+      "gh-showroots",
+      "gh-ivoo-ventas",
+      "gh-bot-financiero",
+      "gh-ecommerce-django",
+      "gh-ecommerce-idx",
+      "gh-rasa-base",
+      "gh-cloudsong",
+      "gh-cloud-file",
+      "gh-chatia",
+      "gh-sinpel",
+      "gh-auditoria-damasco",
+      "gh-casheaform",
+      "gh-compras",
+      "gh-giftcards",
+      "gh-quiniela",
+      "gh-rrhh-gde",
+      "gh-lidotel",
+      "gh-hc-historial",
+      "gh-csen-v1",
+      "gh-csen-v2",
+      "gh-nomina"
+    ]
+  },
+  "ediciones": [
+    {
+      "id": "gh-lumi-booth",
+      "_eliminado": true
+    },
+    {
+      "id": "gh-nuestra-noche",
+      "_eliminado": true
+    },
+    {
+      "id": "gh-currucumor",
+      "_eliminado": true
+    },
+    {
+      "id": "gh-webscraping",
+      "_eliminado": true
+    },
+    {
+      "id": "gh-goldmach",
+      "_eliminado": true
+    },
+    {
+      "id": "gh-va-bus",
+      "hidden": false,
+      "featured": true,
+      "sub_skills": [
+        "JWT",
+        "Google OAuth",
+        "Vite",
+        "DigitalOcean"
+      ],
+      "github_repos": [
+        "BenjiVZ/VA-Bus"
+      ],
+      "image_url": "/media/proyectos/1788992311605-Captura_de_pantalla_2026-09-09_181407.png",
+      "live_url": "https://aerorutasdevenezuela.net/",
+      "repo_url": "",
+      "sort_order": 1,
+      "title": "VA-Bus - Reservas de pasajes para Aerorutas",
+      "short_description": "Plataforma web de venta y reserva de boletos de autobús para la empresa Aerorutas.",
+      "description": "Sistema completo de reservas de pasajes para Aerorutas (Venezuela). El backend en Django REST Framework gestiona viajes, buses, rutas y distribución de asientos, reservas con selección de puesto, pagos con comprobantes y usuarios con autenticación JWT y Google OAuth; incluye un módulo de integración con APIs externas y un backoffice. El frontend es una SPA en React + Vite con capa de servicios y contexto de autenticación. Preparado para producción con SQL Server, Nginx y servicio systemd, con guía de despliegue en DigitalOcean.",
+      "category": "personal",
+      "subcategory": "web",
+      "tech_stack": [
+        "Python",
+        "Django",
+        "Django REST Framework",
+        "React",
+        "JavaScript",
+        "SQL Server",
+        "Nginx"
+      ]
+    },
+    {
+      "id": "gh-portafolio-sofi",
+      "hidden": false,
+      "featured": false,
+      "sub_skills": [
+        "CSS"
+      ],
+      "github_repos": [
+        "BenjiVZ/Portafolio-sofi"
+      ],
+      "image_url": "",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 74,
+      "title": "Portafolio Sofia",
+      "short_description": "Sitio de portafolio en React + Vite con Supabase y un panel de administración en Electron.",
+      "description": "Portafolio profesional para una clienta: sitio en React + Vite con secciones de presentación, sobre mí, servicios, portafolio, testimonios y contacto, contenidos en Supabase con migraciones y políticas RLS, y un panel de administración de escritorio en Electron para editarlos.",
+      "category": "personal",
+      "subcategory": "web",
+      "tech_stack": [
+        "React",
+        "JavaScript",
+        "Vite",
+        "Supabase",
+        "Electron"
+      ]
+    },
+    {
+      "id": "gh-projectmanager",
+      "hidden": false,
+      "featured": false,
+      "sub_skills": [],
+      "github_repos": [
+        "BenjiVZ/ProjectManager",
+        "BenjiVZ/ProjectManager-2.0"
+      ],
+      "image_url": "",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 75,
+      "title": "ProjectManager - Gestor de proyectos de escritorio",
+      "short_description": "App Electron para organizar proyectos, lanzadores, notas y tecnologías desde un solo panel.",
+      "description": "Aplicación de escritorio en Electron que centraliza los proyectos de desarrollo: fichas con tecnologías, lanzadores para abrir o ejecutar cada proyecto, notas y ajustes guardados en JSON, respaldo exportable y un pequeño servidor local. La versión 2.0 está en preparación.",
+      "category": "work",
+      "subcategory": "app",
+      "tech_stack": [
+        "Electron",
+        "JavaScript",
+        "Node.js",
+        "HTML",
+        "CSS"
+      ]
+    },
+    {
+      "id": "gh-respaldo-sql",
+      "hidden": false,
+      "featured": false,
+      "sub_skills": [
+        "REST",
+        "CLI"
+      ],
+      "github_repos": [
+        "BenjiVZ/Respaldo-sql"
+      ],
+      "image_url": "",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 76,
+      "title": "DB Manager - Backups y datos para Django",
+      "short_description": "App Django reutilizable para crear y restaurar backups y exportar o importar datos desde la web o la consola.",
+      "description": "Aplicación Django pensada para copiarse en cualquier proyecto: backups completos de la base de datos preservando relaciones, restauración, exportación selectiva por app o modelo en JSON, XML o YAML, importación con manejo de errores, interfaz web con estadísticas, comandos de terminal para automatizar y una API documentada.",
+      "category": "work",
+      "subcategory": "backend",
+      "tech_stack": [
+        "Python",
+        "Django"
+      ]
+    },
+    {
+      "id": "gh-showroots",
+      "hidden": false,
+      "featured": true,
+      "sub_skills": [
+        "Vite",
+        "Pasarela de pagos",
+        "Hyperframes"
+      ],
+      "github_repos": [
+        "BenjiVZ/SHOWROOTS"
+      ],
+      "image_url": "/media/proyectos/1788992333486-Captura_de_pantalla_2026-09-09_181557.png",
+      "live_url": "https://im-pulsar.com/",
+      "repo_url": "",
+      "sort_order": 78,
+      "title": "Pulsar by ShowRoots - Reservas de DJs y talento",
+      "short_description": "Plataforma curada para contratar DJs, músicos y bandas con cotizaciones, pagos y partners.",
+      "description": "Plataforma en Vue + Django para conectar clientes con talento musical verificado por un administrador. Cuatro roles: cliente (explora sin cuenta, filtra por ciudad, género y presupuesto, solicita cotización, paga un porcentaje o el total, chatea y reseña), talento (perfil con fotos, videos y precio por hora, acepta o ajusta propuestas), admin (curaduría y supervisión) y partner (trae clientes y gana comisión). Backend con apps de cuentas, reservas, pagos, talentos, locales y notificaciones, integración de pagos, despliegue con Nginx y videos promocionales.",
+      "category": "personal",
+      "subcategory": "web",
+      "tech_stack": [
+        "Vue.js",
+        "JavaScript",
+        "Python",
+        "Django",
+        "Nginx"
+      ]
+    },
+    {
+      "id": "gh-ivoo-ventas",
+      "hidden": false,
+      "featured": false,
+      "sub_skills": [
+        "SQLite",
+        "Material Design"
+      ],
+      "github_repos": [
+        "BenjiVZ/RV"
+      ],
+      "image_url": "",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 7,
+      "title": "Ivoo Ventas (RV) - App de apoyo comercial",
+      "short_description": "App Flutter para el equipo de ventas: facturas, clientes, reporte diario y herramientas de cálculo.",
+      "description": "Aplicación móvil para el equipo de ventas de Ivoo. Permite registrar las facturas del día desde un formulario, generar el reporte diario y consultar el historial, administrar la cartera de clientes y solicitar acceso o registrarse como usuario. Incluye herramientas de apoyo: conversor de moneda, calculadora de descuentos y calculadora de cuotas Cashea. Construida con Flutter y Provider, con servicios de autenticación y base de datos.",
+      "category": "work",
+      "subcategory": "app",
+      "tech_stack": [
+        "Flutter",
+        "Dart",
+        "Provider"
+      ]
+    },
+    {
+      "id": "gh-bot-financiero",
+      "hidden": false,
+      "featured": false,
+      "sub_skills": [
+        "SQLite"
+      ],
+      "github_repos": [
+        "BenjiVZ/BOT_FINANCIERO"
+      ],
+      "image_url": "",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 15,
+      "title": "Bot Financiero - Asistente de finanzas personales",
+      "short_description": "Chatbot Rasa con backend Django para consultar saldo, registrar gastos y ver el historial.",
+      "description": "Asistente conversacional de finanzas personales. En Rasa se definen intenciones para consultar saldo y estado de cuenta, ver el historial de transacciones y registrar gastos mediante un formulario (monto y categoría), con avisos cuando se supera el 80 % del presupuesto mensual. Un proyecto Django persiste los datos y sirve la interfaz; un script levanta ambos servicios a la vez.",
+      "category": "university",
+      "subcategory": "backend",
+      "tech_stack": [
+        "Python",
+        "Rasa",
+        "Django"
+      ]
+    },
+    {
+      "id": "gh-ecommerce-django",
+      "hidden": false,
+      "featured": false,
+      "sub_skills": [
+        "SQLite"
+      ],
+      "github_repos": [
+        "BenjiVZ/Benja_projectoDjango"
+      ],
+      "image_url": "",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 20,
+      "title": "E-commerce con Django",
+      "short_description": "Tienda en línea con catálogo, carrito, usuarios y panel de administración.",
+      "description": "Plataforma de comercio electrónico en Django organizada en apps: catálogo de productos con imágenes, carrito de compras, usuarios con formularios propios y un módulo de administración con admin-interface. Plantillas y estilos propios por cada app.",
+      "category": "university",
+      "subcategory": "web",
+      "tech_stack": [
+        "Python",
+        "Django",
+        "HTML",
+        "CSS"
+      ]
+    },
+    {
+      "id": "gh-ecommerce-idx",
+      "hidden": false,
+      "featured": false,
+      "sub_skills": [
+        "Google IDX",
+        "Nix"
+      ],
+      "github_repos": [
+        "BenjiVZ/djangoapp-main",
+        "BenjiVZ/djangoapp"
+      ],
+      "image_url": "",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 21,
+      "title": "E-commerce en Google IDX con filtro inteligente",
+      "short_description": "Tienda Django desarrollada en Google IDX con un bot de filtrado de productos por lenguaje natural.",
+      "description": "Evolución del e-commerce en Django construida en el entorno Google IDX (Nix): apps de catálogo, carrito y usuarios con señales, decoradores y estilos SCSS. Incorpora un bot de filtrado de productos que procesa la consulta del usuario con NLTK (tokenización, lematización y stopwords en español) y la traduce en búsquedas sobre la base de datos. Publicado como djangoapp (base) y djangoapp-main (versión completa con el bot).",
+      "category": "university",
+      "subcategory": "web",
+      "tech_stack": [
+        "Python",
+        "Django",
+        "NLTK",
+        "SCSS"
+      ]
+    },
+    {
+      "id": "gh-rasa-base",
+      "hidden": false,
+      "featured": false,
+      "sub_skills": [
+        "NLU"
+      ],
+      "github_repos": [
+        "BenjiVZ/Rasa"
+      ],
+      "image_url": "",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 31,
+      "title": "Chatbot base con Rasa",
+      "short_description": "Asistente conversacional en Rasa con intenciones, reglas, historias y acciones personalizadas.",
+      "description": "Proyecto base de chatbot con Rasa 3: datos de entrenamiento (NLU), reglas e historias, dominio con respuestas, acciones personalizadas en Python y una página HTML mínima para conversar con el bot desde el navegador. Incluye modelos entrenados y los comandos para levantar el servidor con la API habilitada. Sirvió de punto de partida para los asistentes de e-commerce, turismo y finanzas.",
+      "category": "university",
+      "subcategory": "backend",
+      "tech_stack": [
+        "Python",
+        "Rasa",
+        "HTML"
+      ]
+    },
+    {
+      "id": "gh-cloudsong",
+      "hidden": false,
+      "featured": false,
+      "sub_skills": [
+        "Capacitor",
+        "SQLite",
+        "FFmpeg",
+        "YouTube"
+      ],
+      "github_repos": [
+        "BenjiVZ/CLOUD-CS",
+        "BenjiVZ/cloudsong_app",
+        "BenjiVZ/cloudsong_app_ionic",
+        "BenjiVZ/cloudsong_app_ionic_react",
+        "BenjiVZ/cloudsong_app_ionic_vue",
+        "BenjiVZ/APP-CS"
+      ],
+      "image_url": "",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 62,
+      "title": "CloudSong - Música personal en la nube",
+      "short_description": "Servidor Django que descarga y cataloga música más apps en Flutter, Ionic y React Native para oírla offline.",
+      "description": "Servicio de streaming de música personal: el backend Django descarga audio desde YouTube y Spotify en MP3 de alta calidad, extrae metadatos y carátulas, analiza mixes y expone una API REST con token. Las apps permiten iniciar sesión, buscar, reproducir con controles completos, crear playlists, descargar para escuchar sin conexión y subir nuevas canciones por URL; existen versiones en Flutter, Ionic Angular, Ionic React, Ionic Vue y React Native.",
+      "category": "sistemas",
+      "subcategory": "app",
+      "tech_stack": [
+        "Python",
+        "Django",
+        "Flutter",
+        "Ionic",
+        "Angular",
+        "React",
+        "Vue.js",
+        "TypeScript"
+      ]
+    },
+    {
+      "id": "gh-cloud-file",
+      "hidden": false,
+      "featured": false,
+      "sub_skills": [
+        "REST",
+        "SQLite"
+      ],
+      "github_repos": [
+        "BenjiVZ/Cloud-file",
+        "BenjiVZ/Manager-File"
+      ],
+      "image_url": "",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 63,
+      "title": "SyncServer - Archivos privados en la nube",
+      "short_description": "Nube de archivos personal con carpetas, enlaces compartidos y cliente de escritorio en Electron.",
+      "description": "Sistema de archivos privado en Django: carpetas y subcarpetas por usuario, subida de archivos de hasta 1 GB con hash MD5, enlaces públicos con token que se pueden activar o desactivar, explorador web en Bootstrap 5 y API REST. Lo acompaña Manager File, un cliente de escritorio en Electron + React con login contra el servidor, panel y notificaciones.",
+      "category": "sistemas",
+      "subcategory": "web",
+      "tech_stack": [
+        "Python",
+        "Django",
+        "Bootstrap",
+        "Electron",
+        "React",
+        "JavaScript"
+      ]
+    },
+    {
+      "id": "gh-chatia",
+      "hidden": false,
+      "featured": false,
+      "sub_skills": [
+        "SQLite"
+      ],
+      "github_repos": [
+        "BenjiVZ/ChatIA"
+      ],
+      "image_url": "",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 64,
+      "title": "ChatIA - Chat con Gemini",
+      "short_description": "Chat web en Django con conversaciones y mensajes guardados, sobre la API de Gemini.",
+      "description": "Aplicación Django de chat con Google Gemini: conversaciones con título y fecha, mensajes de usuario y asistente persistidos, cliente de Gemini desacoplado e interfaz web sencilla. Versión genérica y personal del asistente que luego se especializó para la empresa.",
+      "category": "sistemas",
+      "subcategory": "backend",
+      "tech_stack": [
+        "Python",
+        "Django",
+        "Gemini",
+        "HTML"
+      ]
+    },
+    {
+      "id": "gh-sinpel",
+      "hidden": false,
+      "featured": false,
+      "sub_skills": [
+        "SQLite"
+      ],
+      "github_repos": [
+        "benjaS357/sistema-sinpel",
+        "BenjiVZ/sistema-sinpel-main"
+      ],
+      "image_url": "/media/proyectos/1788992490029-Captura_de_pantalla_2026-02-26_205023.png",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 8,
+      "title": "SINPEL - Gestión técnica e inventario",
+      "short_description": "Sistema Django para casos de garantía, servicio técnico e inventario de repuestos.",
+      "description": "Plataforma web para SINPEL, servicio técnico de línea blanca y marrón. Registra el ingreso de equipos con datos del cliente, factura, serial, fallas, accesorios y condición; sigue el envío y la recepción con el centro de servicio y controla el inventario de repuestos con importación masiva. Módulos de ingresos, inventario y reportes con panel de administración. La versión ampliada (sistema-sinpel-main) añade API, reportes en PDF por sucursal, gestión de seriales múltiples, repuestos utilizados, salida a 48 horas y scripts para publicarlo con túneles de Cloudflare.",
+      "category": "work",
+      "subcategory": "web",
+      "tech_stack": [
+        "Python",
+        "Django",
+        "JavaScript",
+        "HTML",
+        "CSS"
+      ]
+    },
+    {
+      "id": "gh-auditoria-damasco",
+      "hidden": false,
+      "featured": true,
+      "sub_skills": [
+        "pyodbc",
+        "SQLite",
+        "Excel"
+      ],
+      "github_repos": [
+        "BenjiVZ/Sistema-de-Auditor-a-DAMASCO",
+        "benjaS357/Auditoria-Damasco"
+      ],
+      "image_url": "/media/proyectos/1788993453872-Captura_de_pantalla_2026-09-09_a_la_s__6.34.29_p._m..png",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 33,
+      "title": "Sistema de Auditoría DAMASCO",
+      "short_description": "Evaluaciones de tiendas con auditores, regionales, garantías SAP y una app Flutter de auditoría de precios.",
+      "description": "Sistema web en Django 5 para auditar y evaluar las tiendas de la cadena. El administrador define tipos de evaluación (puntuación o checklist), secciones e ítems, y los asigna a auditores por tienda; los regionales solo ven las evaluaciones de sus tiendas. Integra SAP Business One para registrar garantías desde tickets y mercancía pendiente por retirar desde facturas, con respaldos de base de datos desde la web y por consola. Lo complementa una app Flutter (damasco_precios) para auditar precios exhibidos contra campañas cargadas en Excel.",
+      "category": "work",
+      "subcategory": "web",
+      "tech_stack": [
+        "Python",
+        "Django",
+        "SAP",
+        "SQL Server",
+        "Flutter",
+        "Dart"
+      ]
+    },
+    {
+      "id": "gh-casheaform",
+      "hidden": false,
+      "featured": true,
+      "sub_skills": [
+        "Cashea"
+      ],
+      "github_repos": [
+        "benjaS357/casheaform"
+      ],
+      "image_url": "/media/proyectos/1788993461389-Captura_de_pantalla_2026-09-09_a_la_s__6.34.42_p._m..png",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 36,
+      "title": "Portal de reportes Cashea",
+      "short_description": "Registro y reporte de órdenes financiadas con Cashea por tienda, marca y comprador.",
+      "description": "Portal en Django conectado a SQL Server para registrar las ventas financiadas con Cashea: número de orden y factura, datos del comprador, tienda, marca, grupo y montos de la venta. Incluye formularios de carga, reportes por período y el script SQL de la tabla.",
+      "category": "work",
+      "subcategory": "web",
+      "tech_stack": [
+        "Python",
+        "Django",
+        "SQL Server",
+        "HTML",
+        "CSS"
+      ]
+    },
+    {
+      "id": "gh-compras",
+      "hidden": false,
+      "featured": true,
+      "sub_skills": [
+        "JWT",
+        "Firebase",
+        "C#"
+      ],
+      "github_repos": [
+        "benjaS357/Compra"
+      ],
+      "image_url": "/media/proyectos/1788993468106-Captura_de_pantalla_2026-09-09_a_la_s__6.34.53_p._m..png",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 38,
+      "title": "Sistema central de Compras",
+      "short_description": "Backend Django para solicitudes de compra, cotizaciones, proveedores e inventario integrado con SAP.",
+      "description": "Sistema central de compras de la empresa: solicitudes con lotes, cotizaciones, proveedores, inventario, departamentos y notificaciones por correo, con catálogos sincronizados desde SAP, replicación de SQL Server, sincronización a MongoDB y un login central con JWT que otros sistemas usan para crear solicitudes vía API. Incluye documentación de instalación en servidor y clientes en Flutter y JavaScript.",
+      "category": "work",
+      "subcategory": "web",
+      "tech_stack": [
+        "Python",
+        "Django",
+        "SQL Server",
+        "MongoDB",
+        "SAP",
+        "Flutter",
+        "JavaScript"
+      ]
+    },
+    {
+      "id": "gh-giftcards",
+      "hidden": false,
+      "featured": true,
+      "sub_skills": [
+        "Vite",
+        "SQL Server"
+      ],
+      "github_repos": [
+        "benjaS357/gifcard-clientes"
+      ],
+      "image_url": "/media/proyectos/1788993514823-Captura_de_pantalla_2026-09-09_a_la_s__6.35.35_p._m..png",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 44,
+      "title": "Gift Cards DAMASCO",
+      "short_description": "Tarjetas de regalo con diseños personalizables, planes de crédito desde SAP y flujos de cajera, cliente y tesorería.",
+      "description": "Plataforma de tarjetas de regalo con backend Django y frontend Vue: plantillas visuales de la tarjeta (imagen o HTML generado por IA, una activa a la vez), planes de crédito sincronizados desde SAP Business One, solicitudes y pagos con revisión desde el admin, y flujos separados para cliente, cajera, empleador y tesorería. Incluye manual, capturas y videos demo del proceso.",
+      "category": "work",
+      "subcategory": "web",
+      "tech_stack": [
+        "Python",
+        "Django",
+        "Vue.js",
+        "JavaScript",
+        "SAP"
+      ]
+    },
+    {
+      "id": "gh-quiniela",
+      "hidden": false,
+      "featured": false,
+      "sub_skills": [
+        "Entity Framework",
+        "Razor"
+      ],
+      "github_repos": [
+        "benjaS357/QuinielaDamascoMvc"
+      ],
+      "image_url": "",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 51,
+      "title": "Quiniela DAMASCO",
+      "short_description": "Quiniela de fútbol para empleados con partidos, predicciones y motor de puntuación.",
+      "description": "Aplicación ASP.NET Core MVC para una quiniela interna: eventos y partidos administrados por el equipo organizador, predicciones de cada participante identificado por cédula y PIN, motor de puntuación con pruebas, tablero de posiciones, banderas y avatares. Credenciales fuera del repositorio mediante user-secrets y variables de entorno.",
+      "category": "work",
+      "subcategory": "web",
+      "tech_stack": [
+        "C#",
+        "ASP.NET Core",
+        "SQL Server"
+      ]
+    },
+    {
+      "id": "gh-rrhh-gde",
+      "hidden": false,
+      "featured": true,
+      "sub_skills": [
+        "Cifrado Fernet",
+        "PyMuPDF",
+        "Auditoría"
+      ],
+      "github_repos": [
+        "benjaS357/rrhh"
+      ],
+      "image_url": "/media/proyectos/1788993484246-Captura_de_pantalla_2026-09-09_a_la_s__6.35.23_p._m..png",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 53,
+      "title": "GDE - Gestión Digital de Expedientes",
+      "short_description": "Expedientes de personal con documentos cifrados, roles por zona, auditoría y alertas de vencimiento.",
+      "description": "Sistema de RRHH en Django + HTMX para la sede central y las sucursales del interior: expedientes por trabajador con documentos versionados y cifrados en reposo, tres roles con alcance geográfico aplicado en todas las consultas, bitácora inmutable de accesos, papelera con borrado lógico, compresión opcional de archivos grandes, alertas de vencimiento, checklist de completitud y remuneración en varias monedas. Pensado para servidor físico interno, con suite de pruebas por módulo.",
+      "category": "work",
+      "subcategory": "web",
+      "tech_stack": [
+        "Python",
+        "Django",
+        "HTMX",
+        "JavaScript"
+      ]
+    },
+    {
+      "id": "gh-lidotel",
+      "hidden": false,
+      "featured": false,
+      "sub_skills": [
+        "Jazzmin",
+        "SQLite"
+      ],
+      "github_repos": [
+        "BenjiVZ/django-lidotel",
+        "BenjiVZ/django-nico"
+      ],
+      "image_url": "/media/proyectos/1788992660566-Lidotel.PNG",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 10,
+      "title": "Lidotel - Fidelización de agencias de viaje",
+      "short_description": "Sistema Django de puntos para las agencias que reservan en un hotel.",
+      "description": "Plataforma de fidelización para un hotel: cada agencia de viajes tiene su cuenta y acumula puntos por las reservas que genera, según tipo de habitación, duración de la estadía y servicios adicionales (transporte, tours, spa), con multiplicadores por temporada alta o último minuto y bonos por volumen de huéspedes. Gestiona reservas con estados (pendiente, confirmada, cancelada, completada), configuración de puntos desde el admin y gráficas con Chart.js sobre Jazzmin. Hay una copia del sistema en el repositorio django-nico.",
+      "category": "personal",
+      "subcategory": "web",
+      "tech_stack": [
+        "Python",
+        "Django",
+        "Chart.js",
+        "CSS"
+      ]
+    },
+    {
+      "id": "gh-hc-historial",
+      "hidden": false,
+      "featured": false,
+      "sub_skills": [
+        "PDF",
+        "SQLite"
+      ],
+      "github_repos": [
+        "BenjiVZ/HC-HistorialMedico"
+      ],
+      "image_url": "/media/proyectos/1788992757952-Captura_de_pantalla_2026-02-26_204906.png",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 66,
+      "title": "Historias Clínicas para centro estético",
+      "short_description": "Pacientes, citas, historias, servicios y consentimientos en PDF para un centro estético.",
+      "description": "Sistema Django de historias clínicas para un centro estético: módulos de pacientes, citas, historias, servicios, portal y reportes, con consentimientos informados en PDF por tratamiento (láser, HIFU, radiofrecuencia, IPL, botox) y una paleta visual propia definida en la especificación técnica.",
+      "category": "personal",
+      "subcategory": "web",
+      "tech_stack": [
+        "Python",
+        "Django",
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ]
+    },
+    {
+      "id": "gh-csen-v1",
+      "hidden": false,
+      "featured": false,
+      "sub_skills": [
+        "WeasyPrint",
+        "Excel",
+        "SQLite"
+      ],
+      "github_repos": [
+        "BenjiVZ/CSEN",
+        "BenjiVZ/CSEN-main",
+        "BenjiVZ/CSEN-main-jojoto",
+        "BenjiVZ/CSEN-ingenio-V1",
+        "BenjiVZ/CSEN-V3",
+        "BenjiVZ/ingenio"
+      ],
+      "image_url": "/media/proyectos/1788992768571-Captura_de_pantalla_2026-02-26_204117.png",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 68,
+      "title": "CSEN - Sistema Integral de Gestión Comercial",
+      "short_description": "Facturación, caja, inventario y reportes en Django para CSEN, con importación de Excel y licencias.",
+      "description": "Sistema comercial en Django para CSEN: facturación con devoluciones y cuentas por cobrar, control de caja, inventario por depósitos, reportes con WeasyPrint, roles y grupos, e importación de inventarios desde Excel en varias etapas. La versión 3 suma licenciamiento, cliente de Supabase, respaldos automáticos y un extenso registro de correcciones; existe además una variante para Ingenio con sus propios depósitos.",
+      "category": "personal",
+      "subcategory": "web",
+      "tech_stack": [
+        "Python",
+        "Django",
+        "JavaScript",
+        "HTML",
+        "CSS",
+        "Supabase"
+      ]
+    },
+    {
+      "id": "gh-csen-v2",
+      "hidden": false,
+      "featured": false,
+      "sub_skills": [
+        "JWT",
+        "Swagger",
+        "Vite"
+      ],
+      "github_repos": [
+        "BenjiVZ/Csen-v2.0"
+      ],
+      "image_url": "/media/proyectos/1788992914153-Captura_de_pantalla_2026-09-09_182811.png",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 69,
+      "title": "CSEN v2.0 - API REST y frontend Vue",
+      "short_description": "Migración de CSEN a Django REST Framework con JWT, Swagger y un frontend Vue empaquetado con Electron.",
+      "description": "Segunda versión de CSEN con arquitectura separada: API REST en Django 5.1 y Django REST Framework con autenticación JWT, documentación Swagger, apps de usuarios, inventario, clientes, proveedores, facturación, caja, reportes y panel, sobre MySQL en producción; frontend en Vue + Vite con versión de escritorio en Electron, scripts de instalación, migración de datos y creación de pines.",
+      "category": "personal",
+      "subcategory": "web",
+      "tech_stack": [
+        "Python",
+        "Django",
+        "Django REST Framework",
+        "Vue.js",
+        "JavaScript",
+        "MySQL",
+        "Electron"
+      ]
+    },
+    {
+      "id": "gh-nomina",
+      "hidden": false,
+      "featured": true,
+      "sub_skills": [
+        "SQLite"
+      ],
+      "github_repos": [
+        "BenjiVZ/Nomina"
+      ],
+      "image_url": "/media/proyectos/1788993001113-Captura_de_pantalla_2026-02-26_203656.png",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 73,
+      "title": "Sistema de Nómina Modular",
+      "short_description": "Nómina multiempresa con expedientes, asistencia, cálculo de impuestos, liquidaciones y dispersión bancaria.",
+      "description": "Sistema de nómina en Django organizado en módulos: identidad y estructura (varias empresas y sucursales, expediente digital, calendarios de pago), motor de reglas (conceptos salariales, configuración fiscal, impuestos, divisas), tiempo y asistencia (reloj checador, incidencias, horas extra), liquidaciones y finiquitos con simulador de despido, y pagos y reportes con dispersión bancaria.",
+      "category": "personal",
+      "subcategory": "web",
+      "tech_stack": [
+        "Python",
+        "Django",
+        "HTML",
+        "CSS",
+        "JavaScript"
+      ]
+    }
+  ]
+}
