@@ -41,7 +41,7 @@ export function withTimeout(promise, ms = TIMEOUT_MS) {
 
 // Los errores de PostgREST traen `code` (por ejemplo 42P01, tabla inexistente):
 // esos si llegaron a la base. Sin codigo es que la peticion nunca llego.
-function esFalloDeConexion(e) {
+export function esFalloDeConexion(e) {
   return e instanceof TiempoAgotado || !e?.code
 }
 

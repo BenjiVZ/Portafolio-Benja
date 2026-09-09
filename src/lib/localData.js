@@ -3,6 +3,10 @@
 // Lee los JSON de src/data y los normaliza al mismo shape que devuelven
 // las tablas de Supabase, para que los componentes no noten la diferencia.
 //
+// Encima de cada JSON del repo se aplican las ediciones hechas desde /admin
+// en modo local (public/data/<coleccion>-edit.json, escritas por
+// vite.config.js). Asi el sitio y el panel ven lo mismo.
+//
 // Gracias a esto el portafolio nunca se ve vacío: si la base está caída,
 // pausada o sin credenciales, el sitio sigue mostrando el contenido.
 // ============================================
@@ -14,7 +18,8 @@ const loaders = {
   configuracion: () => import('../data/configuracion.json'),
   habilidades: () => import('../data/habilidades.json'),
   flyers: () => import('../data/flyers.json'),
-  servicios: () => import('../data/servicios.json')
+  servicios: () => import('../data/servicios.json'),
+  testimonios: () => import('../data/testimonios.json')
 }
 
 const cache = new Map()
@@ -65,12 +70,16 @@ function mapCategory(nombre = '') {
   return 'personal'
 }
 
-// Cambios guardados desde /admin en modo local (vite.config.js los escribe
-// en public/data). Vive en public para pedirse siempre fresco por fetch:
-// los JSON de src/data van en cache de modulo y no verian las ediciones.
-async function loadEditsProyectos() {
+// ── Ediciones del admin en modo local ──
+// Viven en public/data para pedirse siempre frescas por fetch: los JSON de
+// src/data van en cache de modulo y no verian los cambios.
+export const COLECCIONES_EDIT = [
+  'proyectos', 'servicios', 'experiencia', 'flyers', 'testimonios', 'configuracion-sitio', 'mensajes'
+]
+
+export async function loadEdits(coleccion) {
   try {
-    const res = await fetch('/data/proyectos-edit.json', { cache: 'no-store' })
+    const res = await fetch(`/data/${coleccion}-edit.json`, { cache: 'no-store' })
     if (!res.ok) return []
     const edits = await res.json()
     return Array.isArray(edits) ? edits : []
@@ -79,11 +88,30 @@ async function loadEditsProyectos() {
   }
 }
 
+// Las ediciones pisan por id; ids nuevos se agregan al final. "Eliminar" en
+// el admin local no borra del JSON del repo: marca _eliminado (distinto de
+// hidden, que solo esconde del sitio publico). `base` debe traer objetos
+// propios (no los de la cache), porque se modifican en sitio.
+export function aplicarEdits(base, edits) {
+  const porId = new Map(base.map(p => [String(p.id), p]))
+  for (const e of edits) {
+    const original = porId.get(String(e.id))
+    if (original) Object.assign(original, e)
+    else {
+      base.push({ ...e })
+      porId.set(String(e.id), base[base.length - 1])
+    }
+  }
+  return base.filter(p => !p._eliminado)
+}
+
+const porOrden = (a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0)
+
 export async function localProjects() {
   // src/data/proyectos.json ya trae los proyectos en el shape de la tabla
   // `projects` (son los sistemas sacados de GitHub, con resumen redactado a
   // mano). El export viejo de Django quedo en docs/archivo/.
-  const [data, edits] = await Promise.all([load('proyectos'), loadEditsProyectos()])
+  const [data, edits] = await Promise.all([load('proyectos'), loadEdits('proyectos')])
   const mapped = data.map(p => ({
     hidden: false,
     featured: false,
@@ -95,40 +123,33 @@ export async function localProjects() {
     sort_order: 0,
     ...p
   }))
-
-  // Las ediciones del admin pisan por id; ids nuevos se agregan al final
-  const porId = new Map(mapped.map(p => [String(p.id), p]))
-  for (const e of edits) {
-    const original = porId.get(String(e.id))
-    if (original) Object.assign(original, e)
-    else mapped.push(e)
-  }
-  // "Eliminar" en el admin local no borra del JSON del repo: marca _eliminado
-  // (distinto de hidden, que solo lo esconde del sitio publico)
-  return mapped.filter(p => !p._eliminado)
+  return aplicarEdits(mapped, edits)
 }
 
 export async function localServices() {
-  const data = await load('servicios')
-  return [...data].sort((a, b) => (a.sort_order ?? 0) - (b.sort_order ?? 0))
+  const [data, edits] = await Promise.all([load('servicios'), loadEdits('servicios')])
+  return aplicarEdits(data.map(s => ({ ...s })), edits).sort(porOrden)
 }
 
 export async function localExperiences() {
-  const data = await load('experiencia')
-  return data.map(e => ({
+  const [data, edits] = await Promise.all([load('experiencia'), loadEdits('experiencia')])
+  const mapped = data.map(e => ({
+    id: e.id,
     title: e.cargo,
     company: e.empresa,
     location: e.ubicacion || '',
     period: formatPeriod(e.fecha_inicio, e.fecha_fin, e.actual),
     is_current: Boolean(e.actual),
     tasks: (e.descripcion || '').split('\n').map(s => s.trim()).filter(Boolean),
-    techs: []
+    techs: [],
+    sort_order: e.orden ?? 0
   }))
+  return aplicarEdits(mapped, edits).sort(porOrden)
 }
 
 export async function localFlyers() {
-  const data = await load('flyers')
-  return data
+  const [data, edits] = await Promise.all([load('flyers'), loadEdits('flyers')])
+  const mapped = data
     .filter(f => f.activo !== false)
     .map(f => ({
       id: f.id,
@@ -137,15 +158,30 @@ export async function localFlyers() {
       image_url: f.imagen || '',
       sort_order: f.orden ?? 0
     }))
-    .sort((a, b) => a.sort_order - b.sort_order)
+  return aplicarEdits(mapped, edits).sort(porOrden)
+}
+
+// src/data/testimonios.json ya viene en el shape de la tabla `testimonials`
+export async function localTestimonials() {
+  const [data, edits] = await Promise.all([load('testimonios'), loadEdits('testimonios')])
+  return aplicarEdits(data.map(t => ({ ...t })), edits).sort(porOrden)
+}
+
+// Los mensajes de contacto no tienen JSON en el repo: solo existen los que
+// se hayan guardado desde el admin local (o nada).
+export async function localMessages() {
+  const edits = await loadEdits('mensajes')
+  return aplicarEdits([], edits)
+    .sort((a, b) => String(b.created_at || '').localeCompare(String(a.created_at || '')))
 }
 
 // site_config en Supabase es un mapa key → value; aquí se arma igual
 export async function localSiteConfig() {
-  const [infoArr, configArr, habilidades] = await Promise.all([
+  const [infoArr, configArr, habilidades, edits] = await Promise.all([
     load('personalInfo'),
     load('configuracion'),
-    load('habilidades')
+    load('habilidades'),
+    loadEdits('configuracion-sitio')
   ])
 
   const info = (Array.isArray(infoArr) ? infoArr[0] : infoArr) || {}
@@ -160,7 +196,7 @@ export async function localSiteConfig() {
       .map(h => h.nombre)
   )]
 
-  return {
+  const mapa = {
     hero: {
       name: `${info.nombre || ''} ${info.apellido || ''}`.trim() || 'MastersLogic',
       role: info.titulo || 'Desarrollador Full Stack',
@@ -189,4 +225,10 @@ export async function localSiteConfig() {
       tagline: cfg.descripcion_meta || 'Soluciones tecnológicas a tu medida'
     }
   }
+
+  // Cada seccion guardada desde el admin local es una fila { id: clave, value }
+  for (const e of edits) {
+    if (e?.id && !e._eliminado && e.value && typeof e.value === 'object') mapa[e.id] = e.value
+  }
+  return mapa
 }

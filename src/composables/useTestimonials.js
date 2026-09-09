@@ -1,5 +1,7 @@
 import { ref } from 'vue'
 import { supabase } from '../lib/supabase'
+import { localTestimonials } from '../lib/localData'
+import { loadWithFallback } from '../lib/dataSource'
 
 export function useTestimonials() {
   const testimonials = ref([])
@@ -9,21 +11,20 @@ export function useTestimonials() {
   async function fetchTestimonials() {
     loading.value = true
     error.value = null
-    try {
-      const { data, error: err } = await supabase
-        .from('testimonials')
-        .select('*')
-        .order('sort_order', { ascending: true })
 
-      if (err) throw err
-      testimonials.value = data || []
-    } catch (e) {
-      console.error('No se pudieron cargar los testimonios de Supabase:', e.message)
-      error.value = e.message
-      testimonials.value = []
-    } finally {
-      loading.value = false
-    }
+    const res = await loadWithFallback({
+      nombre: 'Testimonios',
+      query: () => supabase.from('testimonials').select('*').order('sort_order', { ascending: true }),
+      // src/data/testimonios.json mas lo agregado desde el admin local
+      local: localTestimonials,
+      onError: [],
+      // Pinta lo local al instante; si Supabase contesta, lo reemplaza
+      onEarly: valor => { testimonials.value = valor; loading.value = false }
+    })
+
+    testimonials.value = res.value || []
+    error.value = res.error
+    loading.value = false
   }
 
   fetchTestimonials()

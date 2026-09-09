@@ -77,8 +77,8 @@
       <section class="respaldo-bloque">
         <h2>Archivos locales del repositorio</h2>
         <p class="respaldo-hint">
-          Tal cual están en <code>src/data/</code> y <code>public/data/</code>. El archivo
-          <code>proyectos-edit</code> son tus cambios guardados desde el panel en modo local.
+          Tal cual están en <code>src/data/</code> y <code>public/data/</code>. Los archivos
+          <code>*-edit</code> son tus cambios guardados desde el panel en modo local, uno por pestaña.
         </p>
         <div class="respaldo-tabla-wrap">
           <table class="respaldo-tabla">
@@ -103,7 +103,7 @@
       <section class="respaldo-bloque respaldo-nota">
         <h2>Cómo restaurar</h2>
         <ul>
-          <li>Ediciones locales: copia <code>archivos["proyectos-edit"]</code> del respaldo a <code>public/data/proyectos-edit.json</code>.</li>
+          <li>Ediciones locales: copia cada <code>archivos["&lt;coleccion&gt;-edit"]</code> del respaldo a <code>public/data/&lt;coleccion&gt;-edit.json</code>.</li>
           <li>Archivos base: cada clave de <code>archivos</code> corresponde a <code>src/data/&lt;clave&gt;.json</code>.</li>
           <li>Supabase: <code>efectivo.projects</code>, <code>efectivo.services</code>, etc. tienen las columnas de cada tabla y se pueden importar desde el Table Editor (CSV/JSON).</li>
         </ul>
@@ -116,6 +116,7 @@
 import { ref, computed, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAdmin } from '../composables/useAdmin'
+import { COLECCIONES_EDIT, loadEdits } from '../lib/localData'
 import logoUrl from '../assets/logo.png'
 
 // Misma sesion que el panel: sin ella, de vuelta al login de /admin
@@ -169,12 +170,10 @@ onMounted(async () => {
     const clave = ruta.split('/').pop().replace(/\.json$/, '')
     archivos.value[clave] = contenido
   }
-  try {
-    const res = await fetch('/data/proyectos-edit.json', { cache: 'no-store' })
-    archivos.value['proyectos-edit'] = res.ok ? await res.json() : []
-  } catch {
-    archivos.value['proyectos-edit'] = []
-  }
+  // Ediciones del admin en modo local: una por pestaña (public/data)
+  await Promise.all(COLECCIONES_EDIT.map(async coleccion => {
+    archivos.value[`${coleccion}-edit`] = await loadEdits(coleccion)
+  }))
 
   // 2) lo que muestra el sistema (Supabase o respaldo), conjunto por conjunto
   admin.usandoLocal.value = false
@@ -222,7 +221,7 @@ const filasEfectivo = computed(() =>
 const filasArchivos = computed(() =>
   Object.keys(archivos.value).sort().map(clave => ({
     clave,
-    ruta: clave === 'proyectos-edit' ? 'public/data/proyectos-edit.json' : `src/data/${clave}.json`,
+    ruta: clave.endsWith('-edit') ? `public/data/${clave}.json` : `src/data/${clave}.json`,
     registros: contar(archivos.value[clave]),
     tamano: tamano(archivos.value[clave])
   }))

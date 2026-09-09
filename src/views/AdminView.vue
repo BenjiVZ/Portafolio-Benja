@@ -39,10 +39,14 @@
           <span class="admin-badge">Admin Panel</span>
         </div>
         <div class="admin-header-actions">
-          <span class="conexion" :class="conexionOk === false ? 'conexion-mal' : conexionOk ? 'conexion-bien' : 'conexion-espera'">
+          <span class="conexion" :class="estadoClase">
             <span class="conexion-punto"></span>
-            {{ conexionOk === false ? 'Sin conexión con Supabase' : conexionOk ? 'Supabase conectado' : 'Comprobando…' }}
+            {{ estadoTexto }}
           </span>
+          <label v-if="enDev" class="modo-local" title="Leer y guardar todas las pestañas en public/data sin pasar por Supabase">
+            <input type="checkbox" :checked="modoLocal" @change="cambiarModoLocal($event.target.checked)" />
+            Editar en local
+          </label>
           <router-link to="/admin/respaldo" class="btn btn-ghost btn-sm" title="Descargar un respaldo completo de los datos">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
             Respaldo
@@ -93,9 +97,10 @@
         </div>
         <p class="panel-hint">Todo se edita aqui mismo: cambia lo que necesites y pulsa Guardar en la fila del proyecto.</p>
         <p v-if="conexionOk === false" class="aviso-respaldo">
-          <strong>Sin conexión con Supabase.</strong> Ves los {{ projectsList.length }} proyectos del respaldo local
+          <strong>{{ modoLocal ? 'Modo local.' : 'Sin conexión con Supabase.' }}</strong> Ves los {{ projectsList.length }} proyectos del respaldo local
           (los JSON del repositorio más tus ediciones), lo mismo que muestra el sitio público.
-          <template v-if="enDev">Los cambios se guardan en <code>public/data/proyectos-edit.json</code>.</template>
+          <template v-if="enDev">Editar, ocultar y eliminar se guardan en <code>public/data/proyectos-edit.json</code>
+            (las demás pestañas tienen su propio <code>-edit.json</code>); al hacer push, el sitio publicado lo refleja.</template>
           <template v-else>En producción es solo lectura: para editar el respaldo ejecuta <code>npm run dev</code>.</template>
         </p>
 
@@ -858,6 +863,26 @@ const admin = useAdmin()
 const enDev = import.meta.env.DEV
 const activeTab = ref('projects')
 
+// "Editar en local" (solo dev): todas las pestañas leen y guardan en
+// public/data/*-edit.json sin esperar a que Supabase falle.
+const modoLocal = admin.modoLocal
+async function cambiarModoLocal(valor) {
+  admin.fijarModoLocal(valor)
+  conexionOk.value = null
+  await loadAll()
+}
+
+const estadoClase = computed(() => {
+  if (modoLocal.value) return 'conexion-local'
+  if (conexionOk.value === false) return 'conexion-mal'
+  return conexionOk.value ? 'conexion-bien' : 'conexion-espera'
+})
+const estadoTexto = computed(() => {
+  if (modoLocal.value) return 'Modo local: guardando en public/data'
+  if (conexionOk.value === false) return enDev ? 'Sin conexión con Supabase · guardando en local' : 'Sin conexión con Supabase'
+  return conexionOk.value ? 'Supabase conectado' : 'Comprobando…'
+})
+
 // Data lists
 const projectsList = ref([])
 
@@ -1231,8 +1256,12 @@ async function alternarOculto(p) {
 
 async function handleDeleteProject(id) {
   if (!confirm('¿Eliminar este proyecto?')) return
-  await admin.deleteProject(id)
-  await recargarProyectos()
+  try {
+    await admin.deleteProject(id)
+    await recargarProyectos()
+  } catch (e) {
+    alert('Error al eliminar: ' + e.message)
+  }
 }
 
 // Testimonials
@@ -1286,19 +1315,27 @@ function openServiceForm(service = null) {
 async function handleSaveService() {
   const data = { ...serviceForm }
   delete data.id
-  if (editingService.value) {
-    await admin.updateService(editingService.value.id, data)
-  } else {
-    await admin.createService(data)
+  try {
+    if (editingService.value) {
+      await admin.updateService(editingService.value.id, data)
+    } else {
+      await admin.createService(data)
+    }
+    showServiceModal.value = false
+    servicesList.value = await admin.getServices()
+  } catch (e) {
+    alert('Error al guardar: ' + e.message)
   }
-  showServiceModal.value = false
-  servicesList.value = await admin.getServices()
 }
 
 async function handleDeleteService(id) {
   if (!confirm('¿Eliminar este servicio?')) return
-  await admin.deleteService(id)
-  servicesList.value = await admin.getServices()
+  try {
+    await admin.deleteService(id)
+    servicesList.value = await admin.getServices()
+  } catch (e) {
+    alert('Error al eliminar: ' + e.message)
+  }
 }
 
 // Experiences
@@ -1326,19 +1363,27 @@ async function handleSaveExperience() {
   const data = { ...experienceForm }
   data.tasks = [...experienceForm.tasks]
   data.techs = [...experienceForm.techs]
-  if (editingExperience.value) {
-    await admin.updateExperience(editingExperience.value.id, data)
-  } else {
-    await admin.createExperience(data)
+  try {
+    if (editingExperience.value) {
+      await admin.updateExperience(editingExperience.value.id, data)
+    } else {
+      await admin.createExperience(data)
+    }
+    showExperienceModal.value = false
+    experiencesList.value = await admin.getExperiences()
+  } catch (e) {
+    alert('Error al guardar: ' + e.message)
   }
-  showExperienceModal.value = false
-  experiencesList.value = await admin.getExperiences()
 }
 
 async function handleDeleteExperience(id) {
   if (!confirm('¿Eliminar esta experiencia?')) return
-  await admin.deleteExperience(id)
-  experiencesList.value = await admin.getExperiences()
+  try {
+    await admin.deleteExperience(id)
+    experiencesList.value = await admin.getExperiences()
+  } catch (e) {
+    alert('Error al eliminar: ' + e.message)
+  }
 }
 
 
@@ -1361,15 +1406,23 @@ async function saveAllConfig() {
 
 // Messages
 async function handleMarkRead(id) {
-  await admin.markMessageRead(id)
-  const msg = messagesList.value.find(m => m.id === id)
-  if (msg) msg.read = true
+  try {
+    await admin.markMessageRead(id)
+    const msg = messagesList.value.find(m => m.id === id)
+    if (msg) msg.read = true
+  } catch (e) {
+    alert('No se pudo marcar como leído: ' + e.message)
+  }
 }
 
 async function handleDeleteMessage(id) {
   if (!confirm('¿Eliminar este mensaje?')) return
-  await admin.deleteMessage(id)
-  messagesList.value = messagesList.value.filter(m => m.id !== id)
+  try {
+    await admin.deleteMessage(id)
+    messagesList.value = messagesList.value.filter(m => m.id !== id)
+  } catch (e) {
+    alert('Error al eliminar: ' + e.message)
+  }
 }
 
 function formatDate(dateStr) {
@@ -1397,19 +1450,27 @@ function openFlyerForm(flyer = null) {
 
 async function handleSaveFlyer() {
   const data = { ...flyerForm }
-  if (editingFlyer.value) {
-    await admin.updateFlyer(editingFlyer.value.id, data)
-  } else {
-    await admin.createFlyer(data)
+  try {
+    if (editingFlyer.value) {
+      await admin.updateFlyer(editingFlyer.value.id, data)
+    } else {
+      await admin.createFlyer(data)
+    }
+    showFlyerModal.value = false
+    flyersList.value = await admin.getFlyers()
+  } catch (e) {
+    alert('Error al guardar: ' + e.message)
   }
-  showFlyerModal.value = false
-  flyersList.value = await admin.getFlyers()
 }
 
 async function handleDeleteFlyer(id) {
   if (!confirm('¿Eliminar este flyer?')) return
-  await admin.deleteFlyer(id)
-  flyersList.value = await admin.getFlyers()
+  try {
+    await admin.deleteFlyer(id)
+    flyersList.value = await admin.getFlyers()
+  } catch (e) {
+    alert('Error al eliminar: ' + e.message)
+  }
 }
 
 async function handleFlyerImgUpload(event) {
@@ -1593,6 +1654,24 @@ onMounted(loadAll)
 
 .conexion-mal { color: var(--color-warning); border-color: rgba(245, 158, 11, 0.35); }
 .conexion-mal .conexion-punto { background: var(--color-warning); }
+
+.conexion-local { color: var(--color-accent); border-color: rgba(34, 211, 238, 0.35); }
+.conexion-local .conexion-punto { background: var(--color-accent); }
+
+/* Interruptor "Editar en local" (solo en npm run dev) */
+.modo-local {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border);
+  font-size: var(--text-xs);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  user-select: none;
+}
+.modo-local input { accent-color: var(--color-accent); cursor: pointer; }
 
 /* Sugerencias */
 .panel-hint {
