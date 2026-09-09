@@ -98,7 +98,7 @@ INSERT INTO site_config (key, value) VALUES
   "email": "benjaminvelazco.01@gmail.com",
   "social": {
     "github": "https://github.com/BenjiVZ",
-    "linkedin": "https://linkedin.com/in/benjamin-velazco",
+    "linkedin": "https://www.linkedin.com/in/benjamin-velazco-093037293/",
     "twitter": ""
   }
 }'::jsonb),
