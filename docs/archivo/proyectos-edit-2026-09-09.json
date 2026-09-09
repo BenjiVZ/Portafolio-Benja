@@ -3,7 +3,7 @@
     "fecha": "2026-09-09",
     "origen": "public/data/proyectos-edit.json",
     "descripcion": "Copia de seguridad de las ediciones hechas desde /admin en modo local. Para restaurar, copiar el array de \"ediciones\" a public/data/proyectos-edit.json.",
-    "total_ediciones": 30,
+    "total_ediciones": 31,
     "eliminados": [
       {
         "id": "gh-lumi-booth",
@@ -51,8 +51,10 @@
       "gh-hc-historial",
       "gh-csen-v1",
       "gh-csen-v2",
-      "gh-nomina"
-    ]
+      "gh-nomina",
+      "gh-damasco-monitor"
+    ],
+    "con_imagen": 14
   },
   "ediciones": [
     {
@@ -784,6 +786,35 @@
         "HTML",
         "CSS",
         "JavaScript"
+      ]
+    },
+    {
+      "id": "gh-damasco-monitor",
+      "hidden": false,
+      "featured": true,
+      "sub_skills": [
+        "Servicios de Windows",
+        "SQLite",
+        "Web scraping"
+      ],
+      "github_repos": [
+        "BenjiVZ/Damasco-Monitor"
+      ],
+      "image_url": "/media/proyectos/1788994634954-WhatsApp_Image_2026-09-09_at_6.42.38_PM.jpeg",
+      "live_url": "",
+      "repo_url": "",
+      "sort_order": 4,
+      "title": "Monitor de Tasas de Cambio",
+      "short_description": "Monitor automático de USD, EUR y Binance P2P con historial y dashboard de gráficas.",
+      "description": "Sistema Django propio que consulta periódicamente las tasas de USD y EUR en DolarVzla y el mercado P2P de Binance (USDT/VES) en horarios programados, detecta las variaciones, guarda solo los cambios y mantiene el historial completo. Incluye un dashboard web con gráficas de evolución en tiempo real hechas con Chart.js, gráfica comparativa normalizada, historial con filtros por fecha y fuente, panel de administración de Django, comandos de gestión para correr cada monitor por separado o todos juntos y guía para dejarlo corriendo como servicio de Windows.",
+      "category": "personal",
+      "subcategory": "web",
+      "tech_stack": [
+        "Python",
+        "Django",
+        "Chart.js",
+        "Bootstrap",
+        "Binance API"
       ]
     }
   ]
