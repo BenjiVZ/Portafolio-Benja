@@ -97,20 +97,22 @@
   },
   {
     "id": "gh-damasco-monitor",
-    "title": "Damasco Monitor - Tasas de cambio",
-    "short_description": "Monitor automático de USD, EUR y Binance P2P con dashboard de gráficas.",
-    "description": "Sistema Django que consulta periódicamente las tasas de USD y EUR (DolarVzla) y el mercado P2P de Binance (USDT/VES) en horarios programados, guarda solo las variaciones y mantiene el historial completo. Incluye dashboard web con gráficas comparativas en tiempo real, filtros de consulta, panel de administración, comandos de gestión para correr los monitores y guía para ejecutarlo como servicio de Windows.",
-    "category": "work",
+    "title": "Monitor de Tasas de Cambio",
+    "short_description": "Monitor automático de USD, EUR y Binance P2P con historial y dashboard de gráficas.",
+    "description": "Sistema Django propio que consulta periódicamente las tasas de USD y EUR en DolarVzla y el mercado P2P de Binance (USDT/VES) en horarios programados, detecta las variaciones, guarda solo los cambios y mantiene el historial completo. Incluye un dashboard web con gráficas de evolución en tiempo real hechas con Chart.js, gráfica comparativa normalizada, historial con filtros por fecha y fuente, panel de administración de Django, comandos de gestión para correr cada monitor por separado o todos juntos y guía para dejarlo corriendo como servicio de Windows.",
+    "category": "personal",
     "subcategory": "web",
     "tech_stack": [
       "Python",
       "Django",
       "Chart.js",
+      "Bootstrap",
       "Binance API"
     ],
     "sub_skills": [
       "Servicios de Windows",
-      "SQLite"
+      "SQLite",
+      "Web scraping"
     ],
     "featured": false,
     "hidden": false,
