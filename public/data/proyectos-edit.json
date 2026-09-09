@@ -141,8 +141,8 @@
     "github_repos": [
       "BenjiVZ/SHOWROOTS"
     ],
-    "image_url": "https://im-pulsar.com/",
-    "live_url": "",
+    "image_url": "",
+    "live_url": "https://im-pulsar.com/",
     "repo_url": "",
     "sort_order": 78,
     "title": "Pulsar by ShowRoots - Reservas de DJs y talento",
@@ -156,6 +156,230 @@
       "Python",
       "Django",
       "Nginx"
+    ]
+  },
+  {
+    "id": "gh-ivoo-ventas",
+    "hidden": false,
+    "featured": false,
+    "sub_skills": [
+      "SQLite",
+      "Material Design"
+    ],
+    "github_repos": [
+      "BenjiVZ/RV"
+    ],
+    "image_url": "",
+    "live_url": "",
+    "repo_url": "",
+    "sort_order": 7,
+    "title": "Ivoo Ventas (RV) - App de apoyo comercial",
+    "short_description": "App Flutter para el equipo de ventas: facturas, clientes, reporte diario y herramientas de cálculo.",
+    "description": "Aplicación móvil para el equipo de ventas de Ivoo. Permite registrar las facturas del día desde un formulario, generar el reporte diario y consultar el historial, administrar la cartera de clientes y solicitar acceso o registrarse como usuario. Incluye herramientas de apoyo: conversor de moneda, calculadora de descuentos y calculadora de cuotas Cashea. Construida con Flutter y Provider, con servicios de autenticación y base de datos.",
+    "category": "work",
+    "subcategory": "app",
+    "tech_stack": [
+      "Flutter",
+      "Dart",
+      "Provider"
+    ]
+  },
+  {
+    "id": "gh-bot-financiero",
+    "hidden": false,
+    "featured": false,
+    "sub_skills": [
+      "SQLite"
+    ],
+    "github_repos": [
+      "BenjiVZ/BOT_FINANCIERO"
+    ],
+    "image_url": "",
+    "live_url": "",
+    "repo_url": "",
+    "sort_order": 15,
+    "title": "Bot Financiero - Asistente de finanzas personales",
+    "short_description": "Chatbot Rasa con backend Django para consultar saldo, registrar gastos y ver el historial.",
+    "description": "Asistente conversacional de finanzas personales. En Rasa se definen intenciones para consultar saldo y estado de cuenta, ver el historial de transacciones y registrar gastos mediante un formulario (monto y categoría), con avisos cuando se supera el 80 % del presupuesto mensual. Un proyecto Django persiste los datos y sirve la interfaz; un script levanta ambos servicios a la vez.",
+    "category": "university",
+    "subcategory": "backend",
+    "tech_stack": [
+      "Python",
+      "Rasa",
+      "Django"
+    ]
+  },
+  {
+    "id": "gh-ecommerce-django",
+    "hidden": false,
+    "featured": false,
+    "sub_skills": [
+      "SQLite"
+    ],
+    "github_repos": [
+      "BenjiVZ/Benja_projectoDjango"
+    ],
+    "image_url": "",
+    "live_url": "",
+    "repo_url": "",
+    "sort_order": 20,
+    "title": "E-commerce con Django",
+    "short_description": "Tienda en línea con catálogo, carrito, usuarios y panel de administración.",
+    "description": "Plataforma de comercio electrónico en Django organizada en apps: catálogo de productos con imágenes, carrito de compras, usuarios con formularios propios y un módulo de administración con admin-interface. Plantillas y estilos propios por cada app.",
+    "category": "university",
+    "subcategory": "web",
+    "tech_stack": [
+      "Python",
+      "Django",
+      "HTML",
+      "CSS"
+    ]
+  },
+  {
+    "id": "gh-ecommerce-idx",
+    "hidden": false,
+    "featured": false,
+    "sub_skills": [
+      "Google IDX",
+      "Nix"
+    ],
+    "github_repos": [
+      "BenjiVZ/djangoapp-main",
+      "BenjiVZ/djangoapp"
+    ],
+    "image_url": "",
+    "live_url": "",
+    "repo_url": "",
+    "sort_order": 21,
+    "title": "E-commerce en Google IDX con filtro inteligente",
+    "short_description": "Tienda Django desarrollada en Google IDX con un bot de filtrado de productos por lenguaje natural.",
+    "description": "Evolución del e-commerce en Django construida en el entorno Google IDX (Nix): apps de catálogo, carrito y usuarios con señales, decoradores y estilos SCSS. Incorpora un bot de filtrado de productos que procesa la consulta del usuario con NLTK (tokenización, lematización y stopwords en español) y la traduce en búsquedas sobre la base de datos. Publicado como djangoapp (base) y djangoapp-main (versión completa con el bot).",
+    "category": "university",
+    "subcategory": "web",
+    "tech_stack": [
+      "Python",
+      "Django",
+      "NLTK",
+      "SCSS"
+    ]
+  },
+  {
+    "id": "gh-rasa-base",
+    "hidden": false,
+    "featured": false,
+    "sub_skills": [
+      "NLU"
+    ],
+    "github_repos": [
+      "BenjiVZ/Rasa"
+    ],
+    "image_url": "",
+    "live_url": "",
+    "repo_url": "",
+    "sort_order": 31,
+    "title": "Chatbot base con Rasa",
+    "short_description": "Asistente conversacional en Rasa con intenciones, reglas, historias y acciones personalizadas.",
+    "description": "Proyecto base de chatbot con Rasa 3: datos de entrenamiento (NLU), reglas e historias, dominio con respuestas, acciones personalizadas en Python y una página HTML mínima para conversar con el bot desde el navegador. Incluye modelos entrenados y los comandos para levantar el servidor con la API habilitada. Sirvió de punto de partida para los asistentes de e-commerce, turismo y finanzas.",
+    "category": "university",
+    "subcategory": "backend",
+    "tech_stack": [
+      "Python",
+      "Rasa",
+      "HTML"
+    ]
+  },
+  {
+    "id": "gh-cloudsong",
+    "hidden": false,
+    "featured": false,
+    "sub_skills": [
+      "Capacitor",
+      "SQLite",
+      "FFmpeg",
+      "YouTube"
+    ],
+    "github_repos": [
+      "BenjiVZ/CLOUD-CS",
+      "BenjiVZ/cloudsong_app",
+      "BenjiVZ/cloudsong_app_ionic",
+      "BenjiVZ/cloudsong_app_ionic_react",
+      "BenjiVZ/cloudsong_app_ionic_vue",
+      "BenjiVZ/APP-CS"
+    ],
+    "image_url": "",
+    "live_url": "",
+    "repo_url": "",
+    "sort_order": 62,
+    "title": "CloudSong - Música personal en la nube",
+    "short_description": "Servidor Django que descarga y cataloga música más apps en Flutter, Ionic y React Native para oírla offline.",
+    "description": "Servicio de streaming de música personal: el backend Django descarga audio desde YouTube y Spotify en MP3 de alta calidad, extrae metadatos y carátulas, analiza mixes y expone una API REST con token. Las apps permiten iniciar sesión, buscar, reproducir con controles completos, crear playlists, descargar para escuchar sin conexión y subir nuevas canciones por URL; existen versiones en Flutter, Ionic Angular, Ionic React, Ionic Vue y React Native.",
+    "category": "sistemas",
+    "subcategory": "app",
+    "tech_stack": [
+      "Python",
+      "Django",
+      "Flutter",
+      "Ionic",
+      "Angular",
+      "React",
+      "Vue.js",
+      "TypeScript"
+    ]
+  },
+  {
+    "id": "gh-cloud-file",
+    "hidden": false,
+    "featured": false,
+    "sub_skills": [
+      "REST",
+      "SQLite"
+    ],
+    "github_repos": [
+      "BenjiVZ/Cloud-file",
+      "BenjiVZ/Manager-File"
+    ],
+    "image_url": "",
+    "live_url": "",
+    "repo_url": "",
+    "sort_order": 63,
+    "title": "SyncServer - Archivos privados en la nube",
+    "short_description": "Nube de archivos personal con carpetas, enlaces compartidos y cliente de escritorio en Electron.",
+    "description": "Sistema de archivos privado en Django: carpetas y subcarpetas por usuario, subida de archivos de hasta 1 GB con hash MD5, enlaces públicos con token que se pueden activar o desactivar, explorador web en Bootstrap 5 y API REST. Lo acompaña Manager File, un cliente de escritorio en Electron + React con login contra el servidor, panel y notificaciones.",
+    "category": "sistemas",
+    "subcategory": "web",
+    "tech_stack": [
+      "Python",
+      "Django",
+      "Bootstrap",
+      "Electron",
+      "React",
+      "JavaScript"
+    ]
+  },
+  {
+    "id": "gh-chatia",
+    "hidden": false,
+    "featured": false,
+    "sub_skills": [
+      "SQLite"
+    ],
+    "github_repos": [
+      "BenjiVZ/ChatIA"
+    ],
+    "image_url": "",
+    "live_url": "",
+    "repo_url": "",
+    "sort_order": 64,
+    "title": "ChatIA - Chat con Gemini",
+    "short_description": "Chat web en Django con conversaciones y mensajes guardados, sobre la API de Gemini.",
+    "description": "Aplicación Django de chat con Google Gemini: conversaciones con título y fecha, mensajes de usuario y asistente persistidos, cliente de Gemini desacoplado e interfaz web sencilla. Versión genérica y personal del asistente que luego se especializó para la empresa.",
+    "category": "sistemas",
+    "subcategory": "backend",
+    "tech_stack": [
+      "Python",
+      "Django",
+      "Gemini",
+      "HTML"
     ]
   }
 ]
