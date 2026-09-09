@@ -6,8 +6,21 @@
     "description": "Sistema completo de reservas de pasajes para Aerorutas (Venezuela). El backend en Django REST Framework gestiona viajes, buses, rutas y distribución de asientos, reservas con selección de puesto, pagos con comprobantes y usuarios con autenticación JWT y Google OAuth; incluye un módulo de integración con APIs externas y un backoffice. El frontend es una SPA en React + Vite con capa de servicios y contexto de autenticación. Preparado para producción con SQL Server, Nginx y servicio systemd, con guía de despliegue en DigitalOcean.",
     "category": "personal",
     "subcategory": "web",
-    "tech_stack": ["Python", "Django", "Django REST Framework", "React", "JavaScript", "SQL Server", "Nginx"],
-    "sub_skills": ["JWT", "Google OAuth", "Vite", "DigitalOcean"],
+    "tech_stack": [
+      "Python",
+      "Django",
+      "Django REST Framework",
+      "React",
+      "JavaScript",
+      "SQL Server",
+      "Nginx"
+    ],
+    "sub_skills": [
+      "JWT",
+      "Google OAuth",
+      "Vite",
+      "DigitalOcean"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -22,8 +35,18 @@
     "description": "Sistema de gestión de autobuses con registro de flota y operadores, rutas trazadas en Google Maps y descritas por escrito, paradas georreferenciadas, sectores y tarifas por ruta o por tramo origen-destino. Incluye billetera con pago automático y una capa de pagos desacoplada, con proveedor abstracto listo para conectar la integración bancaria. Backend en Django 5.2 + DRF con documentación OpenAPI y app móvil en Flutter con login, rutas, mapa, tarifas y pago. La cercanía entre paradas se calcula con Haversine sin depender de PostGIS.",
     "category": "personal",
     "subcategory": "app",
-    "tech_stack": ["Python", "Django", "Django REST Framework", "Flutter", "Dart", "Google Maps"],
-    "sub_skills": ["OpenAPI", "SQLite"],
+    "tech_stack": [
+      "Python",
+      "Django",
+      "Django REST Framework",
+      "Flutter",
+      "Dart",
+      "Google Maps"
+    ],
+    "sub_skills": [
+      "OpenAPI",
+      "SQLite"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -38,8 +61,17 @@
     "description": "Asistente virtual desarrollado en Django que integra Google Gemini (API Key o Vertex AI) con el Service Layer de SAP Business One. Interpreta peticiones en lenguaje natural, construye la consulta OData adecuada mediante function calling y responde con artículos, socios de negocio, pedidos, facturas, almacenes o listas de precios. Guarda el historial de conversaciones, expone endpoints REST y cuenta con panel de administración y guías de configuración.",
     "category": "work",
     "subcategory": "backend",
-    "tech_stack": ["Python", "Django", "Gemini", "SAP"],
-    "sub_skills": ["Vertex AI", "OData", "REST"],
+    "tech_stack": [
+      "Python",
+      "Django",
+      "Gemini",
+      "SAP"
+    ],
+    "sub_skills": [
+      "Vertex AI",
+      "OData",
+      "REST"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -53,9 +85,17 @@
     "short_description": "Monitor automático de USD, EUR y Binance P2P con dashboard de gráficas.",
     "description": "Sistema Django que consulta periódicamente las tasas de USD y EUR (DolarVzla) y el mercado P2P de Binance (USDT/VES) en horarios programados, guarda solo las variaciones y mantiene el historial completo. Incluye dashboard web con gráficas comparativas en tiempo real, filtros de consulta, panel de administración, comandos de gestión para correr los monitores y guía para ejecutarlo como servicio de Windows.",
     "category": "work",
-    "subcategory": "backend",
-    "tech_stack": ["Python", "Django", "Chart.js", "Binance API"],
-    "sub_skills": ["Servicios de Windows", "SQLite"],
+    "subcategory": "web",
+    "tech_stack": [
+      "Python",
+      "Django",
+      "Chart.js",
+      "Binance API"
+    ],
+    "sub_skills": [
+      "Servicios de Windows",
+      "SQLite"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -67,11 +107,19 @@
     "id": "gh-add-distribucion",
     "title": "ADD - Sistema de Distribución y Normalización",
     "short_description": "Sistema Django para cargar, normalizar y auditar planificaciones de distribución entre CEDIS y sucursales.",
-    "description": "Herramienta interna que recibe archivos Excel de planificación y de salidas de mercancía, los normaliza contra maestros de centros de distribución (CEDIS), sucursales, regiones y gerentes regionales, y detecta productos faltantes, incidencias de PVP y errores de origen para resolverlos desde la web. Incluye biblioteca de maestros, mapeo por ID, tablero normalizado y decenas de scripts de análisis, verificación y corrección de datos, con documentación del proceso.",
+    "description": "Herramienta interna que recibe archivos Excel de planificación y de salidas de mercancía, los normaliza contra maestros de centros de distribución (CEDIS), sucursales, regiones y gerentes regionales, y detecta productos faltantes, incidencias de PVP y errores de origen para resolverlos desde la web. Incluye biblioteca de maestros, mapeo por ID, tablero normalizado y decenas de scripts de análisis, verificación y corrección de datos, con documentación del proceso. Existe una versión inicial (ADD) y la versión ampliada con biblioteca de maestros y corrección de CEDIS (ADBD).",
     "category": "work",
     "subcategory": "web",
-    "tech_stack": ["Python", "Django", "Pandas", "Excel"],
-    "sub_skills": ["openpyxl", "SQLite"],
+    "tech_stack": [
+      "Python",
+      "Django",
+      "Pandas",
+      "Excel"
+    ],
+    "sub_skills": [
+      "openpyxl",
+      "SQLite"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -84,10 +132,18 @@
     "title": "Frontend BVC - Panel de la Bolsa de Valores de Caracas",
     "short_description": "Dashboard bursátil en React con cotizaciones, gráficas, dólar y predicciones.",
     "description": "Interfaz web para seguir el mercado de la Bolsa de Valores de Caracas: cinta de cotizaciones, tarjetas de resumen, tabla de acciones con mini gráficas, histórico por símbolo de los últimos 30 días, evolución del dólar, cuadrícula de predicciones y analítica de récords. Consume una API propia mediante hooks reutilizables, soporta tema claro y oscuro y se despliega en Vercel.",
-    "category": "web",
-    "subcategory": "",
-    "tech_stack": ["React", "JavaScript", "Vite", "Chart.js"],
-    "sub_skills": ["Vercel", "REST"],
+    "category": "personal",
+    "subcategory": "web",
+    "tech_stack": [
+      "React",
+      "JavaScript",
+      "Vite",
+      "Chart.js"
+    ],
+    "sub_skills": [
+      "Vercel",
+      "REST"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -100,10 +156,17 @@
     "title": "Ivoo Ventas (RV) - App de apoyo comercial",
     "short_description": "App Flutter para el equipo de ventas: facturas, clientes, reporte diario y herramientas de cálculo.",
     "description": "Aplicación móvil para el equipo de ventas de Ivoo. Permite registrar las facturas del día desde un formulario, generar el reporte diario y consultar el historial, administrar la cartera de clientes y solicitar acceso o registrarse como usuario. Incluye herramientas de apoyo: conversor de moneda, calculadora de descuentos y calculadora de cuotas Cashea. Construida con Flutter y Provider, con servicios de autenticación y base de datos.",
-    "category": "app",
-    "subcategory": "",
-    "tech_stack": ["Flutter", "Dart", "Provider"],
-    "sub_skills": ["SQLite", "Material Design"],
+    "category": "personal",
+    "subcategory": "app",
+    "tech_stack": [
+      "Flutter",
+      "Dart",
+      "Provider"
+    ],
+    "sub_skills": [
+      "SQLite",
+      "Material Design"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -116,10 +179,18 @@
     "title": "SINPEL - Gestión técnica e inventario",
     "short_description": "Sistema Django para casos de garantía, servicio técnico e inventario de repuestos.",
     "description": "Plataforma web para SINPEL, servicio técnico de línea blanca y marrón. Registra el ingreso de equipos con datos del cliente, factura, serial, fallas, accesorios y condición; sigue el envío y la recepción con el centro de servicio y controla el inventario de repuestos con importación masiva. Módulos de ingresos, inventario y reportes con panel de administración.",
-    "category": "personal",
+    "category": "work",
     "subcategory": "web",
-    "tech_stack": ["Python", "Django", "JavaScript", "HTML", "CSS"],
-    "sub_skills": ["SQLite"],
+    "tech_stack": [
+      "Python",
+      "Django",
+      "JavaScript",
+      "HTML",
+      "CSS"
+    ],
+    "sub_skills": [
+      "SQLite"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -132,10 +203,20 @@
     "title": "MenuWeb - Menú digital para restaurantes",
     "short_description": "Menú web con código QR administrado desde Django: categorías, platillos, ingredientes y diseños.",
     "description": "Sistema de menú digital para restaurantes. Desde el panel de Django se gestionan categorías (normal, especial, bebidas, postres), platillos con precio, disponibilidad y destacado, ingredientes con imagen, información del local y diseños de fondo. Genera códigos QR para que los clientes abran el menú desde la mesa; el frontend usa HTML, CSS y JavaScript con Tailwind vía PostCSS.",
-    "category": "web",
-    "subcategory": "",
-    "tech_stack": ["Python", "Django", "HTML", "CSS", "JavaScript", "Tailwind"],
-    "sub_skills": ["Códigos QR", "PostCSS"],
+    "category": "personal",
+    "subcategory": "web",
+    "tech_stack": [
+      "Python",
+      "Django",
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Tailwind"
+    ],
+    "sub_skills": [
+      "Códigos QR",
+      "PostCSS"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -147,11 +228,19 @@
     "id": "gh-lidotel",
     "title": "Lidotel - Fidelización de agencias de viaje",
     "short_description": "Sistema Django de puntos para las agencias que reservan en un hotel.",
-    "description": "Plataforma de fidelización para un hotel: cada agencia de viajes tiene su cuenta y acumula puntos por las reservas que genera, según tipo de habitación, duración de la estadía y servicios adicionales (transporte, tours, spa), con multiplicadores por temporada alta o último minuto y bonos por volumen de huéspedes. Gestiona reservas con estados (pendiente, confirmada, cancelada, completada), configuración de puntos desde el admin y gráficas con Chart.js sobre Jazzmin.",
-    "category": "web",
-    "subcategory": "",
-    "tech_stack": ["Python", "Django", "Chart.js", "CSS"],
-    "sub_skills": ["Jazzmin", "SQLite"],
+    "description": "Plataforma de fidelización para un hotel: cada agencia de viajes tiene su cuenta y acumula puntos por las reservas que genera, según tipo de habitación, duración de la estadía y servicios adicionales (transporte, tours, spa), con multiplicadores por temporada alta o último minuto y bonos por volumen de huéspedes. Gestiona reservas con estados (pendiente, confirmada, cancelada, completada), configuración de puntos desde el admin y gráficas con Chart.js sobre Jazzmin. Hay una copia del sistema en el repositorio django-nico.",
+    "category": "personal",
+    "subcategory": "web",
+    "tech_stack": [
+      "Python",
+      "Django",
+      "Chart.js",
+      "CSS"
+    ],
+    "sub_skills": [
+      "Jazzmin",
+      "SQLite"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -164,10 +253,18 @@
     "title": "Quigua - Inventario y listas de compra",
     "short_description": "Sistema web Django para controlar el stock por categorías y generar listas de compra.",
     "description": "Aplicación web para el control de inventario de un establecimiento: productos por categoría con unidad, cantidad y stock mínimo, alerta automática de reposición, historial de actualización y listas de compra con ítems, notas y cierre. Panel de administración personalizado (admin_interface, CKEditor, StreamField) y comandos de gestión para la carga de datos.",
-    "category": "web",
-    "subcategory": "",
-    "tech_stack": ["Python", "Django", "JavaScript", "CSS"],
-    "sub_skills": ["CKEditor", "SQLite"],
+    "category": "personal",
+    "subcategory": "web",
+    "tech_stack": [
+      "Python",
+      "Django",
+      "JavaScript",
+      "CSS"
+    ],
+    "sub_skills": [
+      "CKEditor",
+      "SQLite"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -180,10 +277,16 @@
     "title": "App de Stock y Compras para posadas",
     "short_description": "App Flutter para el inventario, el consumo de productos y las listas de compra de una posada.",
     "description": "Aplicación móvil multiplataforma para gestionar el inventario de una posada: categorías, productos con detalle y formulario, registro de uso o consumo de cada producto y lista de compras generada a partir del stock. Incluye tutorial integrado y arquitectura por funcionalidades con Provider. Evoluciona una primera versión (posada_app) con las mismas bases.",
-    "category": "app",
-    "subcategory": "",
-    "tech_stack": ["Flutter", "Dart", "Provider"],
-    "sub_skills": ["Material Design"],
+    "category": "personal",
+    "subcategory": "app",
+    "tech_stack": [
+      "Flutter",
+      "Dart",
+      "Provider"
+    ],
+    "sub_skills": [
+      "Material Design"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -195,11 +298,19 @@
     "id": "gh-turismo-ai",
     "title": "Asistente Virtual Turístico de Mérida",
     "short_description": "Chatbot Rasa con API Django que recomienda restaurantes, lugares y actividades en Mérida.",
-    "description": "Asistente conversacional para turistas de Mérida (Venezuela). El bot en Rasa entiende intenciones como buscar restaurantes, lugares para visitar, actividades al aire libre, museos, compras o vida nocturna, y responde con listados con tipo, dirección y horario. Los datos viven en una API con Django REST Framework (modelos, serializadores y carga inicial) que el bot consulta mediante acciones personalizadas.",
+    "description": "Asistente conversacional para turistas de Mérida (Venezuela). El bot en Rasa entiende intenciones como buscar restaurantes, lugares para visitar, actividades al aire libre, museos, compras o vida nocturna, y responde con listados con tipo, dirección y horario. Los datos viven en una API con Django REST Framework (modelos, serializadores y carga inicial) que el bot consulta mediante acciones personalizadas. Publicado en dos repositorios (Turismo-AI y T-BIiAI) con el mismo contenido.",
     "category": "personal",
     "subcategory": "backend",
-    "tech_stack": ["Python", "Rasa", "Django", "Django REST Framework"],
-    "sub_skills": ["NLU", "SQLite"],
+    "tech_stack": [
+      "Python",
+      "Rasa",
+      "Django",
+      "Django REST Framework"
+    ],
+    "sub_skills": [
+      "NLU",
+      "SQLite"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -212,10 +323,20 @@
     "title": "AI Asesor en Compras - E-commerce con asistente Rasa",
     "short_description": "Tienda Django con un bot que busca productos, marcas y filtra por precio en conversación.",
     "description": "E-commerce en Django (catálogo, carrito y usuarios) acompañado de un asistente Rasa que atiende al comprador: consulta productos y marcas, filtra por nombre, descripción y rango de precios mediante un formulario conversacional y adapta sus respuestas al estado de ánimo del usuario. Incluye un filtro de productos con NLTK y se desarrolló en Google IDX.",
-    "category": "web",
-    "subcategory": "backend",
-    "tech_stack": ["Python", "Django", "Rasa", "HTML", "CSS", "JavaScript"],
-    "sub_skills": ["NLTK", "Google IDX"],
+    "category": "personal",
+    "subcategory": "web",
+    "tech_stack": [
+      "Python",
+      "Django",
+      "Rasa",
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
+    "sub_skills": [
+      "NLTK",
+      "Google IDX"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -228,10 +349,16 @@
     "title": "Bot Financiero - Asistente de finanzas personales",
     "short_description": "Chatbot Rasa con backend Django para consultar saldo, registrar gastos y ver el historial.",
     "description": "Asistente conversacional de finanzas personales. En Rasa se definen intenciones para consultar saldo y estado de cuenta, ver el historial de transacciones y registrar gastos mediante un formulario (monto y categoría), con avisos cuando se supera el 80 % del presupuesto mensual. Un proyecto Django persiste los datos y sirve la interfaz; un script levanta ambos servicios a la vez.",
-    "category": "backend",
-    "subcategory": "",
-    "tech_stack": ["Python", "Rasa", "Django"],
-    "sub_skills": ["SQLite"],
+    "category": "personal",
+    "subcategory": "backend",
+    "tech_stack": [
+      "Python",
+      "Rasa",
+      "Django"
+    ],
+    "sub_skills": [
+      "SQLite"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -244,10 +371,17 @@
     "title": "Django Launcher - Lanzador de escritorio para proyectos Django",
     "short_description": "App Electron que clona un repositorio de GitHub y ejecuta su servidor Django en una ventana.",
     "description": "Utilidad de escritorio en Electron que pide la URL de un repositorio de GitHub, lo clona en una carpeta segura, detecta manage.py, ejecuta el servidor Django y muestra el sistema dentro de la misma ventana. Guarda la configuración de forma persistente, muestra una pantalla de carga en arranques posteriores y detiene el proceso al cerrar. Pensada para entregar sistemas Django a usuarios sin conocimientos técnicos.",
-    "category": "app",
-    "subcategory": "backend",
-    "tech_stack": ["Electron", "JavaScript", "Node.js", "Python"],
-    "sub_skills": ["simple-git"],
+    "category": "personal",
+    "subcategory": "app",
+    "tech_stack": [
+      "Electron",
+      "JavaScript",
+      "Node.js",
+      "Python"
+    ],
+    "sub_skills": [
+      "simple-git"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -262,8 +396,18 @@
     "description": "Aplicación web en Flask desarrollada durante la pasantía en A.S 28 La Candelaria. Recibe los reportes de control horario de los locales (Candelaria Center y Sambil), ejecuta macros VBA sobre el Excel, limpia y tabula los datos por día con Pandas, calcula aperturas, cierres y excepciones, y muestra resultados y diagnósticos con gráficas Plotly. Exporta a CSV y XLSX y guarda en MySQL.",
     "category": "internship",
     "subcategory": "web",
-    "tech_stack": ["Python", "Flask", "Pandas", "Excel", "MySQL"],
-    "sub_skills": ["VBA", "Plotly", "openpyxl"],
+    "tech_stack": [
+      "Python",
+      "Flask",
+      "Pandas",
+      "Excel",
+      "MySQL"
+    ],
+    "sub_skills": [
+      "VBA",
+      "Plotly",
+      "openpyxl"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -278,8 +422,16 @@
     "description": "Implementación del servidor OCS Inventory NG 2.11 durante la pasantía en A.S 28 La Candelaria (Constructora - Sambil) para inventariar equipos y activos de TI. El repositorio conserva la configuración del servidor (Apache, API y reportes), el respaldo de la base de datos y los comandos de arranque documentados.",
     "category": "internship",
     "subcategory": "sistemas",
-    "tech_stack": ["OCS Inventory", "Linux", "Apache", "MySQL", "Perl"],
-    "sub_skills": ["PHP"],
+    "tech_stack": [
+      "OCS Inventory",
+      "Linux",
+      "Apache",
+      "MySQL",
+      "Perl"
+    ],
+    "sub_skills": [
+      "PHP"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -294,8 +446,14 @@
     "description": "Instalación y personalización de osTicket como mesa de ayuda para las solicitudes de TI en A.S 28 La Candelaria (Constructora - Sambil). Incluye la instancia configurada (osTicket-sambil) y el respaldo de la base de datos de pruebas.",
     "category": "internship",
     "subcategory": "sistemas",
-    "tech_stack": ["osTicket", "PHP", "MySQL"],
-    "sub_skills": ["Apache"],
+    "tech_stack": [
+      "osTicket",
+      "PHP",
+      "MySQL"
+    ],
+    "sub_skills": [
+      "Apache"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -308,10 +466,17 @@
     "title": "E-commerce con Django",
     "short_description": "Tienda en línea con catálogo, carrito, usuarios y panel de administración.",
     "description": "Plataforma de comercio electrónico en Django organizada en apps: catálogo de productos con imágenes, carrito de compras, usuarios con formularios propios y un módulo de administración con admin-interface. Plantillas y estilos propios por cada app.",
-    "category": "web",
-    "subcategory": "",
-    "tech_stack": ["Python", "Django", "HTML", "CSS"],
-    "sub_skills": ["SQLite"],
+    "category": "personal",
+    "subcategory": "web",
+    "tech_stack": [
+      "Python",
+      "Django",
+      "HTML",
+      "CSS"
+    ],
+    "sub_skills": [
+      "SQLite"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -323,11 +488,19 @@
     "id": "gh-ecommerce-idx",
     "title": "E-commerce en Google IDX con filtro inteligente",
     "short_description": "Tienda Django desarrollada en Google IDX con un bot de filtrado de productos por lenguaje natural.",
-    "description": "Evolución del e-commerce en Django construida en el entorno Google IDX (Nix): apps de catálogo, carrito y usuarios con señales, decoradores y estilos SCSS. Incorpora un bot de filtrado de productos que procesa la consulta del usuario con NLTK (tokenización, lematización y stopwords en español) y la traduce en búsquedas sobre la base de datos.",
-    "category": "web",
-    "subcategory": "",
-    "tech_stack": ["Python", "Django", "NLTK", "SCSS"],
-    "sub_skills": ["Google IDX", "Nix"],
+    "description": "Evolución del e-commerce en Django construida en el entorno Google IDX (Nix): apps de catálogo, carrito y usuarios con señales, decoradores y estilos SCSS. Incorpora un bot de filtrado de productos que procesa la consulta del usuario con NLTK (tokenización, lematización y stopwords en español) y la traduce en búsquedas sobre la base de datos. Publicado como djangoapp (base) y djangoapp-main (versión completa con el bot).",
+    "category": "personal",
+    "subcategory": "web",
+    "tech_stack": [
+      "Python",
+      "Django",
+      "NLTK",
+      "SCSS"
+    ],
+    "sub_skills": [
+      "Google IDX",
+      "Nix"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -339,11 +512,19 @@
     "id": "gh-lumi-booth",
     "title": "Lumi Booth - Cabina de fotos web",
     "short_description": "Cabina de fotos en el navegador: filtros, plantillas, stickers y descarga en PNG o PDF.",
-    "description": "Aplicación web en React + Vite que convierte la cámara del dispositivo en una cabina de fotos: toma la secuencia de fotos, aplica filtros, permite elegir plantilla (tira o cuadrícula), tema, sticker y leyenda con fecha, y descarga el resultado en PNG o PDF. Todo se procesa en el navegador; las fotos nunca salen del equipo.",
-    "category": "web",
-    "subcategory": "",
-    "tech_stack": ["React", "JavaScript", "Vite", "CSS"],
-    "sub_skills": ["Canvas", "PDF"],
+    "description": "Aplicación web en React + Vite que convierte la cámara del dispositivo en una cabina de fotos: toma la secuencia de fotos, aplica filtros, permite elegir plantilla (tira o cuadrícula), tema, sticker y leyenda con fecha, y descarga el resultado en PNG o PDF. Todo se procesa en el navegador; las fotos nunca salen del equipo. El repositorio vive en las dos cuentas de GitHub.",
+    "category": "work",
+    "subcategory": "web",
+    "tech_stack": [
+      "React",
+      "JavaScript",
+      "Vite",
+      "CSS"
+    ],
+    "sub_skills": [
+      "Canvas",
+      "PDF"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -358,8 +539,16 @@
     "description": "Página de una sola pieza que recuerda un momento mostrando el cielo real que había sobre Valencia, Carabobo, esa noche: el disco estelar se dibuja solo (estrellas, constelaciones trazándose una a una, puntos cardinales) y se puede explorar; incluye contadores en vivo y un fondo con capas de estrellas en parallax y estrellas fugaces. Hecha con React + Vite a partir de un catálogo de estrellas y desplegada como sitio estático.",
     "category": "personal",
     "subcategory": "web",
-    "tech_stack": ["React", "JavaScript", "Vite", "CSS"],
-    "sub_skills": ["Canvas", "Vercel"],
+    "tech_stack": [
+      "React",
+      "JavaScript",
+      "Vite",
+      "CSS"
+    ],
+    "sub_skills": [
+      "Canvas",
+      "Vercel"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -374,8 +563,15 @@
     "description": "Página interactiva en Next.js desplegada en Vercel: mural de flores que se abre al tocar, botón que huye del mouse, planificador de cita en tres pasos que genera un mensaje para copiar, página secreta protegida por clave y cierre con confeti y lluvia de corazones. Conserva la versión original en HTML, CSS y JavaScript puro.",
     "category": "personal",
     "subcategory": "web",
-    "tech_stack": ["Next.js", "React", "JavaScript", "CSS"],
-    "sub_skills": ["Vercel"],
+    "tech_stack": [
+      "Next.js",
+      "React",
+      "JavaScript",
+      "CSS"
+    ],
+    "sub_skills": [
+      "Vercel"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -389,9 +585,16 @@
     "short_description": "Notebook de Google Colab para calcular y graficar transformaciones geométricas.",
     "description": "Proyecto universitario en Jupyter / Google Colab que aplica traslaciones y rotaciones a figuras en dos y tres dimensiones mediante matrices de transformación, mostrando paso a paso los cálculos y la figura resultante con Matplotlib.",
     "category": "university",
-    "subcategory": "",
-    "tech_stack": ["Python", "Jupyter", "NumPy", "Matplotlib"],
-    "sub_skills": ["Google Colab"],
+    "subcategory": "backend",
+    "tech_stack": [
+      "Python",
+      "Jupyter",
+      "NumPy",
+      "Matplotlib"
+    ],
+    "sub_skills": [
+      "Google Colab"
+    ],
     "featured": false,
     "hidden": false,
     "image_url": "",
@@ -406,7 +609,10 @@
     "description": "Aplicación de escritorio en Python con interfaz Tkinter que realiza operaciones aritméticas básicas y conversiones entre unidades de longitud (metros, centímetros, milímetros, pies, yardas, millas) y de capacidad (litros, mililitros, galones, cuartos, pintas, onzas).",
     "category": "university",
     "subcategory": "app",
-    "tech_stack": ["Python", "Tkinter"],
+    "tech_stack": [
+      "Python",
+      "Tkinter"
+    ],
     "sub_skills": [],
     "featured": false,
     "hidden": false,
@@ -422,7 +628,10 @@
     "description": "Videojuego arcade desarrollado con Pygame: el jugador guía a un pato que debe esquivar objetos que caen del cielo, con velocidad y cantidad crecientes, sistema de puntuación, reinicio rápido y estética retro.",
     "category": "university",
     "subcategory": "app",
-    "tech_stack": ["Python", "Pygame"],
+    "tech_stack": [
+      "Python",
+      "Pygame"
+    ],
     "sub_skills": [],
     "featured": false,
     "hidden": false,
@@ -435,10 +644,17 @@
     "id": "gh-mega-cars-wash",
     "title": "Mega Cars Wash - Sitio web de autolavado",
     "short_description": "Sitio para un autolavado con registro e inicio de sesión, en tres implementaciones.",
-    "description": "Página web para el autolavado Mega Cars Wash desarrollada en tres versiones independientes: JavaScript con Firebase (autenticación con Google y Facebook, publicaciones y mensajes), PHP con MySQL y una versión inicial en HTML, CSS y JavaScript. Proyecto de formación temprana en desarrollo web.",
+    "description": "Página web para el autolavado Mega Cars Wash desarrollada en tres versiones independientes: JavaScript con Firebase (autenticación con Google y Facebook, publicaciones y mensajes), PHP con MySQL y una versión inicial en HTML, CSS y JavaScript. Proyecto de formación temprana en desarrollo web. Repositorios: Mega-Cars-Wash, MCW, MCW-con-JavaScrip y MCW-con-PHP.",
     "category": "university",
     "subcategory": "web",
-    "tech_stack": ["HTML", "CSS", "JavaScript", "Firebase", "PHP", "MySQL"],
+    "tech_stack": [
+      "HTML",
+      "CSS",
+      "JavaScript",
+      "Firebase",
+      "PHP",
+      "MySQL"
+    ],
     "sub_skills": [],
     "featured": false,
     "hidden": false,
@@ -454,7 +670,12 @@
     "description": "Sistema web de registro académico desarrollado con PHP y MySQL: alta de estudiantes y profesores, carga de notas y consultas, con interfaz en HTML y CSS y respaldo de la base de datos. Uno de los primeros proyectos de formación.",
     "category": "university",
     "subcategory": "web",
-    "tech_stack": ["PHP", "MySQL", "HTML", "CSS"],
+    "tech_stack": [
+      "PHP",
+      "MySQL",
+      "HTML",
+      "CSS"
+    ],
     "sub_skills": [],
     "featured": false,
     "hidden": false,
@@ -470,7 +691,11 @@
     "description": "Página web estática sobre videojuegos con varias secciones, galería de imágenes y algo de JavaScript, realizada como práctica de maquetación con HTML y CSS.",
     "category": "university",
     "subcategory": "web",
-    "tech_stack": ["HTML", "CSS", "JavaScript"],
+    "tech_stack": [
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ],
     "sub_skills": [],
     "featured": false,
     "hidden": false,
@@ -478,5 +703,52 @@
     "live_url": "",
     "repo_url": "",
     "sort_order": 30
+  },
+  {
+    "id": "gh-rasa-base",
+    "title": "Chatbot base con Rasa",
+    "short_description": "Asistente conversacional en Rasa con intenciones, reglas, historias y acciones personalizadas.",
+    "description": "Proyecto base de chatbot con Rasa 3: datos de entrenamiento (NLU), reglas e historias, dominio con respuestas, acciones personalizadas en Python y una página HTML mínima para conversar con el bot desde el navegador. Incluye modelos entrenados y los comandos para levantar el servidor con la API habilitada. Sirvió de punto de partida para los asistentes de e-commerce, turismo y finanzas.",
+    "category": "personal",
+    "subcategory": "backend",
+    "tech_stack": [
+      "Python",
+      "Rasa",
+      "HTML"
+    ],
+    "sub_skills": [
+      "NLU"
+    ],
+    "featured": false,
+    "hidden": false,
+    "image_url": "",
+    "live_url": "",
+    "repo_url": "",
+    "sort_order": 31
+  },
+  {
+    "id": "gh-portafolio",
+    "title": "Portafolio MastersLogic - Este sitio",
+    "short_description": "Portafolio en Vue 3 con panel de administración, Supabase y respaldo local sin conexión.",
+    "description": "Sitio personal construido con Vue 3 y Vite: tema claro y oscuro, sección de proyectos con filtros y paginación, experiencia, servicios, flyers y contacto por WhatsApp. Los contenidos viven en Supabase y, si la base no responde, el sitio cae a un respaldo local en JSON sin mezclar fuentes. Incluye un panel /admin protegido con edición en línea, filtros, ocultar proyectos, guardado masivo, sugerencias de importación y una página de respaldo completo descargable. Desplegado en Vercel.",
+    "category": "personal",
+    "subcategory": "web",
+    "tech_stack": [
+      "Vue.js",
+      "JavaScript",
+      "Vite",
+      "Supabase",
+      "CSS"
+    ],
+    "sub_skills": [
+      "Vercel",
+      "vue-router"
+    ],
+    "featured": false,
+    "hidden": false,
+    "image_url": "",
+    "live_url": "",
+    "repo_url": "",
+    "sort_order": 32
   }
 ]

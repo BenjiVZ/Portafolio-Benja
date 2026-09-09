@@ -1,15 +1,15 @@
 {
   "_meta": {
     "descripcion": "Repos de GitHub curados, fusionados con proyectos.json en src/lib/data.js",
-    "cuentas": [
-      "benjaS357",
-      "BenjiVZ"
-    ],
+    "cuentas": {
+      "benjaS357": "respaldo de proyectos de empresa (categoria work)",
+      "BenjiVZ": "proyectos propios, universitarios e ideas (personal / university / internship)"
+    },
     "excluidos": "forks (ia-1, ADD de BenjiVZ), repo de perfil (BenjiVZ), portafolio anterior (BenjiVZ.github.io) y este mismo sitio (Portafolio-Benja x2)",
     "nota_descripciones": "Los items con descripcion_pendiente:true tienen texto factual generado desde metadata de GitHub (lenguaje y fecha de actividad). Reemplazar con una descripcion real antes de publicar.",
     "actualizado": "2026-09-09",
     "nota_enlaces": "Sin enlaces a repos por decision del autor: el portafolio solo muestra los proyectos trabajados, sin acceso al codigo.",
-    "nota_importados": "2026-09-09: src/data/proyectos.json contiene SOLO los sistemas sacados de GitHub (30), con resumen redactado a partir de cada repositorio. El export viejo de Django esta en docs/archivo/. Excluidos: forks, repos vacios (ADB, star-map, ecommerce, Projecto-Django), duplicados (django-nico = django-lidotel, Turismo-AI = T-BIiAI, ADD = ADBD, posada_app = Aplicacion-de-stok-y-compra, djangoapp = djangoapp-main, MCW*), el bot Rasa suelto y SHOWROOTS (ya no existe en GitHub)."
+    "nota_importados": "2026-09-09: src/data/proyectos.json contiene los 32 sistemas de GitHub con resumen redactado a partir de cada repositorio; categoria = origen (work/personal/university/internship), subcategoria = tipo (web/app/backend/sistemas). Excluidos: forks (ia-1, ADD de BenjiVZ), repos vacios (ADB, star-map, ecommerce, Projecto-Django), el repo de perfil y BenjiVZ.github.io. Fusionados: django-nico=django-lidotel, Turismo-AI=T-BIiAI, ADD=ADBD, posada_app=Aplicacion-de-stok-y-compra, djangoapp=djangoapp-main, MCW*=Mega-Cars-Wash. SHOWROOTS ya no existe en GitHub. Excepcion al criterio de cuentas: nuestra-noche y currucumor estan en benjaS357 pero son personales."
   },
   "enlaces": {},
   "repos": []
