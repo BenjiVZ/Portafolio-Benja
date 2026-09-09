@@ -10,4 +10,14 @@ if (!supabaseUrl || !supabaseAnonKey) {
   )
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey)
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    // El panel entra con VITE_ADMIN_PASSWORD, no con Supabase Auth: no hay
+    // sesion que refrescar. Sin esto el cliente reintenta el refresh_token en
+    // bucle (cada vez que la pestaña vuelve al frente) y llena la consola de
+    // ERR_NAME_NOT_RESOLVED, tapando los avisos que si importan.
+    autoRefreshToken: false,
+    persistSession: false,
+    detectSessionInUrl: false
+  }
+})

@@ -63,12 +63,24 @@ async function remotoOLocal(remota, local, { escritura = false } = {}) {
 
 // ── Escritura local (vite.config.js) ──
 async function guardarLocal(coleccion, row) {
-  const res = await fetch(`/__local/guardar/${coleccion}`, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify(row)
-  })
-  if (!res.ok) throw new Error('La edicion local fallo: ' + res.status)
+  let res
+  try {
+    res = await fetch(`/__local/guardar/${coleccion}`, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify(row)
+    })
+  } catch (e) {
+    throw new Error('No respondió el servidor local. ¿Sigue corriendo npm run dev?')
+  }
+  // 404 = el servidor arrancó con un vite.config.js viejo que no tiene esta ruta
+  if (res.status === 404) {
+    throw new Error(`El servidor de desarrollo no conoce /__local/guardar/${coleccion}. Detén npm run dev y vuelve a arrancarlo para que tome el vite.config.js actual.`)
+  }
+  if (!res.ok) {
+    const detalle = await res.text().catch(() => '')
+    throw new Error(`La edición local falló (${res.status}). ${detalle.slice(0, 200)}`)
+  }
   return res.json()
 }
 

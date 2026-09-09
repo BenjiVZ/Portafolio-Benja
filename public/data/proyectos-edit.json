@@ -1,1 +1,161 @@
-[]
+[
+  {
+    "id": "gh-lumi-booth",
+    "_eliminado": true
+  },
+  {
+    "id": "gh-nuestra-noche",
+    "_eliminado": true
+  },
+  {
+    "id": "gh-currucumor",
+    "_eliminado": true
+  },
+  {
+    "id": "gh-webscraping",
+    "_eliminado": true
+  },
+  {
+    "id": "gh-goldmach",
+    "_eliminado": true
+  },
+  {
+    "id": "gh-va-bus",
+    "hidden": false,
+    "featured": true,
+    "sub_skills": [
+      "JWT",
+      "Google OAuth",
+      "Vite",
+      "DigitalOcean"
+    ],
+    "github_repos": [
+      "BenjiVZ/VA-Bus"
+    ],
+    "image_url": "",
+    "live_url": "https://aerorutasdevenezuela.net/",
+    "repo_url": "",
+    "sort_order": 1,
+    "title": "VA-Bus - Reservas de pasajes para Aerorutas",
+    "short_description": "Plataforma web de venta y reserva de boletos de autobús para la empresa Aerorutas.",
+    "description": "Sistema completo de reservas de pasajes para Aerorutas (Venezuela). El backend en Django REST Framework gestiona viajes, buses, rutas y distribución de asientos, reservas con selección de puesto, pagos con comprobantes y usuarios con autenticación JWT y Google OAuth; incluye un módulo de integración con APIs externas y un backoffice. El frontend es una SPA en React + Vite con capa de servicios y contexto de autenticación. Preparado para producción con SQL Server, Nginx y servicio systemd, con guía de despliegue en DigitalOcean.",
+    "category": "personal",
+    "subcategory": "web",
+    "tech_stack": [
+      "Python",
+      "Django",
+      "Django REST Framework",
+      "React",
+      "JavaScript",
+      "SQL Server",
+      "Nginx"
+    ]
+  },
+  {
+    "id": "gh-portafolio-sofi",
+    "hidden": false,
+    "featured": false,
+    "sub_skills": [
+      "CSS"
+    ],
+    "github_repos": [
+      "BenjiVZ/Portafolio-sofi"
+    ],
+    "image_url": "",
+    "live_url": "",
+    "repo_url": "",
+    "sort_order": 74,
+    "title": "Portafolio Sofia",
+    "short_description": "Sitio de portafolio en React + Vite con Supabase y un panel de administración en Electron.",
+    "description": "Portafolio profesional para una clienta: sitio en React + Vite con secciones de presentación, sobre mí, servicios, portafolio, testimonios y contacto, contenidos en Supabase con migraciones y políticas RLS, y un panel de administración de escritorio en Electron para editarlos.",
+    "category": "personal",
+    "subcategory": "web",
+    "tech_stack": [
+      "React",
+      "JavaScript",
+      "Vite",
+      "Supabase",
+      "Electron"
+    ]
+  },
+  {
+    "id": "gh-projectmanager",
+    "hidden": false,
+    "featured": false,
+    "sub_skills": [],
+    "github_repos": [
+      "BenjiVZ/ProjectManager",
+      "BenjiVZ/ProjectManager-2.0"
+    ],
+    "image_url": "",
+    "live_url": "",
+    "repo_url": "",
+    "sort_order": 75,
+    "title": "ProjectManager - Gestor de proyectos de escritorio",
+    "short_description": "App Electron para organizar proyectos, lanzadores, notas y tecnologías desde un solo panel.",
+    "description": "Aplicación de escritorio en Electron que centraliza los proyectos de desarrollo: fichas con tecnologías, lanzadores para abrir o ejecutar cada proyecto, notas y ajustes guardados en JSON, respaldo exportable y un pequeño servidor local. La versión 2.0 está en preparación.",
+    "category": "work",
+    "subcategory": "app",
+    "tech_stack": [
+      "Electron",
+      "JavaScript",
+      "Node.js",
+      "HTML",
+      "CSS"
+    ]
+  },
+  {
+    "id": "gh-respaldo-sql",
+    "hidden": false,
+    "featured": false,
+    "sub_skills": [
+      "REST",
+      "CLI"
+    ],
+    "github_repos": [
+      "BenjiVZ/Respaldo-sql"
+    ],
+    "image_url": "",
+    "live_url": "",
+    "repo_url": "",
+    "sort_order": 76,
+    "title": "DB Manager - Backups y datos para Django",
+    "short_description": "App Django reutilizable para crear y restaurar backups y exportar o importar datos desde la web o la consola.",
+    "description": "Aplicación Django pensada para copiarse en cualquier proyecto: backups completos de la base de datos preservando relaciones, restauración, exportación selectiva por app o modelo en JSON, XML o YAML, importación con manejo de errores, interfaz web con estadísticas, comandos de terminal para automatizar y una API documentada.",
+    "category": "work",
+    "subcategory": "backend",
+    "tech_stack": [
+      "Python",
+      "Django"
+    ]
+  },
+  {
+    "id": "gh-showroots",
+    "hidden": false,
+    "featured": true,
+    "sub_skills": [
+      "Vite",
+      "Pasarela de pagos",
+      "Hyperframes"
+    ],
+    "github_repos": [
+      "BenjiVZ/SHOWROOTS"
+    ],
+    "image_url": "https://im-pulsar.com/",
+    "live_url": "",
+    "repo_url": "",
+    "sort_order": 78,
+    "title": "Pulsar by ShowRoots - Reservas de DJs y talento",
+    "short_description": "Plataforma curada para contratar DJs, músicos y bandas con cotizaciones, pagos y partners.",
+    "description": "Plataforma en Vue + Django para conectar clientes con talento musical verificado por un administrador. Cuatro roles: cliente (explora sin cuenta, filtra por ciudad, género y presupuesto, solicita cotización, paga un porcentaje o el total, chatea y reseña), talento (perfil con fotos, videos y precio por hora, acepta o ajusta propuestas), admin (curaduría y supervisión) y partner (trae clientes y gana comisión). Backend con apps de cuentas, reservas, pagos, talentos, locales y notificaciones, integración de pagos, despliegue con Nginx y videos promocionales.",
+    "category": "personal",
+    "subcategory": "web",
+    "tech_stack": [
+      "Vue.js",
+      "JavaScript",
+      "Python",
+      "Django",
+      "Nginx"
+    ]
+  }
+]

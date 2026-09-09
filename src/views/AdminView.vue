@@ -78,6 +78,16 @@
       </button>
     </nav>
 
+    <!-- Avisos del panel: reemplazan a alert(), que el navegador puede silenciar -->
+    <div v-if="aviso" class="aviso-flotante" :class="'aviso-' + aviso.tipo" role="status">
+      <span class="aviso-icono">
+        <svg v-if="aviso.tipo === 'ok'" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        <svg v-else width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      </span>
+      <span class="aviso-texto">{{ aviso.texto }}</span>
+      <button class="aviso-cerrar" @click="aviso = null" aria-label="Cerrar aviso">✕</button>
+    </div>
+
     <main class="admin-content">
       <!-- PROJECTS TAB -->
       <div v-if="activeTab === 'projects'" class="admin-panel">
@@ -142,6 +152,7 @@
           <div v-for="p in proyectosFiltrados" :key="p.id" class="project-edit-row" :class="{ 'es-nuevo': p._nuevo, 'esta-oculto': p.hidden, 'esta-modificado': estaModificado(p) }">
             <span v-if="p.hidden" class="pe-oculto-badge">Oculto · no sale en el sitio</span>
             <span v-else-if="estaModificado(p)" class="pe-oculto-badge pe-modificado-badge">Sin guardar</span>
+            <span v-else-if="guardadoId === p.id" class="pe-oculto-badge pe-guardado-badge">Guardado ✓</span>
             <div class="pe-imagen">
               <div class="project-img-preview" v-if="p.image_url">
                 <img :src="p.image_url" alt="Preview" @error="$event.target.style.display='none'" />
@@ -815,7 +826,7 @@
 
 <script setup>
 import logoUrl from '../assets/logo.png'
-import { ref, reactive, computed, onMounted, h } from 'vue'
+import { ref, reactive, computed, onMounted, onUnmounted, h } from 'vue'
 import { useAdmin } from '../composables/useAdmin'
 import { getProjectSuggestions, toProjectRow } from '../lib/suggestions'
 
@@ -862,6 +873,20 @@ function handleLogout() {
 const admin = useAdmin()
 const enDev = import.meta.env.DEV
 const activeTab = ref('projects')
+
+// ── Avisos ──
+// Antes esto eran alert(): si el navegador marca "impedir que esta página cree
+// cuadros de diálogo adicionales", los errores dejan de verse y un guardado
+// fallido parece exitoso. El aviso va dentro de la página y no se puede callar.
+const aviso = ref(null)
+let avisoTimer = null
+function avisar(texto, tipo) {
+  const esError = tipo === 'error' || /no se pudo|no se guard|no se import|error|falló|fallo/i.test(texto)
+  aviso.value = { texto: String(texto), tipo: esError ? 'error' : 'ok' }
+  clearTimeout(avisoTimer)
+  // Los errores se quedan hasta que se cierren; los "listo" se van solos
+  if (!esError) avisoTimer = setTimeout(() => { aviso.value = null }, 4000)
+}
 
 // "Editar en local" (solo dev): todas las pestañas leen y guardan en
 // public/data/*-edit.json sin esperar a que Supabase falle.
@@ -973,7 +998,7 @@ async function handleImportSuggestion(s) {
     await recargarProyectos()
     await loadSuggestions()
   } catch (e) {
-    alert('No se pudo importar: ' + e.message)
+    avisar('No se pudo importar: ' + e.message)
   } finally {
     importingId.value = null
   }
@@ -994,7 +1019,7 @@ async function handleImportAll() {
   await recargarProyectos()
   await loadSuggestions()
   importingAll.value = false
-  if (fallidos.length) alert(`No se importaron ${fallidos.length}:\n` + fallidos.join('\n'))
+  if (fallidos.length) avisar(`No se importaron ${fallidos.length}:\n` + fallidos.join('\n'))
 }
 
 // Importa la sugerencia y salta al listado, donde queda editable en su fila.
@@ -1037,7 +1062,7 @@ async function handlePhotoUpload(event) {
     const url = await admin.uploadImage(file, 'masterslogic Org')
     configForm.about.image_url = url
   } catch (err) {
-    alert('Error subiendo foto: ' + err.message)
+    avisar('Error subiendo foto: ' + err.message)
   } finally {
     uploadingPhoto.value = false
     event.target.value = ''
@@ -1054,7 +1079,7 @@ async function handleProjectImgUpload(event, p) {
   try {
     p.image_url = await admin.uploadImage(file, 'masterslogic Org')
   } catch (err) {
-    alert('Error subiendo imagen: ' + err.message)
+    avisar('Error subiendo imagen: ' + err.message)
   } finally {
     uploadingImgId.value = null
     event.target.value = ''
@@ -1194,6 +1219,15 @@ function setGithubRepos(p, e) {
   p.github_repos = e.target.value.split(',').map(s => s.trim()).filter(Boolean)
 }
 
+// Id de la fila que acaba de guardarse, para confirmarlo en pantalla
+const guardadoId = ref(null)
+let guardadoTimer = null
+function marcarGuardado(id) {
+  guardadoId.value = id
+  clearTimeout(guardadoTimer)
+  guardadoTimer = setTimeout(() => { guardadoId.value = null }, 4000)
+}
+
 async function guardarProyecto(p, { recargar = true } = {}) {
   savingProjectId.value = p.id
   try {
@@ -1207,10 +1241,14 @@ async function guardarProyecto(p, { recargar = true } = {}) {
     } else {
       await admin.updateProject(p.id, data)
     }
-    if (recargar) await recargarProyectos()
+    if (recargar) {
+      await recargarProyectos()
+      marcarGuardado(p.id)
+      avisar(`Guardado: ${p.title || p.id}${admin.enDev ? ' → public/data/proyectos-edit.json' : ''}`, 'ok')
+    }
     return true
   } catch (e) {
-    alert('No se pudo guardar: ' + e.message)
+    avisar('No se pudo guardar: ' + e.message)
     return false
   } finally {
     savingProjectId.value = null
@@ -1233,7 +1271,8 @@ async function guardarTodos() {
   } finally {
     guardandoTodos.value = false
   }
-  if (fallidos.length) alert(`No se guardaron ${fallidos.length}: ${fallidos.join(', ')}`)
+  if (fallidos.length) avisar(`No se guardaron ${fallidos.length}: ${fallidos.join(', ')}`)
+  else avisar(`Guardados ${pendientes.length} proyecto${pendientes.length === 1 ? '' : 's'}.`, 'ok')
 }
 
 // Ocultar no borra nada: el proyecto sigue aqui, editable, pero el sitio
@@ -1241,12 +1280,15 @@ async function guardarTodos() {
 async function alternarOculto(p) {
   savingProjectId.value = p.id
   try {
-    await admin.updateProject(p.id, { hidden: !p.hidden })
+    const oculto = !p.hidden
+    await admin.updateProject(p.id, { hidden: oculto })
     await recargarProyectos()
+    marcarGuardado(p.id)
+    avisar(oculto ? `Oculto: ya no sale en el sitio.` : `Visible otra vez en el sitio.`, 'ok')
   } catch (e) {
     // PostgREST responde PGRST204 si la tabla aun no tiene la columna
     const sinColumna = /hidden/i.test(e.message || '') && /column|columna|PGRST204/i.test(e.message || '')
-    alert(sinColumna
+    avisar(sinColumna
       ? 'Supabase todavía no tiene la columna "hidden". Ejecuta en el SQL Editor:\n\nalter table projects add column if not exists hidden boolean default false;'
       : 'No se pudo cambiar la visibilidad: ' + e.message)
   } finally {
@@ -1259,8 +1301,9 @@ async function handleDeleteProject(id) {
   try {
     await admin.deleteProject(id)
     await recargarProyectos()
+    avisar('Proyecto eliminado del panel y del sitio.', 'ok')
   } catch (e) {
-    alert('Error al eliminar: ' + e.message)
+    avisar('Error al eliminar: ' + e.message)
   }
 }
 
@@ -1287,7 +1330,7 @@ async function handleSaveTestimonial() {
     showTestimonialModal.value = false
     testimonialsList.value = await admin.getTestimonials()
   } catch (e) {
-    alert('Error al guardar: ' + e.message)
+    avisar('Error al guardar: ' + e.message)
   }
 }
 
@@ -1297,7 +1340,7 @@ async function handleDeleteTestimonial(id) {
     await admin.deleteTestimonial(id)
     testimonialsList.value = await admin.getTestimonials()
   } catch (e) {
-    alert('Error al eliminar: ' + e.message)
+    avisar('Error al eliminar: ' + e.message)
   }
 }
 
@@ -1324,7 +1367,7 @@ async function handleSaveService() {
     showServiceModal.value = false
     servicesList.value = await admin.getServices()
   } catch (e) {
-    alert('Error al guardar: ' + e.message)
+    avisar('Error al guardar: ' + e.message)
   }
 }
 
@@ -1334,7 +1377,7 @@ async function handleDeleteService(id) {
     await admin.deleteService(id)
     servicesList.value = await admin.getServices()
   } catch (e) {
-    alert('Error al eliminar: ' + e.message)
+    avisar('Error al eliminar: ' + e.message)
   }
 }
 
@@ -1372,7 +1415,7 @@ async function handleSaveExperience() {
     showExperienceModal.value = false
     experiencesList.value = await admin.getExperiences()
   } catch (e) {
-    alert('Error al guardar: ' + e.message)
+    avisar('Error al guardar: ' + e.message)
   }
 }
 
@@ -1382,7 +1425,7 @@ async function handleDeleteExperience(id) {
     await admin.deleteExperience(id)
     experiencesList.value = await admin.getExperiences()
   } catch (e) {
-    alert('Error al eliminar: ' + e.message)
+    avisar('Error al eliminar: ' + e.message)
   }
 }
 
@@ -1396,9 +1439,9 @@ async function saveAllConfig() {
     await admin.updateSiteConfig('about', configForm.about)
     await admin.updateSiteConfig('contact', configForm.contact)
     await admin.updateSiteConfig('footer', configForm.footer)
-    alert('Configuración guardada exitosamente')
+    avisar('Configuración guardada exitosamente')
   } catch (e) {
-    alert('Error al guardar: ' + e.message)
+    avisar('Error al guardar: ' + e.message)
   } finally {
     savingConfig.value = false
   }
@@ -1411,7 +1454,7 @@ async function handleMarkRead(id) {
     const msg = messagesList.value.find(m => m.id === id)
     if (msg) msg.read = true
   } catch (e) {
-    alert('No se pudo marcar como leído: ' + e.message)
+    avisar('No se pudo marcar como leído: ' + e.message)
   }
 }
 
@@ -1421,7 +1464,7 @@ async function handleDeleteMessage(id) {
     await admin.deleteMessage(id)
     messagesList.value = messagesList.value.filter(m => m.id !== id)
   } catch (e) {
-    alert('Error al eliminar: ' + e.message)
+    avisar('Error al eliminar: ' + e.message)
   }
 }
 
@@ -1459,7 +1502,7 @@ async function handleSaveFlyer() {
     showFlyerModal.value = false
     flyersList.value = await admin.getFlyers()
   } catch (e) {
-    alert('Error al guardar: ' + e.message)
+    avisar('Error al guardar: ' + e.message)
   }
 }
 
@@ -1469,7 +1512,7 @@ async function handleDeleteFlyer(id) {
     await admin.deleteFlyer(id)
     flyersList.value = await admin.getFlyers()
   } catch (e) {
-    alert('Error al eliminar: ' + e.message)
+    avisar('Error al eliminar: ' + e.message)
   }
 }
 
@@ -1481,14 +1524,31 @@ async function handleFlyerImgUpload(event) {
     const url = await admin.uploadImage(file, 'flyers')
     flyerForm.image_url = url
   } catch (err) {
-    alert('Error subiendo imagen: ' + err.message)
+    avisar('Error subiendo imagen: ' + err.message)
   } finally {
     uploadingFlyerImg.value = false
     event.target.value = ''
   }
 }
 
-onMounted(loadAll)
+// Recargar la pagina con filas a medio editar las perdia sin decir nada: los
+// cambios viven en memoria hasta pulsar Guardar. El navegador ahora pregunta.
+function avisarSalida(e) {
+  if (!modificados.value.length) return
+  e.preventDefault()
+  e.returnValue = ''
+}
+
+onMounted(() => {
+  window.addEventListener('beforeunload', avisarSalida)
+  loadAll()
+})
+
+onUnmounted(() => {
+  window.removeEventListener('beforeunload', avisarSalida)
+  clearTimeout(avisoTimer)
+  clearTimeout(guardadoTimer)
+})
 </script>
 
 <style scoped>
@@ -1657,6 +1717,48 @@ onMounted(loadAll)
 
 .conexion-local { color: var(--color-accent); border-color: rgba(34, 211, 238, 0.35); }
 .conexion-local .conexion-punto { background: var(--color-accent); }
+
+/* Aviso de guardado / error: dentro de la pagina, no se puede silenciar */
+.aviso-flotante {
+  position: fixed;
+  right: var(--space-lg);
+  bottom: var(--space-lg);
+  z-index: 200;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  max-width: 520px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border);
+  background: var(--color-surface);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+}
+.aviso-flotante .aviso-icono { display: flex; flex-shrink: 0; margin-top: 1px; }
+.aviso-flotante .aviso-texto { white-space: pre-line; }
+.aviso-ok { color: var(--color-success); border-color: rgba(34, 197, 94, 0.45); }
+.aviso-error { color: var(--color-warning); border-color: rgba(245, 158, 11, 0.55); }
+.aviso-cerrar {
+  flex-shrink: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  opacity: 0.6;
+  cursor: pointer;
+  font-size: var(--text-sm);
+  line-height: 1;
+  padding: 2px 4px;
+}
+.aviso-cerrar:hover { opacity: 1; }
+
+/* Fila recien guardada */
+.pe-guardado-badge {
+  background: rgba(34, 197, 94, 0.15);
+  border-color: rgba(34, 197, 94, 0.45);
+  color: var(--color-success);
+}
 
 /* Interruptor "Editar en local" (solo en npm run dev) */
 .modo-local {
