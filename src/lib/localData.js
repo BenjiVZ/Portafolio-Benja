@@ -88,6 +88,7 @@ export async function localProjects() {
     hidden: false,
     featured: false,
     sub_skills: [],
+    github_repos: [],
     image_url: '',
     live_url: '',
     repo_url: '',

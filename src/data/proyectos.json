@@ -26,7 +26,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 1
+    "sort_order": 1,
+    "github_repos": [
+      "BenjiVZ/VA-Bus"
+    ]
   },
   {
     "id": "gh-autobus",
@@ -52,7 +55,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 2
+    "sort_order": 2,
+    "github_repos": [
+      "BenjiVZ/autobus"
+    ]
   },
   {
     "id": "gh-damasco-ia",
@@ -77,7 +83,11 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 3
+    "sort_order": 3,
+    "github_repos": [
+      "benjaS357/ia",
+      "BenjiVZ/ia-1"
+    ]
   },
   {
     "id": "gh-damasco-monitor",
@@ -101,7 +111,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 4
+    "sort_order": 4,
+    "github_repos": [
+      "BenjiVZ/Damasco-Monitor"
+    ]
   },
   {
     "id": "gh-add-distribucion",
@@ -125,7 +138,12 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 5
+    "sort_order": 5,
+    "github_repos": [
+      "benjaS357/ADD",
+      "BenjiVZ/ADBD",
+      "BenjiVZ/ADD"
+    ]
   },
   {
     "id": "gh-frontend-bvc",
@@ -149,7 +167,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 6
+    "sort_order": 6,
+    "github_repos": [
+      "BenjiVZ/frontend-BVC"
+    ]
   },
   {
     "id": "gh-ivoo-ventas",
@@ -172,7 +193,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 7
+    "sort_order": 7,
+    "github_repos": [
+      "BenjiVZ/RV"
+    ]
   },
   {
     "id": "gh-sinpel",
@@ -196,7 +220,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 8
+    "sort_order": 8,
+    "github_repos": [
+      "benjaS357/sistema-sinpel"
+    ]
   },
   {
     "id": "gh-menuweb",
@@ -222,7 +249,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 9
+    "sort_order": 9,
+    "github_repos": [
+      "BenjiVZ/MenuWeb"
+    ]
   },
   {
     "id": "gh-lidotel",
@@ -246,7 +276,11 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 10
+    "sort_order": 10,
+    "github_repos": [
+      "BenjiVZ/django-lidotel",
+      "BenjiVZ/django-nico"
+    ]
   },
   {
     "id": "gh-quigua",
@@ -270,7 +304,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 11
+    "sort_order": 11,
+    "github_repos": [
+      "BenjiVZ/Quigua"
+    ]
   },
   {
     "id": "gh-stock-compra",
@@ -292,7 +329,11 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 12
+    "sort_order": 12,
+    "github_repos": [
+      "BenjiVZ/Aplicacion-de-stok-y-compra",
+      "BenjiVZ/posada_app"
+    ]
   },
   {
     "id": "gh-turismo-ai",
@@ -316,7 +357,11 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 13
+    "sort_order": 13,
+    "github_repos": [
+      "BenjiVZ/Turismo-AI",
+      "BenjiVZ/T-BIiAI"
+    ]
   },
   {
     "id": "gh-ai-asesor-compras",
@@ -342,7 +387,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 14
+    "sort_order": 14,
+    "github_repos": [
+      "BenjiVZ/AI-asesor_en_compras"
+    ]
   },
   {
     "id": "gh-bot-financiero",
@@ -364,7 +412,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 15
+    "sort_order": 15,
+    "github_repos": [
+      "BenjiVZ/BOT_FINANCIERO"
+    ]
   },
   {
     "id": "gh-django-launcher",
@@ -387,7 +438,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 16
+    "sort_order": 16,
+    "github_repos": [
+      "BenjiVZ/Django-Launcher"
+    ]
   },
   {
     "id": "gh-seac",
@@ -413,7 +467,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 17
+    "sort_order": 17,
+    "github_repos": [
+      "BenjiVZ/SEAC"
+    ]
   },
   {
     "id": "gh-ocsinventory",
@@ -437,7 +494,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 18
+    "sort_order": 18,
+    "github_repos": [
+      "BenjiVZ/OCSInventory"
+    ]
   },
   {
     "id": "gh-osticket",
@@ -459,7 +519,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 19
+    "sort_order": 19,
+    "github_repos": [
+      "BenjiVZ/osticket"
+    ]
   },
   {
     "id": "gh-ecommerce-django",
@@ -482,7 +545,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 20
+    "sort_order": 20,
+    "github_repos": [
+      "BenjiVZ/Benja_projectoDjango"
+    ]
   },
   {
     "id": "gh-ecommerce-idx",
@@ -506,7 +572,11 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 21
+    "sort_order": 21,
+    "github_repos": [
+      "BenjiVZ/djangoapp-main",
+      "BenjiVZ/djangoapp"
+    ]
   },
   {
     "id": "gh-lumi-booth",
@@ -530,7 +600,11 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 22
+    "sort_order": 22,
+    "github_repos": [
+      "benjaS357/lumi-booth",
+      "BenjiVZ/lumi-booth"
+    ]
   },
   {
     "id": "gh-nuestra-noche",
@@ -554,7 +628,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 23
+    "sort_order": 23,
+    "github_repos": [
+      "benjaS357/nuestra-noche"
+    ]
   },
   {
     "id": "gh-currucumor",
@@ -577,7 +654,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 24
+    "sort_order": 24,
+    "github_repos": [
+      "benjaS357/currucumor"
+    ]
   },
   {
     "id": "gh-calculadora-traslacion",
@@ -600,7 +680,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 25
+    "sort_order": 25,
+    "github_repos": [
+      "BenjiVZ/Calculadora-de-Traslaci-n-y-Rotaci-n-2D3D"
+    ]
   },
   {
     "id": "gh-calculadora-tkinter",
@@ -619,7 +702,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 26
+    "sort_order": 26,
+    "github_repos": [
+      "BenjiVZ/Calculadora-tkinter"
+    ]
   },
   {
     "id": "gh-ducks-dodge",
@@ -638,7 +724,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 27
+    "sort_order": 27,
+    "github_repos": [
+      "BenjiVZ/Videojuego-pygame"
+    ]
   },
   {
     "id": "gh-mega-cars-wash",
@@ -661,7 +750,13 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 28
+    "sort_order": 28,
+    "github_repos": [
+      "BenjiVZ/Mega-Cars-Wash",
+      "BenjiVZ/MCW",
+      "BenjiVZ/MCW-con-JavaScrip",
+      "BenjiVZ/MCW-con-PHP"
+    ]
   },
   {
     "id": "gh-pagina-registro",
@@ -682,7 +777,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 29
+    "sort_order": 29,
+    "github_repos": [
+      "BenjiVZ/Pagina-Registro"
+    ]
   },
   {
     "id": "gh-pagina-videojuegos",
@@ -702,7 +800,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 30
+    "sort_order": 30,
+    "github_repos": [
+      "BenjiVZ/Pagina-WEB-de-Videojuegos"
+    ]
   },
   {
     "id": "gh-rasa-base",
@@ -724,7 +825,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 31
+    "sort_order": 31,
+    "github_repos": [
+      "BenjiVZ/Rasa"
+    ]
   },
   {
     "id": "gh-portafolio",
@@ -749,6 +853,10 @@
     "image_url": "",
     "live_url": "",
     "repo_url": "",
-    "sort_order": 32
+    "sort_order": 32,
+    "github_repos": [
+      "benjaS357/Portafolio-Benja",
+      "BenjiVZ/Portafolio-Benja"
+    ]
   }
 ]

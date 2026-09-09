@@ -23,11 +23,13 @@ CREATE TABLE IF NOT EXISTS projects (
   repo_url TEXT,
   featured BOOLEAN DEFAULT false,
   hidden BOOLEAN DEFAULT false,
+  github_repos TEXT[] DEFAULT '{}',
   sort_order INTEGER DEFAULT 0,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
 -- Bases creadas antes de 2026-09-08: anade la columna de ocultar
 alter table projects add column if not exists hidden boolean default false;
+alter table projects add column if not exists github_repos text[] default '{}';
 
 -- 3. Services
 CREATE TABLE IF NOT EXISTS services (

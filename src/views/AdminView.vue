@@ -106,6 +106,10 @@
             type="search"
             placeholder="Buscar por título, descripción o tecnología…"
           />
+          <select class="input filtro-select" v-model="filtroCuenta">
+            <option value="">Las dos cuentas de GitHub</option>
+            <option v-for="c in cuentasGithub" :key="c" :value="c">Solo {{ c }}</option>
+          </select>
           <select class="input filtro-select" v-model="filtroCategoria">
             <option value="">Todas las categorías</option>
             <option v-for="c in CATEGORIAS_ADMIN" :key="c.value" :value="c.value">{{ c.label }}</option>
@@ -211,6 +215,13 @@
                   <label class="input-label">Sub-Skills <small style="color:var(--color-text-muted);font-weight:400;">(separadas por coma)</small></label>
                   <input class="input" :value="(p.sub_skills || []).join(', ')" @change="setSubSkills(p, $event)" />
                 </div>
+              </div>
+              <div class="input-group">
+                <label class="input-label">Repositorios de GitHub <small style="color:var(--color-text-muted);font-weight:400;">(cuenta/repo, separados por coma)</small></label>
+                <input class="input" :value="(p.github_repos || []).join(', ')" @change="setGithubRepos(p, $event)" placeholder="BenjiVZ/mi-repo, benjaS357/mi-repo" />
+                <span v-if="cuentasDe(p).length" class="pe-cuentas">
+                  <span v-for="c in cuentasDe(p)" :key="c" class="pe-cuenta" :class="'pe-cuenta-' + c.toLowerCase()">{{ c }}</span>
+                </span>
               </div>
             </div>
 
@@ -861,6 +872,16 @@ const filtroTexto = ref('')
 const filtroCategoria = ref('')
 const filtroDestacado = ref('')
 const filtroVisible = ref('')
+const filtroCuenta = ref('')
+// Cuenta de GitHub = primer tramo de "cuenta/repo"
+function cuentasDe(p) {
+  return [...new Set((p.github_repos || []).map(r => String(r).split('/')[0]).filter(Boolean))]
+}
+const cuentasGithub = computed(() => {
+  const todas = new Set()
+  for (const p of projectsList.value) for (const c of cuentasDe(p)) todas.add(c)
+  return [...todas].sort()
+})
 const ocultosTotal = computed(() => projectsList.value.filter(p => p.hidden).length)
 
 // Sin tildes ni mayusculas: "musica" encuentra "Música"
@@ -868,7 +889,7 @@ function normalizar(s) {
   return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
 }
 
-const hayFiltro = computed(() => Boolean(filtroTexto.value || filtroCategoria.value || filtroDestacado.value || filtroVisible.value))
+const hayFiltro = computed(() => Boolean(filtroTexto.value || filtroCategoria.value || filtroDestacado.value || filtroVisible.value || filtroCuenta.value))
 
 const proyectosFiltrados = computed(() => {
   const q = normalizar(filtroTexto.value)
@@ -876,13 +897,14 @@ const proyectosFiltrados = computed(() => {
     // Las filas recien creadas se quedan visibles aunque no coincidan
     if (p._nuevo) return true
     if (filtroCategoria.value && p.category !== filtroCategoria.value) return false
+    if (filtroCuenta.value && !cuentasDe(p).includes(filtroCuenta.value)) return false
     if (filtroDestacado.value === 'si' && !p.featured) return false
     if (filtroDestacado.value === 'no' && p.featured) return false
     if (filtroVisible.value === 'visibles' && p.hidden) return false
     if (filtroVisible.value === 'ocultos' && !p.hidden) return false
     if (filtroVisible.value === 'modificados' && !estaModificado(p)) return false
     if (!q) return true
-    const pajar = normalizar([p.title, p.short_description, p.description, ...(p.tech_stack || []), ...(p.sub_skills || [])].join(' '))
+    const pajar = normalizar([p.title, p.short_description, p.description, ...(p.tech_stack || []), ...(p.sub_skills || []), ...(p.github_repos || [])].join(' '))
     return pajar.includes(q)
   })
 })
@@ -892,6 +914,7 @@ function limpiarFiltros() {
   filtroCategoria.value = ''
   filtroDestacado.value = ''
   filtroVisible.value = ''
+  filtroCuenta.value = ''
 }
 const servicesList = ref([])
 const experiencesList = ref([])
@@ -1130,7 +1153,7 @@ function nuevoProyecto() {
     _nuevo: true,
     title: '', description: '', short_description: '', category: 'web', subcategory: '',
     image_url: '', tech_stack: [], sub_skills: [], live_url: '', repo_url: '',
-    featured: false, hidden: false, sort_order: 0
+    featured: false, hidden: false, github_repos: [], sort_order: 0
   })
 }
 
@@ -1140,6 +1163,10 @@ function setTechStack(p, e) {
 
 function setSubSkills(p, e) {
   p.sub_skills = e.target.value.split(',').map(s => s.trim()).filter(Boolean)
+}
+
+function setGithubRepos(p, e) {
+  p.github_repos = e.target.value.split(',').map(s => s.trim()).filter(Boolean)
 }
 
 async function guardarProyecto(p, { recargar = true } = {}) {
@@ -1688,6 +1715,14 @@ onMounted(loadAll)
 }
 .project-edit-row.esta-modificado { border-color: var(--color-border-accent); }
 .panel-acciones { display: flex; gap: var(--space-sm); align-items: center; }
+.pe-cuentas { display: inline-flex; gap: 6px; margin-top: 6px; }
+.pe-cuenta {
+  padding: 1px 8px; border-radius: var(--radius-full);
+  font-size: var(--text-xs); font-family: var(--font-mono);
+  border: 1px solid var(--color-border-strong); color: var(--color-text-secondary);
+}
+.pe-cuenta-benjas357 { color: var(--color-warning); border-color: rgba(245, 158, 11, 0.45); }
+.pe-cuenta-benjivz { color: var(--color-accent); border-color: var(--color-border-accent); }
 
 .pe-imagen {
   display: flex;

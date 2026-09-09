@@ -61,6 +61,7 @@ export function toProjectRow(p) {
     live_url: p.live_url || '',
     repo_url: p.repo_url || '',
     featured: Boolean(p.featured),
+    github_repos: p.github_repos || [],
     image_url: p.image_url || '',
     sort_order: p.sort_order ?? 0
   }
