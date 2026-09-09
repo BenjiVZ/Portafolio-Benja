@@ -85,8 +85,32 @@
           <template v-else>En producción es solo lectura: para editar el respaldo ejecuta <code>npm run dev</code>.</template>
         </p>
 
+        <div class="filtros-proyectos">
+          <input
+            class="input filtro-buscar"
+            v-model.trim="filtroTexto"
+            type="search"
+            placeholder="Buscar por título, descripción o tecnología…"
+          />
+          <select class="input filtro-select" v-model="filtroCategoria">
+            <option value="">Todas las categorías</option>
+            <option v-for="c in CATEGORIAS_ADMIN" :key="c.value" :value="c.value">{{ c.label }}</option>
+          </select>
+          <select class="input filtro-select" v-model="filtroDestacado">
+            <option value="">Todos (destacados o no)</option>
+            <option value="si">Solo destacados</option>
+            <option value="no">Solo no destacados</option>
+          </select>
+          <span class="filtro-conteo">
+            {{ proyectosFiltrados.length === projectsList.length
+              ? `${projectsList.length} proyectos`
+              : `${proyectosFiltrados.length} de ${projectsList.length}` }}
+          </span>
+          <button v-if="hayFiltro" class="btn btn-ghost btn-sm" @click="limpiarFiltros">Limpiar</button>
+        </div>
+
         <div class="project-edit-list">
-          <div v-for="p in projectsList" :key="p.id" class="project-edit-row" :class="{ 'es-nuevo': p._nuevo }">
+          <div v-for="p in proyectosFiltrados" :key="p.id" class="project-edit-row" :class="{ 'es-nuevo': p._nuevo }">
             <div class="pe-imagen">
               <div class="project-img-preview" v-if="p.image_url">
                 <img :src="p.image_url" alt="Preview" @error="$event.target.style.display='none'" />
@@ -187,6 +211,7 @@
             </div>
           </div>
           <p v-if="projectsList.length === 0" class="empty-state">No hay proyectos. Crea el primero.</p>
+          <p v-else-if="proyectosFiltrados.length === 0" class="empty-state">Ningún proyecto coincide con el filtro.</p>
         </div>
       </div>
 
@@ -796,6 +821,44 @@ const activeTab = ref('projects')
 
 // Data lists
 const projectsList = ref([])
+
+// ── Filtro del listado de proyectos ──
+const CATEGORIAS_ADMIN = [
+  { value: 'web', label: 'Web' }, { value: 'app', label: 'App' }, { value: 'backend', label: 'Backend' },
+  { value: 'sistemas', label: 'Sistemas' }, { value: 'university', label: 'Universitario' },
+  { value: 'internship', label: 'Pasantías' }, { value: 'work', label: 'Laboral' },
+  { value: 'personal', label: 'Personal' }, { value: 'future', label: 'Futuro' }
+]
+const filtroTexto = ref('')
+const filtroCategoria = ref('')
+const filtroDestacado = ref('')
+
+// Sin tildes ni mayusculas: "musica" encuentra "Música"
+function normalizar(s) {
+  return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
+}
+
+const hayFiltro = computed(() => Boolean(filtroTexto.value || filtroCategoria.value || filtroDestacado.value))
+
+const proyectosFiltrados = computed(() => {
+  const q = normalizar(filtroTexto.value)
+  return projectsList.value.filter(p => {
+    // Las filas recien creadas se quedan visibles aunque no coincidan
+    if (p._nuevo) return true
+    if (filtroCategoria.value && p.category !== filtroCategoria.value) return false
+    if (filtroDestacado.value === 'si' && !p.featured) return false
+    if (filtroDestacado.value === 'no' && p.featured) return false
+    if (!q) return true
+    const pajar = normalizar([p.title, p.short_description, p.description, ...(p.tech_stack || []), ...(p.sub_skills || [])].join(' '))
+    return pajar.includes(q)
+  })
+})
+
+function limpiarFiltros() {
+  filtroTexto.value = ''
+  filtroCategoria.value = ''
+  filtroDestacado.value = ''
+}
 const servicesList = ref([])
 const experiencesList = ref([])
 const flyersList = ref([])
@@ -1434,6 +1497,22 @@ onMounted(loadAll)
   padding: 1px 5px;
   border-radius: 4px;
   background: var(--color-chip);
+}
+
+.filtros-proyectos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-sm);
+  margin: var(--space-lg) 0 var(--space-md);
+}
+.filtro-buscar { flex: 1 1 260px; min-width: 0; }
+.filtro-select { flex: 0 1 220px; }
+.filtro-conteo {
+  font-size: var(--text-sm);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+  margin-left: auto;
 }
 
 .suggestion-desc {

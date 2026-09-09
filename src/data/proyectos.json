@@ -35,7 +35,7 @@
     "tecnologias": "Flutter, Dart",
     "estado": "completado",
     "fecha_creacion": "2026-02-03",
-    "destacado": true,
+    "destacado": false,
     "orden": 1
   },
   {
@@ -182,7 +182,7 @@
     "tecnologias": "Django, Python, Firebase, Google IDX, HTML, CSS, JavaScript, Bootstrap, SQLite",
     "estado": "completado",
     "fecha_creacion": "2024-05-01",
-    "destacado": true,
+    "destacado": false,
     "orden": 1
   },
   {
@@ -263,7 +263,7 @@
     "tecnologias": "Django, Python, MySQL, Flutter, Dart, Firebase, REST API, JWT, Analytics",
     "estado": "completado",
     "fecha_creacion": "2024-03-01",
-    "destacado": true,
+    "destacado": false,
     "orden": 1
   },
   {
@@ -308,7 +308,7 @@
     "tecnologias": "Django, Python, PostgreSQL",
     "estado": "completado",
     "fecha_creacion": "2026-02-03",
-    "destacado": true,
+    "destacado": false,
     "orden": 2
   },
   {
@@ -587,7 +587,7 @@
     "tecnologias": "Flutter, Dart",
     "estado": "completado",
     "fecha_creacion": "2026-02-03",
-    "destacado": true,
+    "destacado": false,
     "orden": 3
   },
   {
@@ -650,7 +650,7 @@
     "tecnologias": "Django, Python, SAP, PostgreSQL, REST API, PDF Generation",
     "estado": "completado",
     "fecha_creacion": "2025-06-01",
-    "destacado": true,
+    "destacado": false,
     "orden": 3
   },
   {
@@ -719,7 +719,7 @@
     "tecnologias": "Flutter, Dart, Firebase, SQLite, Provider, Material Design, Barcode Scanner",
     "estado": "completado",
     "fecha_creacion": "2025-01-01",
-    "destacado": true,
+    "destacado": false,
     "orden": 3
   },
   {
@@ -872,7 +872,7 @@
     "tecnologias": "Django, Python, PostgreSQL",
     "estado": "completado",
     "fecha_creacion": "2026-02-03",
-    "destacado": true,
+    "destacado": false,
     "orden": 4
   },
   {
@@ -929,7 +929,7 @@
     "tecnologias": "Django, Python, SAP, PostgreSQL, REST API",
     "estado": "completado",
     "fecha_creacion": "2025-03-01",
-    "destacado": true,
+    "destacado": false,
     "orden": 4
   },
   {
@@ -998,7 +998,7 @@
     "tecnologias": "Django, Python, PostgreSQL, Chart.js, Bootstrap, PDF Generation, WhatsApp API",
     "estado": "completado",
     "fecha_creacion": "2025-01-15",
-    "destacado": true,
+    "destacado": false,
     "orden": 4
   },
   {
@@ -1112,7 +1112,7 @@
     "tecnologias": "Django, Python, PostgreSQL",
     "estado": "completado",
     "fecha_creacion": "2026-02-03",
-    "destacado": true,
+    "destacado": false,
     "orden": 5
   },
   {
@@ -1187,7 +1187,7 @@
     "tecnologias": "Django, Python, MySQL, Vue.js, REST API, Docker, Redis, Celery",
     "estado": "completado",
     "fecha_creacion": "2025-01-20",
-    "destacado": true,
+    "destacado": false,
     "orden": 5
   },
   {
@@ -1262,7 +1262,7 @@
     "tecnologias": "Django, Python, PostgreSQL, HTML, CSS, JavaScript, REST API, Testing",
     "estado": "completado",
     "fecha_creacion": "2024-03-01",
-    "destacado": true,
+    "destacado": false,
     "orden": 5
   },
   {
@@ -1301,7 +1301,7 @@
     "tecnologias": "Flutter, Dart",
     "estado": "completado",
     "fecha_creacion": "2026-02-03",
-    "destacado": true,
+    "destacado": false,
     "orden": 6
   },
   {
@@ -1376,7 +1376,7 @@
     "tecnologias": "Django, Python, Pandas, NumPy, PostgreSQL, Celery, Scrapy, Machine Learning",
     "estado": "completado",
     "fecha_creacion": "2025-01-25",
-    "destacado": true,
+    "destacado": false,
     "orden": 6
   },
   {
@@ -1451,7 +1451,7 @@
     "tecnologias": "Django, Python, RASA, NLP, Machine Learning, PostgreSQL, TensorFlow, Chatbot",
     "estado": "completado",
     "fecha_creacion": "2024-08-01",
-    "destacado": true,
+    "destacado": false,
     "orden": 6
   },
   {
@@ -1496,7 +1496,7 @@
     "tecnologias": "Django, Python, PostgreSQL",
     "estado": "en_desarrollo",
     "fecha_creacion": "2026-02-03",
-    "destacado": true,
+    "destacado": false,
     "orden": 7
   },
   {
@@ -1553,7 +1553,7 @@
     "tecnologias": "Django REST Framework, Python, Electron, Cloudflare, JavaScript",
     "estado": "completado",
     "fecha_creacion": "2025-08-01",
-    "destacado": true,
+    "destacado": false,
     "orden": 12
   },
   {
@@ -1610,7 +1610,7 @@
     "tecnologias": "Django REST Framework, Python, Flutter, Dart, Cloudflare",
     "estado": "completado",
     "fecha_creacion": "2025-09-01",
-    "destacado": true,
+    "destacado": false,
     "orden": 13
   },
   {
@@ -1679,7 +1679,7 @@
     "tecnologias": "Django REST Framework, Python, Vue.js, JavaScript, MySQL, JWT, REST API",
     "estado": "en_desarrollo",
     "fecha_creacion": "2025-11-01",
-    "destacado": true,
+    "destacado": false,
     "orden": 14
   },
   {
@@ -1736,7 +1736,7 @@
     "tecnologias": "Django, Python, PostgreSQL, Bootstrap, JavaScript",
     "estado": "completado",
     "fecha_creacion": "2025-05-01",
-    "destacado": true,
+    "destacado": false,
     "orden": 15
   },
   {
@@ -1805,7 +1805,7 @@
     "tecnologias": "Django, Python, PostgreSQL, Bootstrap, Chart.js, PDF Generation, REST API",
     "estado": "completado",
     "fecha_creacion": "2025-07-01",
-    "destacado": true,
+    "destacado": false,
     "orden": 16
   }
 ]

@@ -10,7 +10,7 @@
     ],
     "live_url": "",
     "repo_url": "",
-    "featured": true,
+    "featured": false,
     "image_url": "",
     "sort_order": 1000
   },
@@ -26,7 +26,7 @@
     ],
     "live_url": "",
     "repo_url": "",
-    "featured": true,
+    "featured": false,
     "image_url": "",
     "sort_order": 1001
   },
@@ -41,7 +41,7 @@
     ],
     "live_url": "https://currucumor.vercel.app",
     "repo_url": "",
-    "featured": true,
+    "featured": false,
     "image_url": "",
     "sort_order": 1002
   },
