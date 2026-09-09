@@ -189,7 +189,7 @@ Módulos del sistema:
 - Panel de reportes y analytics avanzados
                 
 Implementado actualmente en 3 hoteles piloto con más de 1,000 usuarios activos.','Sistema completo de fidelización para cadenas hoteleras','personal',ARRAY['Analytics','Dart','Django','Firebase','Flutter','JWT','MySQL','Python','REST API'],'','',true,'',1);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (29,'Damasco IA - Chat Gemini conectado a la base de datos','Sistema de chat con Gemini integrado a la base de datos de Damasco. Responde en tiempo real con información de productos, ventas y operaciones, con respuestas contextualizadas para el equipo interno.','Chat corporativo con Gemini para consultar información de Damasco en tiempo real.','sistemas',ARRAY['Django','PostgreSQL','Python'],'','',true,'',2);
+insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (29,'Damasco IA - Chat Gemini conectado a la base de datos','Sistema de chat con Gemini integrado a la base de datos de Damasco. Responde en tiempo real con información de productos, ventas y operaciones, con respuestas contextualizadas para el equipo interno.','Chat corporativo con Gemini para consultar información de Damasco en tiempo real.','work',ARRAY['Django','PostgreSQL','Python'],'','',true,'',2);
 insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (27,'Servidor Asterisk con FreePBX','Implementación completa de un servidor de telefonía IP empresarial basado en Asterisk con interfaz gráfica FreePBX, completamente containerizado con Docker para facilitar el despliegue, escalabilidad y mantenimiento en entornos empresariales.
                 
 Características técnicas planificadas:
@@ -236,7 +236,7 @@ Características del juego:
 - Física básica para movimientos y colisiones
                 
 Este proyecto me ayudó a comprender los conceptos de programación orientada a objetos y desarrollo de interfaces gráficas en Python.','Videojuego interactivo desarrollado con Python','university',ARRAY['Game Development','OOP','PyGame','PyQT5','Python','Sound Programming'],'','',false,'',2);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (30,'Damasco Ventas Live - Reportes en el momento','Aplicación para el monitoreo de ventas en el momento en Damasco. Provee reportes instantáneos del día, métricas clave y vistas rápidas para apoyar decisiones comerciales.','App de reportes de ventas en tiempo real para apoyo comercial.','sistemas',ARRAY['Dart','Flutter'],'','',true,'',3);
+insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (30,'Damasco Ventas Live - Reportes en el momento','Aplicación para el monitoreo de ventas en el momento en Damasco. Provee reportes instantáneos del día, métricas clave y vistas rápidas para apoyar decisiones comerciales.','App de reportes de ventas en tiempo real para apoyo comercial.','work',ARRAY['Dart','Flutter'],'','',true,'',3);
 insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (45,'Damasco Auditoria - Sistema de Control y Auditoria','Sistema integral de auditoria desarrollado para Damasco, diseñado para garantizar el control, la transparencia y la trazabilidad de las operaciones empresariales.
 
 El sistema se integra directamente con SAP para extraer y validar datos en tiempo real, permitiendo a los auditores internos verificar transacciones, detectar inconsistencias y generar reportes de cumplimiento.
@@ -248,7 +248,7 @@ Características principales:
 • Generación de reportes de auditoria en PDF
 • Control de acceso por roles (auditor, supervisor, gerencia)
 • Historial completo de auditorias realizadas con trazabilidad
-• Módulo de verificación cruzada de datos entre sistemas','Sistema de auditoria empresarial con integración SAP para control y trazabilidad','sistemas',ARRAY['Django','PDF Generation','PostgreSQL','Python','REST API','SAP'],'','',true,'',3);
+• Módulo de verificación cruzada de datos entre sistemas','Sistema de auditoria empresarial con integración SAP para control y trazabilidad','work',ARRAY['Django','PDF Generation','PostgreSQL','Python','REST API','SAP'],'','',true,'',3);
 insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (22,'App Móvil: Listas de Compras y Gestión de Stock Hotelero','Aplicación multiplataforma desarrollada con Flutter para la gestión eficiente de listas de compras y control de inventario en establecimientos hoteleros de pequeña y mediana escala.
                 
 Funcionalidades principales:
@@ -290,7 +290,7 @@ Funcionalidades principales:
 • Sistema de alertas para pagos vencidos y créditos próximos a vencer
 • Historial completo de transacciones por socio de negocios
 • Reportes de estado de cuenta y conciliación
-• Gestión de niveles de fidelización basados en volumen de compras','Gestión de créditos, pagos y fidelización de socios de negocios con integración SAP','sistemas',ARRAY['Django','PostgreSQL','Python','REST API','SAP'],'','',true,'',4);
+• Gestión de niveles de fidelización basados en volumen de compras','Gestión de créditos, pagos y fidelización de socios de negocios con integración SAP','work',ARRAY['Django','PostgreSQL','Python','REST API','SAP'],'','',true,'',4);
 insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (23,'Sistema Web de Gestión Técnica e Inventario SINPEL','Plataforma web integral desarrollada específicamente para SINPEL, enfocada en la gestión eficiente de casos de garantía, inventario de repuestos y seguimiento de reparaciones técnicas de equipos de línea blanca y marrón.
                 
 Módulos implementados:

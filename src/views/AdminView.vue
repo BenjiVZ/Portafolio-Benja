@@ -75,7 +75,17 @@
       <div v-if="activeTab === 'projects'" class="admin-panel">
         <div class="panel-header">
           <h2>Proyectos</h2>
-          <button class="btn btn-primary btn-sm" @click="nuevoProyecto()">+ Nuevo Proyecto</button>
+          <div class="panel-acciones">
+            <button
+              class="btn btn-primary btn-sm"
+              :disabled="modificados.length === 0 || guardandoTodos"
+              :title="modificados.length ? 'Guarda las filas con cambios sin guardar' : 'No hay cambios pendientes'"
+              @click="guardarTodos()"
+            >
+              {{ guardandoTodos ? 'Guardando…' : `Guardar todos (${modificados.length})` }}
+            </button>
+            <button class="btn btn-ghost btn-sm" @click="nuevoProyecto()">+ Nuevo Proyecto</button>
+          </div>
         </div>
         <p class="panel-hint">Todo se edita aqui mismo: cambia lo que necesites y pulsa Guardar en la fila del proyecto.</p>
         <p v-if="conexionOk === false" class="aviso-respaldo">
@@ -105,6 +115,7 @@
             <option value="">Visibles y ocultos</option>
             <option value="visibles">Solo visibles</option>
             <option value="ocultos">Solo ocultos</option>
+            <option value="modificados">Solo con cambios sin guardar</option>
           </select>
           <span class="filtro-conteo">
             {{ proyectosFiltrados.length === projectsList.length
@@ -115,8 +126,9 @@
         </div>
 
         <div class="project-edit-list">
-          <div v-for="p in proyectosFiltrados" :key="p.id" class="project-edit-row" :class="{ 'es-nuevo': p._nuevo, 'esta-oculto': p.hidden }">
+          <div v-for="p in proyectosFiltrados" :key="p.id" class="project-edit-row" :class="{ 'es-nuevo': p._nuevo, 'esta-oculto': p.hidden, 'esta-modificado': estaModificado(p) }">
             <span v-if="p.hidden" class="pe-oculto-badge">Oculto · no sale en el sitio</span>
+            <span v-else-if="estaModificado(p)" class="pe-oculto-badge pe-modificado-badge">Sin guardar</span>
             <div class="pe-imagen">
               <div class="project-img-preview" v-if="p.image_url">
                 <img :src="p.image_url" alt="Preview" @error="$event.target.style.display='none'" />
@@ -864,6 +876,7 @@ const proyectosFiltrados = computed(() => {
     if (filtroDestacado.value === 'no' && p.featured) return false
     if (filtroVisible.value === 'visibles' && p.hidden) return false
     if (filtroVisible.value === 'ocultos' && !p.hidden) return false
+    if (filtroVisible.value === 'modificados' && !estaModificado(p)) return false
     if (!q) return true
     const pajar = normalizar([p.title, p.short_description, p.description, ...(p.tech_stack || []), ...(p.sub_skills || [])].join(' '))
     return pajar.includes(q)
@@ -905,7 +918,7 @@ async function handleImportSuggestion(s) {
   importingId.value = s.id
   try {
     await admin.createProject(toProjectRow(s))
-    projectsList.value = await admin.getProjects() || []
+    await recargarProyectos()
     await loadSuggestions()
   } catch (e) {
     alert('No se pudo importar: ' + e.message)
@@ -926,7 +939,7 @@ async function handleImportAll() {
       fallidos.push(`${s.title}: ${e.message}`)
     }
   }
-  projectsList.value = await admin.getProjects() || []
+  await recargarProyectos()
   await loadSuggestions()
   importingAll.value = false
   if (fallidos.length) alert(`No se importaron ${fallidos.length}:\n` + fallidos.join('\n'))
@@ -1051,6 +1064,7 @@ async function loadAll() {
   try {
     admin.usandoLocal.value = false
     projectsList.value = await admin.getProjects() || []
+    tomarSnapshot()
     // getProjects cae solo al respaldo local si Supabase no responde:
     // el composable avisa por usandoLocal para no dar por buena la conexion
     conexionOk.value = !admin.usandoLocal.value
@@ -1083,6 +1097,28 @@ async function loadAll() {
 
 // Projects — edicion directa en el listado, sin modal
 const savingProjectId = ref(null)
+const guardandoTodos = ref(false)
+
+// Foto de cada fila tal como llego de la base: comparando contra ella se sabe
+// que filas tienen cambios sin guardar (boton "Guardar todos" e insignia).
+const snapshot = ref(new Map())
+function serializar(p) {
+  const { _nuevo, ...resto } = p
+  return JSON.stringify(resto)
+}
+function tomarSnapshot() {
+  snapshot.value = new Map(projectsList.value.map(p => [String(p.id), serializar(p)]))
+}
+function estaModificado(p) {
+  if (p._nuevo) return Boolean((p.title || '').trim())
+  return snapshot.value.get(String(p.id)) !== serializar(p)
+}
+const modificados = computed(() => projectsList.value.filter(estaModificado))
+
+async function recargarProyectos() {
+  projectsList.value = await admin.getProjects() || []
+  tomarSnapshot()
+}
 
 function nuevoProyecto() {
   projectsList.value.unshift({
@@ -1102,7 +1138,7 @@ function setSubSkills(p, e) {
   p.sub_skills = e.target.value.split(',').map(s => s.trim()).filter(Boolean)
 }
 
-async function guardarProyecto(p) {
+async function guardarProyecto(p, { recargar = true } = {}) {
   savingProjectId.value = p.id
   try {
     const data = { ...p, tech_stack: [...(p.tech_stack || [])], sub_skills: [...(p.sub_skills || [])] }
@@ -1115,12 +1151,33 @@ async function guardarProyecto(p) {
     } else {
       await admin.updateProject(p.id, data)
     }
-    projectsList.value = await admin.getProjects()
+    if (recargar) await recargarProyectos()
+    return true
   } catch (e) {
     alert('No se pudo guardar: ' + e.message)
+    return false
   } finally {
     savingProjectId.value = null
   }
+}
+
+// Guarda de una vez todas las filas con cambios (y las nuevas con titulo).
+// De a una para que un fallo no tumbe el resto; recarga al final.
+async function guardarTodos() {
+  const pendientes = [...modificados.value]
+  if (!pendientes.length) return
+  guardandoTodos.value = true
+  const fallidos = []
+  try {
+    for (const p of pendientes) {
+      const ok = await guardarProyecto(p, { recargar: false })
+      if (!ok) fallidos.push(p.title || p.id)
+    }
+    await recargarProyectos()
+  } finally {
+    guardandoTodos.value = false
+  }
+  if (fallidos.length) alert(`No se guardaron ${fallidos.length}: ${fallidos.join(', ')}`)
 }
 
 // Ocultar no borra nada: el proyecto sigue aqui, editable, pero el sitio
@@ -1129,9 +1186,13 @@ async function alternarOculto(p) {
   savingProjectId.value = p.id
   try {
     await admin.updateProject(p.id, { hidden: !p.hidden })
-    projectsList.value = await admin.getProjects()
+    await recargarProyectos()
   } catch (e) {
-    alert('No se pudo cambiar la visibilidad: ' + e.message)
+    // PostgREST responde PGRST204 si la tabla aun no tiene la columna
+    const sinColumna = /hidden/i.test(e.message || '') && /column|columna|PGRST204/i.test(e.message || '')
+    alert(sinColumna
+      ? 'Supabase todavía no tiene la columna "hidden". Ejecuta en el SQL Editor:\n\nalter table projects add column if not exists hidden boolean default false;'
+      : 'No se pudo cambiar la visibilidad: ' + e.message)
   } finally {
     savingProjectId.value = null
   }
@@ -1140,7 +1201,7 @@ async function alternarOculto(p) {
 async function handleDeleteProject(id) {
   if (!confirm('¿Eliminar este proyecto?')) return
   await admin.deleteProject(id)
-  projectsList.value = await admin.getProjects()
+  await recargarProyectos()
 }
 
 // Testimonials
@@ -1617,6 +1678,12 @@ onMounted(loadAll)
   border: 1px solid rgba(245, 158, 11, 0.45);
   border-radius: var(--radius-full);
 }
+.pe-modificado-badge {
+  color: var(--color-accent);
+  border-color: var(--color-border-accent);
+}
+.project-edit-row.esta-modificado { border-color: var(--color-border-accent); }
+.panel-acciones { display: flex; gap: var(--space-sm); align-items: center; }
 
 .pe-imagen {
   display: flex;

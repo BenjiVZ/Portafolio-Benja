@@ -270,7 +270,7 @@
     "id": 29,
     "categoria": {
       "id": 4,
-      "nombre": "Sistemas",
+      "nombre": "Laboral",
       "descripcion": "",
       "icono": "💼",
       "orden": 1
@@ -555,7 +555,7 @@
     "id": 30,
     "categoria": {
       "id": 4,
-      "nombre": "Sistemas",
+      "nombre": "Laboral",
       "descripcion": "",
       "icono": "💼",
       "orden": 1
@@ -594,7 +594,7 @@
     "id": 45,
     "categoria": {
       "id": 4,
-      "nombre": "Sistemas",
+      "nombre": "Laboral",
       "descripcion": "",
       "icono": "💼",
       "orden": 1
@@ -879,7 +879,7 @@
     "id": 46,
     "categoria": {
       "id": 4,
-      "nombre": "Sistemas",
+      "nombre": "Laboral",
       "descripcion": "",
       "icono": "💼",
       "orden": 1
