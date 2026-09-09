@@ -105,7 +105,8 @@ export async function localProjects() {
     if (original) Object.assign(original, e)
     else mapped.push(e)
   }
-  return mapped
+  // "Eliminar" en el admin local no borra del JSON del repo: marca _oculto
+  return mapped.filter(p => !p._oculto)
 }
 
 export async function localServices() {

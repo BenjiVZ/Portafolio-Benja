@@ -8,17 +8,26 @@ import { localProjects, localServices, localExperiences, localFlyers, localSiteC
 // src/data/repos-github.json y se editan en el repo.
 // ============================================
 
-// Con Supabase caido, y solo en `npm run dev`, las operaciones de proyectos
-// caen al backend local de vite.config.js (guarda en public/data y
-// public/media). En produccion no hay plan B: el error llega al panel.
+// Con Supabase caido, las LECTURAS caen a los JSON del repo en cualquier
+// entorno (es lo mismo que muestra el sitio publico). Las ESCRITURAS solo
+// tienen plan B en `npm run dev`: el backend de vite.config.js guarda en
+// public/data y public/media. En produccion el error llega al panel.
 const enDev = import.meta.env.DEV
 
-async function remotoOLocal(remota, local) {
+// true cuando la ultima lectura tuvo que usar el respaldo: el panel lo usa
+// para el indicador de conexion (antes un respaldo exitoso se leia como
+// "Supabase conectado").
+const usandoLocal = ref(false)
+
+async function remotoOLocal(remota, local, { escritura = false } = {}) {
   try {
     return await remota()
   } catch (e) {
-    if (!enDev) throw e
-    console.warn('Supabase no disponible, usando edicion local:', e.message)
+    if (escritura && !enDev) {
+      throw new Error('Sin conexión con Supabase. En producción no se puede guardar; para editar el respaldo local ejecuta npm run dev.')
+    }
+    console.warn('Supabase no disponible, usando respaldo local:', e.message)
+    if (!escritura) usandoLocal.value = true
     return local()
   }
 }
@@ -75,7 +84,8 @@ export function useAdmin() {
           if (err) throw err
           return data
         },
-        () => guardarProyectoLocal({ id: `nuevo-${Date.now()}`, ...project })
+        () => guardarProyectoLocal({ id: `nuevo-${Date.now()}`, ...project }),
+        { escritura: true }
       )
     } finally { loading.value = false }
   }
@@ -94,7 +104,8 @@ export function useAdmin() {
           if (err) throw err
           return data
         },
-        () => guardarProyectoLocal({ id, ...updates })
+        () => guardarProyectoLocal({ id, ...updates }),
+        { escritura: true }
       )
     } finally { loading.value = false }
   }
@@ -102,11 +113,19 @@ export function useAdmin() {
   async function deleteProject(id) {
     loading.value = true
     try {
-      const { error: err } = await supabase
-        .from('projects')
-        .delete()
-        .eq('id', id)
-      if (err) throw err
+      return await remotoOLocal(
+        async () => {
+          const { error: err } = await supabase
+            .from('projects')
+            .delete()
+            .eq('id', id)
+          if (err) throw err
+        },
+        // Los JSON del repo no se tocan: el proyecto queda marcado como
+        // oculto en proyectos-edit.json y localProjects() lo filtra
+        () => guardarProyectoLocal({ id, _oculto: true }),
+        { escritura: true }
+      )
     } finally { loading.value = false }
   }
 
@@ -389,13 +408,14 @@ export function useAdmin() {
 
           return data.publicUrl
         },
-        () => subirImagenLocal(file)
+        () => subirImagenLocal(file),
+        { escritura: true }
       )
     } finally { loading.value = false }
   }
 
   return {
-    loading, error,
+    loading, error, usandoLocal,
     // Projects
     getProjects, createProject, updateProject, deleteProject,
     // Services

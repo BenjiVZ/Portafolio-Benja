@@ -78,6 +78,12 @@
           <button class="btn btn-primary btn-sm" @click="nuevoProyecto()">+ Nuevo Proyecto</button>
         </div>
         <p class="panel-hint">Todo se edita aqui mismo: cambia lo que necesites y pulsa Guardar en la fila del proyecto.</p>
+        <p v-if="conexionOk === false" class="aviso-respaldo">
+          <strong>Sin conexión con Supabase.</strong> Ves los {{ projectsList.length }} proyectos del respaldo local
+          (los JSON del repositorio más tus ediciones), lo mismo que muestra el sitio público.
+          <template v-if="enDev">Los cambios se guardan en <code>public/data/proyectos-edit.json</code>.</template>
+          <template v-else>En producción es solo lectura: para editar el respaldo ejecuta <code>npm run dev</code>.</template>
+        </p>
 
         <div class="project-edit-list">
           <div v-for="p in projectsList" :key="p.id" class="project-edit-row" :class="{ 'es-nuevo': p._nuevo }">
@@ -193,6 +199,9 @@
               Proyectos que estan en los archivos del repositorio (el export de Django y tus repos de
               GitHub) pero todavia no en Supabase. El sitio publico no los muestra mientras la base
               responda; si Supabase se cae, vuelven a salir solos.
+            </p>
+            <p v-if="conexionOk === false" class="aviso-respaldo">
+              Sin conexión con Supabase no hay nada que sugerir: todo el respaldo ya está en la pestaña Proyectos.
             </p>
           </div>
           <button
@@ -782,6 +791,7 @@ function handleLogout() {
 }
 
 const admin = useAdmin()
+const enDev = import.meta.env.DEV
 const activeTab = ref('projects')
 
 // Data lists
@@ -959,9 +969,11 @@ const tabs = [
 // Load data
 async function loadAll() {
   try {
+    admin.usandoLocal.value = false
     projectsList.value = await admin.getProjects() || []
-    // Si la primera consulta paso, la base responde: el panel puede guardar
-    conexionOk.value = true
+    // getProjects cae solo al respaldo local si Supabase no responde:
+    // el composable avisa por usandoLocal para no dar por buena la conexion
+    conexionOk.value = !admin.usandoLocal.value
     servicesList.value = await admin.getServices() || []
     try { testimonialsList.value = await admin.getTestimonials() || [] } catch (e) { console.warn('Tabla testimonials no disponible:', e.message) }
     experiencesList.value = await admin.getExperiences() || []
@@ -1403,6 +1415,25 @@ onMounted(loadAll)
   font-size: var(--text-sm);
   color: var(--color-text-muted);
   line-height: var(--leading-relaxed);
+}
+
+.aviso-respaldo {
+  margin-top: var(--space-sm);
+  max-width: 760px;
+  padding: 10px 14px;
+  font-size: var(--text-sm);
+  line-height: var(--leading-relaxed);
+  color: var(--color-text-secondary);
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: var(--radius-md);
+}
+.aviso-respaldo code {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: var(--color-chip);
 }
 
 .suggestion-desc {
