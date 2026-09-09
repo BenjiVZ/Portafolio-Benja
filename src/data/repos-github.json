@@ -9,7 +9,7 @@
     "nota_descripciones": "Los items con descripcion_pendiente:true tienen texto factual generado desde metadata de GitHub (lenguaje y fecha de actividad). Reemplazar con una descripcion real antes de publicar.",
     "actualizado": "2026-09-09",
     "nota_enlaces": "Sin enlaces a repos por decision del autor: el portafolio solo muestra los proyectos trabajados, sin acceso al codigo.",
-    "nota_importados": "2026-09-09: src/data/proyectos.json contiene los 32 sistemas de GitHub con resumen redactado a partir de cada repositorio; categoria = origen (work/personal/university/internship), subcategoria = tipo (web/app/backend/sistemas). Excluidos: forks (ia-1, ADD de BenjiVZ), repos vacios (ADB, star-map, ecommerce, Projecto-Django), el repo de perfil y BenjiVZ.github.io. Fusionados: django-nico=django-lidotel, Turismo-AI=T-BIiAI, ADD=ADBD, posada_app=Aplicacion-de-stok-y-compra, djangoapp=djangoapp-main, MCW*=Mega-Cars-Wash. SHOWROOTS ya no existe en GitHub. Excepcion al criterio de cuentas: nuestra-noche y currucumor estan en benjaS357 pero son personales."
+    "nota_importados": "2026-09-09: src/data/proyectos.json contiene 79 sistemas que cubren 112 repositorios de las dos cuentas (41 en benjaS357, 80 en BenjiVZ, publicos y privados), con resumen redactado a partir del README, arbol y modelos de cada repo. categoria = origen (work/personal/university/internship), subcategoria = tipo. Excluidos por no tener contenido: ADB, star-map, ecommerce, Projecto-Django, Scanned-Documents, Damasco-recursos (solo estilos), codespeak (solo una especificacion), el repo de perfil BenjiVZ y BenjiVZ.github.io. Los repos que son versiones del mismo sistema van fusionados en un solo proyecto (ver github_repos)."
   },
   "enlaces": {},
   "repos": []

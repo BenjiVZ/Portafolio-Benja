@@ -103,7 +103,26 @@ const SIMPLE_SLUGS = {
   sass: 'sass',
   plotly: 'plotly',
   postcss: 'postcss',
-  vercel: 'vercel'
+  vercel: 'vercel',
+  'asp.net core': 'dotnet',
+  'asp.net': 'dotnet',
+  '.net': 'dotnet',
+  htmx: 'htmx',
+  prisma: 'prisma',
+  claude: 'claude',
+  anthropic: 'claude',
+  express: 'express',
+  'react native': 'react',
+  ionic: 'ionic',
+  angular: 'angular',
+  swagger: 'swagger',
+  capacitor: 'capacitor',
+  ray: 'ray',
+  youtube: 'youtube',
+  spotify: 'spotify',
+  zelle: 'zelle',
+  ffmpeg: 'ffmpeg',
+  crewai: 'crewai'
 }
 
 // Los que Simple Icons retiro y Devicon si tiene
