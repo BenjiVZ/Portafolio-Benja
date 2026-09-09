@@ -4,6 +4,9 @@ import { localProjects } from '../lib/localData'
 import { loadWithFallback } from '../lib/dataSource'
 import { applyRepoLinks, mergeWithGithub, fetchGithubProjects } from '../lib/githubRepos'
 
+// Los ocultos desde /admin no salen en el sitio, vengan de Supabase o del respaldo
+const visibles = rows => (rows || []).filter(p => !p.hidden)
+
 export function useProjects() {
   const projects = ref([])
   const loading = ref(true)
@@ -21,10 +24,10 @@ export function useProjects() {
       // Con Supabase vivo manda solo la base: los proyectos locales y los repos
       // de GitHub quedan como sugerencias en /admin. De los repos se aprovecha
       // unicamente el enlace, para no duplicar tarjetas.
-      transform: applyRepoLinks,
+      transform: rows => visibles(applyRepoLinks(rows)),
       // Sin base, el sitio no puede quedar vacio: entran los JSON del repo
       // y ahi si se publican tambien los repos de GitHub.
-      local: async () => mergeWithGithub(await localProjects()),
+      local: async () => visibles(await mergeWithGithub(await localProjects())),
       // Ultimo recurso si ni los JSON cargan: al menos los repos de GitHub
       onError: () => fetchGithubProjects().catch(() => []),
       // Pinta lo local al instante; si Supabase contesta, lo reemplaza

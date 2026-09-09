@@ -15,10 +15,13 @@ create table if not exists projects (
   live_url text,
   repo_url text,
   featured boolean default false,
+  hidden boolean default false,
   image_url text,
   sort_order int default 0,
   created_at timestamptz default now()
 );
+-- Bases creadas antes de 2026-09-08: anade la columna de ocultar
+alter table projects add column if not exists hidden boolean default false;
 
 create table if not exists services (
   id bigserial primary key,

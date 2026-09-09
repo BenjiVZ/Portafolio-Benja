@@ -93,6 +93,8 @@ export async function localProjects() {
     live_url: p.url_demo || p.url_link || '',
     repo_url: p.url_github || '',
     featured: Boolean(p.destacado),
+    // Oculto: sigue en /admin pero el sitio publico no lo muestra
+    hidden: false,
     image_url: p.imagen || '',
     sort_order: p.orden ?? 0
   }))
@@ -105,8 +107,9 @@ export async function localProjects() {
     if (original) Object.assign(original, e)
     else mapped.push(e)
   }
-  // "Eliminar" en el admin local no borra del JSON del repo: marca _oculto
-  return mapped.filter(p => !p._oculto)
+  // "Eliminar" en el admin local no borra del JSON del repo: marca _eliminado
+  // (distinto de hidden, que solo lo esconde del sitio publico)
+  return mapped.filter(p => !p._eliminado)
 }
 
 export async function localServices() {

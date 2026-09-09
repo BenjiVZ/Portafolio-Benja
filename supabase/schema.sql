@@ -22,9 +22,12 @@ CREATE TABLE IF NOT EXISTS projects (
   live_url TEXT,
   repo_url TEXT,
   featured BOOLEAN DEFAULT false,
+  hidden BOOLEAN DEFAULT false,
   sort_order INTEGER DEFAULT 0,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );
+-- Bases creadas antes de 2026-09-08: anade la columna de ocultar
+alter table projects add column if not exists hidden boolean default false;
 
 -- 3. Services
 CREATE TABLE IF NOT EXISTS services (

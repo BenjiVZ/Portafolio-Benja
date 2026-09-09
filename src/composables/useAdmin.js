@@ -122,8 +122,8 @@ export function useAdmin() {
           if (err) throw err
         },
         // Los JSON del repo no se tocan: el proyecto queda marcado como
-        // oculto en proyectos-edit.json y localProjects() lo filtra
-        () => guardarProyectoLocal({ id, _oculto: true }),
+        // eliminado en proyectos-edit.json y localProjects() lo filtra
+        () => guardarProyectoLocal({ id, _eliminado: true }),
         { escritura: true }
       )
     } finally { loading.value = false }

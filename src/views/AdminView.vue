@@ -101,16 +101,22 @@
             <option value="si">Solo destacados</option>
             <option value="no">Solo no destacados</option>
           </select>
+          <select class="input filtro-select" v-model="filtroVisible">
+            <option value="">Visibles y ocultos</option>
+            <option value="visibles">Solo visibles</option>
+            <option value="ocultos">Solo ocultos</option>
+          </select>
           <span class="filtro-conteo">
             {{ proyectosFiltrados.length === projectsList.length
               ? `${projectsList.length} proyectos`
-              : `${proyectosFiltrados.length} de ${projectsList.length}` }}
+              : `${proyectosFiltrados.length} de ${projectsList.length}` }}<template v-if="ocultosTotal"> · {{ ocultosTotal }} oculto{{ ocultosTotal === 1 ? '' : 's' }}</template>
           </span>
           <button v-if="hayFiltro" class="btn btn-ghost btn-sm" @click="limpiarFiltros">Limpiar</button>
         </div>
 
         <div class="project-edit-list">
-          <div v-for="p in proyectosFiltrados" :key="p.id" class="project-edit-row" :class="{ 'es-nuevo': p._nuevo }">
+          <div v-for="p in proyectosFiltrados" :key="p.id" class="project-edit-row" :class="{ 'es-nuevo': p._nuevo, 'esta-oculto': p.hidden }">
+            <span v-if="p.hidden" class="pe-oculto-badge">Oculto · no sale en el sitio</span>
             <div class="pe-imagen">
               <div class="project-img-preview" v-if="p.image_url">
                 <img :src="p.image_url" alt="Preview" @error="$event.target.style.display='none'" />
@@ -207,6 +213,12 @@
               <button class="btn btn-primary btn-sm" :disabled="savingProjectId === p.id" @click="guardarProyecto(p)">
                 {{ savingProjectId === p.id ? 'Guardando...' : 'Guardar' }}
               </button>
+              <button
+                class="btn btn-ghost btn-sm"
+                :disabled="p._nuevo || savingProjectId === p.id"
+                :title="p.hidden ? 'Volver a mostrarlo en el sitio' : 'Quitarlo del sitio sin borrarlo'"
+                @click="alternarOculto(p)"
+              >{{ p.hidden ? 'Mostrar' : 'Ocultar' }}</button>
               <button class="btn btn-ghost btn-sm btn-danger" @click="handleDeleteProject(p.id)">Eliminar</button>
             </div>
           </div>
@@ -832,13 +844,15 @@ const CATEGORIAS_ADMIN = [
 const filtroTexto = ref('')
 const filtroCategoria = ref('')
 const filtroDestacado = ref('')
+const filtroVisible = ref('')
+const ocultosTotal = computed(() => projectsList.value.filter(p => p.hidden).length)
 
 // Sin tildes ni mayusculas: "musica" encuentra "Música"
 function normalizar(s) {
   return String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
 }
 
-const hayFiltro = computed(() => Boolean(filtroTexto.value || filtroCategoria.value || filtroDestacado.value))
+const hayFiltro = computed(() => Boolean(filtroTexto.value || filtroCategoria.value || filtroDestacado.value || filtroVisible.value))
 
 const proyectosFiltrados = computed(() => {
   const q = normalizar(filtroTexto.value)
@@ -848,6 +862,8 @@ const proyectosFiltrados = computed(() => {
     if (filtroCategoria.value && p.category !== filtroCategoria.value) return false
     if (filtroDestacado.value === 'si' && !p.featured) return false
     if (filtroDestacado.value === 'no' && p.featured) return false
+    if (filtroVisible.value === 'visibles' && p.hidden) return false
+    if (filtroVisible.value === 'ocultos' && !p.hidden) return false
     if (!q) return true
     const pajar = normalizar([p.title, p.short_description, p.description, ...(p.tech_stack || []), ...(p.sub_skills || [])].join(' '))
     return pajar.includes(q)
@@ -858,6 +874,7 @@ function limpiarFiltros() {
   filtroTexto.value = ''
   filtroCategoria.value = ''
   filtroDestacado.value = ''
+  filtroVisible.value = ''
 }
 const servicesList = ref([])
 const experiencesList = ref([])
@@ -1073,7 +1090,7 @@ function nuevoProyecto() {
     _nuevo: true,
     title: '', description: '', short_description: '', category: 'web', subcategory: '',
     image_url: '', tech_stack: [], sub_skills: [], live_url: '', repo_url: '',
-    featured: false, sort_order: 0
+    featured: false, hidden: false, sort_order: 0
   })
 }
 
@@ -1101,6 +1118,20 @@ async function guardarProyecto(p) {
     projectsList.value = await admin.getProjects()
   } catch (e) {
     alert('No se pudo guardar: ' + e.message)
+  } finally {
+    savingProjectId.value = null
+  }
+}
+
+// Ocultar no borra nada: el proyecto sigue aqui, editable, pero el sitio
+// publico lo descarta (useProjects filtra hidden).
+async function alternarOculto(p) {
+  savingProjectId.value = p.id
+  try {
+    await admin.updateProject(p.id, { hidden: !p.hidden })
+    projectsList.value = await admin.getProjects()
+  } catch (e) {
+    alert('No se pudo cambiar la visibilidad: ' + e.message)
   } finally {
     savingProjectId.value = null
   }
@@ -1564,6 +1595,27 @@ onMounted(loadAll)
 .project-edit-row.es-nuevo {
   border-color: var(--color-border-accent);
   border-style: dashed;
+}
+
+.project-edit-row { position: relative; }
+.project-edit-row.esta-oculto {
+  opacity: 0.6;
+  border-style: dashed;
+}
+.project-edit-row.esta-oculto:hover,
+.project-edit-row.esta-oculto:focus-within { opacity: 1; }
+.pe-oculto-badge {
+  position: absolute;
+  top: -10px;
+  left: var(--space-md);
+  padding: 2px 10px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--color-warning);
+  background: var(--color-bg);
+  border: 1px solid rgba(245, 158, 11, 0.45);
+  border-radius: var(--radius-full);
 }
 
 .pe-imagen {
