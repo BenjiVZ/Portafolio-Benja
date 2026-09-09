@@ -216,6 +216,7 @@ export async function localSiteConfig() {
       email: info.email || '',
       social: {
         github: info.github || '',
+        github_alt: info.github_alt || '',
         linkedin: info.linkedin || '',
         twitter: ''
       }

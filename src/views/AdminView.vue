@@ -555,8 +555,12 @@
                 <input class="input" v-model="configForm.contact.email" />
               </div>
               <div class="input-group">
-                <label class="input-label">GitHub URL</label>
+                <label class="input-label">GitHub URL <small style="color:var(--color-text-muted);font-weight:400;">(cuenta principal)</small></label>
                 <input class="input" v-model="configForm.contact.social.github" />
+              </div>
+              <div class="input-group">
+                <label class="input-label">GitHub URL <small style="color:var(--color-text-muted);font-weight:400;">(segunda cuenta)</small></label>
+                <input class="input" v-model="configForm.contact.social.github_alt" placeholder="https://github.com/usuario" />
               </div>
               <div class="input-group">
                 <label class="input-label">LinkedIn URL</label>
@@ -1032,7 +1036,7 @@ async function handleImportYEditar(s) {
 const configForm = reactive({
   hero: { name: '', role: '', tagline: '', cta_primary: 'Ver Proyectos', cta_secondary: 'Contactar' },
   about: { title: 'Sobre Mí', description: '', image_url: '', skills: [], years_exp: '1+', projects_count: '10+', companies_count: '3+' },
-  contact: { title: 'Contacto', subtitle: '', email: '', social: { github: '', linkedin: '', twitter: '' } },
+  contact: { title: 'Contacto', subtitle: '', email: '', social: { github: '', github_alt: '', linkedin: '', twitter: '' } },
   footer: { copyright: '', tagline: '' }
 })
 const skillsList = ref([])

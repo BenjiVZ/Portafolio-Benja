@@ -23,7 +23,7 @@ const fallbackConfig = {
     title: 'Contacto',
     subtitle: '¿Tienes un proyecto en mente? Hablemos.',
     email: '',
-    social: { github: '', linkedin: '', twitter: '' }
+    social: { github: '', github_alt: '', linkedin: '', twitter: '' }
   },
   footer: {
     copyright: `© ${new Date().getFullYear()} MastersLogic. Todos los derechos reservados.`,
