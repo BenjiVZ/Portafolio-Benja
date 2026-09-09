@@ -89,7 +89,21 @@ const SIMPLE_SLUGS = {
   anaconda: 'anaconda',
   php: 'php',
   gemini: 'googlegemini',
-  'google gemini': 'googlegemini'
+  'google gemini': 'googlegemini',
+  'google maps': 'googlemaps',
+  nginx: 'nginx',
+  vite: 'vite',
+  'next.js': 'nextdotjs',
+  nextjs: 'nextdotjs',
+  binance: 'binance',
+  'binance api': 'binance',
+  perl: 'perl',
+  apache: 'apache',
+  scss: 'sass',
+  sass: 'sass',
+  plotly: 'plotly',
+  postcss: 'postcss',
+  vercel: 'vercel'
 }
 
 // Los que Simple Icons retiro y Devicon si tiene

@@ -7,9 +7,9 @@
     ],
     "excluidos": "forks (ia-1, ADD de BenjiVZ), repo de perfil (BenjiVZ), portafolio anterior (BenjiVZ.github.io) y este mismo sitio (Portafolio-Benja x2)",
     "nota_descripciones": "Los items con descripcion_pendiente:true tienen texto factual generado desde metadata de GitHub (lenguaje y fecha de actividad). Reemplazar con una descripcion real antes de publicar.",
-    "actualizado": "2026-09-07",
+    "actualizado": "2026-09-09",
     "nota_enlaces": "Sin enlaces a repos por decision del autor: el portafolio solo muestra los proyectos trabajados, sin acceso al codigo.",
-    "nota_importados": "Los repos se importaron como proyectos editables en public/data/proyectos-edit.json (2026-09-07); ya no aparecen como sugerencias ni se duplican en el sitio."
+    "nota_importados": "2026-09-09: src/data/proyectos.json contiene SOLO los sistemas sacados de GitHub (30), con resumen redactado a partir de cada repositorio. El export viejo de Django esta en docs/archivo/. Excluidos: forks, repos vacios (ADB, star-map, ecommerce, Projecto-Django), duplicados (django-nico = django-lidotel, Turismo-AI = T-BIiAI, ADD = ADBD, posada_app = Aplicacion-de-stok-y-compra, djangoapp = djangoapp-main, MCW*), el bot Rasa suelto y SHOWROOTS (ya no existe en GitHub)."
   },
   "enlaces": {},
   "repos": []

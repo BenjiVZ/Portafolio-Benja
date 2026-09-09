@@ -80,27 +80,22 @@ async function loadEditsProyectos() {
 }
 
 export async function localProjects() {
+  // src/data/proyectos.json ya trae los proyectos en el shape de la tabla
+  // `projects` (son los sistemas sacados de GitHub, con resumen redactado a
+  // mano). El export viejo de Django quedo en docs/archivo/.
   const [data, edits] = await Promise.all([load('proyectos'), loadEditsProyectos()])
   const mapped = data.map(p => ({
-    id: p.id,
-    title: p.titulo,
-    description: p.descripcion,
-    short_description: p.descripcion_corta,
-    category: mapCategory(p.categoria?.nombre),
-    tech_stack: p.tecnologias_rel?.length
-      ? p.tecnologias_rel.map(t => t.nombre)
-      : (p.tecnologias || '').split(',').map(s => s.trim()).filter(Boolean),
-    live_url: p.url_demo || p.url_link || '',
-    repo_url: p.url_github || '',
-    featured: Boolean(p.destacado),
-    // Oculto: sigue en /admin pero el sitio publico no lo muestra
     hidden: false,
-    image_url: p.imagen || '',
-    sort_order: p.orden ?? 0
+    featured: false,
+    sub_skills: [],
+    image_url: '',
+    live_url: '',
+    repo_url: '',
+    sort_order: 0,
+    ...p
   }))
 
   // Las ediciones del admin pisan por id; ids nuevos se agregan al final
-  if (!edits.length) return mapped
   const porId = new Map(mapped.map(p => [String(p.id), p]))
   for (const e of edits) {
     const original = porId.get(String(e.id))

@@ -145,317 +145,38 @@ create policy "borrado privado" on contact_messages for delete to authenticated 
 
 -- 31 proyectos
 truncate projects restart identity cascade;
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (28,'Ivoo Ventas - App de apoyo comercial','Aplicación móvil para el equipo de ventas de Ivoo. Permite registrar ventas del día, generar reportes por tipo de venta, administrar cartera de clientes, calcular caja y descuentos, y actualizar el tipo de cambio BCV.','App móvil para control diario de ventas, clientes y caja en Ivoo.','personal',ARRAY['Dart','Flutter'],'','',true,'',1);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (26,'App Móvil de Combinación de Outfits con IA','Aplicación móvil innovadora que utiliza inteligencia artificial y visión computacional para recomendar combinaciones de ropa y colores basándose en el guardarropa personal del usuario, ocasiones específicas y tendencias de moda actuales.
-                
-Funcionalidades planificadas:
-- Escaneo y catalogación automática del guardarropa personal
-- Recomendaciones personalizadas usando algoritmos de machine learning
-- Análisis de colores y estilos compatibles
-- Sugerencias basadas en clima, ocasión y tendencias
-- Integración con tiendas online para compras sugeridas
-- Comunidad social para compartir outfits y obtener feedback
-- Asistente virtual fashion con procesamiento de lenguaje natural
-- Realidad aumentada para probador virtual
-- Análisis de estilo personal y evolución en el tiempo
-- Integración con redes sociales para inspiración
-                
-En fase de investigación y diseño, con lanzamiento planificado para Q3 2025.','App de recomendación de outfits con inteligencia artificial','future',ARRAY['OpenCV'],'','',false,'',1);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (35,'Implementación de osTicket','Participación en la implementación de osTicket para gestión de solicitudes TI en A.S 28 La Candelaria (Constructora - Sambil).','Soporte en implementación de mesa de ayuda TI.','internship',ARRAY['osTicket'],'','',false,'',1);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (14,'E-commerce con Django en Google IDX/Firebase Studio','Desarrollo completo de una plataforma e-commerce utilizando Django como framework principal y Google IDX/Firebase Studio para el despliegue y gestión de la base de datos. 
-                
-La plataforma incluye:
-- Sistema completo de gestión de productos con categorías
-- Carrito de compras funcional con persistencia de sesión
-- Sistema de usuarios con registro y autenticación
-- Panel de administración para gestión de inventario
-- Integración con sistemas de pago
-- Diseño responsive y optimizado para dispositivos móviles
-- Base de datos escalable con Firebase
-                
-Este proyecto me permitió profundizar en el desarrollo full-stack con Django y la integración con servicios cloud de Google.','Plataforma e-commerce completa con Django y Firebase Studio','university',ARRAY['Bootstrap','CSS','Django','Firebase','Google IDX','HTML','JavaScript','Python','SQLite'],'','',true,'',1);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (20,'Sistema de Puntos de Fidelización Hotelera','Sistema integral para la gestión de programas de fidelización en cadenas hoteleras, diseñado para incrementar la lealtad de los huéspedes y optimizar las estrategias de marketing hotelero.
-                
-Módulos del sistema:
-- Dashboard administrativo para hoteles con métricas en tiempo real
-- Aplicación móvil para huéspedes con Flutter
-- Sistema de acumulación y canje de puntos automático
-- Programa de beneficios por niveles (Bronze, Silver, Gold, Platinum)
-- Integración con sistemas PMS hoteleros existentes
-- Notificaciones push personalizadas
-- Geolocalización para ofertas contextuales
-- Análisis predictivo de comportamiento de huéspedes
-- API REST para integración con terceros
-- Panel de reportes y analytics avanzados
-                
-Implementado actualmente en 3 hoteles piloto con más de 1,000 usuarios activos.','Sistema completo de fidelización para cadenas hoteleras','personal',ARRAY['Analytics','Dart','Django','Firebase','Flutter','JWT','MySQL','Python','REST API'],'','',true,'',1);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (29,'Damasco IA - Chat Gemini conectado a la base de datos','Sistema de chat con Gemini integrado a la base de datos de Damasco. Responde en tiempo real con información de productos, ventas y operaciones, con respuestas contextualizadas para el equipo interno.','Chat corporativo con Gemini para consultar información de Damasco en tiempo real.','work',ARRAY['Django','PostgreSQL','Python'],'','',true,'',2);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (27,'Servidor Asterisk con FreePBX','Implementación completa de un servidor de telefonía IP empresarial basado en Asterisk con interfaz gráfica FreePBX, completamente containerizado con Docker para facilitar el despliegue, escalabilidad y mantenimiento en entornos empresariales.
-                
-Características técnicas planificadas:
-- Implementación completa de Asterisk en contenedores Docker
-- Interfaz web FreePBX para administración simplificada
-- Configuración automática de extensiones y troncales SIP
-- Sistema de grabación de llamadas con almacenamiento en la nube
-- IVR (Interactive Voice Response) personalizable
-- Integración con CRM para pop-up de información de clientes
-- Dashboard de métricas de llamadas en tiempo real
-- Failover automático para alta disponibilidad
-- Configuración multi-tenant para múltiples empresas
-- API REST para integraciones con sistemas externos
-- Sistema de backup automático de configuraciones
-- Monitoreo proactivo con alertas automatizadas
-                
-Proyecto dirigido a PYMEs que buscan modernizar su infraestructura de telecomunicaciones.','Servidor de telefonía IP empresarial containerizado','future',ARRAY['Asterisk','Docker','Docker Compose','FreePBX','Linux','Networking','SIP','VoIP'],'','',false,'',2);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (36,'Implementación de OCSInventory','Apoyo en la implementación de OCSInventory para inventario y control de activos TI en A.S 28 La Candelaria (Constructora - Sambil).','Soporte en inventario de activos TI.','internship',ARRAY['OCSInventory'],'','',false,'',2);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (21,'Asistente Virtual Turístico de Mérida','Asistente virtual especializado e inteligente para información turística de la ciudad de Mérida, Venezuela, utilizando procesamiento de lenguaje natural para proporcionar recomendaciones personalizadas.
-                
-Capacidades del asistente:
-- Base de conocimiento completa sobre Mérida y sus atractivos
-- Recomendaciones personalizadas de lugares turísticos
-- Información actualizada sobre restaurantes y gastronomía local
-- Sugerencias de hoteles y hospedajes por presupuesto
-- Itinerarios personalizados según intereses y tiempo disponible
-- Información climática y consejos de vestimenta
-- Integración con servicios de transporte local
-- Soporte multiidioma (español e inglés)
-- Interfaz conversacional natural con RASA
-- Geolocalización y mapas interactivos
-                
-Desarrollado como contribución al turismo local de Mérida, con más de 500 consultas procesadas mensualmente.','Asistente IA especializado en turismo merideño','personal',ARRAY['Bootstrap','Flask','Geolocation API','JavaScript','NLP','Python','RASA'],'','',false,'',2);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (15,'Videojuego con PYQT5 y PyGame','Desarrollo de un videojuego interactivo completo utilizando las librerías PYQT5 para la interfaz gráfica de usuario y PyGame para la lógica del juego y renderizado.
-                
-Características del juego:
-- Interfaz gráfica intuitiva desarrollada con PYQT5
-- Motor de juego implementado con PyGame
-- Sistema de puntuación y niveles progresivos
-- Efectos de sonido y música de fondo
-- Gráficos 2D personalizados
-- Sistema de guardado de progreso
-- Múltiples personajes y enemigos
-- Física básica para movimientos y colisiones
-                
-Este proyecto me ayudó a comprender los conceptos de programación orientada a objetos y desarrollo de interfaces gráficas en Python.','Videojuego interactivo desarrollado con Python','university',ARRAY['Game Development','OOP','PyGame','PyQT5','Python','Sound Programming'],'','',false,'',2);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (30,'Damasco Ventas Live - Reportes en el momento','Aplicación para el monitoreo de ventas en el momento en Damasco. Provee reportes instantáneos del día, métricas clave y vistas rápidas para apoyar decisiones comerciales.','App de reportes de ventas en tiempo real para apoyo comercial.','work',ARRAY['Dart','Flutter'],'','',true,'',3);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (45,'Damasco Auditoria - Sistema de Control y Auditoria','Sistema integral de auditoria desarrollado para Damasco, diseñado para garantizar el control, la transparencia y la trazabilidad de las operaciones empresariales.
+-- Proyectos: los sistemas sacados de GitHub (src/data/proyectos.json), regenerado 2026-09-09
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('VA-Bus - Reservas de pasajes para Aerorutas','Sistema completo de reservas de pasajes para Aerorutas (Venezuela). El backend en Django REST Framework gestiona viajes, buses, rutas y distribución de asientos, reservas con selección de puesto, pagos con comprobantes y usuarios con autenticación JWT y Google OAuth; incluye un módulo de integración con APIs externas y un backoffice. El frontend es una SPA en React + Vite con capa de servicios y contexto de autenticación. Preparado para producción con SQL Server, Nginx y servicio systemd, con guía de despliegue en DigitalOcean.','Plataforma web de venta y reserva de boletos de autobús para la empresa Aerorutas.','personal','web',ARRAY['Python','Django','Django REST Framework','React','JavaScript','SQL Server','Nginx'],ARRAY['JWT','Google OAuth','Vite','DigitalOcean'],'','',false,false,'',1);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('Autobus - Gestión de flota, rutas y pagos','Sistema de gestión de autobuses con registro de flota y operadores, rutas trazadas en Google Maps y descritas por escrito, paradas georreferenciadas, sectores y tarifas por ruta o por tramo origen-destino. Incluye billetera con pago automático y una capa de pagos desacoplada, con proveedor abstracto listo para conectar la integración bancaria. Backend en Django 5.2 + DRF con documentación OpenAPI y app móvil en Flutter con login, rutas, mapa, tarifas y pago. La cercanía entre paradas se calcula con Haversine sin depender de PostGIS.','Backend Django y app Flutter para operadores de transporte: flota, rutas en mapa, tarifas y billetera.','personal','app',ARRAY['Python','Django','Django REST Framework','Flutter','Dart','Google Maps'],ARRAY['OpenAPI','SQLite'],'','',false,false,'',2);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('Damasco IA - Asistente Gemini conectado a SAP Business One','Asistente virtual desarrollado en Django que integra Google Gemini (API Key o Vertex AI) con el Service Layer de SAP Business One. Interpreta peticiones en lenguaje natural, construye la consulta OData adecuada mediante function calling y responde con artículos, socios de negocio, pedidos, facturas, almacenes o listas de precios. Guarda el historial de conversaciones, expone endpoints REST y cuenta con panel de administración y guías de configuración.','Chat con Gemini que consulta SAP Business One en lenguaje natural.','work','backend',ARRAY['Python','Django','Gemini','SAP'],ARRAY['Vertex AI','OData','REST'],'','',false,false,'',3);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('Damasco Monitor - Tasas de cambio','Sistema Django que consulta periódicamente las tasas de USD y EUR (DolarVzla) y el mercado P2P de Binance (USDT/VES) en horarios programados, guarda solo las variaciones y mantiene el historial completo. Incluye dashboard web con gráficas comparativas en tiempo real, filtros de consulta, panel de administración, comandos de gestión para correr los monitores y guía para ejecutarlo como servicio de Windows.','Monitor automático de USD, EUR y Binance P2P con dashboard de gráficas.','work','backend',ARRAY['Python','Django','Chart.js','Binance API'],ARRAY['Servicios de Windows','SQLite'],'','',false,false,'',4);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('ADD - Sistema de Distribución y Normalización','Herramienta interna que recibe archivos Excel de planificación y de salidas de mercancía, los normaliza contra maestros de centros de distribución (CEDIS), sucursales, regiones y gerentes regionales, y detecta productos faltantes, incidencias de PVP y errores de origen para resolverlos desde la web. Incluye biblioteca de maestros, mapeo por ID, tablero normalizado y decenas de scripts de análisis, verificación y corrección de datos, con documentación del proceso.','Sistema Django para cargar, normalizar y auditar planificaciones de distribución entre CEDIS y sucursales.','work','web',ARRAY['Python','Django','Pandas','Excel'],ARRAY['openpyxl','SQLite'],'','',false,false,'',5);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('Frontend BVC - Panel de la Bolsa de Valores de Caracas','Interfaz web para seguir el mercado de la Bolsa de Valores de Caracas: cinta de cotizaciones, tarjetas de resumen, tabla de acciones con mini gráficas, histórico por símbolo de los últimos 30 días, evolución del dólar, cuadrícula de predicciones y analítica de récords. Consume una API propia mediante hooks reutilizables, soporta tema claro y oscuro y se despliega en Vercel.','Dashboard bursátil en React con cotizaciones, gráficas, dólar y predicciones.','web','',ARRAY['React','JavaScript','Vite','Chart.js'],ARRAY['Vercel','REST'],'','',false,false,'',6);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('Ivoo Ventas (RV) - App de apoyo comercial','Aplicación móvil para el equipo de ventas de Ivoo. Permite registrar las facturas del día desde un formulario, generar el reporte diario y consultar el historial, administrar la cartera de clientes y solicitar acceso o registrarse como usuario. Incluye herramientas de apoyo: conversor de moneda, calculadora de descuentos y calculadora de cuotas Cashea. Construida con Flutter y Provider, con servicios de autenticación y base de datos.','App Flutter para el equipo de ventas: facturas, clientes, reporte diario y herramientas de cálculo.','app','',ARRAY['Flutter','Dart','Provider'],ARRAY['SQLite','Material Design'],'','',false,false,'',7);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('SINPEL - Gestión técnica e inventario','Plataforma web para SINPEL, servicio técnico de línea blanca y marrón. Registra el ingreso de equipos con datos del cliente, factura, serial, fallas, accesorios y condición; sigue el envío y la recepción con el centro de servicio y controla el inventario de repuestos con importación masiva. Módulos de ingresos, inventario y reportes con panel de administración.','Sistema Django para casos de garantía, servicio técnico e inventario de repuestos.','personal','web',ARRAY['Python','Django','JavaScript','HTML','CSS'],ARRAY['SQLite'],'','',false,false,'',8);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('MenuWeb - Menú digital para restaurantes','Sistema de menú digital para restaurantes. Desde el panel de Django se gestionan categorías (normal, especial, bebidas, postres), platillos con precio, disponibilidad y destacado, ingredientes con imagen, información del local y diseños de fondo. Genera códigos QR para que los clientes abran el menú desde la mesa; el frontend usa HTML, CSS y JavaScript con Tailwind vía PostCSS.','Menú web con código QR administrado desde Django: categorías, platillos, ingredientes y diseños.','web','',ARRAY['Python','Django','HTML','CSS','JavaScript','Tailwind'],ARRAY['Códigos QR','PostCSS'],'','',false,false,'',9);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('Lidotel - Fidelización de agencias de viaje','Plataforma de fidelización para un hotel: cada agencia de viajes tiene su cuenta y acumula puntos por las reservas que genera, según tipo de habitación, duración de la estadía y servicios adicionales (transporte, tours, spa), con multiplicadores por temporada alta o último minuto y bonos por volumen de huéspedes. Gestiona reservas con estados (pendiente, confirmada, cancelada, completada), configuración de puntos desde el admin y gráficas con Chart.js sobre Jazzmin.','Sistema Django de puntos para las agencias que reservan en un hotel.','web','',ARRAY['Python','Django','Chart.js','CSS'],ARRAY['Jazzmin','SQLite'],'','',false,false,'',10);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('Quigua - Inventario y listas de compra','Aplicación web para el control de inventario de un establecimiento: productos por categoría con unidad, cantidad y stock mínimo, alerta automática de reposición, historial de actualización y listas de compra con ítems, notas y cierre. Panel de administración personalizado (admin_interface, CKEditor, StreamField) y comandos de gestión para la carga de datos.','Sistema web Django para controlar el stock por categorías y generar listas de compra.','web','',ARRAY['Python','Django','JavaScript','CSS'],ARRAY['CKEditor','SQLite'],'','',false,false,'',11);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('App de Stock y Compras para posadas','Aplicación móvil multiplataforma para gestionar el inventario de una posada: categorías, productos con detalle y formulario, registro de uso o consumo de cada producto y lista de compras generada a partir del stock. Incluye tutorial integrado y arquitectura por funcionalidades con Provider. Evoluciona una primera versión (posada_app) con las mismas bases.','App Flutter para el inventario, el consumo de productos y las listas de compra de una posada.','app','',ARRAY['Flutter','Dart','Provider'],ARRAY['Material Design'],'','',false,false,'',12);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('Asistente Virtual Turístico de Mérida','Asistente conversacional para turistas de Mérida (Venezuela). El bot en Rasa entiende intenciones como buscar restaurantes, lugares para visitar, actividades al aire libre, museos, compras o vida nocturna, y responde con listados con tipo, dirección y horario. Los datos viven en una API con Django REST Framework (modelos, serializadores y carga inicial) que el bot consulta mediante acciones personalizadas.','Chatbot Rasa con API Django que recomienda restaurantes, lugares y actividades en Mérida.','personal','backend',ARRAY['Python','Rasa','Django','Django REST Framework'],ARRAY['NLU','SQLite'],'','',false,false,'',13);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('AI Asesor en Compras - E-commerce con asistente Rasa','E-commerce en Django (catálogo, carrito y usuarios) acompañado de un asistente Rasa que atiende al comprador: consulta productos y marcas, filtra por nombre, descripción y rango de precios mediante un formulario conversacional y adapta sus respuestas al estado de ánimo del usuario. Incluye un filtro de productos con NLTK y se desarrolló en Google IDX.','Tienda Django con un bot que busca productos, marcas y filtra por precio en conversación.','web','backend',ARRAY['Python','Django','Rasa','HTML','CSS','JavaScript'],ARRAY['NLTK','Google IDX'],'','',false,false,'',14);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('Bot Financiero - Asistente de finanzas personales','Asistente conversacional de finanzas personales. En Rasa se definen intenciones para consultar saldo y estado de cuenta, ver el historial de transacciones y registrar gastos mediante un formulario (monto y categoría), con avisos cuando se supera el 80 % del presupuesto mensual. Un proyecto Django persiste los datos y sirve la interfaz; un script levanta ambos servicios a la vez.','Chatbot Rasa con backend Django para consultar saldo, registrar gastos y ver el historial.','backend','',ARRAY['Python','Rasa','Django'],ARRAY['SQLite'],'','',false,false,'',15);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('Django Launcher - Lanzador de escritorio para proyectos Django','Utilidad de escritorio en Electron que pide la URL de un repositorio de GitHub, lo clona en una carpeta segura, detecta manage.py, ejecuta el servidor Django y muestra el sistema dentro de la misma ventana. Guarda la configuración de forma persistente, muestra una pantalla de carga en arranques posteriores y detiene el proceso al cerrar. Pensada para entregar sistemas Django a usuarios sin conocimientos técnicos.','App Electron que clona un repositorio de GitHub y ejecuta su servidor Django en una ventana.','app','backend',ARRAY['Electron','JavaScript','Node.js','Python'],ARRAY['simple-git'],'','',false,false,'',16);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('SEAC - Control horario de locales comerciales','Aplicación web en Flask desarrollada durante la pasantía en A.S 28 La Candelaria. Recibe los reportes de control horario de los locales (Candelaria Center y Sambil), ejecuta macros VBA sobre el Excel, limpia y tabula los datos por día con Pandas, calcula aperturas, cierres y excepciones, y muestra resultados y diagnósticos con gráficas Plotly. Exporta a CSV y XLSX y guarda en MySQL.','Herramienta Flask que procesa los Excel de apertura y cierre de tiendas en centros comerciales.','internship','web',ARRAY['Python','Flask','Pandas','Excel','MySQL'],ARRAY['VBA','Plotly','openpyxl'],'','',false,false,'',17);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('Implementación de OCS Inventory','Implementación del servidor OCS Inventory NG 2.11 durante la pasantía en A.S 28 La Candelaria (Constructora - Sambil) para inventariar equipos y activos de TI. El repositorio conserva la configuración del servidor (Apache, API y reportes), el respaldo de la base de datos y los comandos de arranque documentados.','Despliegue y configuración de OCS Inventory NG para el control de activos de TI.','internship','sistemas',ARRAY['OCS Inventory','Linux','Apache','MySQL','Perl'],ARRAY['PHP'],'','',false,false,'',18);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('Implementación de osTicket','Instalación y personalización de osTicket como mesa de ayuda para las solicitudes de TI en A.S 28 La Candelaria (Constructora - Sambil). Incluye la instancia configurada (osTicket-sambil) y el respaldo de la base de datos de pruebas.','Mesa de ayuda con osTicket para la gestión de solicitudes de TI en Sambil.','internship','sistemas',ARRAY['osTicket','PHP','MySQL'],ARRAY['Apache'],'','',false,false,'',19);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('E-commerce con Django','Plataforma de comercio electrónico en Django organizada en apps: catálogo de productos con imágenes, carrito de compras, usuarios con formularios propios y un módulo de administración con admin-interface. Plantillas y estilos propios por cada app.','Tienda en línea con catálogo, carrito, usuarios y panel de administración.','web','',ARRAY['Python','Django','HTML','CSS'],ARRAY['SQLite'],'','',false,false,'',20);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('E-commerce en Google IDX con filtro inteligente','Evolución del e-commerce en Django construida en el entorno Google IDX (Nix): apps de catálogo, carrito y usuarios con señales, decoradores y estilos SCSS. Incorpora un bot de filtrado de productos que procesa la consulta del usuario con NLTK (tokenización, lematización y stopwords en español) y la traduce en búsquedas sobre la base de datos.','Tienda Django desarrollada en Google IDX con un bot de filtrado de productos por lenguaje natural.','web','',ARRAY['Python','Django','NLTK','SCSS'],ARRAY['Google IDX','Nix'],'','',false,false,'',21);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('Lumi Booth - Cabina de fotos web','Aplicación web en React + Vite que convierte la cámara del dispositivo en una cabina de fotos: toma la secuencia de fotos, aplica filtros, permite elegir plantilla (tira o cuadrícula), tema, sticker y leyenda con fecha, y descarga el resultado en PNG o PDF. Todo se procesa en el navegador; las fotos nunca salen del equipo.','Cabina de fotos en el navegador: filtros, plantillas, stickers y descarga en PNG o PDF.','web','',ARRAY['React','JavaScript','Vite','CSS'],ARRAY['Canvas','PDF'],'','',false,false,'',22);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('El cielo que nos vio - Mapa estelar de una fecha','Página de una sola pieza que recuerda un momento mostrando el cielo real que había sobre Valencia, Carabobo, esa noche: el disco estelar se dibuja solo (estrellas, constelaciones trazándose una a una, puntos cardinales) y se puede explorar; incluye contadores en vivo y un fondo con capas de estrellas en parallax y estrellas fugaces. Hecha con React + Vite a partir de un catálogo de estrellas y desplegada como sitio estático.','Página-regalo en React que dibuja el cielo real de un lugar y un instante concretos.','personal','web',ARRAY['React','JavaScript','Vite','CSS'],ARRAY['Canvas','Vercel'],'','',false,false,'',23);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('Un date especial - Página interactiva','Página interactiva en Next.js desplegada en Vercel: mural de flores que se abre al tocar, botón que huye del mouse, planificador de cita en tres pasos que genera un mensaje para copiar, página secreta protegida por clave y cierre con confeti y lluvia de corazones. Conserva la versión original en HTML, CSS y JavaScript puro.','Página romántica en Next.js con fases interactivas, clave secreta y confeti.','personal','web',ARRAY['Next.js','React','JavaScript','CSS'],ARRAY['Vercel'],'','',false,false,'',24);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('Calculadora de Traslación y Rotación 2D/3D','Proyecto universitario en Jupyter / Google Colab que aplica traslaciones y rotaciones a figuras en dos y tres dimensiones mediante matrices de transformación, mostrando paso a paso los cálculos y la figura resultante con Matplotlib.','Notebook de Google Colab para calcular y graficar transformaciones geométricas.','university','',ARRAY['Python','Jupyter','NumPy','Matplotlib'],ARRAY['Google Colab'],'','',false,false,'',25);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('Calculadora con Tkinter','Aplicación de escritorio en Python con interfaz Tkinter que realiza operaciones aritméticas básicas y conversiones entre unidades de longitud (metros, centímetros, milímetros, pies, yardas, millas) y de capacidad (litros, mililitros, galones, cuartos, pintas, onzas).','Calculadora de escritorio con conversión de unidades de longitud y capacidad.','university','app',ARRAY['Python','Tkinter'],'{}','','',false,false,'',26);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('Duck''s Dodge - Videojuego con Pygame','Videojuego arcade desarrollado con Pygame: el jugador guía a un pato que debe esquivar objetos que caen del cielo, con velocidad y cantidad crecientes, sistema de puntuación, reinicio rápido y estética retro.','Juego arcade en Python: esquiva los objetos que caen y supera tu récord.','university','app',ARRAY['Python','Pygame'],'{}','','',false,false,'',27);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('Mega Cars Wash - Sitio web de autolavado','Página web para el autolavado Mega Cars Wash desarrollada en tres versiones independientes: JavaScript con Firebase (autenticación con Google y Facebook, publicaciones y mensajes), PHP con MySQL y una versión inicial en HTML, CSS y JavaScript. Proyecto de formación temprana en desarrollo web.','Sitio para un autolavado con registro e inicio de sesión, en tres implementaciones.','university','web',ARRAY['HTML','CSS','JavaScript','Firebase','PHP','MySQL'],'{}','','',false,false,'',28);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('Sistema de Registro Académico','Sistema web de registro académico desarrollado con PHP y MySQL: alta de estudiantes y profesores, carga de notas y consultas, con interfaz en HTML y CSS y respaldo de la base de datos. Uno de los primeros proyectos de formación.','Registro de estudiantes, profesores y notas con PHP y MySQL.','university','web',ARRAY['PHP','MySQL','HTML','CSS'],'{}','','',false,false,'',29);
+insert into projects (title,description,short_description,category,subcategory,tech_stack,sub_skills,live_url,repo_url,featured,hidden,image_url,sort_order) values ('Página Web de Videojuegos','Página web estática sobre videojuegos con varias secciones, galería de imágenes y algo de JavaScript, realizada como práctica de maquetación con HTML y CSS.','Sitio informativo sobre videojuegos maquetado con HTML y CSS.','university','web',ARRAY['HTML','CSS','JavaScript'],'{}','','',false,false,'',30);
 
-El sistema se integra directamente con SAP para extraer y validar datos en tiempo real, permitiendo a los auditores internos verificar transacciones, detectar inconsistencias y generar reportes de cumplimiento.
-
-Características principales:
-• Integración bidireccional con SAP para consulta de datos de ventas, inventario y finanzas
-• Dashboard de auditoria con indicadores clave y alertas automáticas
-• Registro de hallazgos y seguimiento de acciones correctivas
-• Generación de reportes de auditoria en PDF
-• Control de acceso por roles (auditor, supervisor, gerencia)
-• Historial completo de auditorias realizadas con trazabilidad
-• Módulo de verificación cruzada de datos entre sistemas','Sistema de auditoria empresarial con integración SAP para control y trazabilidad','work',ARRAY['Django','PDF Generation','PostgreSQL','Python','REST API','SAP'],'','',true,'',3);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (22,'App Móvil: Listas de Compras y Gestión de Stock Hotelero','Aplicación multiplataforma desarrollada con Flutter para la gestión eficiente de listas de compras y control de inventario en establecimientos hoteleros de pequeña y mediana escala.
-                
-Funcionalidades principales:
-- Gestión de listas de compras inteligentes con sugerencias automáticas
-- Control de inventario en tiempo real por categorías
-- Sistema de alertas por stock mínimo y fechas de vencimiento
-- Generación automática de órdenes de compra
-- Sincronización multi-dispositivo con Firebase
-- Escáner de códigos de barras para registro rápido
-- Reportes de consumo y análisis de tendencias
-- Gestión de proveedores y precios comparativos
-- Sistema de usuarios por roles (administrador, encargado, staff)
-- Integración con sistemas contables básicos
-- Funcionalidad offline con sincronización posterior
-                
-Implementada en 5 hoteles boutique con reducción del 30% en desperdicio de alimentos.','App integral para gestión de inventario hotelero','personal',ARRAY['Barcode Scanner','Dart','Firebase','Flutter','Material Design','Provider','SQLite'],'','',true,'',3);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (37,'Automatización de reportes internos','Desarrollo de herramientas internas con Python (Flask, Pandas) para automatización de reportes del centro comercial.','Herramientas internas para reportes del centro comercial.','internship',ARRAY['Flask','Pandas','Python'],'','',false,'',3);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (16,'Aplicación GUI con Electron','Aplicación de escritorio completa con interfaz gráfica desarrollada en Python utilizando la librería Tkinter nativa. La aplicación implementa un sistema de gestión de datos con múltiples funcionalidades.
-                
-Funcionalidades principales:
-- Interfaz gráfica intuitiva y profesional
-- Sistema CRUD completo (Create, Read, Update, Delete)
-- Validación robusta de formularios
-- Conexión y gestión de base de datos SQLite
-- Sistema de backup y restauración de datos
-- Gestión de Proyectos 
-                
-Este proyecto me permitió dominar el desarrollo de aplicaciones de escritorio y la gestión de bases de datos locales.','Aplicación de escritorio con interfaz gráfica completa','university',ARRAY['Database Management','GUI Design','PDF Generation','Python','SQLite','Tkinter'],'','',false,'',3);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (31,'Verozh Spa Yoga - Control de clases','Sistema web para Verozh Spa que automatiza la asignación de profesoras y fechas de clases, gestiona cupos y facilita la organización del calendario de yoga.','Sistema para programación y control de clases de yoga.','personal',ARRAY['Django','PostgreSQL','Python'],'','',true,'',4);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (46,'Damasco Fidelización - Gestión de Socios de Negocios','Plataforma de gestión de socios de negocios y programa de fidelización para Damasco, con integración directa al sistema SAP para la sincronización de datos comerciales.
-
-El sistema permite visualizar en tiempo real los créditos de cada socio de negocios, registrar y validar pagos, y mantener un control exhaustivo de las relaciones comerciales.
-
-Funcionalidades principales:
-• Visualización de créditos y saldos de socios de negocios en tiempo real
-• Registro y validación de pagos con flujo de aprobación
-• Integración con SAP para sincronización de datos de socios y transacciones
-• Panel de control con métricas de fidelización y comportamiento de socios
-• Sistema de alertas para pagos vencidos y créditos próximos a vencer
-• Historial completo de transacciones por socio de negocios
-• Reportes de estado de cuenta y conciliación
-• Gestión de niveles de fidelización basados en volumen de compras','Gestión de créditos, pagos y fidelización de socios de negocios con integración SAP','work',ARRAY['Django','PostgreSQL','Python','REST API','SAP'],'','',true,'',4);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (23,'Sistema Web de Gestión Técnica e Inventario SINPEL','Plataforma web integral desarrollada específicamente para SINPEL, enfocada en la gestión eficiente de casos de garantía, inventario de repuestos y seguimiento de reparaciones técnicas de equipos de línea blanca y marrón.
-                
-Módulos implementados:
-- Dashboard ejecutivo con KPIs en tiempo real
-- Gestión completa de casos de garantía con workflow automatizado
-- Inventario inteligente de repuestos con alertas automáticas
-- Sistema de asignación de técnicos por zona geográfica
-- Seguimiento detallado de reparaciones con fotos y diagnósticos
-- Generación automática de reportes operativos y gerenciales
-- Sistema de facturación y cobranza integrado
-- Portal del cliente para seguimiento de casos
-- Integración con WhatsApp para notificaciones
-- Analytics predictivo para planificación de inventario
-- Sistema de evaluación de técnicos y calidad de servicio
-                
-Sistema en producción manejando 200+ casos mensuales con mejora del 40% en tiempos de respuesta.','Sistema integral para gestión técnica y garantías','personal',ARRAY['Bootstrap','Chart.js','Django','PDF Generation','PostgreSQL','Python','WhatsApp API'],'','',true,'',4);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (17,'Calculadora de Traslación y Rotación 2D/3D','Herramienta matemática avanzada desarrollada en Google Colab para el cálculo y visualización de transformaciones geométricas en espacios bidimensionales y tridimensionales.
-                
-Capacidades de la calculadora:
-- Cálculo de traslaciones en 2D y 3D
-- Rotaciones con ángulos personalizables
-- Escalado y transformaciones compuestas
-- Visualización gráfica interactiva de las transformaciones
-- Interfaz web intuitiva en Jupyter Notebook
-- Exportación de resultados y gráficos
-- Soporte para matrices de transformación
-- Animaciones de las transformaciones step-by-step
-                
-Desarrollada como herramienta de apoyo para materias de matemáticas y gráficos computacionales, utilizando bibliotecas científicas de Python.','Calculadora avanzada para transformaciones geométricas 2D/3D','university',ARRAY['Google Colab','Gráficos 3D','Jupyter','Matemáticas Aplicadas','Matplotlib','NumPy','Python'],'','',false,'',4);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (32,'Verozh Spa - Historial clínico y consultas','Sistema de control clínico para Verozh Spa con registro de historial del paciente, seguimiento de consultas y programación de fechas.','Gestión de historias clínicas y citas médicas.','personal',ARRAY['Django','PostgreSQL','Python'],'','',true,'',5);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (24,'Sistema Integral de Gestión Comercial CSEN','Plataforma completa de gestión empresarial desarrollada para CSEN, diseñada para automatizar y optimizar todos los procesos comerciales, desde la gestión de inventarios hasta el análisis de ventas y CRM.
-                
-Arquitectura del sistema:
-- Módulo de inventario con control multi-almacén
-- Sistema CRM con seguimiento completo del pipeline de ventas
-- Facturación electrónica con integración SENIAT
-- Gestión de proveedores y órdenes de compra automatizadas
-- Control de cuentas por cobrar y por pagar
-- Dashboard gerencial con métricas de negocio en tiempo real
-- Sistema de comisiones para vendedores
-- Gestión de productos con códigos de barras
-- Reportes financieros y operativos automatizados
-- API REST para integraciones con sistemas externos
-- Sistema de backup automático y recuperación de desastres
-- Módulo de nómina básica integrada
-                
-Implementado para empresa con 50+ empleados, procesando 500+ transacciones diarias.','ERP completo para gestión comercial empresarial','personal',ARRAY['Celery','Django','Docker','MySQL','Python','REST API','Redis','Vue.js'],'','',true,'',5);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (18,'E-commerce con Django','Plataforma e-commerce robusta desarrollada completamente con Django, enfocada en las mejores prácticas de desarrollo web y arquitectura escalable.
-                
-Arquitectura y funcionalidades:
-- Arquitectura MVT (Model-View-Template) bien estructurada
-- Sistema de autenticación y autorización avanzado
-- Gestión completa de inventario y productos
-- Carrito de compras con persistencia de sesión
-- Sistema de órdenes y facturación
-- Panel de administración personalizado
-- API REST para integración con terceros
-- Optimización SEO y rendimiento
-- Testing automatizado con cobertura completa
-                
-Este proyecto consolidó mis conocimientos en Django y desarrollo web profesional.','Plataforma e-commerce robusta con arquitectura escalable','university',ARRAY['CSS','Django','HTML','JavaScript','PostgreSQL','Python','REST API','Testing'],'','',true,'',5);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (33,'Monitor Cambiario VE - Dólar, euro y cripto','Aplicación de monitoreo de cambio en Venezuela para dólar, euro, USDT y USDC. Incluye calculadora de conversión y gráficas de variación en 1 semana, 1 mes y 1 año.','App con tasas actualizadas y calculadora multi-moneda.','personal',ARRAY['Dart','Flutter'],'','',true,'',6);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (25,'Sistema de Consolidación de Precios y Preventas IVOO','Sistema especializado para IVOO enfocado en la consolidación automática de precios de múltiples proveedores y la gestión inteligente de preventas comerciales con algoritmos de optimización avanzados.
-                
-Componentes técnicos:
-- Algoritmos de web scraping para captura automática de precios
-- Sistema de machine learning para predicción de tendencias de precios
-- Consolidación inteligente de datos de múltiples fuentes
-- Dashboard de comparación de precios en tiempo real
-- Sistema automatizado de generación de preventas
-- Análisis predictivo para optimización de márgenes de ganancia
-- Alertas automáticas de cambios significativos en precios
-- Integración con sistemas de inventario existentes
-- Módulo de análisis de competencia
-- API para integración con sistemas POS
-- Reportes ejecutivos con visualizaciones interactivas
-- Sistema de auditoría para trazabilidad de cambios
-                
-Sistema procesando 10,000+ comparaciones de precios diarias con mejora del 25% en márgenes.','Sistema IA para consolidación de precios y preventas','personal',ARRAY['Celery','Django','Machine Learning','NumPy','Pandas','PostgreSQL','Python','Scrapy'],'','',true,'',6);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (19,'E-commerce y Asistente virtual con Django y RASA','Plataforma e-commerce avanzada integrada con un asistente virtual inteligente desarrollado con RASA para proporcionar una experiencia de compra conversacional y personalizada.
-                
-Componentes del sistema:
-- Plataforma e-commerce completa con Django
-- Asistente virtual con procesamiento de lenguaje natural
-- Integración RASA para comprensión de intenciones
-- Chatbot contextual para recomendaciones de productos
-- Sistema de machine learning para personalización
-- Base de conocimiento dinámica
-- Análisis de sentimientos en conversaciones
-- Multi-idioma (español e inglés)
-- Integración con sistemas de pago conversacionales
-                
-Proyecto de tesis que combina e-commerce tradicional con IA conversacional para crear una experiencia de usuario innovadora.','E-commerce con asistente virtual inteligente usando IA','university',ARRAY['Chatbot','Django','Machine Learning','NLP','PostgreSQL','Python','RASA','TensorFlow'],'','',true,'',6);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (34,'Sistema de Nómina Modular','Plataforma modular para gestionar contratación, cálculo de nómina, asistencia, liquidaciones y dispersión de pagos, con reportes y autoservicio para empleados.','Sistema de nómina con módulos de identidad, cálculo y control de tiempo.','personal',ARRAY['Django','PostgreSQL','Python'],'','',true,'',7);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (47,'Cloud de Archivos - Almacenamiento Personal en la Nube','Plataforma de almacenamiento en la nube personal con dominio propio gestionado a través de Cloudflare, acompañada de una aplicación de escritorio desarrollada con Electron.
-
-El backend está construido con Django REST Framework, proporcionando una API robusta para la gestión de archivos, mientras que la aplicación de escritorio ofrece una experiencia nativa para la sincronización y gestión de documentos.
-
-Características principales:
-• Almacenamiento seguro de archivos en servidor propio
-• Dominio personalizado con Cloudflare (DNS, SSL, CDN)
-• Aplicación de escritorio con Electron para subir, descargar y organizar archivos
-• API REST completa para operaciones CRUD de archivos
-• Sistema de carpetas y organización de documentos
-• Previsualización de archivos multimedia
-• Control de acceso y compartición de archivos
-• Sincronización automática entre escritorio y nube','Nube personal de archivos con app de escritorio Electron y Django REST API','personal',ARRAY['Cloudflare','Django REST Framework','Electron','JavaScript','Python'],'','',true,'',12);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (48,'Cloud de Música - Reproductor Personal en la Nube','Servicio de streaming de música personal desplegado en un dominio propio con Cloudflare, con una aplicación móvil que funciona como reproductor y un backend en Django REST API.
-
-Permite subir, organizar y reproducir tu colección musical desde cualquier lugar, con una app móvil dedicada que ofrece una experiencia de reproducción fluida.
-
-Características principales:
-• Cloud de música con dominio propio protegido por Cloudflare
-• Aplicación móvil como reproductor con controles completos de audio
-• Backend Django REST API para gestión de biblioteca musical
-• Subida y organización de canciones por artista, álbum y género
-• Reproductor con cola de reproducción, shuffle y repetición
-• Streaming de audio optimizado para conexiones móviles
-• Listas de reproducción personalizables
-• Búsqueda y filtrado avanzado de canciones','Streaming de música personal con app móvil reproductora y Django REST API','personal',ARRAY['Cloudflare','Dart','Django REST Framework','Flutter','Python'],'','',true,'',13);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (49,'CSEN v2 - Migración a Django REST API y Vue.js','Segunda versión del Sistema Integral de Gestión Comercial CSEN, migrado desde una arquitectura monolítica de Django con HTML, CSS y JavaScript puro, hacia una arquitectura moderna de API REST con Django REST Framework en el backend y Vue.js como framework frontend consumidor de la API.
-
-Esta migración permite una separación completa entre backend y frontend, mejorando la escalabilidad, mantenibilidad y experiencia de usuario.
-
-Mejoras respecto a v1:
-• Backend completamente API REST con Django REST Framework
-• Frontend SPA con Vue.js consumiendo la API
-• Autenticación basada en tokens JWT
-• Interfaz de usuario más fluida y reactiva sin recargas de página
-• Mejor separación de responsabilidades (frontend/backend)
-• Mayor facilidad para integrar apps móviles en el futuro
-• Documentación automática de la API con Swagger/OpenAPI
-• Tests automatizados para endpoints de la API','Migración del sistema CSEN de Django monolítico a Django REST API + Vue.js','personal',ARRAY['Django REST Framework','JWT','JavaScript','MySQL','Python','REST API','Vue.js'],'','',true,'',14);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (50,'Sistema de Inventario y Menú Web para Tintos y Café','Sistema de gestión de inventario especializado para establecimientos de café y tintos, con menú web integrado para clientes y un módulo completo de costeo de platillos.
-
-Permite organizar los ingredientes de cada platillo del menú, calcular automáticamente el costo total basándose en el precio unitario de cada ingrediente, y gestionar el inventario de insumos.
-
-Funcionalidades principales:
-• Menú web interactivo para clientes con precios y descripciones
-• Registro de ingredientes con precios unitarios actualizables
-• Composición de platillos: asignación de ingredientes y cantidades
-• Cálculo automático del costo total de cada platillo
-• Análisis de margen de ganancia por producto
-• Control de inventario de ingredientes con alertas de stock bajo
-• Historial de precios de ingredientes para análisis de costos
-• Interfaz responsiva adaptada para tablets en cocina','Inventario de café con menú web, costeo de ingredientes y cálculo de precios','personal',ARRAY['Bootstrap','Django','JavaScript','PostgreSQL','Python'],'','',true,'',15);
-insert into projects (id,title,description,short_description,category,tech_stack,live_url,repo_url,featured,image_url,sort_order) values (51,'Smart Inventory - Plataforma de Gestión Logística Inteligente','Plataforma digital diseñada para digitalizar y centralizar la logística empresarial. Smart Inventory ofrece una solución integral para el control de inventarios, automatización de procesos y trazabilidad de operaciones.
-
-El sistema se basa en cuatro pilares fundamentales:
-
-Control Centralizado:
-Gestión de múltiples almacenes o bodegas desde un solo lugar, con rastreo en tiempo real de la ubicación de cada producto.
-
-Automatización de Inventario:
-Vigilancia automática de niveles de stock. El sistema envía alertas automáticas cuando un producto está por agotarse, previniendo quiebres de stock.
-
-Seguridad y Auditoría:
-Supervisión de accesos al sistema y cambios realizados mediante roles de usuario, garantizando transparencia y autorización en los movimientos de mercancía.
-
-Contabilidad Logística (Kardex):
-Generación de reportes detallados de entradas, salidas y saldos, facilitando el control de costos y la toma de decisiones basada en datos reales.','Plataforma logística con control centralizado, automatización y Kardex','personal',ARRAY['Bootstrap','Chart.js','Django','PDF Generation','PostgreSQL','Python','REST API'],'','',true,'',16);
-select setval('projects_id_seq', (select coalesce(max(id),1) from projects));
-
--- 4 servicios
-truncate services restart identity;
 insert into services (title,description,icon_name,sort_order) values ('Desarrollo Web','Creo aplicaciones web modernas, responsivas y de alto rendimiento usando las últimas tecnologías.','globe',1);
 insert into services (title,description,icon_name,sort_order) values ('Desarrollo Backend','Diseño e implemento APIs robustas, bases de datos optimizadas y arquitecturas escalables.','server',2);
 insert into services (title,description,icon_name,sort_order) values ('Aplicaciones Móviles','Desarrollo apps nativas y multiplataforma con experiencias de usuario fluidas.','smartphone',3);
